@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --nexora-bg: #0b0f19;
+  --nexora-surface: #121623;
+  --nexora-card: #1a202c;
+  --nexora-cyan: #00f2fe;
+  --nexora-teal: #00d2c4;
+  --nexora-muted: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--nexora-bg);
+  color: #ffffff;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+/* Glassmorphism card base */
+.glass-card {
+  background: rgba(26, 32, 44, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 242, 254, 0.12);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 242, 254, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 242, 254, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Cyan gradient button */
+.btn-primary {
+  background: linear-gradient(135deg, #00f2fe 0%, #00d2c4 100%);
+  color: #0b0f19;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 24px rgba(0, 242, 254, 0.6), 0 0 48px rgba(0, 242, 254, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  color: #00f2fe;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  border: 1.5px solid #00f2fe;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  background: rgba(0, 242, 254, 0.1);
+  box-shadow: 0 0 16px rgba(0, 242, 254, 0.3);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #00f2fe 0%, #00d2c4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section heading underline accent */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #00f2fe;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--nexora-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 242, 254, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 242, 254, 0.6);
+}
+
+/* Input field styling */
+.form-input {
+  width: 100%;
+  background: rgba(26, 32, 44, 0.8);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  border-radius: 12px;
+  padding: 0.875rem 1.25rem;
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #00f2fe;
+  box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15);
+}
+
+.form-input::placeholder {
+  color: #64748b;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.7s ease forwards;
+}
+
+/* Step connector line */
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #00f2fe 0%, #00d2c444 100%);
+  margin: 0 8px;
+}
