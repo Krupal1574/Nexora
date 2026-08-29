@@ -1,17 +1,20 @@
 @import "tailwindcss";
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap");
-
-:root {
-  --nexora-bg: #0b0f19;
-  --nexora-surface: #121623;
-  --nexora-card: #1a202c;
-  --nexora-cyan: #00f2fe;
-  --nexora-teal: #00d2c4;
-  --nexora-muted: #94a3b8;
+/* ─── Tailwind v4 CSS-first theme tokens ─────────────────────────────────── */
+@theme {
+  --color-nexora-bg: #0b0f19;
+  --color-nexora-surface: #121623;
+  --color-nexora-card: #1a202c;
+  --color-nexora-border: #2d3748;
+  --color-nexora-cyan: #00f2fe;
+  --color-nexora-teal: #00d2c4;
+  --color-nexora-muted: #94a3b8;
 }
 
-* {
+/* ─── Global resets ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -22,7 +25,7 @@ html {
 }
 
 body {
-  background-color: var(--nexora-bg);
+  background-color: #0b0f19;
   color: #ffffff;
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -39,9 +42,9 @@ h6 {
   font-family: "Space Grotesk", system-ui, sans-serif;
 }
 
-/* Glassmorphism card base */
+/* ─── Glassmorphism card ──────────────────────────────────────────────────── */
 .glass-card {
-  background: rgba(26, 32, 44, 0.7);
+  background: rgba(26, 32, 44, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(0, 242, 254, 0.12);
@@ -55,7 +58,7 @@ h6 {
   transform: translateY(-4px);
 }
 
-/* Cyan gradient button */
+/* ─── Gradient CTA button ─────────────────────────────────────────────────── */
 .btn-primary {
   background: linear-gradient(135deg, #00f2fe 0%, #00d2c4 100%);
   color: #0b0f19;
@@ -71,14 +74,17 @@ h6 {
   letter-spacing: 0.01em;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 24px rgba(0, 242, 254, 0.6), 0 0 48px rgba(0, 242, 254, 0.3);
+  box-shadow:
+    0 0 24px rgba(0, 242, 254, 0.6),
+    0 0 48px rgba(0, 242, 254, 0.3);
   transform: translateY(-2px);
 }
 
-/* Ghost button */
+/* ─── Ghost button ────────────────────────────────────────────────────────── */
 .btn-ghost {
   background: transparent;
   color: #00f2fe;
@@ -94,6 +100,7 @@ h6 {
   letter-spacing: 0.01em;
   border: 1.5px solid #00f2fe;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-ghost:hover {
@@ -101,15 +108,7 @@ h6 {
   box-shadow: 0 0 16px rgba(0, 242, 254, 0.3);
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #00f2fe 0%, #00d2c4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Section heading underline accent */
+/* ─── Section label ───────────────────────────────────────────────────────── */
 .section-label {
   font-size: 0.75rem;
   font-weight: 700;
@@ -120,22 +119,7 @@ h6 {
   display: block;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--nexora-bg);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 242, 254, 0.3);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 242, 254, 0.6);
-}
-
-/* Input field styling */
+/* ─── Form input ──────────────────────────────────────────────────────────── */
 .form-input {
   width: 100%;
   background: rgba(26, 32, 44, 0.8);
@@ -158,7 +142,22 @@ h6 {
   color: #64748b;
 }
 
-/* Marquee animation */
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0f19;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 242, 254, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 242, 254, 0.6);
+}
+
+/* ─── Marquee animation ───────────────────────────────────────────────────── */
 @keyframes marquee {
   0% {
     transform: translateX(0%);
@@ -170,15 +169,17 @@ h6 {
 
 .animate-marquee {
   animation: marquee 30s linear infinite;
+  display: flex;
+  width: max-content;
 }
 
-/* Fade up animation */
+/* ─── Fade-up ─────────────────────────────────────────────────────────────── */
 @keyframes fadeUp {
-  0% {
+  from {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(28px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
@@ -186,12 +187,4 @@ h6 {
 
 .fade-up {
   animation: fadeUp 0.7s ease forwards;
-}
-
-/* Step connector line */
-.step-connector {
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(90deg, #00f2fe 0%, #00d2c444 100%);
-  margin: 0 8px;
 }

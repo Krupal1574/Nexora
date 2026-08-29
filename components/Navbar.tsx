@@ -1,22 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, Zap } from "lucide-react";
-
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Our Services", href: "/services" },
-  { label: "Refer & Earn", href: "/refer-and-earn" },
-  { label: "Contact", href: "/contact" },
-];
+import { navigation, siteConfig } from "@/lib/site";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -27,6 +22,19 @@ export default function Navbar() {
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    closeButtonRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   return (
     <>
@@ -60,7 +68,7 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
+              {navigation.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -82,7 +90,7 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <div className="hidden lg:flex items-center gap-4">
-              <a href="tel:+13024124095" className="btn-primary text-sm">
+              <a href={siteConfig.contact.phoneHref} className="btn-primary text-sm">
                 <Phone className="w-4 h-4" />
                 Call Us Now!
               </a>
@@ -91,8 +99,11 @@ export default function Navbar() {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setIsOpen(!isOpen)}
+              ref={menuButtonRef}
               className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#00F2FE]/10 transition-all"
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -103,6 +114,10 @@ export default function Navbar() {
       {/* Mobile Drawer Overlay */}
       {isOpen && (
         <div
+          id="mobile-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation"
           className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
           onClick={() => setIsOpen(false)}
         />
@@ -136,7 +151,9 @@ export default function Navbar() {
             </Link>
             <button
               onClick={() => setIsOpen(false)}
+              ref={closeButtonRef}
               className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#1A202C] transition-all"
+              aria-label="Close navigation menu"
             >
               <X className="w-4 h-4" />
             </button>
@@ -144,7 +161,7 @@ export default function Navbar() {
 
           {/* Drawer Links */}
           <nav className="flex flex-col gap-1 p-4 flex-1">
-            {navLinks.map((link, i) => (
+            {navigation.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -163,14 +180,14 @@ export default function Navbar() {
           {/* Drawer CTA */}
           <div className="p-6 border-t border-[#1A202C]">
             <a
-              href="tel:+13024124095"
+              href={siteConfig.contact.phoneHref}
               className="btn-primary w-full justify-center"
             >
               <Phone className="w-4 h-4" />
               Call Us Now!
             </a>
             <p className="text-center text-[#64748B] text-xs mt-3">
-              +1 (302) 412-4095 · Mon–Fri 9AM–6PM EST
+              {siteConfig.contact.phoneDisplay}
             </p>
           </div>
         </div>
