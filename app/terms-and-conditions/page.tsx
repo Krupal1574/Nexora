@@ -35,10 +35,10 @@ export default function TermsAndConditionsPage() {
     <div className="overflow-x-hidden">
       <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#2E8BF014_0%,transparent_65%)]" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="section-label">Legal</span>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] mb-5">Terms &amp; <span className="text-[#00F2FE]">Conditions</span></h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] mb-5">Terms &amp; <span className="text-[#2E8BF0]">Conditions</span></h1>
           <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">Terms for using this website and submitting an inquiry or referral.</p>
         </div>
       </section>
@@ -53,7 +53,7 @@ export default function TermsAndConditionsPage() {
               <p className="text-[#94A3B8] leading-relaxed">{section.body}</p>
             </section>
           ))}
-          <p className="text-sm text-[#94A3B8]">Read the <Link href="/privacy-policy" className="text-[#00F2FE] underline underline-offset-2">Privacy Policy</Link> for information-handling details.</p>
+          <p className="text-sm text-[#94A3B8]">Read the <Link href="/privacy-policy" className="text-[#2E8BF0] underline underline-offset-2">Privacy Policy</Link> for information-handling details.</p>
         </article>
       </section>
     </div>

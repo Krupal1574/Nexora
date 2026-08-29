@@ -14,8 +14,8 @@ const config: Config = {
           surface: "#121623",
           card: "#1A202C",
           border: "#2D3748",
-          cyan: "#00F2FE",
-          teal: "#00D2C4",
+          cyan: "#2E8BF0",
+          teal: "#F0851F",
           muted: "#94A3B8",
           white: "#FFFFFF",
         },
@@ -25,10 +25,10 @@ const config: Config = {
         display: ["Space Grotesk", "system-ui", "sans-serif"],
       },
       backgroundImage: {
-        "nexora-gradient": "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-        "nexora-glow": "linear-gradient(135deg, #00F2FE22 0%, #00D2C422 100%)",
+        "nexora-gradient": "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
+        "nexora-glow": "linear-gradient(135deg, #2E8BF022 0%, #F0851F22 100%)",
         "hero-radial":
-          "radial-gradient(ellipse at 60% 50%, #00F2FE18 0%, transparent 60%)",
+          "radial-gradient(ellipse at 60% 50%, #2E8BF018 0%, transparent 60%)",
         "card-gradient":
           "linear-gradient(135deg, #1A202C 0%, #121623 100%)",
       },
@@ -53,13 +53,13 @@ const config: Config = {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         glow: {
-          "0%": { boxShadow: "0 0 8px #00F2FE44" },
-          "100%": { boxShadow: "0 0 24px #00F2FE99, 0 0 48px #00F2FE33" },
+          "0%": { boxShadow: "0 0 8px #2E8BF044" },
+          "100%": { boxShadow: "0 0 24px #2E8BF099, 0 0 48px #2E8BF033" },
         },
       },
       boxShadow: {
-        "cyan-glow": "0 0 20px #00F2FE44, 0 0 40px #00F2FE22",
-        "card-hover": "0 8px 32px rgba(0,242,254,0.12)",
+        "cyan-glow": "0 0 20px #2E8BF044, 0 0 40px #2E8BF022",
+        "card-hover": "0 8px 32px rgba(46,139,240,0.12)",
         glass: "0 4px 24px rgba(0,0,0,0.4)",
       },
     },

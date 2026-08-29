@@ -24,7 +24,7 @@ const steps = [
     title: "Refer a Friend or Colleague",
     description:
       "Know someone looking for a job in the U.S. tech industry? Submit their details using our simple referral form. It takes less than 2 minutes.",
-    color: "#00F2FE",
+    color: "#2E8BF0",
   },
   {
     number: "02",
@@ -32,7 +32,7 @@ const steps = [
     title: "Empower Their Career",
     description:
       "Nexora's team takes it from there — providing your referral with full career counseling, resume optimization, and active placement support.",
-    color: "#00D2C4",
+    color: "#F0851F",
   },
   {
     number: "03",
@@ -40,7 +40,7 @@ const steps = [
     title: "Collect Your Referral Bonus",
     description:
       "Once your referral is successfully placed in a role, you receive up to $500 directly to your account. No limits — refer as many people as you like.",
-    color: "#00F2FE",
+    color: "#2E8BF0",
   },
 ];
 
@@ -127,29 +127,29 @@ export default function ReferAndEarnPage() {
       ════════════════════════════════════════════════════════ */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#2E8BF014_0%,transparent_65%)]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #2E8BF0 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
 
         {/* Floating dollar signs */}
-        <div className="absolute top-24 left-12 text-6xl opacity-5 font-bold text-[#00F2FE] select-none">
+        <div className="absolute top-24 left-12 text-6xl opacity-5 font-bold text-[#2E8BF0] select-none">
           $
         </div>
-        <div className="absolute top-40 right-20 text-8xl opacity-5 font-bold text-[#00D2C4] select-none">
+        <div className="absolute top-40 right-20 text-8xl opacity-5 font-bold text-[#F0851F] select-none">
           $
         </div>
-        <div className="absolute bottom-16 left-1/4 text-4xl opacity-5 font-bold text-[#00F2FE] select-none">
+        <div className="absolute bottom-16 left-1/4 text-4xl opacity-5 font-bold text-[#2E8BF0] select-none">
           $
         </div>
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Earnings badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-semibold mb-8">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#2E8BF0]/25 bg-[#2E8BF0]/8 text-[#2E8BF0] text-sm font-semibold mb-8">
             <Gift className="w-4 h-4" />
             Earn up to $500 per placed referral — unlimited referrals!
           </div>
@@ -161,7 +161,7 @@ export default function ReferAndEarnPage() {
             Join Nexora's{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -173,7 +173,7 @@ export default function ReferAndEarnPage() {
           <p className="text-[#94A3B8] text-xl max-w-3xl mx-auto leading-relaxed">
             Help a friend land their dream tech job. Nexora handles everything — the
             career coaching, resume work, and placement. You earn up to{" "}
-            <span className="text-[#00F2FE] font-semibold">$500</span> for every
+            <span className="text-[#2E8BF0] font-semibold">$500</span> for every
             person you refer who gets placed.
           </p>
         </div>
@@ -193,7 +193,7 @@ export default function ReferAndEarnPage() {
               3 Simple Steps to Your{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -206,7 +206,7 @@ export default function ReferAndEarnPage() {
 
           <div className="grid md:grid-cols-3 gap-6 relative">
             {/* Connector lines */}
-            <div className="hidden md:block absolute top-16 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] opacity-30 z-0" />
+            <div className="hidden md:block absolute top-16 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-[#2E8BF0] to-[#F0851F] opacity-30 z-0" />
 
             {steps.map(({ number, icon: Icon, title, description, color }) => (
               <div
@@ -216,7 +216,7 @@ export default function ReferAndEarnPage() {
                 {/* Step circle */}
                 <div className="relative">
                   <div
-                    className="w-20 h-20 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,242,254,0.2)]"
+                    className="w-20 h-20 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(46,139,240,0.2)]"
                     style={{
                       background: `linear-gradient(135deg, ${color}33 0%, ${color}15 100%)`,
                       border: `2px solid ${color}50`,
@@ -227,7 +227,7 @@ export default function ReferAndEarnPage() {
                   <span
                     className="absolute -top-2 -right-2 w-7 h-7 rounded-full text-[#0B0F19] text-xs font-bold flex items-center justify-center"
                     style={{
-                      background: `linear-gradient(135deg, ${color} 0%, #00D2C4 100%)`,
+                      background: `linear-gradient(135deg, ${color} 0%, #F0851F 100%)`,
                     }}
                   >
                     {number}
@@ -257,9 +257,9 @@ export default function ReferAndEarnPage() {
             ].map(({ icon: Icon, text }) => (
               <div
                 key={text}
-                className="flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#0B0F19] border border-[#00F2FE]/15"
+                className="flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#0B0F19] border border-[#2E8BF0]/15"
               >
-                <Icon className="w-5 h-5 text-[#00F2FE] flex-shrink-0" />
+                <Icon className="w-5 h-5 text-[#2E8BF0] flex-shrink-0" />
                 <span className="text-white text-sm font-medium">{text}</span>
               </div>
             ))}
@@ -281,7 +281,7 @@ export default function ReferAndEarnPage() {
               Refer Someone Today &{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -294,8 +294,8 @@ export default function ReferAndEarnPage() {
 
           {submitted ? (
             <div className="glass-card p-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-[#00F2FE]/15 border border-[#00F2FE]/30 flex items-center justify-center mx-auto mb-5">
-                <CheckCircle2 className="w-8 h-8 text-[#00F2FE]" />
+              <div className="w-16 h-16 rounded-full bg-[#2E8BF0]/15 border border-[#2E8BF0]/30 flex items-center justify-center mx-auto mb-5">
+                <CheckCircle2 className="w-8 h-8 text-[#2E8BF0]" />
               </div>
               <h3
                 className="text-2xl font-bold text-white mb-3"
@@ -334,7 +334,7 @@ export default function ReferAndEarnPage() {
                 {/* Your Info */}
                 <div>
                   <h4
-                    className="text-white font-semibold mb-4 text-sm uppercase tracking-wider text-[#00F2FE]"
+                    className="text-white font-semibold mb-4 text-sm uppercase tracking-wider text-[#2E8BF0]"
                   >
                     Your Details
                   </h4>
@@ -388,7 +388,7 @@ export default function ReferAndEarnPage() {
 
                 {/* Referral Info */}
                 <div>
-                  <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider text-[#00F2FE]">
+                  <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider text-[#2E8BF0]">
                     Referral's Details
                   </h4>
                   <div className="space-y-4">
@@ -485,7 +485,7 @@ export default function ReferAndEarnPage() {
                       name="authorizedToRefer"
                       checked={form.authorizedToRefer}
                       onChange={handleChange}
-                      className="mt-1 h-4 w-4 rounded border-[#4A5568] bg-transparent text-[#00F2FE] focus:ring-[#00F2FE]"
+                      className="mt-1 h-4 w-4 rounded border-[#4A5568] bg-transparent text-[#2E8BF0] focus:ring-[#2E8BF0]"
                       aria-invalid={Boolean(fieldErrors.authorizedToRefer)}
                       aria-describedby={fieldErrors.authorizedToRefer ? "authorization-error" : undefined}
                     />
@@ -501,7 +501,7 @@ export default function ReferAndEarnPage() {
                   {loading ? "Sending Referral..." : "Submit Referral"}
                 </button>
                 <p className="text-center text-[#64748B] text-xs">
-                  By submitting, you acknowledge the <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-[#00F2FE]">Privacy Policy</Link> and <Link href="/terms-and-conditions" className="underline underline-offset-2 hover:text-[#00F2FE]">Terms &amp; Conditions</Link>.
+                  By submitting, you acknowledge the <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-[#2E8BF0]">Privacy Policy</Link> and <Link href="/terms-and-conditions" className="underline underline-offset-2 hover:text-[#2E8BF0]">Terms &amp; Conditions</Link>.
                 </p>
               </form>
             </div>
@@ -527,7 +527,7 @@ export default function ReferAndEarnPage() {
             {faqs.map(({ q, a }) => (
               <div key={q} className="glass-card p-6">
                 <div className="flex items-start gap-3">
-                  <ChevronRight className="w-4 h-4 text-[#00F2FE] mt-1 flex-shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-[#2E8BF0] mt-1 flex-shrink-0" />
                   <div>
                     <p
                       className="text-white font-semibold mb-2"

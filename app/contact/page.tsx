@@ -21,7 +21,7 @@ const contactCards = [
     value: "+1 (302) 412-4095",
     sublabel: "Mon–Fri, 9AM–6PM EST",
     href: "tel:+13024124095",
-    color: "#00F2FE",
+    color: "#2E8BF0",
   },
   {
     icon: Mail,
@@ -29,14 +29,14 @@ const contactCards = [
     value: "support@nexora.info",
     sublabel: "We respond within 24 hours",
     href: "mailto:support@nexora.info",
-    color: "#00D2C4",
+    color: "#F0851F",
   },
   {
     icon: MapPin,
     title: "Headquarters",
     value: "Tampa, FL, USA",
     sublabel: "Serving clients nationwide",
-    color: "#00F2FE",
+    color: "#2E8BF0",
   },
 ];
 
@@ -109,11 +109,11 @@ export default function ContactPage() {
       ════════════════════════════════════════════════════════ */}
       <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#2E8BF014_0%,transparent_65%)]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #2E8BF0 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -126,7 +126,7 @@ export default function ContactPage() {
             Let's Start Your{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -145,7 +145,7 @@ export default function ContactPage() {
                 key={label}
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
               >
-                <Icon className="w-4 h-4 text-[#00F2FE]" />
+                <Icon className="w-4 h-4 text-[#2E8BF0]" />
                 {label}
               </div>
             ))}
@@ -185,7 +185,7 @@ export default function ContactPage() {
                       {title}
                     </p>
                     <p
-                      className={`text-white font-semibold text-base transition-colors ${href ? 'group-hover:text-[#00F2FE]' : ''}`}
+                      className={`text-white font-semibold text-base transition-colors ${href ? 'group-hover:text-[#2E8BF0]' : ''}`}
                       style={{ fontFamily: "Space Grotesk, sans-serif" }}
                     >
                       {value}
@@ -214,7 +214,7 @@ export default function ContactPage() {
               We'd Love to{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -227,8 +227,8 @@ export default function ContactPage() {
 
           {submitted ? (
             <div className="glass-card p-12 text-center">
-              <div className="w-20 h-20 rounded-full bg-[#00F2FE]/15 border border-[#00F2FE]/30 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_#00F2FE33]">
-                <CheckCircle2 className="w-10 h-10 text-[#00F2FE]" />
+              <div className="w-20 h-20 rounded-full bg-[#2E8BF0]/15 border border-[#2E8BF0]/30 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_#2E8BF033]">
+                <CheckCircle2 className="w-10 h-10 text-[#2E8BF0]" />
               </div>
               <h3
                 className="text-2xl font-bold text-white mb-3"
@@ -241,7 +241,7 @@ export default function ContactPage() {
               </p>
               <p className="text-[#94A3B8] text-sm mb-8">
                 Your message has been sent to the Nexora team. We will use{" "}
-                <span className="text-[#00F2FE]">{form.email}</span> to reply.
+                <span className="text-[#2E8BF0]">{form.email}</span> to reply.
               </p>
               <button
                 onClick={() => {
@@ -274,7 +274,7 @@ export default function ContactPage() {
                     htmlFor="name"
                     className="text-[#94A3B8] text-sm mb-2 block font-medium"
                   >
-                    Full Name <span className="text-[#00F2FE]">*</span>
+                    Full Name <span className="text-[#2E8BF0]">*</span>
                   </label>
                   <div className="relative">
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
@@ -301,7 +301,7 @@ export default function ContactPage() {
                     htmlFor="phone"
                     className="text-[#94A3B8] text-sm mb-2 block font-medium"
                   >
-                    Phone Number <span className="text-[#00F2FE]">*</span>
+                    Phone Number <span className="text-[#2E8BF0]">*</span>
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
@@ -331,10 +331,10 @@ export default function ContactPage() {
                         className="peer sr-only"
                       />
                       <div
-                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#00F2FE] ${
+                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#2E8BF0] ${
                           form.smsOptIn
-                            ? "bg-[#00F2FE] border-[#00F2FE]"
-                            : "bg-transparent border-[#4A5568] group-hover:border-[#00F2FE]/60"
+                            ? "bg-[#2E8BF0] border-[#2E8BF0]"
+                            : "bg-transparent border-[#4A5568] group-hover:border-[#2E8BF0]/60"
                         }`}
                       >
                         {form.smsOptIn && (
@@ -355,7 +355,7 @@ export default function ContactPage() {
                     htmlFor="email"
                     className="text-[#94A3B8] text-sm mb-2 block font-medium"
                   >
-                    Email Address <span className="text-[#00F2FE]">*</span>
+                    Email Address <span className="text-[#2E8BF0]">*</span>
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
@@ -382,7 +382,7 @@ export default function ContactPage() {
                     htmlFor="message"
                     className="text-[#94A3B8] text-sm mb-2 block font-medium"
                   >
-                    Message <span className="text-[#00F2FE]">*</span>
+                    Message <span className="text-[#2E8BF0]">*</span>
                   </label>
                   <div className="relative">
                     <MessageSquare className="absolute left-4 top-4 w-4 h-4 text-[#64748B]" />
@@ -422,7 +422,7 @@ export default function ContactPage() {
                 </button>
 
                 <p className="text-center text-[#64748B] text-xs">
-                  By submitting, you acknowledge the <Link href="/privacy-policy" className="text-[#94A3B8] underline underline-offset-2 hover:text-[#00F2FE]">Privacy Policy</Link>. Do not include sensitive personal information in this form.
+                  By submitting, you acknowledge the <Link href="/privacy-policy" className="text-[#94A3B8] underline underline-offset-2 hover:text-[#2E8BF0]">Privacy Policy</Link>. Do not include sensitive personal information in this form.
                 </p>
               </form>
             </div>

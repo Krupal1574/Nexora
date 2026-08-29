@@ -47,11 +47,11 @@ export default function AboutPage() {
       ════════════════════════════════════════════════════════ */}
       <section className="relative pt-32 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#2E8BF014_0%,transparent_65%)]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #2E8BF0 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -64,7 +64,7 @@ export default function AboutPage() {
             Your Partner In Achieving{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -97,7 +97,7 @@ export default function AboutPage() {
               Our Mission &{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -111,9 +111,9 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-8 mb-16">
             {/* Mission */}
             <div className="glass-card p-10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#00F2FE]/5 rounded-full blur-2xl" />
-              <div className="w-14 h-14 rounded-2xl bg-[#00F2FE]/10 border border-[#00F2FE]/25 flex items-center justify-center mb-6">
-                <Target className="w-7 h-7 text-[#00F2FE]" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#2E8BF0]/5 rounded-full blur-2xl" />
+              <div className="w-14 h-14 rounded-2xl bg-[#2E8BF0]/10 border border-[#2E8BF0]/25 flex items-center justify-center mb-6">
+                <Target className="w-7 h-7 text-[#2E8BF0]" />
               </div>
               <h3
                 className="text-2xl font-bold text-white mb-4"
@@ -139,7 +139,7 @@ export default function AboutPage() {
                   "Build long-term employer-candidate relationships",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-[#00F2FE] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#2E8BF0] mt-0.5 flex-shrink-0" />
                     <span className="text-[#94A3B8] text-sm">{item}</span>
                   </li>
                 ))}
@@ -148,9 +148,9 @@ export default function AboutPage() {
 
             {/* Vision */}
             <div className="glass-card p-10 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#00D2C4]/5 rounded-full blur-2xl" />
-              <div className="w-14 h-14 rounded-2xl bg-[#00D2C4]/10 border border-[#00D2C4]/25 flex items-center justify-center mb-6">
-                <Eye className="w-7 h-7 text-[#00D2C4]" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#F0851F]/5 rounded-full blur-2xl" />
+              <div className="w-14 h-14 rounded-2xl bg-[#F0851F]/10 border border-[#F0851F]/25 flex items-center justify-center mb-6">
+                <Eye className="w-7 h-7 text-[#F0851F]" />
               </div>
               <h3
                 className="text-2xl font-bold text-white mb-4"
@@ -176,7 +176,7 @@ export default function AboutPage() {
                   "Industry-leading candidate satisfaction",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-4 h-4 text-[#00D2C4] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#F0851F] mt-0.5 flex-shrink-0" />
                     <span className="text-[#94A3B8] text-sm">{item}</span>
                   </li>
                 ))}
@@ -195,8 +195,8 @@ export default function AboutPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {values.map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="glass-card p-6 flex flex-col gap-4 group">
-                  <div className="w-10 h-10 rounded-xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-5 h-5 text-[#00F2FE]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#2E8BF0]/10 border border-[#2E8BF0]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-5 h-5 text-[#2E8BF0]" />
                   </div>
                   <h4
                     className="text-white font-semibold"
@@ -224,7 +224,7 @@ export default function AboutPage() {
             Ready to Be Our Next{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",

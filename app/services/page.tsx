@@ -30,10 +30,10 @@ const services = [
       "Salary benchmarking and negotiation coaching",
       "Domain pivot guidance for professionals transitioning into tech",
     ],
-    accent: "#00F2FE",
-    bgAccent: "#00F2FE12",
-    iconBg: "#00F2FE18",
-    borderColor: "#00F2FE30",
+    accent: "#2E8BF0",
+    bgAccent: "#2E8BF012",
+    iconBg: "#2E8BF018",
+    borderColor: "#2E8BF030",
   },
   {
     id: "resume-optimization",
@@ -50,10 +50,10 @@ const services = [
       "LinkedIn profile overhaul and SEO optimization",
       "Quantified achievement highlights that stand out to hiring managers",
     ],
-    accent: "#00D2C4",
-    bgAccent: "#00D2C412",
-    iconBg: "#00D2C418",
-    borderColor: "#00D2C430",
+    accent: "#F0851F",
+    bgAccent: "#F0851F12",
+    iconBg: "#F0851F18",
+    borderColor: "#F0851F30",
   },
   {
     id: "resume-marketing",
@@ -70,10 +70,10 @@ const services = [
       "Continuous pipeline updates and feedback loops from employers",
       "Negotiation support during offer stage",
     ],
-    accent: "#00F2FE",
-    bgAccent: "#00F2FE12",
-    iconBg: "#00F2FE18",
-    borderColor: "#00F2FE30",
+    accent: "#2E8BF0",
+    bgAccent: "#2E8BF012",
+    iconBg: "#2E8BF018",
+    borderColor: "#2E8BF030",
   },
   {
     id: "technical-training",
@@ -90,10 +90,10 @@ const services = [
       "Project portfolio building guidance for hands-on skill demonstration",
       "Access to curated learning resources and certification preparation",
     ],
-    accent: "#00D2C4",
-    bgAccent: "#00D2C412",
-    iconBg: "#00D2C418",
-    borderColor: "#00D2C430",
+    accent: "#F0851F",
+    bgAccent: "#F0851F12",
+    iconBg: "#F0851F18",
+    borderColor: "#F0851F30",
   },
   {
     id: "compliance-onboarding",
@@ -110,10 +110,10 @@ const services = [
       "Benefits enrollment guidance and HR system onboarding",
       "Dedicated point-of-contact through your first 90 days",
     ],
-    accent: "#00F2FE",
-    bgAccent: "#00F2FE12",
-    iconBg: "#00F2FE18",
-    borderColor: "#00F2FE30",
+    accent: "#2E8BF0",
+    bgAccent: "#2E8BF012",
+    iconBg: "#2E8BF018",
+    borderColor: "#2E8BF030",
   },
 ];
 
@@ -132,11 +132,11 @@ export default function ServicesPage() {
       ════════════════════════════════════════════════════════ */}
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#2E8BF014_0%,transparent_65%)]" />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #2E8BF0 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -149,7 +149,7 @@ export default function ServicesPage() {
             Turning Your Tech Dreams{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -171,7 +171,7 @@ export default function ServicesPage() {
                 key={label}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
               >
-                <Icon className="w-4 h-4 text-[#00F2FE]" />
+                <Icon className="w-4 h-4 text-[#2E8BF0]" />
                 {label}
               </div>
             ))}
@@ -205,7 +205,7 @@ export default function ServicesPage() {
                 <div
                   key={id}
                   id={id}
-                  className="rounded-2xl border p-8 lg:p-12 relative overflow-hidden transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,242,254,0.08)]"
+                  className="rounded-2xl border p-8 lg:p-12 relative overflow-hidden transition-all duration-300 hover:shadow-[0_8px_40px_rgba(46,139,240,0.08)]"
                   style={{
                     background: `${bgAccent}`,
                     borderColor: borderColor,
@@ -297,7 +297,7 @@ export default function ServicesPage() {
             Ready to Start Your{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",

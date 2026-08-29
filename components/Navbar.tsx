@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, Zap } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { navigation, siteConfig } from "@/lib/site";
 
 export default function Navbar() {
@@ -41,28 +42,40 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#0B0F19]/90 backdrop-blur-xl border-b border-[#00F2FE]/10 shadow-lg"
+            ? "bg-[#0B0F19]/90 backdrop-blur-xl border-b border-[#2E8BF0]/10 shadow-lg"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center shadow-[0_0_16px_#00F2FE44] group-hover:shadow-[0_0_24px_#00F2FE88] transition-all duration-300">
-                <Zap className="w-5 h-5 text-[#0B0F19]" fill="currentColor" />
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden ring-1 ring-white/10 shadow-[0_0_16px_#2E8BF033] group-hover:shadow-[0_0_24px_#2E8BF066] transition-all duration-300">
+                <Image
+                  src="/brand/nexora-mark.png"
+                  alt="Nexora logo"
+                  fill
+                  sizes="40px"
+                  className="object-cover"
+                  priority
+                />
               </div>
-              <span
-                className="text-2xl font-bold tracking-tight"
-                style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  background: "linear-gradient(135deg, #ffffff 0%, #00F2FE 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Nexora
+              <span className="flex flex-col leading-none">
+                <span
+                  className="text-2xl font-bold tracking-tight"
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    background: "linear-gradient(135deg, #ffffff 0%, #2E8BF0 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  Nexora
+                </span>
+                <span className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-[#F0851F] mt-1">
+                  Staffing LLP
+                </span>
               </span>
             </Link>
 
@@ -74,13 +87,13 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative text-sm font-medium transition-all duration-200 group ${
                     pathname === link.href
-                      ? "text-[#00F2FE]"
+                      ? "text-[#2E8BF0]"
                       : "text-[#94A3B8] hover:text-white"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] rounded-full transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-[#2E8BF0] to-[#F0851F] rounded-full transition-all duration-300 ${
                       pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -100,7 +113,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               ref={menuButtonRef}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#00F2FE]/10 transition-all"
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#94A3B8] hover:text-[#2E8BF0] hover:bg-[#2E8BF0]/10 transition-all"
               aria-label="Toggle menu"
               aria-expanded={isOpen}
               aria-controls="mobile-navigation"
@@ -125,28 +138,39 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 z-50 bg-[#121623] border-l border-[#00F2FE]/15 transform transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed top-0 right-0 h-full w-80 z-50 bg-[#121623] border-l border-[#2E8BF0]/15 transform transition-transform duration-300 ease-in-out lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Drawer Header */}
           <div className="flex items-center justify-between p-6 border-b border-[#1A202C]">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center">
-                <Zap className="w-4 h-4 text-[#0B0F19]" fill="currentColor" />
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="relative w-9 h-9 rounded-full overflow-hidden ring-1 ring-white/10">
+                <Image
+                  src="/brand/nexora-mark.png"
+                  alt="Nexora logo"
+                  fill
+                  sizes="36px"
+                  className="object-cover"
+                />
               </div>
-              <span
-                className="text-xl font-bold"
-                style={{
-                  fontFamily: "Space Grotesk, sans-serif",
-                  background: "linear-gradient(135deg, #ffffff 0%, #00F2FE 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Nexora
+              <span className="flex flex-col leading-none">
+                <span
+                  className="text-xl font-bold"
+                  style={{
+                    fontFamily: "Space Grotesk, sans-serif",
+                    background: "linear-gradient(135deg, #ffffff 0%, #2E8BF0 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                >
+                  Nexora
+                </span>
+                <span className="text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-[#F0851F] mt-0.5">
+                  Staffing LLP
+                </span>
               </span>
             </Link>
             <button
@@ -168,7 +192,7 @@ export default function Navbar() {
                 style={{ animationDelay: `${i * 60}ms` }}
                 className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium transition-all duration-200 ${
                   pathname === link.href
-                    ? "bg-[#00F2FE]/10 text-[#00F2FE] border border-[#00F2FE]/20"
+                    ? "bg-[#2E8BF0]/10 text-[#2E8BF0] border border-[#2E8BF0]/20"
                     : "text-[#94A3B8] hover:bg-[#1A202C] hover:text-white"
                 }`}
               >

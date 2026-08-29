@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,29 +8,43 @@ import { getSiteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: "Nexora | IT Staffing, Talent Recruitment & Career Consulting",
-    template: "%s | Nexora",
+    default: "Nexora Staffing LLP | Connecting People, Building Futures",
+    template: "%s | Nexora Staffing LLP",
   },
   description:
-    "Nexora is a premier IT staffing and talent solutions firm connecting top tech professionals with leading U.S. enterprises. Expert career counseling, resume optimization, and placement services.",
+    "Nexora Staffing LLP is a premier talent solutions firm delivering global talent acquisition, executive search, and contract staffing. Empowering teams and accelerating growth.",
   keywords: [
+    "staffing solutions",
+    "global talent acquisition",
+    "executive search",
+    "contract staffing",
     "IT staffing",
-    "tech talent",
+    "recruitment",
     "career consulting",
-    "resume optimization",
-    "technical training",
-    "US job placement",
-    "Nexora",
+    "Nexora Staffing LLP",
   ],
-  authors: [{ name: "Nexora" }],
+  authors: [{ name: "Nexora Staffing LLP" }],
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Nexora",
-    title: "Nexora | IT Staffing, Talent Recruitment & Career Consulting",
+    siteName: "Nexora Staffing LLP",
+    title: "Nexora Staffing LLP | Connecting People, Building Futures",
     description:
-      "Premier IT staffing and talent solutions firm connecting top tech professionals with leading U.S. enterprises.",
+      "Global talent acquisition, executive search, and contract staffing solutions. Empowering teams. Accelerating growth.",
+    images: [
+      {
+        url: "/brand/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Nexora Staffing LLP",
+      },
+    ],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0B0F19",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Nexora",
+  name: "Nexora Staffing LLP",
   // Configure this in production. The fallback is derived from the existing
   // company email domain and must be verified before deployment.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nexora.info",

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   ChevronRight,
@@ -23,25 +24,25 @@ const services = [
     icon: Briefcase,
     title: "Career Counseling",
     desc: "1-on-1 career mapping sessions with expert technical domain advisors to chart your ideal path.",
-    color: "#00F2FE",
+    color: "#2E8BF0",
   },
   {
     icon: FileText,
     title: "Resume Optimization",
     desc: "ATS-tailored resume overhauls crafted for U.S. job market standards that get you noticed.",
-    color: "#00D2C4",
+    color: "#F0851F",
   },
   {
     icon: Calendar,
     title: "Interview Preparation",
     desc: "Mock interviews, behavioral coaching, and technical drill sessions with industry veterans.",
-    color: "#00F2FE",
+    color: "#2E8BF0",
   },
   {
     icon: Code2,
     title: "Technical Training",
     desc: "Skill upgrade sessions, weekly webinars, and mock tech assessments to sharpen your edge.",
-    color: "#00D2C4",
+    color: "#F0851F",
   },
 ];
 
@@ -91,70 +92,87 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Background layers */}
         <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,#00F2FE18_0%,transparent_60%)]" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00F2FE]/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#00D2C4]/5 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,#2E8BF018_0%,transparent_60%)]" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2E8BF0]/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#F0851F]/5 rounded-full blur-3xl animate-pulse delay-1000" />
 
         {/* Grid dots */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
-              "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
+              "radial-gradient(circle, #2E8BF0 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Logo mark */}
+          <div
+            className={`mx-auto mb-8 relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-1 ring-white/10 shadow-[0_0_50px_#2E8BF033] transition-all duration-700 ${
+              heroVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"
+            }`}
+          >
+            <Image
+              src="/brand/nexora-mark.png"
+              alt="Nexora Staffing LLP logo"
+              fill
+              sizes="112px"
+              className="object-cover"
+              priority
+            />
+          </div>
+
           {/* Badge */}
           <div
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-8 transition-all duration-700 ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#2E8BF0]/25 bg-[#2E8BF0]/8 text-[#2E8BF0] text-sm font-medium mb-8 transition-all duration-700 ${
               heroVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-6"
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-pulse" />
-            IT Staffing & Talent Solutions
+            <span className="w-2 h-2 rounded-full bg-[#F0851F] animate-pulse" />
+            Global Talent Acquisition &amp; Staffing Solutions
           </div>
 
           {/* Headline */}
           <h1
-            className={`text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6 transition-all duration-700 delay-150 ${
+            className={`text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6 text-balance transition-all duration-700 delay-150 ${
               heroVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
             }`}
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
-            Your Dream Tech Career{" "}
+            Connecting People,{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              Is Waiting For You
+              Building Futures
             </span>
           </h1>
 
           {/* Subtext */}
           <p
-            className={`text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed mb-10 transition-all duration-700 delay-300 ${
+            className={`text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed mb-10 text-pretty transition-all duration-700 delay-300 ${
               heroVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
             }`}
           >
-            Nexora bridges the gap between elite tech talent and top U.S. enterprises.
-            From resume optimization to placement, we're your career acceleration partner.
+            Nexora Staffing LLP bridges the gap between elite talent and leading
+            enterprises. Empowering teams and accelerating growth — from executive
+            search to contract staffing, we are your talent acceleration partner.
           </p>
 
           {/* CTA Buttons */}
           <div
-            className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-500 ${
+            className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 transition-all duration-700 delay-500 ${
               heroVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -169,13 +187,34 @@ export default function HomePage() {
             </Link>
           </div>
 
-
+          {/* Service pillars */}
+          <div
+            className={`flex flex-wrap items-center justify-center gap-3 transition-all duration-700 delay-700 ${
+              heroVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+            }`}
+          >
+            {[
+              "Global Talent Acquisition",
+              "Executive Search",
+              "Contract Staffing Solutions",
+            ].map((pillar) => (
+              <span
+                key={pillar}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1A202C]/80 border border-[#2D3748] text-[#94A3B8] text-sm"
+              >
+                <CheckCircle2 className="w-4 h-4 text-[#F0851F]" />
+                {pillar}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
           <span className="text-[#64748B] text-xs tracking-widest uppercase">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-[#00F2FE] to-transparent" />
+          <div className="w-px h-12 bg-gradient-to-b from-[#2E8BF0] to-transparent" />
         </div>
       </section>
 
@@ -194,7 +233,7 @@ export default function HomePage() {
                 America's Leading IT{" "}
                 <span
                   style={{
-                    background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                    background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -233,8 +272,8 @@ export default function HomePage() {
                   key={label}
                   className="glass-card p-7 flex flex-col items-start gap-3"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#00F2FE]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#2E8BF0]/10 border border-[#2E8BF0]/20 flex items-center justify-center">
+                    <Icon className="w-5 h-5 text-[#2E8BF0]" />
                   </div>
                   <span
                     className="text-lg font-bold text-white mt-2"
@@ -263,7 +302,7 @@ export default function HomePage() {
               Services Built for Your{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -297,7 +336,7 @@ export default function HomePage() {
                 </div>
                 <Link
                   href="/services"
-                  className="mt-auto flex items-center gap-2 text-[#00F2FE] text-sm font-medium hover:gap-3 transition-all"
+                  className="mt-auto flex items-center gap-2 text-[#2E8BF0] text-sm font-medium hover:gap-3 transition-all"
                 >
                   Learn More <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -311,7 +350,7 @@ export default function HomePage() {
           CANDIDATE JOURNEY — 8 STEPS
       ════════════════════════════════════════════════════════ */}
       <section className="py-24 bg-[#0B0F19] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,#00F2FE08_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,#2E8BF008_0%,transparent_70%)] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <span className="section-label">The Nexora Process</span>
@@ -322,7 +361,7 @@ export default function HomePage() {
               Your 8-Step Journey to{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -347,15 +386,15 @@ export default function HomePage() {
                 {/* connector arrow for desktop */}
                 {i % 4 !== 3 && (
                   <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                    <ChevronRight className="w-5 h-5 text-[#00F2FE]/40" />
+                    <ChevronRight className="w-5 h-5 text-[#2E8BF0]/40" />
                   </div>
                 )}
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00F2FE]/20 to-[#00D2C4]/10 border border-[#00F2FE]/25 flex items-center justify-center group-hover:shadow-[0_0_20px_#00F2FE33] transition-all duration-300">
-                  <Icon className="w-6 h-6 text-[#00F2FE]" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2E8BF0]/20 to-[#F0851F]/10 border border-[#2E8BF0]/25 flex items-center justify-center group-hover:shadow-[0_0_20px_#2E8BF033] transition-all duration-300">
+                  <Icon className="w-6 h-6 text-[#2E8BF0]" />
                 </div>
                 <div>
                   <span
-                    className="text-xs font-bold tracking-widest text-[#00F2FE] block mb-1"
+                    className="text-xs font-bold tracking-widest text-[#2E8BF0] block mb-1"
                   >
                     STEP {num}
                   </span>
@@ -378,8 +417,8 @@ export default function HomePage() {
           BOTTOM CTA BANNER
       ════════════════════════════════════════════════════════ */}
       <section className="py-20 bg-[#121623] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,#00F2FE12_0%,transparent_65%)] pointer-events-none" />
-        <div className="absolute inset-0 border-y border-[#00F2FE]/10 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,#2E8BF012_0%,transparent_65%)] pointer-events-none" />
+        <div className="absolute inset-0 border-y border-[#2E8BF0]/10 pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
             className="text-4xl lg:text-5xl font-bold text-white mb-5"
@@ -388,7 +427,7 @@ export default function HomePage() {
             Ready to Launch Your{" "}
             <span
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #2E8BF0 0%, #F0851F 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
