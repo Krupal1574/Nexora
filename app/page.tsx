@@ -88,7 +88,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           HERO SECTION
       ════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,#00F2FE18_0%,transparent_60%)]" />
@@ -105,7 +105,7 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 container-wide text-center">
           {/* Badge */}
           <div
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-8 transition-all duration-700 ${
@@ -120,7 +120,7 @@ export default function HomePage() {
 
           {/* Headline */}
           <h1
-            className={`text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6 transition-all duration-700 delay-150 ${
+            className={`text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto leading-[1.1] tracking-tight mb-6 transition-all duration-700 delay-150 ${
               heroVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -182,13 +182,13 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           COMPANY INTRO
       ════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#0B0F19]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="section-spacing bg-[#0B0F19]">
+        <div className="container-wide">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-start">
             <div>
               <span className="section-label">Who We Are</span>
               <h2
-                className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
+                className="text-[length:var(--section-title)] font-bold text-white mb-6 leading-tight"
                 style={{ fontFamily: "Space Grotesk, sans-serif" }}
               >
                 America's Leading IT{" "}
@@ -222,7 +222,7 @@ export default function HomePage() {
             </div>
 
             {/* Capability grid */}
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid sm:grid-cols-2 gap-5">
               {[
                 { label: "Personalized Approach", icon: Users },
                 { label: "End-to-End Support", icon: Briefcase },
@@ -252,12 +252,12 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           SERVICES OVERVIEW
       ════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#121623]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-spacing bg-[#121623]">
+        <div className="container-wide">
           <div className="text-center mb-14">
             <span className="section-label">What We Offer</span>
             <h2
-              className="text-4xl lg:text-5xl font-bold text-white"
+              className="text-[length:var(--section-title)] font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Services Built for Your{" "}
@@ -310,13 +310,13 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           CANDIDATE JOURNEY — 8 STEPS
       ════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#0B0F19] relative overflow-hidden">
+      <section className="section-spacing bg-[#0B0F19] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,#00F2FE08_0%,transparent_70%)] pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container-wide relative z-10">
           <div className="text-center mb-16">
             <span className="section-label">The Nexora Process</span>
             <h2
-              className="text-4xl lg:text-5xl font-bold text-white"
+              className="text-[length:var(--section-title)] font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Your 8-Step Journey to{" "}
@@ -377,12 +377,12 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           BOTTOM CTA BANNER
       ════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-[#121623] relative overflow-hidden">
+      <section className="section-spacing bg-[#121623] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,#00F2FE12_0%,transparent_65%)] pointer-events-none" />
         <div className="absolute inset-0 border-y border-[#00F2FE]/10 pointer-events-none" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative container-narrow text-center">
           <h2
-            className="text-4xl lg:text-5xl font-bold text-white mb-5"
+            className="text-[length:var(--section-title)] font-bold text-white mb-5"
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
             Ready to Launch Your{" "}

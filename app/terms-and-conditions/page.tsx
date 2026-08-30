@@ -33,17 +33,17 @@ const sections = [
 export default function TermsAndConditionsPage() {
   return (
     <div className="overflow-x-hidden">
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-[clamp(6rem,12vw,10rem)] pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative container-narrow text-center">
           <span className="section-label">Legal</span>
           <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] mb-5">Terms &amp; <span className="text-[#00F2FE]">Conditions</span></h1>
           <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">Terms for using this website and submitting an inquiry or referral.</p>
         </div>
       </section>
-      <section className="py-16 bg-[#121623] border-y border-[#1A202C]">
-        <article className="max-w-3xl mx-auto px-4 sm:px-6 space-y-6">
+      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
+        <article className="container-narrow space-y-6">
           <div className="rounded-xl border border-amber-300/30 bg-amber-300/10 p-5 text-sm leading-relaxed text-amber-100">
             This page requires review and approval by Nexora's authorized legal owner before public launch. It does not replace legal advice.
           </div>

@@ -125,7 +125,7 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
         <div
@@ -147,7 +147,7 @@ export default function ReferAndEarnPage() {
           $
         </div>
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative container-wide text-center">
           {/* Earnings badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-semibold mb-8">
             <Gift className="w-4 h-4" />
@@ -155,7 +155,7 @@ export default function ReferAndEarnPage() {
           </div>
 
           <h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6"
+            className="text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto text-white leading-[1.1] mb-6"
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
             Join Nexora's{" "}
@@ -182,12 +182,12 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           3-STEP PROCESS
       ════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-[#121623] border-y border-[#1A202C]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-spacing bg-[#121623] border-y border-[#1A202C]">
+        <div className="container-wide">
           <div className="text-center mb-14">
             <span className="section-label">How It Works</span>
             <h2
-              className="text-4xl font-bold text-white"
+              className="text-[length:var(--section-title)] font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               3 Simple Steps to Your{" "}
@@ -270,12 +270,12 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           REFERRAL FORM
       ════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#0B0F19]">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6">
+      <section className="section-spacing bg-[#0B0F19]">
+        <div className="container-narrow">
           <div className="text-center mb-10">
             <span className="section-label">Submit a Referral</span>
             <h2
-              className="text-3xl lg:text-4xl font-bold text-white"
+              className="text-[length:var(--section-title)] font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Refer Someone Today &{" "}
@@ -512,12 +512,12 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           FAQ
       ════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-[#121623] border-t border-[#1A202C]">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
+        <div className="container-narrow">
           <div className="text-center mb-12">
             <span className="section-label">FAQs</span>
             <h2
-              className="text-3xl font-bold text-white"
+              className="text-[length:var(--section-title)] font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Common Questions

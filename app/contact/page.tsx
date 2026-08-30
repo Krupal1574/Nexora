@@ -107,7 +107,7 @@ export default function ContactPage() {
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
         <div
@@ -117,10 +117,10 @@ export default function ContactPage() {
             backgroundSize: "40px 40px",
           }}
         />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative container-wide text-center">
           <span className="section-label">Get In Touch</span>
           <h1
-            className="text-5xl sm:text-6xl font-bold text-white leading-[1.1] mb-5"
+            className="text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto text-white leading-[1.1] mb-5"
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
             Let's Start Your{" "}
@@ -156,8 +156,8 @@ export default function ContactPage() {
       {/* ════════════════════════════════════════════════════════
           QUICK INFO CARDS
       ════════════════════════════════════════════════════════ */}
-      <section className="py-12 bg-[#0B0F19]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-spacing bg-[#0B0F19]">
+        <div className="container-wide">
           <div className="grid sm:grid-cols-3 gap-5">
             {contactCards.map(({ icon: Icon, title, value, sublabel, href, color }) => {
               const commonProps = {
@@ -203,12 +203,12 @@ export default function ContactPage() {
       {/* ════════════════════════════════════════════════════════
           CONTACT FORM
       ════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-[#121623] border-t border-[#1A202C]">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6">
+      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
+        <div className="container-narrow">
           <div className="text-center mb-10">
             <span className="section-label">Send a Message</span>
             <h2
-              className="text-3xl lg:text-4xl font-bold text-white"
+              className="text-[length:var(--section-title)] font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               We'd Love to{" "}
