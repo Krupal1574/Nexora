@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, Zap } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { navigation, siteConfig } from "@/lib/site";
 
 export default function Navbar() {
@@ -49,9 +50,13 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center shadow-[0_0_16px_#00F2FE44] group-hover:shadow-[0_0_24px_#00F2FE88] transition-all duration-300">
-                <Zap className="w-5 h-5 text-[#0B0F19]" fill="currentColor" />
-              </div>
+              <Image
+                src="/logo.jpg"
+                alt="Nexora logo"
+                width={36}
+                height={36}
+                className="rounded-xl shadow-[0_0_16px_#00F2FE44] group-hover:shadow-[0_0_24px_#00F2FE88] transition-all duration-300"
+              />
               <span
                 className="text-2xl font-bold tracking-tight"
                 style={{
@@ -133,9 +138,13 @@ export default function Navbar() {
           {/* Drawer Header */}
           <div className="flex items-center justify-between p-6 border-b border-[#1A202C]">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center">
-                <Zap className="w-4 h-4 text-[#0B0F19]" fill="currentColor" />
-              </div>
+              <Image
+                src="/logo.jpg"
+                alt="Nexora logo"
+                width={32}
+                height={32}
+                className="rounded-lg"
+              />
               <span
                 className="text-xl font-bold"
                 style={{
