@@ -54,7 +54,7 @@ export default function RootLayout({
       </head>
       <body className="bg-[#0B0F19] text-white antialiased">
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen pt-16 lg:pt-20">{children}</main>
         <Footer />
       </body>
     </html>

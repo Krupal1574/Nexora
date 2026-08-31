@@ -130,7 +130,7 @@ export default function ServicesPage() {
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
+      <section className="relative pt-16 lg:pt-24 pb-16 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
         <div
@@ -142,10 +142,7 @@ export default function ServicesPage() {
         />
         <div className="relative container-wide text-center">
           <span className="section-label">What We Do</span>
-          <h1
-            className="text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto text-white leading-[1.1] mb-6"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
+          <h1 className="hero-title max-w-4xl mx-auto text-white mb-6">
             Turning Your Tech Dreams{" "}
             <span
               style={{
@@ -236,7 +233,7 @@ export default function ServicesPage() {
                             SERVICE {number}
                           </span>
                           <h2
-                            className="text-[length:var(--section-title)] font-bold text-white"
+                            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"
                             style={{ fontFamily: "Space Grotesk, sans-serif" }}
                           >
                             {title}
@@ -291,7 +288,7 @@ export default function ServicesPage() {
       <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
         <div className="container-narrow text-center">
           <h2
-            className="text-[length:var(--section-title)] font-bold text-white mb-5"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5"
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
             Ready to Start Your{" "}

@@ -45,7 +45,7 @@ export default function AboutPage() {
       {/* ════════════════════════════════════════════════════════
           HERO BANNER
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
+      <section className="relative pt-16 lg:pt-24 pb-16 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,#00F2FE12_0%,transparent_65%)] pointer-events-none" />
         <div
@@ -57,10 +57,7 @@ export default function AboutPage() {
         />
         <div className="relative z-10 container-wide text-center">
           <span className="section-label">About Nexora</span>
-          <h1
-            className="text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto text-white leading-tight mb-6"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
+          <h1 className="hero-title max-w-4xl mx-auto text-white mb-6">
             Your Partner In Achieving{" "}
             <span
               style={{
@@ -81,8 +78,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-
-
       {/* ════════════════════════════════════════════════════════
           MISSION & VISION
       ════════════════════════════════════════════════════════ */}
@@ -91,7 +86,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <span className="section-label">Purpose & Direction</span>
             <h2
-              className="text-[length:var(--section-title)] font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Our Mission &{" "}
@@ -218,7 +213,7 @@ export default function AboutPage() {
       <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
         <div className="container-narrow text-center">
           <h2
-            className="text-[length:var(--section-title)] font-bold text-white mb-5"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5"
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
             Ready to Be Our Next{" "}

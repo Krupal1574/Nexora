@@ -107,7 +107,7 @@ export default function ContactPage() {
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
+      <section className="relative pt-16 lg:pt-24 pb-16 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
         <div
@@ -119,10 +119,7 @@ export default function ContactPage() {
         />
         <div className="relative container-wide text-center">
           <span className="section-label">Get In Touch</span>
-          <h1
-            className="text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto text-white leading-[1.1] mb-5"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
+          <h1 className="hero-title max-w-4xl mx-auto text-white mb-5">
             Let's Start Your{" "}
             <span
               style={{
@@ -208,7 +205,7 @@ export default function ContactPage() {
           <div className="text-center mb-10">
             <span className="section-label">Send a Message</span>
             <h2
-              className="text-[length:var(--section-title)] font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               We'd Love to{" "}

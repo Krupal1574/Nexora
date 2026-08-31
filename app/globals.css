@@ -20,9 +20,30 @@
 
   --section-y: clamp(4rem, 7vw, 7rem);
   --section-y-large: clamp(5rem, 8vw, 9rem);
+}
 
-  --hero-title: clamp(2.5rem, 5vw, 4.5rem);
-  --section-title: clamp(2rem, 3.5vw, 3rem);
+@utility hero-title {
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  line-height: 1.12;
+  font-weight: 800;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+@utility section-title {
+  font-size: clamp(1.85rem, 3.5vw, 3rem);
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+}
+
+.page-hero-padding {
+  padding-top: calc(var(--navbar-desktop) + 3.5rem);
+}
+
+@media (max-width: 1023px) {
+  .page-hero-padding {
+    padding-top: calc(var(--navbar-mobile) + 2.5rem);
+  }
 }
 
 /* ─── Global containers & geometry ────────────────────────────────────────── */
@@ -49,14 +70,6 @@
 }
 
 /* ─── Global resets ───────────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -86,6 +99,7 @@ h6 {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(0, 242, 254, 0.12);
   border-radius: 16px;
+  padding: 1.75rem;
   transition: all 0.3s ease;
 }
 

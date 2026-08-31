@@ -37,7 +37,7 @@ const sections = [
 export default function PrivacyPolicyPage() {
   return (
     <div className="overflow-x-hidden">
-      <section className="relative pt-[clamp(6rem,12vw,10rem)] pb-12 overflow-hidden">
+      <section className="relative pt-12 lg:pt-16 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
         <div className="relative container-narrow text-center">

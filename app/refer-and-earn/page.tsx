@@ -125,7 +125,7 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
+      <section className="relative pt-16 lg:pt-24 pb-16 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
         <div
@@ -154,10 +154,7 @@ export default function ReferAndEarnPage() {
             Earn up to $500 per placed referral — unlimited referrals!
           </div>
 
-          <h1
-            className="text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto text-white leading-[1.1] mb-6"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
+          <h1 className="hero-title max-w-4xl mx-auto text-white mb-6">
             Join Nexora's{" "}
             <span
               style={{
@@ -187,7 +184,7 @@ export default function ReferAndEarnPage() {
           <div className="text-center mb-14">
             <span className="section-label">How It Works</span>
             <h2
-              className="text-[length:var(--section-title)] font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               3 Simple Steps to Your{" "}
@@ -275,7 +272,7 @@ export default function ReferAndEarnPage() {
           <div className="text-center mb-10">
             <span className="section-label">Submit a Referral</span>
             <h2
-              className="text-[length:var(--section-title)] font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Refer Someone Today &{" "}
@@ -517,7 +514,7 @@ export default function ReferAndEarnPage() {
           <div className="text-center mb-12">
             <span className="section-label">FAQs</span>
             <h2
-              className="text-[length:var(--section-title)] font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Common Questions

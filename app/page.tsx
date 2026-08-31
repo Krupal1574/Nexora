@@ -76,19 +76,12 @@ function useCounter(target: number, duration = 2000, start = false) {
 }
 
 export default function HomePage() {
-  const [heroVisible, setHeroVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setHeroVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="overflow-x-hidden">
       {/* ════════════════════════════════════════════════════════
           HERO SECTION
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-[calc(var(--navbar-mobile)+4rem)] lg:pt-[calc(var(--navbar-desktop)+6rem)] pb-16 lg:pb-24 overflow-hidden">
+      <section className="relative pt-20 lg:pt-28 pb-20 lg:pb-32 overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,#00F2FE18_0%,transparent_60%)]" />
@@ -107,26 +100,13 @@ export default function HomePage() {
 
         <div className="relative z-10 container-wide text-center">
           {/* Badge */}
-          <div
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-8 transition-all duration-700 ${
-              heroVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-6"
-            }`}
-          >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-8">
             <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-pulse" />
             IT Staffing & Talent Solutions
           </div>
 
           {/* Headline */}
-          <h1
-            className={`text-[length:var(--hero-title)] font-bold max-w-4xl mx-auto leading-[1.1] tracking-tight mb-6 transition-all duration-700 delay-150 ${
-              heroVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
-            }`}
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
+          <h1 className="hero-title max-w-4xl mx-auto mb-6">
             Your Dream Tech Career{" "}
             <span
               style={{
@@ -141,25 +121,13 @@ export default function HomePage() {
           </h1>
 
           {/* Subtext */}
-          <p
-            className={`text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed mb-10 transition-all duration-700 delay-300 ${
-              heroVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
-            }`}
-          >
+          <p className="text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed mb-10">
             Nexora bridges the gap between elite tech talent and top U.S. enterprises.
             From resume optimization to placement, we're your career acceleration partner.
           </p>
 
           {/* CTA Buttons */}
-          <div
-            className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-500 ${
-              heroVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-8"
-            }`}
-          >
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/services" className="btn-primary text-base px-8 py-4">
               Explore Services
               <ArrowRight className="w-4 h-4" />
@@ -168,14 +136,6 @@ export default function HomePage() {
               Contact Recruiters
             </Link>
           </div>
-
-
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
-          <span className="text-[#64748B] text-xs tracking-widest uppercase">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-[#00F2FE] to-transparent" />
         </div>
       </section>
 
@@ -188,7 +148,7 @@ export default function HomePage() {
             <div>
               <span className="section-label">Who We Are</span>
               <h2
-                className="text-[length:var(--section-title)] font-bold text-white mb-6 leading-tight"
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
                 style={{ fontFamily: "Space Grotesk, sans-serif" }}
               >
                 America's Leading IT{" "}
@@ -257,7 +217,7 @@ export default function HomePage() {
           <div className="text-center mb-14">
             <span className="section-label">What We Offer</span>
             <h2
-              className="text-[length:var(--section-title)] font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Services Built for Your{" "}
@@ -316,7 +276,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <span className="section-label">The Nexora Process</span>
             <h2
-              className="text-[length:var(--section-title)] font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Your 8-Step Journey to{" "}
@@ -382,7 +342,7 @@ export default function HomePage() {
         <div className="absolute inset-0 border-y border-[#00F2FE]/10 pointer-events-none" />
         <div className="relative container-narrow text-center">
           <h2
-            className="text-[length:var(--section-title)] font-bold text-white mb-5"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5"
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
             Ready to Launch Your{" "}
