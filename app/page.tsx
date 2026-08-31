@@ -139,6 +139,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Mobile section divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
+
       {/* ════════════════════════════════════════════════════════
           COMPANY INTRO
       ════════════════════════════════════════════════════════ */}
@@ -209,6 +212,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Mobile section divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
+
       {/* ════════════════════════════════════════════════════════
           SERVICES OVERVIEW
       ════════════════════════════════════════════════════════ */}
@@ -267,6 +273,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Mobile section divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
+
       {/* ════════════════════════════════════════════════════════
           CANDIDATE JOURNEY — 8 STEPS
       ════════════════════════════════════════════════════════ */}
@@ -297,8 +306,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Desktop: 4-4 grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* Journey steps: single column on mobile, 2 on sm, 4 on lg */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {journeySteps.map(({ num, label, icon: Icon }, i) => (
               <div
                 key={num}
@@ -333,6 +342,9 @@ export default function HomePage() {
       </section>
 
 
+
+      {/* Mobile section divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
 
       {/* ════════════════════════════════════════════════════════
           BOTTOM CTA BANNER

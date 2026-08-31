@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 import { getSiteUrl } from "@/lib/site";
 
@@ -41,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -54,8 +56,9 @@ export default function RootLayout({
       </head>
       <body className="bg-[#0B0F19] text-white antialiased">
         <Navbar />
-        <main className="min-h-screen pt-16 lg:pt-20">{children}</main>
+        <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-0">{children}</main>
         <Footer />
+        <MobileBottomNav />
       </body>
     </html>
   );
