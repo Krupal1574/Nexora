@@ -21,6 +21,7 @@ interface CartState {
   itemCount: number;
   subtotal: number;
   totalSavings: number;
+  isCartOpen: boolean;
 }
 
 type CartAction =
@@ -28,7 +29,9 @@ type CartAction =
   | { type: "REMOVE"; productId: string }
   | { type: "UPDATE_QTY"; productId: string; quantity: number }
   | { type: "CLEAR" }
-  | { type: "HYDRATE"; items: CartItem[] };
+  | { type: "HYDRATE"; items: CartItem[] }
+  | { type: "OPEN_CART" }
+  | { type: "CLOSE_CART" };
 
 interface CartContextValue extends CartState {
   addToCart: (product: Product, quantity?: number) => void;
@@ -36,6 +39,8 @@ interface CartContextValue extends CartState {
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   isInCart: (productId: string) => boolean;
+  openCart: () => void;
+  closeCart: () => void;
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -110,6 +115,10 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case "HYDRATE":
       newItems = action.items;
       break;
+    case "OPEN_CART":
+      return { ...state, isCartOpen: true };
+    case "CLOSE_CART":
+      return { ...state, isCartOpen: false };
     default:
       return state;
   }
@@ -126,6 +135,7 @@ const initialState: CartState = {
   itemCount: 0,
   subtotal: 0,
   totalSavings: 0,
+  isCartOpen: false,
 };
 
 export function CartProvider({ children }: { children: ReactNode }) {
@@ -175,6 +185,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => dispatch({ type: "CLEAR" }), []);
 
+  const openCart = useCallback(() => dispatch({ type: "OPEN_CART" }), []);
+  const closeCart = useCallback(() => dispatch({ type: "CLOSE_CART" }), []);
+
   const isInCart = useCallback(
     (productId: string) => state.items.some((i) => i.product.id === productId),
     [state.items]
@@ -189,6 +202,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updateQuantity,
         clearCart,
         isInCart,
+        openCart,
+        closeCart,
       }}
     >
       {children}

@@ -94,26 +94,29 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* CTA Button */}
-            <div className="hidden lg:flex items-center gap-4">
-              <CartIcon />
-              <a href={siteConfig.contact.phoneHref} className="btn-primary text-sm">
-                <Phone className="w-4 h-4" />
-                Call Us Now!
-              </a>
-            </div>
+            {/* Right side controls */}
+            <div className="flex items-center gap-2 sm:gap-4">
+              <div className="hidden lg:block">
+                <a href={siteConfig.contact.phoneHref} className="btn-primary text-sm">
+                  <Phone className="w-4 h-4 mr-1.5" />
+                  Call Us Now!
+                </a>
+              </div>
 
-            {/* Mobile Hamburger */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              ref={menuButtonRef}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#00F2FE]/10 transition-all"
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
-              aria-controls="mobile-navigation"
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+              <CartIcon />
+
+              {/* Mobile Hamburger */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                ref={menuButtonRef}
+                className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#00F2FE]/10 transition-all"
+                aria-label="Toggle menu"
+                aria-expanded={isOpen}
+                aria-controls="mobile-navigation"
+              >
+                {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
         </div>
       </header>

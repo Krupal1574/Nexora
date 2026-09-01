@@ -6,24 +6,26 @@ import { ShoppingCart, X, Plus, Minus, Trash2, ArrowRight } from "lucide-react";
 import { useCart } from "@/lib/cart";
 
 export default function CartIcon() {
-  const { items, itemCount, subtotal, totalSavings, updateQuantity, removeFromCart, clearCart } =
-    useCart();
-  const [isOpen, setIsOpen] = useState(false);
+  const { 
+    items, itemCount, subtotal, totalSavings, 
+    updateQuantity, removeFromCart, clearCart,
+    isCartOpen, openCart, closeCart
+  } = useCart();
   const drawerRef = useRef<HTMLDivElement>(null);
 
   // Close on Escape
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isCartOpen) return;
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "Escape") closeCart();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [isOpen]);
+  }, [isCartOpen, closeCart]);
 
   // Lock body scroll when drawer is open
   useEffect(() => {
-    if (isOpen) {
+    if (isCartOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -31,13 +33,13 @@ export default function CartIcon() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isCartOpen]);
 
   return (
     <>
       {/* Cart Button */}
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={openCart}
         className="relative w-10 h-10 flex items-center justify-center rounded-xl text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#00F2FE]/10 transition-all duration-200"
         aria-label={`Shopping cart with ${itemCount} items`}
       >
@@ -50,10 +52,10 @@ export default function CartIcon() {
       </button>
 
       {/* Overlay */}
-      {isOpen && (
+      {isCartOpen && (
         <div
           className="fixed top-0 left-0 w-screen h-screen z-[60] bg-black/60 backdrop-blur-sm"
-          onClick={() => setIsOpen(false)}
+          onClick={closeCart}
         />
       )}
 
@@ -61,7 +63,7 @@ export default function CartIcon() {
       <div
         ref={drawerRef}
         className={`fixed top-0 right-0 h-[100dvh] w-full sm:w-[420px] z-[70] bg-[#121623] border-l border-[#00F2FE]/15 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
@@ -84,7 +86,7 @@ export default function CartIcon() {
               </div>
             </div>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={closeCart}
               className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#1A202C] transition-all"
               aria-label="Close cart"
             >
@@ -107,7 +109,7 @@ export default function CartIcon() {
                 </p>
                 <Link
                   href="/shop"
-                  onClick={() => setIsOpen(false)}
+                  onClick={closeCart}
                   className="btn-primary text-sm"
                 >
                   Browse Plans <ArrowRight className="w-3.5 h-3.5" />
@@ -219,7 +221,7 @@ export default function CartIcon() {
               {/* Actions */}
               <Link
                 href="/contact?checkout=true"
-                onClick={() => setIsOpen(false)}
+                onClick={closeCart}
                 className="btn-primary w-full justify-center text-sm py-3.5"
               >
                 Proceed to Checkout

@@ -19,7 +19,7 @@ export default function ProductDetailPage({
 }) {
   const { id } = use(params);
   const product = getProductBySlug(id);
-  const { addToCart } = useCart();
+  const { addToCart, openCart } = useCart();
 
   if (!product) {
     notFound();
@@ -103,7 +103,10 @@ export default function ProductDetailPage({
 
               <div className="mt-8">
                 <button
-                  onClick={() => addToCart(product)}
+                  onClick={() => {
+                    addToCart(product);
+                    openCart();
+                  }}
                   className="w-full btn-primary justify-center py-4 text-base group"
                 >
                   <ShoppingCart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />

@@ -16,7 +16,7 @@ import { useCart } from "@/lib/cart";
 import ShopPromo from "@/components/ShopPromo";
 
 export default function ShopPage() {
-  const { addToCart } = useCart();
+  const { addToCart, openCart } = useCart();
   const [category, setCategory] = useState<CategoryFilter>("all");
   const [sort, setSort] = useState<SortOption>("popular");
 
@@ -26,13 +26,13 @@ export default function ShopPage() {
   );
 
   return (
-    <div className="overflow-x-hidden page-hero-padding">
+    <div className="overflow-x-hidden">
       <ShopPromo />
 
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-8 lg:pt-16 pb-16 overflow-hidden">
+      <section className="relative pt-20 lg:pt-28 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-[#0B0F19]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
         
@@ -219,7 +219,10 @@ export default function ShopPage() {
 
                   <div className="mt-auto flex flex-col gap-3">
                     <button
-                      onClick={() => addToCart(product)}
+                      onClick={() => {
+                        addToCart(product);
+                        openCart();
+                      }}
                       className="w-full btn-primary justify-center group/btn"
                     >
                       <ShoppingCart className="w-4 h-4 mr-1 group-hover/btn:scale-110 transition-transform" />
