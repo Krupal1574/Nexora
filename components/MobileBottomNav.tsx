@@ -3,13 +3,13 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Users, Briefcase, Gift, MessageCircle } from "lucide-react";
+import { Home, Users, Briefcase, Gift, MessageCircle, ShoppingCart } from "lucide-react";
 
 const mobileNavItems = [
   { label: "Home", href: "/", icon: Home },
   { label: "About", href: "/about", icon: Users },
   { label: "Services", href: "/services", icon: Briefcase },
-  { label: "Refer", href: "/refer-and-earn", icon: Gift },
+  { label: "Shop", href: "/shop", icon: ShoppingCart },
   { label: "Contact", href: "/contact", icon: MessageCircle },
 ];
 

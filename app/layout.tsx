@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import CartProvider from "@/components/CartProvider";
 
 import { getSiteUrl } from "@/lib/site";
 
@@ -55,10 +56,12 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#0B0F19] text-white antialiased">
-        <Navbar />
-        <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-0">{children}</main>
-        <Footer />
-        <MobileBottomNav />
+        <CartProvider>
+          <Navbar />
+          <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-0">{children}</main>
+          <Footer />
+          <MobileBottomNav />
+        </CartProvider>
       </body>
     </html>
   );

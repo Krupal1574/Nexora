@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
 import { navigation, siteConfig } from "@/lib/site";
+import CartIcon from "@/components/CartIcon";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -95,6 +96,7 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <div className="hidden lg:flex items-center gap-4">
+              <CartIcon />
               <a href={siteConfig.contact.phoneHref} className="btn-primary text-sm">
                 <Phone className="w-4 h-4" />
                 Call Us Now!
