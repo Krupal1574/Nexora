@@ -10,7 +10,7 @@ import { navigation, siteConfig, servicesList } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0B0F19]">
+    <footer className="relative bg-[#0B0F19] overflow-hidden">
       {/* Gradient top accent line */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE] to-transparent" />
 
@@ -177,7 +177,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="container-wide">
+      <div className="container-wide pb-24 lg:pb-0">
         <div className="h-px bg-gradient-to-r from-transparent via-[#2D3748] to-transparent" />
         <div className="py-7 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[#64748B] text-sm text-center">
