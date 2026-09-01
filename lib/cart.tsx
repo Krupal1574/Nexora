@@ -124,7 +124,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   }
 
   persistCart(newItems);
-  return { items: newItems, ...computeTotals(newItems) };
+  return { ...state, items: newItems, ...computeTotals(newItems) };
 }
 
 // ─── Context ─────────────────────────────────────────────────────────────────
