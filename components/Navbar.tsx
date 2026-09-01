@@ -55,7 +55,7 @@ export default function Navbar() {
                 alt="Nexora logo"
                 width={36}
                 height={36}
-                className="rounded-xl shadow-[0_0_16px_#00F2FE44] group-hover:shadow-[0_0_24px_#00F2FE88] transition-all duration-300"
+                className="rounded-full shadow-[0_0_16px_#00F2FE44] group-hover:shadow-[0_0_24px_#00F2FE88] transition-all duration-300"
               />
               <span
                 className="text-2xl font-bold tracking-tight"
@@ -143,7 +143,7 @@ export default function Navbar() {
                 alt="Nexora logo"
                 width={32}
                 height={32}
-                className="rounded-lg"
+                className="rounded-full"
               />
               <span
                 className="text-xl font-bold"

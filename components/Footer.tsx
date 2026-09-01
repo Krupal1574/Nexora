@@ -59,7 +59,7 @@ export default function Footer() {
                 alt="Nexora logo"
                 width={40}
                 height={40}
-                className="rounded-xl shadow-[0_0_20px_#00F2FE55] group-hover:shadow-[0_0_28px_#00F2FE77] transition-shadow duration-300"
+                className="rounded-full shadow-[0_0_20px_#00F2FE55] group-hover:shadow-[0_0_28px_#00F2FE77] transition-shadow duration-300"
               />
               <span
                 className="text-2xl font-bold"
