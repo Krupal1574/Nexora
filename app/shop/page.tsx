@@ -1,301 +1,753 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowRight,
-  Filter,
+  ChevronRight,
   ShoppingCart,
-  ChevronDown,
   CheckCircle2,
-  Tag,
+  Rocket,
+  TrendingUp,
+  Crown,
+  FileText,
+  Briefcase,
+  Code2,
+  ArrowRight,
   Sparkles,
 } from "lucide-react";
-import { products, shopFAQ, type CategoryFilter, type SortOption, filterAndSort } from "@/lib/shop";
+
 import { useCart } from "@/lib/cart";
-import ShopPromo from "@/components/ShopPromo";
 
-export default function ShopPage() {
+// ─────────────────────────────────────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────────────────────────────────────
+
+type ProductCategory = "package" | "individual";
+
+interface ApiProduct {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  price: string;
+  originalPrice: string;
+  discount: number;
+  image: string;
+  category: ProductCategory;
+  status: string;
+  stock: number;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+type SortOption =
+  | "popular"
+  | "price-asc"
+  | "price-desc"
+  | "discount";
+
+type CategoryFilter = "all" | "package" | "individual";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Extra presentation data
+// The actual price/name/category comes from the database.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const productMeta: Record<
+  string,
+  {
+    tagline: string;
+    features: string[];
+    badge?: "BEST SELLER" | "PREMIUM" | "POPULAR" | "NEW";
+    icon: typeof Rocket;
+  }
+> = {
+  "launch-plan": {
+    tagline:
+      "Kickstart your tech career with essential services",
+    features: [
+      "ATS-optimized resume rewrite",
+      "LinkedIn profile overhaul & SEO",
+      "1-on-1 career counseling session",
+      "Job search strategy roadmap",
+      "Cover letter template pack",
+      "30-day email support",
+    ],
+    icon: Rocket,
+  },
+
+  "accelerate-plan": {
+    tagline:
+      "Fast-track your placement with full-spectrum support",
+    features: [
+      "Everything in Launch Plan",
+      "Dedicated personal recruiter",
+      "Resume marketing to top employers",
+      "3 mock interview sessions",
+      "Technical skills assessment & training plan",
+      "Interview scheduling & calendar management",
+      "Salary negotiation coaching",
+      "60-day priority support",
+    ],
+    badge: "BEST SELLER",
+    icon: TrendingUp,
+  },
+
+  "summit-plan": {
+    tagline:
+      "The complete career transformation experience",
+    features: [
+      "Everything in Accelerate Plan",
+      "Unlimited mock interviews",
+      "Advanced technical training",
+      "Portfolio & GitHub project guidance",
+      "Direct outreach to hiring managers",
+      "Background check & compliance coordination",
+      "Onboarding support through first 90 days",
+      "Dedicated account manager",
+      "Priority placement queue",
+      "120-day VIP support",
+    ],
+    badge: "PREMIUM",
+    icon: Crown,
+  },
+
+  "resume-optimization": {
+    tagline:
+      "Get past the ATS and land interviews",
+    features: [
+      "Complete ATS audit & keyword optimization",
+      "Professional rewrite",
+      "Quantified achievement highlights",
+      "2 rounds of revisions",
+      "Delivered in 5 business days",
+    ],
+    badge: "POPULAR",
+    icon: FileText,
+  },
+
+  "interview-prep": {
+    tagline:
+      "Walk into every interview with confidence",
+    features: [
+      "3 mock interview sessions",
+      "Behavioral + technical coverage",
+      "Detailed feedback reports",
+      "Question bank for your target role",
+      "Negotiation strategy guide",
+    ],
+    icon: Briefcase,
+  },
+
+  "tech-training": {
+    tagline:
+      "Sharpen your skills with structured learning",
+    features: [
+      "Domain-specific learning path",
+      "4 live training sessions",
+      "Mock technical assessment",
+      "Certification prep guidance",
+      "Access to curated learning resources",
+    ],
+    badge: "NEW",
+    icon: Code2,
+  },
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Product card
+// ─────────────────────────────────────────────────────────────────────────────
+
+function ProductCard({
+  product,
+}: {
+  product: ApiProduct;
+}) {
   const { addToCart, openCart } = useCart();
-  const [category, setCategory] = useState<CategoryFilter>("all");
-  const [sort, setSort] = useState<SortOption>("popular");
 
-  const displayProducts = useMemo(
-    () => filterAndSort(products, category, sort),
-    [category, sort]
-  );
+  const meta = productMeta[product.slug];
+
+  const Icon = meta?.icon ?? Briefcase;
+
+  const price = Number(product.price);
+  const originalPrice = Number(product.originalPrice);
+
+  const savings = Math.max(originalPrice - price, 0);
+
+  const discount =
+    product.discount ||
+    Math.round(
+      ((originalPrice - price) / originalPrice) * 100
+    );
+
+  const handleAddToCart = () => {
+    /*
+     * Your cart currently uses the Product type from lib/shop.ts.
+     * The metadata below gives it the additional fields it expects.
+     */
+
+    const cartProduct = {
+      id: product.id,
+      slug: product.slug,
+      name: product.name,
+      tagline:
+        meta?.tagline || product.description,
+      description: product.description,
+      features: meta?.features || [],
+      originalPrice,
+      salePrice: price,
+      discountPercent: discount,
+      savings,
+      badge: meta?.badge,
+      category: product.category,
+      icon: Icon,
+    };
+
+    addToCart(cartProduct);
+    openCart();
+  };
 
   return (
-    <div className="overflow-x-hidden">
-      <ShopPromo />
+    <div className="group relative rounded-2xl bg-[#121923] border border-[#203548] p-5 flex flex-col min-h-[300px] hover:border-[#00F2FE]/40 transition-all duration-300">
+      {/* Discount */}
+      <div className="absolute top-2 left-2 z-10">
+        <span className="inline-flex items-center rounded-md bg-[#00F2FE] px-2 py-1 text-[9px] font-bold text-[#061018]">
+          {discount}% OFF
+        </span>
 
-      {/* ════════════════════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-20 lg:pt-28 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
-        
-        <div className="relative container-wide text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-6">
-            <Tag className="w-4 h-4" />
+        {meta?.badge && (
+          <div className="mt-1">
+            <span className="inline-flex items-center rounded-md border border-[#00F2FE]/40 bg-[#07151d] px-2 py-1 text-[8px] font-bold text-white">
+              {meta.badge}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Icon */}
+      <div className="mt-7 mb-3">
+        <div className="w-10 h-10 rounded-xl bg-[#06242b] border border-[#00F2FE]/30 flex items-center justify-center">
+          <Icon className="w-5 h-5 text-[#00F2FE]" />
+        </div>
+      </div>
+
+      {/* Name */}
+      <h3
+        className="text-base font-bold text-white mb-1"
+        style={{
+          fontFamily: "Space Grotesk, sans-serif",
+        }}
+      >
+        {product.name}
+      </h3>
+
+      {/* Description */}
+      <p className="text-[9px] leading-relaxed text-[#94A3B8] line-clamp-3 min-h-[40px]">
+        {meta?.tagline || product.description}
+      </p>
+
+      {/* Price */}
+      <div className="mt-3 pt-3 border-t border-[#263241]">
+        <div className="flex items-baseline gap-2">
+          <span
+            className="text-2xl font-bold text-white"
+            style={{
+              fontFamily: "Space Grotesk, sans-serif",
+            }}
+          >
+            ${price.toLocaleString()}
+          </span>
+
+          <span className="text-[10px] text-[#64748B] line-through">
+            ${originalPrice.toLocaleString()}
+          </span>
+        </div>
+
+        <p className="text-[9px] text-[#00D2C4] mt-1">
+          You save ${savings.toLocaleString()}
+        </p>
+      </div>
+
+      {/* Features */}
+      <ul className="mt-3 space-y-1.5 flex-1">
+        {(meta?.features || []).slice(0, 4).map(
+          (feature, index) => (
+            <li
+              key={index}
+              className="flex items-start gap-2 text-[8px] text-[#CBD5E1]"
+            >
+              <CheckCircle2 className="w-2.5 h-2.5 mt-0.5 flex-shrink-0 text-[#00F2FE]" />
+              <span className="line-clamp-1">
+                {feature}
+              </span>
+            </li>
+          )
+        )}
+
+        {(meta?.features?.length || 0) > 4 && (
+          <li className="text-[7px] text-[#64748B] pl-4">
+            + {(meta?.features?.length || 0) - 4} more
+            features
+          </li>
+        )}
+      </ul>
+
+      {/* Buttons */}
+      <div className="mt-4 space-y-2">
+        <button
+          onClick={handleAddToCart}
+          className="w-full h-8 rounded-full bg-[#00D2D2] hover:bg-[#00F2FE] text-[#061018] text-[9px] font-bold flex items-center justify-center gap-2 transition-colors"
+        >
+          <ShoppingCart className="w-3 h-3" />
+          Add to Cart
+        </button>
+
+        <Link
+          href={`/shop/${product.slug}`}
+          className="w-full h-8 rounded-full border border-[#00F2FE] text-[#00F2FE] hover:bg-[#00F2FE]/10 text-[9px] font-bold flex items-center justify-center transition-colors"
+        >
+          View Details
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Loading Card
+// ─────────────────────────────────────────────────────────────────────────────
+
+function LoadingCard() {
+  return (
+    <div className="rounded-2xl bg-[#121923] border border-[#203548] p-5 min-h-[300px] animate-pulse">
+      <div className="w-12 h-4 rounded bg-[#1d2a38] mb-5" />
+      <div className="w-10 h-10 rounded-xl bg-[#1d2a38] mb-4" />
+      <div className="w-32 h-4 rounded bg-[#1d2a38] mb-2" />
+      <div className="w-full h-8 rounded bg-[#1d2a38] mb-5" />
+      <div className="w-24 h-7 rounded bg-[#1d2a38] mb-4" />
+      <div className="space-y-2">
+        <div className="w-full h-2 rounded bg-[#1d2a38]" />
+        <div className="w-4/5 h-2 rounded bg-[#1d2a38]" />
+        <div className="w-3/5 h-2 rounded bg-[#1d2a38]" />
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Main Shop Page
+// ─────────────────────────────────────────────────────────────────────────────
+
+export default function ShopPage() {
+  const [products, setProducts] = useState<ApiProduct[]>(
+    []
+  );
+
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState("");
+
+  const [category, setCategory] =
+    useState<CategoryFilter>("all");
+
+  const [sort, setSort] =
+    useState<SortOption>("popular");
+
+  // ───────────────────────────────────────────────────────
+  // Fetch products from Prisma API
+  // ───────────────────────────────────────────────────────
+
+  useEffect(() => {
+    let mounted = true;
+
+    async function loadProducts() {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await fetch("/api/products", {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            "Failed to fetch products"
+          );
+        }
+
+        const data = await response.json();
+
+        if (!data.success) {
+          throw new Error(
+            data.message ||
+            "Failed to load products"
+          );
+        }
+
+        if (mounted) {
+          setProducts(data.products || []);
+        }
+      } catch (err) {
+        console.error("Shop products error:", err);
+
+        if (mounted) {
+          setError(
+            "Unable to load products. Please refresh the page."
+          );
+        }
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadProducts();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // ───────────────────────────────────────────────────────
+  // Filter + Sort
+  // ───────────────────────────────────────────────────────
+
+  const visibleProducts = useMemo(() => {
+    let result = [...products];
+
+    // Only show active products
+    result = result.filter(
+      (product) => product.status === "ACTIVE"
+    );
+
+    // Category
+    if (category !== "all") {
+      result = result.filter(
+        (product) =>
+          product.category === category
+      );
+    }
+
+    // Sort
+    switch (sort) {
+      case "price-asc":
+        result.sort(
+          (a, b) =>
+            Number(a.price) - Number(b.price)
+        );
+        break;
+
+      case "price-desc":
+        result.sort(
+          (a, b) =>
+            Number(b.price) - Number(a.price)
+        );
+        break;
+
+      case "discount":
+        result.sort(
+          (a, b) =>
+            b.discount - a.discount
+        );
+        break;
+
+      case "popular":
+      default:
+        result.sort(
+          (a, b) =>
+            Number(b.featured) -
+            Number(a.featured)
+        );
+        break;
+    }
+
+    return result;
+  }, [products, category, sort]);
+
+  // ───────────────────────────────────────────────────────
+  // Render
+  // ───────────────────────────────────────────────────────
+
+  return (
+    <main className="overflow-x-hidden page-hero-padding pb-24">
+      <div className="container-wide">
+
+        {/* Hero */}
+        <section className="text-center pt-8 sm:pt-12">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#00F2FE]/30 bg-[#00F2FE]/5 px-3 py-1 text-[8px] font-semibold text-[#00F2FE]">
+            <Sparkles className="w-2.5 h-2.5" />
             Limited Time Offers
           </div>
-          
-          <h1 className="hero-title max-w-4xl mx-auto text-white mb-6">
+
+          <h1
+            className="mt-5 text-3xl sm:text-5xl font-bold text-white leading-tight"
+            style={{
+              fontFamily:
+                "Space Grotesk, sans-serif",
+            }}
+          >
             Invest in Your{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Career Success
+            <span className="text-[#00F2FE]">
+              Career
+            </span>
+            <br />
+            <span className="text-[#00F2FE]">
+              Success
             </span>
           </h1>
-          <p className="text-[#94A3B8] text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed mb-10">
-            Choose the perfect plan to accelerate your job search, optimize your profile, and land your dream role faster.
-          </p>
-        </div>
-      </section>
 
-      {/* ════════════════════════════════════════════════════════
-          PROMO BANNER
-      ════════════════════════════════════════════════════════ */}
-      <section className="container-wide mb-16">
-        <div className="rounded-2xl bg-gradient-to-r from-[#00F2FE]/10 to-[#00D2C4]/10 border border-[#00F2FE]/20 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 overflow-hidden relative">
-           <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#00F2FE]/[0.05] rounded-full blur-[80px] pointer-events-none" />
-           <div className="flex items-center gap-4 relative z-10">
-              <div className="w-12 h-12 rounded-xl bg-[#00F2FE]/20 border border-[#00F2FE]/30 flex items-center justify-center flex-shrink-0 text-[#00F2FE]">
-                <Sparkles className="w-6 h-6" />
+          <p className="max-w-xl mx-auto mt-5 text-xs sm:text-sm leading-relaxed text-[#94A3B8]">
+            Choose the perfect plan to accelerate
+            your job search, optimize your profile,
+            and land your dream role faster.
+          </p>
+        </section>
+
+        {/* Promo Banner */}
+        <section className="mt-10 rounded-xl border border-[#00F2FE]/30 bg-[#06262d]/70 px-4 py-4 sm:px-5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center">
+                <Rocket className="w-4 h-4 text-[#00F2FE]" />
               </div>
+
               <div>
-                <h3 className="text-white text-lg font-bold" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-                  Save up to 33% on Career Packages
-                </h3>
-                <p className="text-[#94A3B8] text-sm mt-1">
-                  Introductory pricing available for a limited time.
+                <p className="text-[10px] sm:text-xs font-bold text-white">
+                  Save up to 35% on Career Packages
+                </p>
+
+                <p className="text-[8px] text-[#94A3B8] mt-0.5">
+                  Introductory pricing available for
+                  a limited time.
                 </p>
               </div>
-           </div>
-           <Link href="#products" className="btn-primary text-sm whitespace-nowrap relative z-10">
-             Explore Packages <ArrowRight className="w-4 h-4" />
-           </Link>
-        </div>
-      </section>
+            </div>
 
-      {/* ════════════════════════════════════════════════════════
-          PRODUCTS & FILTERS
-      ════════════════════════════════════════════════════════ */}
-      <section id="products" className="container-wide pb-24 scroll-mt-24">
-        {/* Filters Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-[#2D3748]/60">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
             <button
-              onClick={() => setCategory("all")}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                category === "all"
-                  ? "bg-[#00F2FE]/15 text-[#00F2FE] border border-[#00F2FE]/30"
-                  : "bg-transparent text-[#94A3B8] border border-transparent hover:text-white hover:bg-[#1A202C]"
-              }`}
+              onClick={() =>
+                setCategory("package")
+              }
+              className="shrink-0 rounded-full bg-[#00D2D2] hover:bg-[#00F2FE] px-5 py-2 text-[9px] font-bold text-[#061018] flex items-center gap-2 transition-colors"
             >
-              All Services
-            </button>
-            <button
-              onClick={() => setCategory("package")}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                category === "package"
-                   ? "bg-[#00F2FE]/15 text-[#00F2FE] border border-[#00F2FE]/30"
-                  : "bg-transparent text-[#94A3B8] border border-transparent hover:text-white hover:bg-[#1A202C]"
-              }`}
-            >
-              Career Packages
-            </button>
-            <button
-              onClick={() => setCategory("individual")}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                category === "individual"
-                  ? "bg-[#00F2FE]/15 text-[#00F2FE] border border-[#00F2FE]/30"
-                  : "bg-transparent text-[#94A3B8] border border-transparent hover:text-white hover:bg-[#1A202C]"
-              }`}
-            >
-              Individual Services
+              Explore Packages
+              <ArrowRight className="w-3 h-3" />
             </button>
           </div>
+        </section>
 
-          <div className="flex items-center gap-2 text-sm text-[#94A3B8]">
-            <Filter className="w-4 h-4" />
-            <span>Sort by:</span>
-            <div className="relative">
+        {/* Filters */}
+        <section className="mt-8 border-b border-[#1e2b38] pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+            {/* Categories */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() =>
+                  setCategory("all")
+                }
+                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "all"
+                    ? "bg-[#00F2FE] text-[#061018]"
+                    : "text-[#94A3B8] hover:text-white"
+                  }`}
+              >
+                All Services
+              </button>
+
+              <button
+                onClick={() =>
+                  setCategory("package")
+                }
+                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "package"
+                    ? "bg-[#00F2FE] text-[#061018]"
+                    : "text-[#94A3B8] hover:text-white"
+                  }`}
+              >
+                Career Packages
+              </button>
+
+              <button
+                onClick={() =>
+                  setCategory("individual")
+                }
+                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "individual"
+                    ? "bg-[#00F2FE] text-[#061018]"
+                    : "text-[#94A3B8] hover:text-white"
+                  }`}
+              >
+                Individual Services
+              </button>
+            </div>
+
+            {/* Sort */}
+            <div className="flex items-center gap-2">
+              <span className="text-[8px] text-[#64748B]">
+                Sort by
+              </span>
+
               <select
                 value={sort}
-                onChange={(e) => setSort(e.target.value as SortOption)}
-                className="appearance-none bg-[#1A202C] border border-[#2D3748] rounded-lg pl-3 pr-8 py-1.5 text-white outline-none focus:border-[#00F2FE]/50 transition-colors cursor-pointer"
+                onChange={(e) =>
+                  setSort(
+                    e.target.value as SortOption
+                  )
+                }
+                className="rounded-md border border-[#294052] bg-[#101821] px-2 py-1.5 text-[8px] text-white outline-none focus:border-[#00F2FE]"
               >
-                <option value="popular">Most Popular</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="discount">Biggest Discount</option>
+                <option value="popular">
+                  Most Popular
+                </option>
+
+                <option value="price-asc">
+                  Price: Low to High
+                </option>
+
+                <option value="price-desc">
+                  Price: High to Low
+                </option>
+
+                <option value="discount">
+                  Biggest Discount
+                </option>
               </select>
-              <ChevronDown className="w-4 h-4 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#94A3B8]" />
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
-          {displayProducts.map((product) => {
-            const Icon = product.icon;
-            return (
-              <div
-                key={product.id}
-                className="glass-card flex flex-col relative overflow-hidden group hover:shadow-[0_8px_32px_rgba(0,242,254,0.1)] p-0"
-              >
-                {/* Badges */}
-                <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
-                  <span className="bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] text-[#0B0F19] px-2.5 py-1 rounded-md text-xs font-bold shadow-lg">
-                    {product.discountPercent}% OFF
-                  </span>
-                  {product.badge && (
-                    <span className="bg-[#1A202C]/90 backdrop-blur-md border border-[#00F2FE]/30 text-white px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
+        {/* Error */}
+        {error && !loading && (
+          <div className="mt-8 rounded-xl border border-red-500/30 bg-red-500/5 p-5 text-center">
+            <p className="text-sm text-red-400">
+              {error}
+            </p>
 
-                {/* Card Header area */}
-                <div className="pt-12 px-6 pb-6 border-b border-[#2D3748]/50 bg-gradient-to-b from-[#1A202C] to-transparent relative">
-                  <div className="w-14 h-14 rounded-2xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-7 h-7 text-[#00F2FE]" />
-                  </div>
-                  <h3
-                    className="text-2xl font-bold text-white mb-2"
-                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                  >
-                    {product.name}
-                  </h3>
-                  <p className="text-[#94A3B8] text-sm line-clamp-2 h-10">
-                    {product.description}
-                  </p>
-                </div>
-
-                {/* Price Area */}
-                <div className="px-6 py-5 bg-[#121623]/50">
-                  <div className="flex items-end gap-3 mb-1">
-                    <span
-                      className="text-3xl font-bold text-white"
-                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                    >
-                      ${product.salePrice.toLocaleString()}
-                    </span>
-                    <span className="text-[#64748B] text-lg line-through mb-1">
-                      ${product.originalPrice.toLocaleString()}
-                    </span>
-                  </div>
-                  <p className="text-emerald-400 text-sm font-medium">
-                    You save ${product.savings.toLocaleString()}
-                  </p>
-                </div>
-
-                {/* Features Area */}
-                <div className="px-6 pb-6 pt-2 flex-1">
-                  <ul className="space-y-3 mb-8">
-                    {product.features.slice(0, 4).map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-4 h-4 text-[#00F2FE] mt-0.5 flex-shrink-0" />
-                        <span className="text-[#94A3B8] text-sm leading-snug">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                    {product.features.length > 4 && (
-                      <li className="text-[#64748B] text-sm italic pl-7">
-                        + {product.features.length - 4} more features
-                      </li>
-                    )}
-                  </ul>
-
-                  <div className="mt-auto flex flex-col gap-3">
-                    <button
-                      onClick={() => {
-                        addToCart(product);
-                        openCart();
-                      }}
-                      className="w-full btn-primary justify-center group/btn"
-                    >
-                      <ShoppingCart className="w-4 h-4 mr-1 group-hover/btn:scale-110 transition-transform" />
-                      Add to Cart
-                    </button>
-                    <Link
-                      href={`/shop/${product.slug}`}
-                      className="w-full btn-ghost justify-center"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════
-          FAQ
-      ════════════════════════════════════════════════════════ */}
-      <section className="bg-[#121623] section-spacing border-t border-[#1A202C]">
-        <div className="container-narrow">
-          <div className="text-center mb-12">
-            <span className="section-label">Common Questions</span>
-            <h2
-              className="text-3xl sm:text-4xl font-bold text-white mb-4"
-              style={{ fontFamily: "Space Grotesk, sans-serif" }}
+            <button
+              onClick={() =>
+                window.location.reload()
+              }
+              className="mt-3 text-xs text-white underline"
             >
-              Frequently Asked{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Questions
-              </span>
-            </h2>
+              Refresh
+            </button>
           </div>
-          <div className="space-y-4">
-            {shopFAQ.map((faq, idx) => (
-              <div key={idx} className="glass-card !p-6 border-[#2D3748]/50">
-                <h4 className="text-white font-semibold text-lg mb-2">{faq.question}</h4>
-                <p className="text-[#94A3B8] leading-relaxed text-sm">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        )}
 
-      {/* ════════════════════════════════════════════════════════
-          CTA
-      ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#0B0F19] border-t border-[#1A202C]">
-        <div className="container-narrow text-center">
-          <h2
-            className="text-3xl sm:text-4xl font-bold text-white mb-5"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Not Sure Which Plan Is Right?
-          </h2>
-          <p className="text-[#94A3B8] mb-8 text-lg">
-            Speak with a Nexora career advisor to get a personalized recommendation.
-          </p>
-          <Link href="/contact" className="btn-primary text-base px-10 py-4">
-            Get a Free Consultation <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
-    </div>
+        {/* Products */}
+        {!error && (
+          <section className="mt-5">
+            {loading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {Array.from({ length: 6 }).map(
+                  (_, index) => (
+                    <LoadingCard key={index} />
+                  )
+                )}
+              </div>
+            ) : visibleProducts.length === 0 ? (
+              <div className="py-20 text-center">
+                <ShoppingCart className="w-10 h-10 text-[#64748B] mx-auto mb-4" />
+
+                <h3 className="text-lg font-semibold text-white">
+                  No products found
+                </h3>
+
+                <p className="text-sm text-[#64748B] mt-2">
+                  Try another category.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {visibleProducts.map(
+                  (product) => (
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                    />
+                  )
+                )}
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* FAQ */}
+        <section className="mt-20 pt-12 border-t border-[#1e2b38]">
+          <div className="text-center mb-8">
+            <h2
+              className="text-2xl sm:text-3xl font-bold text-white"
+              style={{
+                fontFamily:
+                  "Space Grotesk, sans-serif",
+              }}
+            >
+              Frequently Asked Questions
+            </h2>
+
+            <p className="mt-2 text-xs text-[#64748B]">
+              Everything you need to know about our
+              services.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-white flex items-center justify-between">
+                What's included in each plan?
+                <ChevronRight className="w-4 h-4 text-[#00F2FE] group-open:rotate-90 transition-transform" />
+              </summary>
+
+              <p className="mt-3 text-xs leading-relaxed text-[#94A3B8]">
+                Each plan builds on the previous one.
+                Launch covers resume and career
+                foundations, Accelerate adds recruitment
+                and interview preparation, and Summit
+                provides comprehensive career support.
+              </p>
+            </details>
+
+            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-white flex items-center justify-between">
+                Can I upgrade my plan later?
+                <ChevronRight className="w-4 h-4 text-[#00F2FE] group-open:rotate-90 transition-transform" />
+              </summary>
+
+              <p className="mt-3 text-xs leading-relaxed text-[#94A3B8]">
+                Yes. If you start with a Launch or
+                Accelerate plan, you can upgrade later.
+              </p>
+            </details>
+
+            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-white flex items-center justify-between">
+                Do you guarantee job placement?
+                <ChevronRight className="w-4 h-4 text-[#00F2FE] group-open:rotate-90 transition-transform" />
+              </summary>
+
+              <p className="mt-3 text-xs leading-relaxed text-[#94A3B8]">
+                We do not guarantee placement because
+                final hiring decisions are made by
+                employers. We do provide dedicated
+                professional support throughout the
+                process.
+              </p>
+            </details>
+
+            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
+              <summary className="cursor-pointer list-none text-sm font-semibold text-white flex items-center justify-between">
+                What payment methods are accepted?
+                <ChevronRight className="w-4 h-4 text-[#00F2FE] group-open:rotate-90 transition-transform" />
+              </summary>
+
+              <p className="mt-3 text-xs leading-relaxed text-[#94A3B8]">
+                We accept ACH, wire transfer, Zelle,
+                and debit card. Credit card payments are
+                accepted for qualifying transactions.
+              </p>
+            </details>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
