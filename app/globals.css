@@ -36,15 +36,7 @@
   font-family: "Space Grotesk", system-ui, sans-serif;
 }
 
-.page-hero-padding {
-  padding-top: calc(var(--navbar-desktop) + 3.5rem);
-}
 
-@media (max-width: 1023px) {
-  .page-hero-padding {
-    padding-top: calc(var(--navbar-mobile) + 2.5rem);
-  }
-}
 
 /* ─── Global containers & geometry ────────────────────────────────────────── */
 .container-wide {
@@ -243,4 +235,14 @@ h6 {
 
 .fade-up {
   animation: fadeUp 0.7s ease forwards;
+}
+
+/* ─── Testimonials infinite scroll ────────────────────────────────────────── */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }

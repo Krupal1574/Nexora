@@ -57,7 +57,131 @@ const journeySteps = [
   { num: "08", label: "Onboarding", icon: CheckCircle2 },
 ];
 
+import { testimonials as staticTestimonials } from "@/lib/testimonials";
 
+// ─── Testimonials Slider Component ────────────────────────────────────────────
+function TestimonialsSlider() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [testimonials, setTestimonials] = useState<any[]>(staticTestimonials);
+
+  useEffect(() => {
+    fetch("/api/testimonials")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTestimonials(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  // Duplicate for seamless infinite scroll
+  const doubled = [...testimonials, ...testimonials];
+
+  return (
+    <section className="section-spacing bg-[#121623] relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,#00F2FE08_0%,transparent_70%)] pointer-events-none" />
+
+      <div className="relative z-10">
+        <div className="container-wide text-center mb-12">
+          <span className="section-label">Client Testimonials</span>
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
+            style={{ fontFamily: "Space Grotesk, sans-serif" }}
+          >
+            What Our Clients{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Say About Us
+            </span>
+          </h2>
+          <p className="text-[#94A3B8] mt-4 max-w-xl mx-auto">
+            Real stories from real professionals who transformed their careers with Nexora.
+          </p>
+        </div>
+
+        {/* Sliding Track */}
+        <div
+          className="relative w-full overflow-hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Left/Right fade masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#121623] to-transparent pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#121623] to-transparent pointer-events-none" />
+
+          <div
+            ref={scrollRef}
+            className="flex gap-6 py-2"
+            style={{
+              animation: `scroll-left 40s linear infinite`,
+              animationPlayState: isPaused ? "paused" : "running",
+              width: "max-content",
+            }}
+          >
+            {doubled.map((t, i) => (
+              <div
+                key={`${t.id}-${i}`}
+                className="flex-shrink-0 w-[340px] rounded-2xl bg-[#0B0F19] border border-[#203548] p-6 hover:border-[#00F2FE]/40 transition-all duration-300 flex flex-col"
+              >
+                {/* Rating */}
+                <div className="flex items-center gap-1 mb-4">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star
+                      key={j}
+                      className={`w-4 h-4 ${
+                        j < t.rating
+                          ? "text-[#00F2FE] fill-[#00F2FE]"
+                          : "text-[#203548]"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <div className="flex-1 mb-5">
+                  <Quote className="w-5 h-5 text-[#00F2FE]/30 mb-2" />
+                  <p className="text-[#94A3B8] text-sm leading-relaxed line-clamp-4">
+                    {t.content}
+                  </p>
+                </div>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 pt-4 border-t border-[#203548]">
+                  <img
+                    src={t.avatar}
+                    alt={t.name}
+                    className="w-9 h-9 rounded-full border border-[#00F2FE]/30"
+                  />
+                  <div>
+                    <h4 className="text-white font-semibold text-sm">{t.name}</h4>
+                    <p className="text-[#64748B] text-[11px]">
+                      {t.role}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* View All button */}
+        <div className="container-wide text-center mt-10">
+          <Link href="/testimonials" className="btn-primary inline-flex">
+            View All Testimonials <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 // ─── Animated Counter Hook ────────────────────────────────────────────────────
 function useCounter(target: number, duration = 2000, start = false) {
   const [count, setCount] = useState(0);
@@ -342,6 +466,14 @@ export default function HomePage() {
       </section>
 
 
+
+      {/* Mobile section divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
+
+      {/* ════════════════════════════════════════════════════════
+          TESTIMONIALS SLIDING CAROUSEL
+      ════════════════════════════════════════════════════════ */}
+      <TestimonialsSlider />
 
       {/* Mobile section divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />

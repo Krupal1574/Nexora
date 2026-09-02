@@ -1,4 +1,5 @@
 import { prisma } from "../lib/prisma";
+import * as argon2 from "argon2";
 
 const products = [
     {
@@ -99,6 +100,31 @@ async function main() {
     }
 
     console.log(`Seeded ${products.length} products.`);
+
+    // Seed ADMIN user
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (adminEmail && adminPassword) {
+        const hashedPassword = await argon2.hash(adminPassword);
+        
+        await prisma.user.upsert({
+            where: { email: adminEmail },
+            update: {
+                password: hashedPassword,
+                role: "ADMIN",
+            },
+            create: {
+                email: adminEmail,
+                name: "Admin User",
+                password: hashedPassword,
+                role: "ADMIN",
+            },
+        });
+        console.log(`Seeded ADMIN user: ${adminEmail}`);
+    } else {
+        console.log(`Skipped seeding ADMIN user: ADMIN_EMAIL or ADMIN_PASSWORD not set in environment.`);
+    }
 }
 
 main()

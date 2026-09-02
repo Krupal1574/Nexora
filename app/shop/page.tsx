@@ -471,7 +471,7 @@ export default function ShopPage() {
   // ───────────────────────────────────────────────────────
 
   return (
-    <main className="overflow-x-hidden page-hero-padding pb-24">
+    <main className="overflow-x-hidden pb-24">
       <div className="container-wide">
 
         {/* Hero */}
