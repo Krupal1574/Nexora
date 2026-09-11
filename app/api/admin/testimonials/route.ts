@@ -31,6 +31,8 @@ export async function POST(req: NextRequest) {
         avatar: body.avatar || "https://i.pravatar.cc/150?img=1",
         rating: body.rating ? parseInt(body.rating) : 5,
         published: body.published ?? true,
+        isApproved: body.isApproved ?? false,
+        isFeatured: body.isFeatured ?? false,
       },
     });
     return NextResponse.json(testimonial);

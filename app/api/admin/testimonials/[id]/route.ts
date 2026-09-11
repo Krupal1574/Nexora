@@ -22,6 +22,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         avatar: body.avatar,
         rating: body.rating ? parseInt(body.rating) : undefined,
         published: body.published,
+        isApproved: body.isApproved,
+        isFeatured: body.isFeatured,
       },
     });
     return NextResponse.json(testimonial);

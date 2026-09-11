@@ -246,3 +246,26 @@ h6 {
     transform: translateX(-50%);
   }
 }
+
+/* ─── Admin Mobile Responsive ────────────────────────────────────────────── */
+
+/* Make admin tables horizontally scrollable on small screens */
+@media (max-width: 767px) {
+  /* Admin page headings - scale down for mobile */
+  .admin-heading,
+  [class*="admin"] h1,
+  div > h1.text-3xl {
+    font-size: 1.5rem !important;
+  }
+
+  /* Ensure admin tables are scrollable */
+  table {
+    min-width: 500px;
+  }
+
+  /* Admin card stat numbers */
+  .text-4xl {
+    font-size: 2rem;
+  }
+}
+

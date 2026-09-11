@@ -1,6 +1,7 @@
 import { Star, Sparkles } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { testimonials as staticTestimonials } from "@/lib/testimonials";
+import TestimonialForm from "@/components/TestimonialForm";
 
 export const dynamic = "force-dynamic";
 
@@ -98,6 +99,9 @@ export default async function TestimonialsPage() {
             </div>
           ))}
         </div>
+
+        {/* Submission Form */}
+        <TestimonialForm />
       </div>
     </main>
   );

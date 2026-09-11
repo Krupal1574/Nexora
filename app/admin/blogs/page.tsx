@@ -90,6 +90,7 @@ export default function AdminBlogs() {
           {loading ? (
             <p className="p-6 text-[#94A3B8]">Loading...</p>
           ) : (
+            <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead className="bg-[#0B0F19] border-b border-[#203548]">
                 <tr>
@@ -121,6 +122,7 @@ export default function AdminBlogs() {
                 ))}
               </tbody>
             </table>
+            </div>
           )}
         </div>
 
