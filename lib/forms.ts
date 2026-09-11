@@ -2,6 +2,7 @@ import "server-only";
 
 import { randomUUID } from "node:crypto";
 import type { NextRequest } from "next/server";
+import { sendContactNotification, sendReferralNotification } from "@/lib/email";
 
 const MAX_BODY_BYTES = 20_000;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1_000;
@@ -206,6 +207,16 @@ export async function handleFormSubmission(request: NextRequest, type: Submissio
   }
 
   idempotencyStore.set(`${type}:${idempotencyKey}`, Date.now() + IDEMPOTENCY_WINDOW_MS);
+
+  // Fire-and-forget email notification to admin (failures logged internally)
+  if (type === "contact") {
+    const s = submission as ContactSubmission;
+    sendContactNotification({ name: s.name, email: s.email, phone: s.phone, message: s.message });
+  } else {
+    const s = submission as ReferralSubmission;
+    sendReferralNotification(s);
+  }
+
   console.info("form_submission_delivered", { type, submissionId });
   return Response.json({ ok: true }, { status: 201 });
 }

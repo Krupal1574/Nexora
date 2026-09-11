@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { sendOrderStatusEmail } from "@/lib/email";
 
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -19,6 +20,18 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         paymentStatus: body.paymentStatus,
       },
     });
+
+    // Fire-and-forget order status email to the customer
+    sendOrderStatusEmail({
+      orderNumber: item.orderNumber,
+      customerEmail: item.customerEmail,
+      customerName: item.customerName,
+      status: item.status,
+      paymentStatus: item.paymentStatus,
+      total: item.total.toString(),
+      currency: item.currency,
+    });
+
     return NextResponse.json(item);
   } catch (error) {
     console.error('PUT Error in orders:', error);
@@ -30,3 +43,4 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   return NextResponse.json({ error: "Orders cannot be deleted." }, { status: 405 });
 }
+

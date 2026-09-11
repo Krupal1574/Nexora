@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { sendTestimonialNotification } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -24,16 +25,21 @@ export async function POST(req: Request) {
       return new NextResponse("Missing required fields", { status: 400 });
     }
 
+    const rating = 5;
+
     const testimonial = await prisma.testimonial.create({
       data: {
         name,
         role,
         content,
         avatar: avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`,
-        rating: 5,
+        rating,
         published: true, // Auto-publish testimonials
       },
     });
+
+    // Fire-and-forget email notification to admin
+    sendTestimonialNotification({ name, role, content, rating });
 
     return NextResponse.json(testimonial, { status: 201 });
   } catch (error) {
@@ -41,3 +47,4 @@ export async function POST(req: Request) {
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
+

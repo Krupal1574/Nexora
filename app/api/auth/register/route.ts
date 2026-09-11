@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import * as argon2 from "argon2";
+import { sendWelcomeEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -29,6 +30,9 @@ export async function POST(req: Request) {
       },
     });
 
+    // Fire-and-forget welcome email (failures logged internally)
+    sendWelcomeEmail(email, name);
+
     return NextResponse.json(
       { message: "User created successfully", id: user.id },
       { status: 201 }
@@ -38,3 +42,4 @@ export async function POST(req: Request) {
     return new NextResponse("Internal server error", { status: 500 });
   }
 }
+
