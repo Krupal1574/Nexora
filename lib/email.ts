@@ -25,8 +25,11 @@ function getFrom(): string {
   return process.env.EMAIL_FROM || DEFAULT_FROM;
 }
 
-function getAdminEmail(): string | null {
-  return process.env.ADMIN_EMAIL || null;
+function getAdminEmail(): string | string[] | null {
+  const raw = process.env.ADMIN_EMAIL;
+  if (!raw) return null;
+  const emails = raw.split(",").map((e) => e.trim()).filter(Boolean);
+  return emails.length === 1 ? emails[0] : emails;
 }
 
 // ---------------------------------------------------------------------------
@@ -59,6 +62,7 @@ export async function sendContactNotification(submission: {
     });
   } catch (error) {
     console.error("[email] Failed to send contact notification:", error);
+    throw error;
   }
 }
 
@@ -95,6 +99,7 @@ export async function sendReferralNotification(submission: {
     });
   } catch (error) {
     console.error("[email] Failed to send referral notification:", error);
+    throw error;
   }
 }
 

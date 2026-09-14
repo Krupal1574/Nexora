@@ -173,49 +173,26 @@ export async function handleFormSubmission(request: NextRequest, type: Submissio
   const submission = type === "contact" ? validateContact(payload) : validateReferral(payload);
   if (isFormError(submission)) return Response.json(submission, { status: submission.status });
 
-  const webhookUrl = process.env.FORMS_WEBHOOK_URL;
-  const webhookToken = process.env.FORMS_WEBHOOK_TOKEN;
-  if (!webhookUrl || !webhookToken) {
-    console.error("form_submission_unconfigured", { type });
-    return Response.json({ message: "This form is not configured to receive submissions yet. Please use the contact details shown on this page." }, { status: 503 });
-  }
-
+  // Deliver the submission via Resend email notification to the admin.
+  // We await the call so that delivery failures are surfaced to the client
+  // as a 502 rather than being silently dropped.
   const submissionId = randomUUID();
   try {
-    const upstream = await fetch(webhookUrl, {
-      method: "POST",
-      cache: "no-store",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${webhookToken}`,
-        "idempotency-key": `${type}:${idempotencyKey}`,
-      },
-      body: JSON.stringify({
-        event: `${type}_submission`,
-        submissionId,
-        submittedAt: new Date().toISOString(),
-        data: submission,
-      }),
-    });
-    if (!upstream.ok) {
-      console.error("form_submission_delivery_failed", { type, submissionId, status: upstream.status });
-      return Response.json({ message: "We could not deliver your submission. Please try again shortly." }, { status: 502 });
+    if (type === "contact") {
+      const s = submission as ContactSubmission;
+      await sendContactNotification({ name: s.name, email: s.email, phone: s.phone, message: s.message });
+    } else {
+      const s = submission as ReferralSubmission;
+      await sendReferralNotification(s);
     }
-  } catch {
-    console.error("form_submission_delivery_failed", { type, submissionId, status: "network_error" });
+  } catch (err) {
+    console.error("form_submission_email_failed", { type, submissionId, err });
     return Response.json({ message: "We could not deliver your submission. Please try again shortly." }, { status: 502 });
   }
 
+  // Record the idempotency key only after successful delivery so a retry is
+  // still accepted if email delivery failed on a previous attempt.
   idempotencyStore.set(`${type}:${idempotencyKey}`, Date.now() + IDEMPOTENCY_WINDOW_MS);
-
-  // Fire-and-forget email notification to admin (failures logged internally)
-  if (type === "contact") {
-    const s = submission as ContactSubmission;
-    sendContactNotification({ name: s.name, email: s.email, phone: s.phone, message: s.message });
-  } else {
-    const s = submission as ReferralSubmission;
-    sendReferralNotification(s);
-  }
 
   console.info("form_submission_delivered", { type, submissionId });
   return Response.json({ ok: true }, { status: 201 });
