@@ -6,6 +6,7 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import CartProvider from "@/components/CartProvider";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { Chatbot } from "@/components/Chatbot";
 
 import { getSiteUrl } from "@/lib/site";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
             <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-0">{children}</main>
             <Footer />
             <MobileBottomNav />
+            <Chatbot />
           </CartProvider>
         </AuthProvider>
         <Analytics />
