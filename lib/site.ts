@@ -6,7 +6,9 @@ export const siteConfig = {
   contact: {
     phoneDisplay: "+1 (302) 412-4095",
     phoneHref: "tel:+13024124095",
-    email: "support@nexora.info",
+    email: "Support@nexorastaffingllp.com",
+    instagram: "https://www.instagram.com/nexorastaffingllp?stkn=MXd6bHExejU3cm9iZA==",
+    linkedin: "https://www.linkedin.com/company/nexora-staffing-llp/",
   },
 } as const;
 

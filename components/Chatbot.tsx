@@ -38,7 +38,7 @@ function getFallbackResponse(input: string): string {
     return "Looking for a new role or top talent? Our recruitment team specializes in IT staffing and would love to help. You can check our open roles on our careers page or contact us directly!";
   }
   if (lower.match(/\b(contact|recruiter|reach|talk)\b/)) {
-    return "You can reach our recruitment team through the 'Contact Us' page on our website, or email us at info@nexorastaffingllp.com.";
+    return "You can reach our recruitment team through the 'Contact Us' page on our website, or email us at Support@nexorastaffingllp.com.";
   }
   if (lower.match(/\b(start|getting started|how to get started)\b/)) {
     return "Getting started is easy! If you're a candidate, you can submit your resume. If you're a company looking to hire, please reach out via our contact form and our staffing experts will get back to you.";
@@ -170,11 +170,18 @@ export function Chatbot() {
         {!isOpen && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            animate={{ 
+              scale: 1, 
+              opacity: 1,
+              y: [0, -8, 0] 
+            }}
             exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            transition={{ 
+              scale: { type: "spring", stiffness: 260, damping: 20 },
+              y: { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+            }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg shadow-cyan-500/30 transition-all duration-300 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 bg-transparent"
+            className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg shadow-cyan-500/30 transition-shadow duration-300 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 bg-transparent"
             aria-label="Open Nexora AI Chat"
           >
             <div className="relative h-14 w-14 drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]">
@@ -182,6 +189,7 @@ export function Chatbot() {
                 src="/images/nexora-robot.png" 
                 alt="Nexora AI Mascot" 
                 fill 
+                sizes="56px"
                 className="object-contain drop-shadow-md"
               />
             </div>
@@ -217,6 +225,7 @@ export function Chatbot() {
                   src="/images/nexora-robot.png" 
                   alt="Nexora AI Avatar" 
                   fill 
+                  sizes="36px"
                   className="object-contain"
                 />
               </div>
@@ -283,6 +292,7 @@ export function Chatbot() {
                       src="/images/nexora-robot.png" 
                       alt="Nexora AI Avatar Large" 
                       fill 
+                      sizes="64px"
                       className="object-contain"
                     />
                   </div>
@@ -333,6 +343,7 @@ export function Chatbot() {
                           src="/images/nexora-robot.png" 
                           alt="Nexora AI Avatar" 
                           fill 
+                          sizes="28px"
                           className="object-contain"
                         />
                       </div>

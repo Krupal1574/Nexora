@@ -26,9 +26,9 @@ const contactCards = [
   {
     icon: Mail,
     title: "Email",
-    value: "support@nexora.info",
+    value: "Support@nexorastaffingllp.com",
     sublabel: "We respond within 24 hours",
-    href: "mailto:support@nexora.info",
+    href: "mailto:Support@nexorastaffingllp.com",
     color: "#00D2C4",
   },
   {

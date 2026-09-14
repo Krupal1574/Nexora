@@ -171,6 +171,40 @@ export default function Footer() {
                   </div>
                 </a>
               </li>
+              <li>
+                <a
+                  href={siteConfig.contact.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3.5 group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#E1306C]/15 to-[#E1306C]/5 border border-[#E1306C]/20 flex items-center justify-center flex-shrink-0 group-hover:shadow-[0_0_16px_#E1306C33] transition-all duration-300">
+                    <svg className="w-4 h-4 text-[#E1306C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </div>
+                  <div className="flex flex-col justify-center h-10">
+                    <p className="text-sm text-[#CBD5E1] group-hover:text-white transition-colors font-medium">
+                      Instagram
+                    </p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={siteConfig.contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3.5 group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A66C2]/15 to-[#0A66C2]/5 border border-[#0A66C2]/20 flex items-center justify-center flex-shrink-0 group-hover:shadow-[0_0_16px_#0A66C233] transition-all duration-300">
+                    <svg className="w-4 h-4 text-[#0A66C2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </div>
+                  <div className="flex flex-col justify-center h-10">
+                    <p className="text-sm text-[#CBD5E1] group-hover:text-white transition-colors font-medium">
+                      LinkedIn
+                    </p>
+                  </div>
+                </a>
+              </li>
             </ul>
           </div>
         </div>

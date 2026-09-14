@@ -16,6 +16,8 @@ import {
   CheckCircle2,
   Quote,
 } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
 // ─── Services Data ────────────────────────────────────────────────────────────
 const services = [
@@ -205,9 +207,27 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           HERO SECTION
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-20 lg:pt-28 pb-20 lg:pb-32 overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative pt-20 lg:pt-28 pb-20 lg:pb-32 overflow-hidden"
+      >
         {/* Background layers */}
         <div className="absolute inset-0 bg-[#0B0F19]" />
+        
+        {/* Subtle Hero Stock Image with Strong Dark Overlay */}
+        <div className="absolute inset-0 z-0 opacity-20 mix-blend-luminosity">
+          <Image
+            src="/images/tech_interview.jpg"
+            alt="IT Staffing Interview"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B0F19]/80 via-[#0B0F19]/90 to-[#0B0F19]" />
+
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,#00F2FE18_0%,transparent_60%)]" />
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00F2FE]/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#00D2C4]/5 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -224,13 +244,23 @@ export default function HomePage() {
 
         <div className="relative z-10 container-wide text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-8"
+          >
             <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-pulse" />
             IT Staffing & Talent Solutions
-          </div>
+          </motion.div>
 
           {/* Headline */}
-          <h1 className="hero-title max-w-4xl mx-auto mb-6">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="hero-title max-w-4xl mx-auto mb-6"
+          >
             Your Dream Tech Career{" "}
             <span
               style={{
@@ -242,16 +272,26 @@ export default function HomePage() {
             >
               Is Waiting For You
             </span>
-          </h1>
+          </motion.h1>
 
           {/* Subtext */}
-          <p className="text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed mb-10">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed mb-10"
+          >
             Nexora bridges the gap between elite tech talent and top U.S. enterprises.
             From resume optimization to placement, we're your career acceleration partner.
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             <Link href="/services" className="btn-primary text-base px-8 py-4">
               Explore Services
               <ArrowRight className="w-4 h-4" />
@@ -259,9 +299,9 @@ export default function HomePage() {
             <Link href="/contact" className="btn-ghost text-base px-8 py-4">
               Contact Recruiters
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Mobile section divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
@@ -269,9 +309,16 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           COMPANY INTRO
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#0B0F19]">
+      <motion.section 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="section-spacing bg-[#0B0F19]"
+      >
         <div className="container-wide">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
             <div>
               <span className="section-label">Who We Are</span>
               <h2
@@ -308,33 +355,49 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Capability grid */}
-            <div className="grid sm:grid-cols-2 gap-5">
-              {[
-                { label: "Personalized Approach", icon: Users },
-                { label: "End-to-End Support", icon: Briefcase },
-                { label: "U.S. Market Focus", icon: Calendar },
-                { label: "Active Placement", icon: Star },
-              ].map(({ label, icon: Icon }) => (
-                <div
-                  key={label}
-                  className="glass-card p-7 flex flex-col items-start gap-3"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#00F2FE]" />
-                  </div>
-                  <span
-                    className="text-lg font-bold text-white mt-2"
-                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
+            {/* Right Image & Capability Grid */}
+            <div className="space-y-6">
+              <div className="relative rounded-2xl overflow-hidden border border-[#203548] aspect-video group">
+                <Image
+                  src="/images/modern_tech_team.jpg"
+                  alt="Modern Tech Team Collaborating"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-[#0B0F19]/20 group-hover:bg-transparent transition-colors duration-500" />
+              </div>
+              
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { label: "Personalized Approach", icon: Users },
+                  { label: "End-to-End Support", icon: Briefcase },
+                  { label: "U.S. Market Focus", icon: Calendar },
+                  { label: "Active Placement", icon: Star },
+                ].map(({ label, icon: Icon }, i) => (
+                  <motion.div
+                    key={label}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * i, duration: 0.4 }}
+                    className="glass-card p-5 flex items-center gap-4"
                   >
-                    {label}
-                  </span>
-                </div>
-              ))}
+                    <div className="w-10 h-10 shrink-0 rounded-xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-[#00F2FE]" />
+                    </div>
+                    <span
+                      className="text-[15px] font-bold text-white leading-tight"
+                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                    >
+                      {label}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Mobile section divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
@@ -342,8 +405,25 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           SERVICES OVERVIEW
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#121623]">
-        <div className="container-wide">
+      <motion.section 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+        className="section-spacing bg-[#121623] relative"
+      >
+        {/* Soft Background Image behind Services */}
+        <div className="absolute right-0 top-0 w-1/2 h-full opacity-[0.05] pointer-events-none mix-blend-screen">
+          <Image
+            src="/images/software_developer.jpg"
+            alt="Software Developer Background"
+            fill
+            className="object-cover"
+            style={{ objectPosition: 'right center' }}
+          />
+        </div>
+        
+        <div className="container-wide relative z-10">
           <div className="text-center mb-14">
             <span className="section-label">What We Offer</span>
             <h2
@@ -365,10 +445,18 @@ export default function HomePage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map(({ icon: Icon, title, desc, color }) => (
-              <div key={title} className="glass-card p-7 flex flex-col gap-5 group">
+            {services.map(({ icon: Icon, title, desc, color }, i) => (
+              <motion.div 
+                key={title} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i, duration: 0.5 }}
+                whileHover={{ y: -4 }}
+                className="glass-card p-7 flex flex-col gap-5 group bg-[#0B0F19]/80 backdrop-blur-sm"
+              >
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
                   style={{
                     background: `${color}18`,
                     border: `1px solid ${color}30`,
@@ -391,11 +479,11 @@ export default function HomePage() {
                 >
                   Learn More <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Mobile section divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
@@ -403,7 +491,13 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           CANDIDATE JOURNEY — 8 STEPS
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#0B0F19] relative overflow-hidden">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="section-spacing bg-[#0B0F19] relative overflow-hidden"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,#00F2FE08_0%,transparent_70%)] pointer-events-none" />
         <div className="container-wide relative z-10">
           <div className="text-center mb-16">
@@ -433,8 +527,12 @@ export default function HomePage() {
           {/* Journey steps: single column on mobile, 2 on sm, 4 on lg */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {journeySteps.map(({ num, label, icon: Icon }, i) => (
-              <div
+              <motion.div
                 key={num}
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.05 * i, duration: 0.4 }}
                 className="glass-card p-6 flex flex-col items-center text-center gap-4 group relative overflow-hidden"
               >
                 {/* connector arrow for desktop */}
@@ -443,7 +541,7 @@ export default function HomePage() {
                     <ChevronRight className="w-5 h-5 text-[#00F2FE]/40" />
                   </div>
                 )}
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00F2FE]/20 to-[#00D2C4]/10 border border-[#00F2FE]/25 flex items-center justify-center group-hover:shadow-[0_0_20px_#00F2FE33] transition-all duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00F2FE]/20 to-[#00D2C4]/10 border border-[#00F2FE]/25 flex items-center justify-center group-hover:shadow-[0_0_20px_#00F2FE33] transition-all duration-300 group-hover:-translate-y-1">
                   <Icon className="w-6 h-6 text-[#00F2FE]" />
                 </div>
                 <div>
@@ -459,11 +557,11 @@ export default function HomePage() {
                     {label}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
 
 
