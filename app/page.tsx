@@ -362,6 +362,7 @@ export default function HomePage() {
                   src="/images/modern_tech_team.jpg"
                   alt="Modern Tech Team Collaborating"
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-[#0B0F19]/20 group-hover:bg-transparent transition-colors duration-500" />
@@ -418,6 +419,7 @@ export default function HomePage() {
             src="/images/software_developer.jpg"
             alt="Software Developer Background"
             fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
             style={{ objectPosition: 'right center' }}
           />

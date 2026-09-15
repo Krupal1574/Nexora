@@ -8,6 +8,7 @@ export default function TestimonialForm() {
   const [name, setName] = useState(session?.user?.name || "");
   const [role, setRole] = useState("");
   const [content, setContent] = useState("");
+  const [rating, setRating] = useState(5);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -19,7 +20,7 @@ export default function TestimonialForm() {
       const res = await fetch("/api/testimonials", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, role, content }),
+        body: JSON.stringify({ name, role, content, rating }),
       });
 
       if (!res.ok) {
@@ -30,6 +31,7 @@ export default function TestimonialForm() {
       setName("");
       setRole("");
       setContent("");
+      setRating(5);
     } catch (err: any) {
       setStatus("error");
       setErrorMsg(err.message);
@@ -77,6 +79,22 @@ export default function TestimonialForm() {
                 className="w-full p-2.5 rounded-xl bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none transition-colors"
                 placeholder="Software Engineer at Acme Corp"
               />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[#94A3B8] mb-1">Rating</label>
+            <div className="flex space-x-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  type="button"
+                  onClick={() => setRating(star)}
+                  className={`text-2xl ${star <= rating ? "text-yellow-400" : "text-[#203548]"} transition-colors`}
+                >
+                  ★
+                </button>
+              ))}
             </div>
           </div>
 

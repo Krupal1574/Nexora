@@ -2,50 +2,109 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { Sparkles, Search, Clock, ArrowRight } from "lucide-react";
+import { Sparkles, Search, Clock, ArrowRight, ExternalLink } from "lucide-react";
 import { blogPosts as staticBlogPosts, type BlogCategory } from "@/lib/blog";
 
+type Tab = "Nexora" | "Industry";
+
 export default function BlogIndexPage() {
+  const [activeTab, setActiveTab] = useState<Tab>("Nexora");
   const [searchQuery, setSearchQuery] = useState("");
-  const [category, setCategory] = useState<string>("All");
-  const [posts, setPosts] = useState<any[]>([]);
-  const [loaded, setLoaded] = useState(false);
+  
+  // Nexora Posts
+  const [internalCategory, setInternalCategory] = useState<string>("All");
+  const [internalPosts, setInternalPosts] = useState<any[]>([]);
+  const [internalLoaded, setInternalLoaded] = useState(false);
+
+  // Industry News
+  const [externalCategory, setExternalCategory] = useState<string>("All");
+  const [externalPosts, setExternalPosts] = useState<any[]>([]);
+  const [externalLoaded, setExternalLoaded] = useState(false);
 
   useEffect(() => {
+    // Fetch Internal Posts
     fetch("/api/blogs")
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          setPosts(data);
+          setInternalPosts(data);
         } else {
-          // fallback to static data
-          setPosts(staticBlogPosts);
+          setInternalPosts(staticBlogPosts);
         }
-        setLoaded(true);
+        setInternalLoaded(true);
       })
       .catch(() => {
-        setPosts(staticBlogPosts);
-        setLoaded(true);
+        setInternalPosts(staticBlogPosts);
+        setInternalLoaded(true);
       });
   }, []);
 
-  const categories = ["All", ...Array.from(new Set(posts.map((p) => p.category)))];
+  useEffect(() => {
+    // Fetch External News when tab is active (or just fetch once)
+    if (activeTab === "Industry" && !externalLoaded) {
+      fetch("/api/news")
+        .then((r) => r.json())
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setExternalPosts(data);
+          }
+          setExternalLoaded(true);
+        })
+        .catch(() => {
+          setExternalPosts([]);
+          setExternalLoaded(true);
+        });
+    }
+  }, [activeTab, externalLoaded]);
 
-  const visiblePosts = useMemo(() => {
-    return posts.filter((post) => {
+  const internalCategories = ["All", ...Array.from(new Set(internalPosts.map((p) => p.category)))];
+  const externalCategories = ["All", ...Array.from(new Set(externalPosts.map((p) => p.category)))];
+
+  const visibleInternalPosts = useMemo(() => {
+    return internalPosts.filter((post) => {
       const matchesSearch =
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = category === "All" || post.category === category;
+        (post.title || "").toLowerCase().includes((searchQuery || "").toLowerCase()) ||
+        (post.excerpt || "").toLowerCase().includes((searchQuery || "").toLowerCase());
+      const matchesCategory = internalCategory === "All" || post.category === internalCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, category, posts]);
+  }, [searchQuery, internalCategory, internalPosts]);
+
+  const visibleExternalPosts = useMemo(() => {
+    return externalPosts.filter((post) => {
+      const matchesSearch =
+        (post.title || "").toLowerCase().includes((searchQuery || "").toLowerCase()) ||
+        (post.description || "").toLowerCase().includes((searchQuery || "").toLowerCase()) ||
+        (post.source || "").toLowerCase().includes((searchQuery || "").toLowerCase());
+      const matchesCategory = externalCategory === "All" || post.category === externalCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, externalCategory, externalPosts]);
+
+  const isInternal = activeTab === "Nexora";
+  const currentCategories = isInternal ? internalCategories : externalCategories;
+  const currentCategory = isInternal ? internalCategory : externalCategory;
+  const setCategory = isInternal ? setInternalCategory : setExternalCategory;
+  const isLoaded = isInternal ? internalLoaded : externalLoaded;
+  const visiblePosts = isInternal ? visibleInternalPosts : visibleExternalPosts;
+
+  const formatDate = (dateString: string) => {
+    try {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } catch {
+      return dateString;
+    }
+  };
 
   return (
     <main className="overflow-x-hidden pb-24">
       <div className="container-wide">
         {/* Hero */}
-        <section className="text-center pt-8 sm:pt-12 mb-12">
+        <section className="text-center pt-8 sm:pt-12 mb-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#00F2FE]/30 bg-[#00F2FE]/5 px-3 py-1 text-[8px] font-semibold text-[#00F2FE] mb-5">
             <Sparkles className="w-2.5 h-2.5" />
             Insights & Resources
@@ -60,21 +119,45 @@ export default function BlogIndexPage() {
             The Nexora <span className="text-[#00F2FE]">Blog</span>
           </h1>
 
-          <p className="max-w-xl mx-auto text-xs sm:text-sm leading-relaxed text-[#94A3B8]">
+          <p className="max-w-xl mx-auto text-xs sm:text-sm leading-relaxed text-[#94A3B8] mb-8">
             Expert advice, industry trends, and practical guides to help you navigate your tech career.
           </p>
+
+          {/* Tabs */}
+          <div className="inline-flex bg-[#121923] p-1 rounded-full border border-[#203548]">
+            <button
+              onClick={() => setActiveTab("Nexora")}
+              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                activeTab === "Nexora"
+                  ? "bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] text-[#061018] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+                  : "text-[#94A3B8] hover:text-white"
+              }`}
+            >
+              Nexora Articles
+            </button>
+            <button
+              onClick={() => setActiveTab("Industry")}
+              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                activeTab === "Industry"
+                  ? "bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] text-[#061018] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+                  : "text-[#94A3B8] hover:text-white"
+              }`}
+            >
+              Industry News
+            </button>
+          </div>
         </section>
 
         {/* Filters & Search */}
         <section className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-[#1e2b38] pb-6">
           {/* Categories */}
           <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
-            {categories.map((cat) => (
+            {currentCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors ${
-                  category === cat
+                  currentCategory === cat
                     ? "bg-[#00F2FE] text-[#061018]"
                     : "text-[#94A3B8] bg-[#121923] border border-[#203548] hover:border-[#00F2FE]/50 hover:text-white"
                 }`}
@@ -98,7 +181,7 @@ export default function BlogIndexPage() {
         </section>
 
         {/* Blog Grid */}
-        {!loaded ? (
+        {!isLoaded ? (
           <div className="text-center py-20">
             <p className="text-[#94A3B8]">Loading articles...</p>
           </div>
@@ -110,66 +193,127 @@ export default function BlogIndexPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visiblePosts.map((post: any) => (
-              <Link
-                key={post.id}
-                href={`/blog/${post.slug}`}
-                className="group rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden hover:border-[#00F2FE]/40 transition-all duration-300 flex flex-col"
-              >
-                {/* Image */}
-                <div className="relative h-48 w-full overflow-hidden bg-[#0a111a]">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center rounded-md border border-[#00F2FE]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-white">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-5 flex flex-col flex-grow">
-                  <div className="flex items-center gap-4 text-[10px] text-[#64748B] mb-3">
-                    <span>{post.date}</span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {post.readTime}
-                    </span>
-                  </div>
-
-                  <h3
-                    className="text-lg font-bold text-white mb-2 group-hover:text-[#00F2FE] transition-colors"
-                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                  >
-                    {post.title}
-                  </h3>
-
-                  <p className="text-xs text-[#94A3B8] leading-relaxed mb-5 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#203548]">
-                    <div className="flex items-center gap-2">
-                      <img
-                        src={post.authorAvatar || post.author?.avatar || "https://i.pravatar.cc/150?img=2"}
-                        alt={post.authorName || post.author?.name || "Author"}
-                        className="w-6 h-6 rounded-full"
-                      />
-                      <span className="text-[10px] text-[#CBD5E1] font-medium">
-                        {post.authorName || post.author?.name || "Nexora Team"}
+            {isInternal ? (
+              // Nexora Articles
+              visiblePosts.map((post: any) => (
+                <Link
+                  key={post.id}
+                  href={`/blog/${post.slug}`}
+                  className="group rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden hover:border-[#00F2FE]/40 transition-all duration-300 flex flex-col"
+                >
+                  <div className="relative h-48 w-full overflow-hidden bg-[#0a111a]">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 left-3">
+                      <span className="inline-flex items-center rounded-md border border-[#00F2FE]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-white">
+                        {post.category}
                       </span>
                     </div>
-                    
-                    <span className="text-[10px] text-[#00F2FE] font-bold flex items-center gap-1">
-                      Read More <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </span>
                   </div>
-                </div>
-              </Link>
-            ))}
+
+                  <div className="p-5 flex flex-col flex-grow">
+                    <div className="flex items-center gap-4 text-[10px] text-[#64748B] mb-3">
+                      <span>{post.date}</span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </span>
+                    </div>
+
+                    <h3
+                      className="text-lg font-bold text-white mb-2 group-hover:text-[#00F2FE] transition-colors"
+                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                    >
+                      {post.title}
+                    </h3>
+
+                    <p className="text-xs text-[#94A3B8] leading-relaxed mb-5 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#203548]">
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={post.authorAvatar || post.author?.avatar || "https://i.pravatar.cc/150?img=2"}
+                          alt={post.authorName || post.author?.name || "Author"}
+                          className="w-6 h-6 rounded-full"
+                        />
+                        <span className="text-[10px] text-[#CBD5E1] font-medium">
+                          {post.authorName || post.author?.name || "Nexora Team"}
+                        </span>
+                      </div>
+                      
+                      <span className="text-[10px] text-[#00F2FE] font-bold flex items-center gap-1">
+                        Read More <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              // Industry News
+              visiblePosts.map((post: any) => (
+                <a
+                  key={post.id}
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden hover:border-[#00D2C4]/40 transition-all duration-300 flex flex-col"
+                >
+                  <div className="relative h-48 w-full overflow-hidden bg-[#0a111a] flex items-center justify-center">
+                    {post.imageUrl ? (
+                      <img
+                        src={post.imageUrl}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-[#121923] to-[#203548] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                        <Sparkles className="w-10 h-10 text-[#203548]" />
+                      </div>
+                    )}
+                    <div className="absolute top-3 left-3">
+                      <span className="inline-flex items-center rounded-md border border-[#00D2C4]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-white">
+                        {post.category}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="p-5 flex flex-col flex-grow">
+                    <div className="flex items-center gap-4 text-[10px] text-[#64748B] mb-3">
+                      <span>{formatDate(post.publishedAt)}</span>
+                      <span className="text-[#00D2C4] font-semibold flex items-center gap-1">
+                        Source: {post.source}
+                      </span>
+                    </div>
+
+                    <h3
+                      className="text-lg font-bold text-white mb-2 group-hover:text-[#00D2C4] transition-colors line-clamp-2"
+                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                    >
+                      {post.title}
+                    </h3>
+
+                    <p className="text-xs text-[#94A3B8] leading-relaxed mb-5 line-clamp-3">
+                      {post.description}
+                    </p>
+
+                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#203548]">
+                      <span className="text-[10px] text-[#94A3B8]">
+                        External Article
+                      </span>
+                      
+                      <span className="text-[10px] text-[#00D2C4] font-bold flex items-center gap-1">
+                        Read Original <ExternalLink className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              ))
+            )}
           </div>
         )}
       </div>

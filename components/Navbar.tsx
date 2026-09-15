@@ -4,10 +4,39 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, LogOut, User, LayoutDashboard, ChevronDown } from "lucide-react";
+import {
+  Menu, X, Phone, LogOut, User, LayoutDashboard, ChevronDown,
+  Settings, ShoppingBag, UserCircle, Edit3,
+} from "lucide-react";
 import { navigation, siteConfig } from "@/lib/site";
 import CartIcon from "@/components/CartIcon";
 import { useSession, signOut } from "next-auth/react";
+
+function UserAvatar({ image, name, size = 24 }: { image?: string | null; name?: string | null; size?: number }) {
+  const initial = (name || "U").charAt(0).toUpperCase();
+
+  if (image) {
+    return (
+      <img
+        src={image}
+        alt={name || "User avatar"}
+        width={size}
+        height={size}
+        className="rounded-full object-cover"
+        referrerPolicy="no-referrer"
+      />
+    );
+  }
+
+  return (
+    <div
+      className="rounded-full bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center font-bold text-black"
+      style={{ width: size, height: size, fontSize: size * 0.42 }}
+    >
+      {initial}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +83,13 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [userMenuOpen]);
+
+  const dropdownLinks = [
+    { href: "/profile", label: "My Profile", icon: UserCircle },
+    { href: "/profile", label: "Edit Profile", icon: Edit3 },
+    { href: "/my/orders", label: "My Orders", icon: ShoppingBag },
+    { href: "/my/settings", label: "Account Settings", icon: Settings },
+  ];
 
   return (
     <>
@@ -128,9 +164,11 @@ export default function Navbar() {
                       onClick={() => setUserMenuOpen(!userMenuOpen)}
                       className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1A202C] border border-[#203548] hover:border-[#00F2FE]/40 transition-all duration-200"
                     >
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center text-[10px] font-bold text-black">
-                        {(session.user?.name || session.user?.email || "U").charAt(0).toUpperCase()}
-                      </div>
+                      <UserAvatar
+                        image={session.user?.image}
+                        name={session.user?.name}
+                        size={24}
+                      />
                       <span className="text-sm font-medium text-white max-w-[100px] truncate">
                         {session.user?.name || session.user?.email}
                       </span>
@@ -139,30 +177,59 @@ export default function Navbar() {
 
                     {/* Dropdown */}
                     {userMenuOpen && (
-                      <div className="absolute right-0 top-full mt-2 w-56 rounded-xl bg-[#121623] border border-[#203548] shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2 z-50">
-                        <div className="px-4 py-2.5 border-b border-[#203548]">
-                          <p className="text-sm font-medium text-white truncate">{session.user?.name || "User"}</p>
-                          <p className="text-xs text-[#64748B] truncate">{session.user?.email}</p>
+                      <div className="absolute right-0 top-full mt-2 w-60 rounded-xl bg-[#121623] border border-[#203548] shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2 z-50">
+                        {/* User header */}
+                        <div className="px-4 py-3 border-b border-[#203548] flex items-center gap-3">
+                          <UserAvatar
+                            image={session.user?.image}
+                            name={session.user?.name}
+                            size={36}
+                          />
+                          <div className="min-w-0">
+                            <p className="text-sm font-semibold text-white truncate">{session.user?.name || "User"}</p>
+                            <p className="text-xs text-[#64748B] truncate">{session.user?.email}</p>
+                          </div>
                         </div>
 
+                        {/* Nav links */}
+                        <div className="py-1">
+                          {dropdownLinks.map(({ href, label, icon: Icon }) => (
+                            <Link
+                              key={label}
+                              href={href}
+                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#1A202C] transition-colors"
+                              onClick={() => setUserMenuOpen(false)}
+                            >
+                              <Icon className="w-4 h-4 shrink-0" />
+                              {label}
+                            </Link>
+                          ))}
+                        </div>
+
+                        {/* Admin */}
                         {session.user?.role === "ADMIN" && (
-                          <Link
-                            href="/admin"
-                            className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#1A202C] transition-colors"
-                            onClick={() => setUserMenuOpen(false)}
-                          >
-                            <LayoutDashboard className="w-4 h-4" />
-                            Dashboard
-                          </Link>
+                          <div className="border-t border-[#203548] pt-1">
+                            <Link
+                              href="/admin"
+                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#1A202C] transition-colors"
+                              onClick={() => setUserMenuOpen(false)}
+                            >
+                              <LayoutDashboard className="w-4 h-4" />
+                              Admin Dashboard
+                            </Link>
+                          </div>
                         )}
 
-                        <button
-                          onClick={() => { setUserMenuOpen(false); signOut(); }}
-                          className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-red-400 hover:bg-[#1A202C] transition-colors"
-                        >
-                          <LogOut className="w-4 h-4" />
-                          Logout
-                        </button>
+                        {/* Logout */}
+                        <div className="border-t border-[#203548] pt-1">
+                          <button
+                            onClick={() => { setUserMenuOpen(false); signOut(); }}
+                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-red-400 hover:bg-[#1A202C] transition-colors"
+                          >
+                            <LogOut className="w-4 h-4" />
+                            Logout
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -249,7 +316,7 @@ export default function Navbar() {
           </div>
 
           {/* Drawer Links */}
-          <nav className="flex flex-col gap-1 p-4 flex-1">
+          <nav className="flex flex-col gap-1 p-4 flex-1 overflow-y-auto">
             {navigation.map((link, i) => (
               <Link
                 key={link.href}
@@ -264,19 +331,45 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            
+
             <div className="my-2 border-t border-[#1A202C]" />
-            
+
             {session ? (
               <>
+                {/* User info in mobile drawer */}
+                <div className="flex items-center gap-3 px-4 py-3 mb-1">
+                  <UserAvatar image={session.user?.image} name={session.user?.name} size={36} />
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-white truncate">{session.user?.name || "User"}</p>
+                    <p className="text-xs text-[#64748B] truncate">{session.user?.email}</p>
+                  </div>
+                </div>
+
+                {dropdownLinks.map(({ href, label, icon: Icon }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-white transition-all"
+                  >
+                    <Icon className="w-5 h-5" />
+                    {label}
+                  </Link>
+                ))}
+
                 {session.user?.role === "ADMIN" && (
-                  <Link href="/admin" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-[#00F2FE]">
-                    <LayoutDashboard className="w-5 h-5" /> Dashboard
+                  <Link href="/admin" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-[#00F2FE] transition-all">
+                    <LayoutDashboard className="w-5 h-5" /> Admin Dashboard
                   </Link>
                 )}
-                <button onClick={() => signOut()} className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-red-400">
-                  <LogOut className="w-5 h-5" /> Logout ({session.user?.name || "User"})
-                </button>
+
+                <div className="border-t border-[#1A202C] mt-1 pt-1">
+                  <button
+                    onClick={() => signOut()}
+                    className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-red-400 transition-all"
+                  >
+                    <LogOut className="w-5 h-5" /> Logout
+                  </button>
+                </div>
               </>
             ) : (
               <>

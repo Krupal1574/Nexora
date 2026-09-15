@@ -41,8 +41,14 @@ model User {
   email         String    @unique
   password      String?
   image         String?
+  jobTitle      String?
+  company       String?
   role          UserRole  @default(CUSTOMER)
   emailVerified DateTime?
+
+  // Candidate contact fields
+  phone         String?
+  pendingPhone  String?   // Phone pending OTP verification
 
   accounts      Account[]
   sessions      Session[]
@@ -53,6 +59,11 @@ model User {
   enrollments   Enrollment[]
   lessonProgress UserLessonProgress[]
   auditLogs     AdminAuditLog[]
+
+  // Candidate profile relations
+  candidateProfile    CandidateProfile?
+  resume              Resume?
+  pendingEmailChanges PendingEmailChange[]
 
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -97,6 +108,98 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Candidate Profile — extended professional information
+// ---------------------------------------------------------------------------
+model CandidateProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+
+  headline       String?  @db.Text      // "Senior Software Engineer at Acme"
+  location       String?                // "San Francisco, CA"
+  summary        String?  @db.Text      // About / career summary
+  availability   String?                // "Immediately", "2 weeks notice", etc.
+  expectedSalary String?                // Free-text: "$120k–$150k"
+
+  // Rich structured data stored as JSONB arrays
+  skills         Json     @default("[]") @db.JsonB  // string[]
+  languages      Json     @default("[]") @db.JsonB  // {lang: string, level: string}[]
+  education      Json     @default("[]") @db.JsonB  // {school, degree, field, from, to, current}[]
+  experience     Json     @default("[]") @db.JsonB  // {company, title, from, to, current, description}[]
+  certifications Json     @default("[]") @db.JsonB  // {name, issuer, date, url}[]
+
+  // Links
+  linkedinUrl    String?
+  githubUrl      String?
+  portfolioUrl   String?
+
+  // Custom profile photo — stored as a signed path "/api/user/profile/photo"
+  // The actual bytes live in CandidatePhoto.  Never store base64 in the session/cookie.
+  hasCustomPhoto Boolean  @default(false)
+
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// CandidatePhoto — raw bytes for the custom profile photo
+// Abstracted behind /api/user/profile/photo so the storage layer can later
+// move to object storage without touching any UI code.
+// ---------------------------------------------------------------------------
+model CandidatePhoto {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+
+  data      Bytes              // Raw image bytes (JPEG/PNG/WEBP, max 2 MB)
+  mimeType  String             // image/jpeg | image/png | image/webp
+  size      Int                // bytes
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ---------------------------------------------------------------------------
+// Resume — abstracted file storage
+// Replace `data Bytes` with a cloud storage URL/key when migrating to S3/Blob.
+// ---------------------------------------------------------------------------
+model Resume {
+  id         String   @id @default(cuid())
+  userId     String   @unique              // one active resume per user
+
+  fileName   String
+  fileSize   Int                           // bytes, max 5 MB
+  mimeType   String                        // application/pdf | .docx
+  data       Bytes                         // raw file bytes — never exposed publicly
+  parsedData Json?    @db.JsonB            // last Gemini parse result (for reference)
+
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// ---------------------------------------------------------------------------
+// PendingEmailChange — secure email-change flow
+// ---------------------------------------------------------------------------
+model PendingEmailChange {
+  id        String   @id @default(cuid())
+  userId    String
+  newEmail  String
+  token     String   @unique
+  expiresAt DateTime
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
 }
 
 model Product {
@@ -420,12 +523,40 @@ model AdminAuditLog {
 
 model MediaAsset {
   id          String        @id @default(cuid())
-  url         String        
-  publicId    String?       
+  url         String
+  publicId    String?
   format      String?
   width       Int?
   height      Int?
   size        Int?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
+}
+
+model ExternalArticle {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  url         String   @unique
+  source      String
+  imageUrl    String?
+  publishedAt DateTime
+  category    String
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+
+  @@index([category])
+  @@index([publishedAt])
+  @@index([expiresAt])
+}
+
+model RateLimit {
+  id         String   @id @default(cuid())
+  identifier String
+  action     String
+  count      Int      @default(1)
+  resetAt    DateTime
+
+  @@unique([identifier, action])
+  @@index([identifier])
 }

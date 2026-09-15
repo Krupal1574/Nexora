@@ -21,6 +21,7 @@ export const authOptions: NextAuthOptions = {
         
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
+          include: { candidateProfile: { select: { headline: true } } },
         });
 
         if (!user || !user.password) return null;
@@ -33,6 +34,9 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           email: user.email,
           role: user.role,
+          phone: user.phone || undefined,
+          headline: user.candidateProfile?.headline || undefined,
+          image: user.image || undefined,
         };
       },
     }),
@@ -42,10 +46,23 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
+    jwt({ token, user, trigger, session }) {
+      if (trigger === "update" && session) {
+        if (session.name) token.name = session.name;
+        if (session.jobTitle !== undefined) token.jobTitle = session.jobTitle;
+        if (session.company !== undefined) token.company = session.company;
+        if (session.phone !== undefined) token.phone = session.phone;
+        if (session.headline !== undefined) token.headline = session.headline;
+        if (session.image !== undefined) token.picture = session.image;
+      }
       if (user) {
         token.role = (user as any).role;
         token.id = user.id;
+        token.jobTitle = (user as any).jobTitle;
+        token.company = (user as any).company;
+        token.phone = (user as any).phone;
+        token.headline = (user as any).headline; // from authorize
+        token.picture = user.image || token.picture; // Keep existing if set
       }
       return token;
     },
@@ -53,6 +70,11 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;
+        (session.user as any).jobTitle = token.jobTitle;
+        (session.user as any).company = token.company;
+        (session.user as any).phone = token.phone;
+        (session.user as any).headline = token.headline;
+        if (token.picture) session.user.image = token.picture;
       }
       return session;
     },

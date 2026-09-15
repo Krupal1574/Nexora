@@ -115,9 +115,6 @@ export default function AdminTestimonials() {
                       <span className={`px-2 py-1 rounded text-xs font-bold w-max ${t.published ? 'bg-emerald-400/10 text-emerald-400' : 'bg-red-400/10 text-red-400'}`}>
                         {t.published ? 'Published' : 'Draft'}
                       </span>
-                      <span className={`px-2 py-1 rounded text-xs font-bold w-max ${t.isApproved ? 'bg-blue-400/10 text-blue-400' : 'bg-orange-400/10 text-orange-400'}`}>
-                        {t.isApproved ? 'Approved' : 'Pending'}
-                      </span>
                       {t.isFeatured && (
                         <span className="px-2 py-1 rounded text-xs font-bold w-max bg-purple-400/10 text-purple-400">
                           Featured
@@ -169,11 +166,7 @@ export default function AdminTestimonials() {
             <div className="flex flex-col gap-2 pt-2">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#00F2FE]" />
-                <span className="text-sm font-medium text-[#94A3B8]">Published (visible on site if approved)</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={isApproved} onChange={(e) => setIsApproved(e.target.checked)} className="w-4 h-4 accent-blue-500" />
-                <span className="text-sm font-medium text-[#94A3B8]">Approved by Admin</span>
+                <span className="text-sm font-medium text-[#94A3B8]">Published (visible on site)</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={isFeatured} onChange={(e) => setIsFeatured(e.target.checked)} className="w-4 h-4 accent-purple-500" />
