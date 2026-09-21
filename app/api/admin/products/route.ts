@@ -1,4 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
+import * as Sentry from "@sentry/nextjs";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -10,12 +11,17 @@ export async function GET() {
   }
 
   try {
+    Sentry.captureMessage("Test log from admin products API", "info");
+    Sentry.metrics.count('test_metric', 1);
     const items = await prisma.product.findMany({
     orderBy: { createdAt: "desc" },
   });
   return NextResponse.json(items);
   } catch (error) {
     console.error('GET Error in products:', error);
+    Sentry.captureException(error, {
+      extra: { context: "GET /api/admin/products" },
+    });
     return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
@@ -46,6 +52,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(item);
   } catch (error) {
     console.error('POST Error in products:', error);
+    Sentry.captureException(error, {
+      extra: { context: "POST /api/admin/products" },
+    });
     return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
