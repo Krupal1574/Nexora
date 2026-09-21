@@ -17,7 +17,7 @@ function stripUndefined<T extends object>(obj: T): any {
 
 export function Prisma8Adapter(): Adapter {
     return {
-        createUser: async ({ id, ...data }) => {
+        createUser: async ({ id, ...data }: any) => {
             const cleaned = stripUndefined(data);
             cleaned.id = id || crypto.randomUUID();
             if (!cleaned.updatedAt) cleaned.updatedAt = new Date().toISOString();
@@ -52,7 +52,7 @@ export function Prisma8Adapter(): Adapter {
         deleteUser: async (id) => {
             await (db.orm.public.User.where as any)({ id }).delete();
         },
-        linkAccount: async (data) => {
+        linkAccount: async (data: any) => {
             const { type, ...rest } = data;
             const mappedData = { ...rest, _type: type, id: crypto.randomUUID() } as any;
             return await (db.orm.public.Account.create as any)(mappedData);
@@ -110,8 +110,5 @@ export function Prisma8Adapter(): Adapter {
             if (verificationToken?.expires) (verificationToken as any).expires = new Date(verificationToken.expires as string);
             return verificationToken as any;
         },
-        async getAccount(providerAccountId, provider) {
-            return await db.orm.public.Account.where({ providerAccountId, provider }).first() as any;
-        },
-    };
+    } as Adapter;
 }
