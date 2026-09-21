@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
         requestBody: {
           values: [
             ["Name", "Email", "Role"],
-            ...users.map(u => [u.name, u.email, u.role])
+            ...users.map((u: any) => [u.name, u.email, u.role])
           ]
         }
       });

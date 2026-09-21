@@ -1,0 +1,534 @@
+// use prisma-next
+// Contract inferred from the live database schema. Edit as needed, then run `prisma contract emit`.
+
+namespace public {
+  model User {
+    id                   String               @id(map: "User_pkey")
+    name                 String?
+    email                String
+    password             String?
+    image                String?
+    role                 pg.enum(UserRole)    @default("CUSTOMER")
+    emailVerified        TimestampString(3)?
+    createdAt            TimestampString(3)         @default(now())
+    updatedAt TimestampString(3) @default(now())
+    isDisabled           Boolean              @default(false)
+    jobTitle             String?
+    company              String?
+    pendingPhone         String?
+    phone                String?
+    accounts             Account[]
+    addresses            Address[]
+    adminAuditLogs       AdminAuditLog[]
+    candidatePhoto       CandidatePhoto?
+    candidateProfile     CandidateProfile?
+    enrollments          Enrollment[]
+    orders               Order[]
+    pendingEmailChanges  PendingEmailChange[]
+    resume               Resume?
+    sessions             Session[]
+    userLessonProgresses UserLessonProgress[]
+
+    @@index([email], map: "User_email_idx")
+    @@index([email], map: "User_email_key", unique: true)
+    @@map("User")
+  }
+
+  model Account {
+    id                String  @id(map: "Account_pkey")
+    userId            String
+    _type             String  @map("type")
+    provider          String
+    providerAccountId String
+    refreshToken      String? @map("refresh_token")
+    accessToken       String? @map("access_token")
+    expiresAt         Int?    @map("expires_at")
+    tokenType         String? @map("token_type")
+    scope             String?
+    idToken           String? @map("id_token")
+    sessionState      String? @map("session_state")
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Account_userId_fkey")
+
+    @@index([provider, providerAccountId], map: "Account_provider_providerAccountId_key", unique: true)
+    @@index([userId], map: "Account_userId_idx")
+    @@map("Account")
+  }
+
+  model Address {
+    id           String       @id(map: "Address_pkey")
+    userId       String
+    firstName    String
+    lastName     String
+    email        String
+    phone        String?
+    addressLine1 String
+    addressLine2 String?
+    city         String
+    state        String?
+    postalCode   String
+    country      String
+    isDefault    Boolean      @default(false)
+    createdAt    TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    orders       Order[]
+    user         User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Address_userId_fkey")
+
+    @@index([userId], map: "Address_userId_idx")
+    @@map("Address")
+  }
+
+  model AdminAuditLog {
+    id        String       @id(map: "AdminAuditLog_pkey")
+    userId    String
+    action    String
+    resource  String
+    details   String?
+    createdAt TimestampString(3) @default(now())
+    user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "AdminAuditLog_userId_fkey")
+
+    @@index([userId], map: "AdminAuditLog_userId_idx")
+    @@map("AdminAuditLog")
+  }
+
+  model BlogPost {
+    id           String       @id(map: "BlogPost_pkey")
+    title        String
+    slug         String
+    excerpt      String
+    content      String
+    image        String
+    category     String
+    readTime     String
+    date         String
+    authorName   String?
+    authorRole   String?
+    authorAvatar String?
+    published    Boolean      @default(true)
+    createdAt    TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    @@index([category], map: "BlogPost_category_idx")
+    @@index([published], map: "BlogPost_published_idx")
+    @@index([slug], map: "BlogPost_slug_key", unique: true)
+    @@map("BlogPost")
+  }
+
+  model CandidatePhoto {
+    id        String       @id(map: "CandidatePhoto_pkey")
+    userId    String
+    data      Bytes
+    mimeType  String
+    size      Int
+    createdAt TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "CandidatePhoto_userId_fkey")
+
+    @@unique([userId], map: "CandidatePhoto_userId_key")
+    @@map("CandidatePhoto")
+  }
+
+  model CandidateProfile {
+    id             String       @id(map: "CandidateProfile_pkey")
+    userId         String
+    headline       String?
+    location       String?
+    summary        String?
+    availability   String?
+    expectedSalary String?
+    skills         Jsonb        @default(dbgenerated("'[]'::jsonb"))
+    languages      Jsonb        @default(dbgenerated("'[]'::jsonb"))
+    education      Jsonb        @default(dbgenerated("'[]'::jsonb"))
+    experience     Jsonb        @default(dbgenerated("'[]'::jsonb"))
+    certifications Jsonb        @default(dbgenerated("'[]'::jsonb"))
+    linkedinUrl    String?
+    githubUrl      String?
+    portfolioUrl   String?
+    hasCustomPhoto Boolean      @default(false)
+    createdAt      TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    user           User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "CandidateProfile_userId_fkey")
+
+    @@unique([userId], map: "CandidateProfile_userId_key")
+    @@map("CandidateProfile")
+  }
+
+  model ContactInquiry {
+    id        String                 @id(map: "ContactInquiry_pkey")
+    name      String
+    email     String
+    subject   String?
+    message   String
+    status    pg.enum(InquiryStatus) @default("NEW")
+    notes     String?
+    createdAt TimestampString(3)           @default(now())
+    updatedAt TimestampString(3) @default(now())
+    @@map("ContactInquiry")
+  }
+
+  model Coupon {
+    id           String                @id(map: "Coupon_pkey")
+    code         String
+    discountType pg.enum(DiscountType) @default("PERCENTAGE")
+    amount       Numeric(10, 2)
+    isActive     Boolean               @default(true)
+    usageLimit   Int?
+    usageCount   Int                   @default(0)
+    expiresAt    TimestampString(3)?
+    createdAt    TimestampString(3)          @default(now())
+    updatedAt TimestampString(3) @default(now())
+    @@index([code], map: "Coupon_code_key", unique: true)
+    @@map("Coupon")
+  }
+
+  model Course {
+    id          String                @id(map: "Course_pkey")
+    title       String
+    slug        String
+    description String?
+    image       String?
+    price       Numeric(10, 2)        @default("0")
+    status      pg.enum(CourseStatus) @default("DRAFT")
+    createdAt   TimestampString(3)          @default(now())
+    updatedAt TimestampString(3) @default(now())
+    enrollments Enrollment[]
+    modules     Module[]
+
+    @@index([slug], map: "Course_slug_key", unique: true)
+    @@map("Course")
+  }
+
+  model Enrollment {
+    id        String       @id(map: "Enrollment_pkey")
+    userId    String
+    courseId  String
+    progress  Int          @default(0)
+    createdAt TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    course    Course       @relation(fields: [courseId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Enrollment_courseId_fkey")
+    user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Enrollment_userId_fkey")
+
+    @@index([courseId], map: "Enrollment_courseId_idx")
+    @@index([userId, courseId], map: "Enrollment_userId_courseId_key", unique: true)
+    @@index([userId], map: "Enrollment_userId_idx")
+    @@map("Enrollment")
+  }
+
+  model ExternalArticle {
+    id          String       @id(map: "ExternalArticle_pkey")
+    title       String
+    description String
+    url         String
+    source      String
+    imageUrl    String?
+    publishedAt TimestampString(3)
+    category    String
+    createdAt   TimestampString(3) @default(now())
+    expiresAt   TimestampString(3)
+
+    @@index([category], map: "ExternalArticle_category_idx")
+    @@index([expiresAt], map: "ExternalArticle_expiresAt_idx")
+    @@index([publishedAt], map: "ExternalArticle_publishedAt_idx")
+    @@index([url], map: "ExternalArticle_url_key", unique: true)
+    @@map("ExternalArticle")
+  }
+
+  model Module {
+    id          String                @id(map: "Module_pkey")
+    courseId    String
+    title       String
+    description String?
+    order       Int                   @default(0)
+    status      pg.enum(CourseStatus) @default("DRAFT")
+    createdAt   TimestampString(3)          @default(now())
+    updatedAt TimestampString(3) @default(now())
+    lessons     Lesson[]
+    course      Course                @relation(fields: [courseId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Module_courseId_fkey")
+
+    @@index([courseId], map: "Module_courseId_idx")
+    @@map("Module")
+  }
+
+  model Lesson {
+    id                   String                @id(map: "Lesson_pkey")
+    moduleId             String
+    title                String
+    content              String?
+    videoUrl             String?
+    order                Int                   @default(0)
+    status               pg.enum(CourseStatus) @default("DRAFT")
+    isFree               Boolean               @default(false)
+    createdAt            TimestampString(3)          @default(now())
+    updatedAt TimestampString(3) @default(now())
+    userLessonProgresses UserLessonProgress[]
+    module               Module                @relation(fields: [moduleId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Lesson_moduleId_fkey")
+
+    @@index([moduleId], map: "Lesson_moduleId_idx")
+    @@map("Lesson")
+  }
+
+  model MediaAsset {
+    id        String       @id(map: "MediaAsset_pkey")
+    url       String
+    publicId  String?
+    format    String?
+    width     Int?
+    height    Int?
+    size      Int?
+    createdAt TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    @@map("MediaAsset")
+  }
+
+  model Order {
+    id              String                 @id(map: "Order_pkey")
+    orderNumber     String
+    userId          String?
+    addressId       String?
+    status          pg.enum(OrderStatus)   @default("PENDING")
+    paymentStatus   pg.enum(PaymentStatus) @default("PENDING")
+    subtotal        Numeric(10, 2)
+    discount        Numeric(10, 2)         @default("0")
+    shippingCost    Numeric(10, 2)         @default("0")
+    tax             Numeric(10, 2)         @default("0")
+    total           Numeric(10, 2)
+    currency        String                 @default("usd")
+    stripeSessionId String?
+    stripePaymentId String?
+    customerEmail   String
+    customerName    String?
+    customerPhone   String?
+    notes           String?
+    createdAt       TimestampString(3)           @default(now())
+    updatedAt TimestampString(3) @default(now())
+    orderItems      OrderItem[]
+    payment         Payment?
+    address         Address?               @relation(fields: [addressId], references: [id], onDelete: SetNull, onUpdate: Cascade, map: "Order_addressId_fkey", index: false)
+    user            User?                  @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade, map: "Order_userId_fkey")
+
+    @@index([createdAt], map: "Order_createdAt_idx")
+    @@index([customerEmail], map: "Order_customerEmail_idx")
+    @@index([orderNumber], map: "Order_orderNumber_key", unique: true)
+    @@index([paymentStatus], map: "Order_paymentStatus_idx")
+    @@index([status], map: "Order_status_idx")
+    @@index([stripeSessionId], map: "Order_stripeSessionId_key", unique: true)
+    @@index([userId], map: "Order_userId_idx")
+    @@map("Order")
+  }
+
+  model Product {
+    id            String                 @id(map: "Product_pkey")
+    name          String
+    slug          String
+    description   String?
+    price         Numeric(10, 2)
+    originalPrice Numeric(10, 2)?
+    discount      Int                    @default(0)
+    image         String?
+    category      String?
+    status        pg.enum(ProductStatus) @default("ACTIVE")
+    stock         Int                    @default(0)
+    featured      Boolean                @default(false)
+    createdAt     TimestampString(3)           @default(now())
+    updatedAt TimestampString(3) @default(now())
+    orderItems    OrderItem[]
+
+    @@index([category], map: "Product_category_idx")
+    @@index([featured], map: "Product_featured_idx")
+    @@index([slug], map: "Product_slug_key", unique: true)
+    @@index([status], map: "Product_status_idx")
+    @@map("Product")
+  }
+
+  model OrderItem {
+    id          String         @id(map: "OrderItem_pkey")
+    orderId     String
+    productId   String?
+    productName String
+    quantity    Int
+    unitPrice   Numeric(10, 2)
+    totalPrice  Numeric(10, 2)
+    order       Order          @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "OrderItem_orderId_fkey")
+    product     Product?       @relation(fields: [productId], references: [id], onDelete: SetNull, onUpdate: Cascade, map: "OrderItem_productId_fkey")
+
+    @@index([orderId], map: "OrderItem_orderId_idx")
+    @@index([productId], map: "OrderItem_productId_idx")
+    @@map("OrderItem")
+  }
+
+  model Payment {
+    id                    String                 @id(map: "Payment_pkey")
+    orderId               String
+    stripePaymentIntentId String?
+    stripeChargeId        String?
+    amount                Numeric(10, 2)
+    currency              String                 @default("usd")
+    status                pg.enum(PaymentStatus) @default("PENDING")
+    paymentMethod         String?
+    receiptUrl            String?
+    createdAt             TimestampString(3)           @default(now())
+    updatedAt TimestampString(3) @default(now())
+    order                 Order                  @relation(fields: [orderId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Payment_orderId_fkey")
+
+    @@unique([orderId], map: "Payment_orderId_key")
+    @@index([status], map: "Payment_status_idx")
+    @@index([stripePaymentIntentId], map: "Payment_stripePaymentIntentId_key", unique: true)
+    @@map("Payment")
+  }
+
+  model PendingEmailChange {
+    id        String       @id(map: "PendingEmailChange_pkey")
+    userId    String
+    newEmail  String
+    token     String
+    expiresAt TimestampString(3)
+    createdAt TimestampString(3) @default(now())
+    user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "PendingEmailChange_userId_fkey")
+
+    @@index([token], map: "PendingEmailChange_token_idx")
+    @@index([token], map: "PendingEmailChange_token_key", unique: true)
+    @@index([userId], map: "PendingEmailChange_userId_idx")
+    @@map("PendingEmailChange")
+  }
+
+
+
+  model RateLimit {
+    id         String       @id(map: "RateLimit_pkey")
+    identifier String
+    action     String
+    count      Int          @default(1)
+    resetAt    TimestampString(3)
+
+    @@index([identifier, action], map: "RateLimit_identifier_action_key", unique: true)
+    @@index([identifier], map: "RateLimit_identifier_idx")
+    @@map("RateLimit")
+  }
+
+  model Resume {
+    id         String       @id(map: "Resume_pkey")
+    userId     String
+    fileName   String
+    fileSize   Int
+    mimeType   String
+    data       Bytes
+    parsedData Jsonb?
+    createdAt  TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    user       User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Resume_userId_fkey")
+
+    @@unique([userId], map: "Resume_userId_key")
+    @@map("Resume")
+  }
+
+  model Session {
+    id           String       @id(map: "Session_pkey")
+    sessionToken String
+    userId       String
+    expires      TimestampString(3)
+    user         User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "Session_userId_fkey")
+
+    @@index([sessionToken], map: "Session_sessionToken_key", unique: true)
+    @@index([userId], map: "Session_userId_idx")
+    @@map("Session")
+  }
+
+  model SiteSetting {
+    id          String       @id(map: "SiteSetting_pkey")
+    key         String
+    value       String
+    description String?
+    createdAt   TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    @@index([key], map: "SiteSetting_key_key", unique: true)
+    @@map("SiteSetting")
+  }
+
+  model Testimonial {
+    id         String       @id(map: "Testimonial_pkey")
+    name       String
+    role       String
+    content    String
+    avatar     String
+    rating     Int          @default(5)
+    published  Boolean      @default(true)
+    createdAt  TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    isApproved Boolean      @default(false)
+    isFeatured Boolean      @default(false)
+    @@map("Testimonial")
+  }
+
+  model UserLessonProgress {
+    id        String       @id(map: "UserLessonProgress_pkey")
+    userId    String
+    lessonId  String
+    completed Boolean      @default(false)
+    createdAt TimestampString(3) @default(now())
+    updatedAt TimestampString(3) @default(now())
+    lesson    Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "UserLessonProgress_lessonId_fkey")
+    user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "UserLessonProgress_userId_fkey")
+
+    @@index([lessonId], map: "UserLessonProgress_lessonId_idx")
+    @@index([userId], map: "UserLessonProgress_userId_idx")
+    @@index([userId, lessonId], map: "UserLessonProgress_userId_lessonId_key", unique: true)
+    @@map("UserLessonProgress")
+  }
+
+  model VerificationToken {
+    identifier String
+    token      String
+    expires    TimestampString(3)
+
+    @@id([identifier, token])
+    @@index([identifier, token], map: "VerificationToken_identifier_token_key", unique: true)
+    @@index([token], map: "VerificationToken_token_key", unique: true)
+    @@map("VerificationToken")
+  }
+
+  native_enum CourseStatus {
+    DRAFT = "DRAFT"
+    ACTIVE = "ACTIVE"
+    DISABLED = "DISABLED"
+    ARCHIVED = "ARCHIVED"
+  }
+
+  native_enum DiscountType {
+    PERCENTAGE = "PERCENTAGE"
+    FIXED_AMOUNT = "FIXED_AMOUNT"
+  }
+
+  native_enum InquiryStatus {
+    NEW = "NEW"
+    IN_PROGRESS = "IN_PROGRESS"
+    RESOLVED = "RESOLVED"
+    SPAM = "SPAM"
+  }
+
+  native_enum OrderStatus {
+    PENDING = "PENDING"
+    CONFIRMED = "CONFIRMED"
+    PROCESSING = "PROCESSING"
+    SHIPPED = "SHIPPED"
+    DELIVERED = "DELIVERED"
+    CANCELLED = "CANCELLED"
+    REFUNDED = "REFUNDED"
+  }
+
+  native_enum PaymentStatus {
+    PENDING = "PENDING"
+    PAID = "PAID"
+    FAILED = "FAILED"
+    REFUNDED = "REFUNDED"
+    PARTIALLY_REFUNDED = "PARTIALLY_REFUNDED"
+  }
+
+  native_enum ProductStatus {
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
+    OUT_OF_STOCK = "OUT_OF_STOCK"
+  }
+
+  native_enum UserRole {
+    CUSTOMER = "CUSTOMER"
+    ADMIN = "ADMIN"
+  }
+}

@@ -40,7 +40,7 @@ export async function GET() {
 
     // Never send the password hash to the client
     const { password, accounts, ...safeUser } = user;
-    const providers = accounts.map((a) => a.provider);
+    const providers = accounts.map((a: any) => a.provider);
 
     return NextResponse.json({
       ...safeUser,

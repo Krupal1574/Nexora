@@ -1,4 +1,5 @@
-import { CandidateProfile, User } from "@prisma/client";
+type CandidateProfile = any;
+type User = any;
 
 export type ProfileCompletionStats = {
   percentage: number;

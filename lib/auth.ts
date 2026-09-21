@@ -1,13 +1,13 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/prisma";
+import { Prisma8Adapter } from "@/lib/prisma8-adapter";
+import { db } from "@/lib/prisma8";
 import * as argon2 from "argon2";
 
 export const authOptions: NextAuthOptions = {
   // @ts-ignore
-  adapter: PrismaAdapter(prisma),
+  adapter: Prisma8Adapter(),
   session: { strategy: "jwt" },
   providers: [
     CredentialsProvider({
@@ -19,10 +19,10 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
         
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-          include: { candidateProfile: { select: { headline: true } } },
-        });
+        const user = await db.orm.public.User
+          .where({ email: credentials.email })
+          .include('candidateProfile', p => p.select('headline'))
+          .first();
 
         if (!user || !user.password) return null;
 

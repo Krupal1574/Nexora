@@ -7,15 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate && (prisma skills sync || exit 0)"
+    "postinstall": "prisma generate && (prisma skills sync || exit 0)",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migration dev",
+    "prisma8:migrate": "prisma db migrate --advance-ref db"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.69",
     "@ai-sdk/groq": "^4.0.41",
     "@ai-sdk/react": "^4.0.102",
     "@auth/prisma-adapter": "^2.11.3",
-    "@prisma/adapter-pg": "^7.10.0",
-    "@prisma/client": "^7.10.0",
+    "@prisma/orm-toolchain": "^8.0.0-rc.11",
     "@vercel/analytics": "^2.0.1",
     "ai": "^7.0.99",
     "argon2": "^0.45.1",
@@ -32,16 +34,21 @@
     "resend": "^6.25.0",
     "rss-parser": "^3.13.0",
     "stripe": "^22.6.0",
+    "uniku": "^0.6.0",
     "zod": "^4.5.4"
   },
   "devDependencies": {
+    "@prisma/orm-framework": "^8.0.0-rc.11",
+    "@prisma/orm-postgres": "^8.0.0-rc.11",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.3",
-    "prisma": "^7.10.0",
+    "openapi-fetch": "^0.17.0",
+    "package-manager-detector": "^1.8.0",
+    "prisma": "^8.0.0-rc.15",
     "tailwindcss": "^4",
     "tsx": "^4.23.13",
     "typescript": "^5"
