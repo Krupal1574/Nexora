@@ -1,4 +1,4 @@
-import type { Adapter } from "@auth/core/adapters";
+import type { Adapter } from "next-auth/adapters";
 import { db } from "./prisma8";
 
 function stripUndefined<T extends object>(obj: T): any {
