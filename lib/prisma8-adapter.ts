@@ -57,7 +57,7 @@ export function Prisma8Adapter(): Adapter {
             const mappedData = { ...rest, _type: type, id: crypto.randomUUID() } as any;
             return await (db.orm.public.Account.create as any)(mappedData);
         },
-        unlinkAccount: async (provider_providerAccountId) => {
+        unlinkAccount: async (provider_providerAccountId: any) => {
             await db.orm.public.Account.where({
                 provider: provider_providerAccountId.provider,
                 providerAccountId: provider_providerAccountId.providerAccountId,
