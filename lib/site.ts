@@ -4,8 +4,8 @@ export const siteConfig = {
   // company email domain and must be verified before deployment.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nexora.info",
   contact: {
-    phoneDisplay: "+1 (302) 412-4095",
-    phoneHref: "tel:+13024124095",
+    phoneDisplay: "+1 (484) 317-5613",
+    phoneHref: "tel:+14843175613",
     email: "Support@nexorastaffingllp.com",
     instagram: "https://www.instagram.com/nexorastaffingllp?stkn=MXd6bHExejU3cm9iZA==",
     linkedin: "https://www.linkedin.com/company/nexora-staffing-llp/",

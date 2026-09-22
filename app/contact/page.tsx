@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { siteConfig } from "@/lib/site";
 import {
   Phone,
   Mail,
@@ -18,17 +19,17 @@ const contactCards = [
   {
     icon: Phone,
     title: "Phone",
-    value: "+1 (302) 412-4095",
+    value: siteConfig.contact.phoneDisplay,
     sublabel: "Mon–Fri, 9AM–6PM EST",
-    href: "tel:+13024124095",
+    href: siteConfig.contact.phoneHref,
     color: "#00F2FE",
   },
   {
     icon: Mail,
     title: "Email",
-    value: "Support@nexorastaffingllp.com",
+    value: siteConfig.contact.email,
     sublabel: "We respond within 24 hours",
-    href: "mailto:Support@nexorastaffingllp.com",
+    href: `mailto:${siteConfig.contact.email}`,
     color: "#00D2C4",
   },
   {
