@@ -100,6 +100,7 @@ export async function POST(req: NextRequest) {
 
     const result = streamText({
       model: groq('groq/compound-mini'),
+      maxOutputTokens: 4096,
       system: `You are Nexora AI, a helpful and knowledgeable assistant for Nexora — a premier IT staffing and talent solutions firm. You help visitors learn about Nexora's services including career counseling, resume optimization, interview preparation, technical training, and IT staffing solutions. Be friendly, professional, and concise. When you don't know something specific about Nexora, be honest but helpful.`,
       messages: modelMessages,
       experimental_telemetry: {

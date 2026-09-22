@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import * as Sentry from "@sentry/nextjs";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
@@ -50,6 +51,9 @@ export async function GET() {
     });
   } catch (error) {
     console.error("GET /api/user/settings error:", error);
+    Sentry.captureException(error, {
+      extra: { context: "GET /api/user/settings" },
+    });
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
@@ -107,6 +111,9 @@ export async function PUT(req: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("PUT /api/user/settings error:", error);
+    Sentry.captureException(error, {
+      extra: { context: "PUT /api/user/settings" },
+    });
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
