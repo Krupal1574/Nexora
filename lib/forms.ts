@@ -3,13 +3,10 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import type { NextRequest } from "next/server";
 import { sendContactNotification, sendReferralNotification } from "@/lib/email";
-
+import { isRateLimited } from "@/lib/rate-limit";
 const MAX_BODY_BYTES = 20_000;
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1_000;
-const RATE_LIMIT_MAX_REQUESTS = 5;
 const IDEMPOTENCY_WINDOW_MS = 24 * 60 * 60 * 1_000;
 
-const rateLimitStore = new Map<string, number[]>();
 const idempotencyStore = new Map<string, number>();
 
 export type ContactSubmission = {
@@ -103,26 +100,10 @@ function getClientKey(request: NextRequest) {
   return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "unknown";
 }
 
-function purgeExpiredEntries(now: number) {
-  for (const [key, timestamps] of rateLimitStore) {
-    const recent = timestamps.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
-    if (recent.length) rateLimitStore.set(key, recent);
-    else rateLimitStore.delete(key);
-  }
+function purgeExpiredIdempotency(now: number) {
   for (const [key, expiresAt] of idempotencyStore) {
     if (expiresAt <= now) idempotencyStore.delete(key);
   }
-}
-
-function isRateLimited(request: NextRequest, type: SubmissionType) {
-  const now = Date.now();
-  purgeExpiredEntries(now);
-  const key = `${type}:${getClientKey(request)}`;
-  const timestamps = rateLimitStore.get(key) ?? [];
-  if (timestamps.length >= RATE_LIMIT_MAX_REQUESTS) return true;
-  timestamps.push(now);
-  rateLimitStore.set(key, timestamps);
-  return false;
 }
 
 function isTrustedOrigin(request: NextRequest) {
@@ -158,7 +139,11 @@ function isFormError(value: unknown): value is FormError {
 
 export async function handleFormSubmission(request: NextRequest, type: SubmissionType) {
   if (!isTrustedOrigin(request)) return Response.json({ message: "Invalid request origin." }, { status: 403 });
-  if (isRateLimited(request, type)) return Response.json({ message: "Please wait before trying again." }, { status: 429 });
+  
+  const ip = getClientKey(request);
+  if (isRateLimited(type, ip)) return Response.json({ message: "Please wait before trying again." }, { status: 429 });
+
+  purgeExpiredIdempotency(Date.now());
 
   const idempotencyKey = getIdempotencyKey(request);
   if (!idempotencyKey) return Response.json({ message: "Invalid submission token. Please refresh and try again." }, { status: 400 });

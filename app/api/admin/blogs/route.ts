@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         date: body.date || new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
         authorName: body.authorName,
         authorRole: body.authorRole,
-        authorAvatar: body.authorAvatar || "https://i.pravatar.cc/150?img=2",
+        authorAvatar: body.authorAvatar || "/images/default-avatar.svg",
         published: body.published ?? true,
       },
     });

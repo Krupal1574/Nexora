@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
+import PageHero from "@/components/motion/PageHero";
 import { siteConfig } from "@/lib/site";
 import {
   Phone,
@@ -104,52 +105,31 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-clip">
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-16 lg:pt-24 pb-16 lg:pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative container-wide text-center">
-          <span className="section-label">Get In Touch</span>
-          <h1 className="hero-title max-w-4xl mx-auto text-white mb-5">
-            Let's Start Your{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+      <PageHero
+        align="center"
+        eyebrow="Get In Touch"
+        lines={[
+          "Let's Start Your ",
+          <span key="success" className="accent">Success Story</span>,
+        ]}
+        sub="Whether you're ready to start your job search or just have questions, the Nexora team is here to help. Reach out — we respond fast."
+      >
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          {features.map(({ icon: Icon, label }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
             >
-              Success Story
-            </span>
-          </h1>
-          <p className="text-[#94A3B8] text-xl max-w-2xl mx-auto mb-8">
-            Whether you're ready to start your job search or just have questions,
-            the Nexora team is here to help. Reach out — we respond fast.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {features.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
-              >
-                <Icon className="w-4 h-4 text-[#00F2FE]" />
-                {label}
-              </div>
-            ))}
-          </div>
+              <Icon className="w-4 h-4 text-[#00F2FE]" />
+              {label}
+            </div>
+          ))}
         </div>
-      </section>
+      </PageHero>
 
       {/* ════════════════════════════════════════════════════════
           QUICK INFO CARDS

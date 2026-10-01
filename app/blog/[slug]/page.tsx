@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Clock, Calendar, Share2 } from "lucide-react";
 import prisma from "@/lib/prisma";
 import { getBlogPostBySlug as getStaticPost, blogPosts } from "@/lib/blog";
@@ -45,7 +46,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <main className="overflow-x-hidden pt-8 pb-24">
+    <main className="overflow-x-clip pt-8 pb-24">
       {/* Article Header */}
       <div className="container-narrow mb-10">
         <Link 
@@ -79,10 +80,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div className="flex items-center justify-between border-t border-b border-[#203548] py-4">
           <div className="flex items-center gap-3">
-            <img
-              src={post.authorAvatar || "https://i.pravatar.cc/150?img=2"}
-              alt={post.authorName || "Author"}
-              className="w-10 h-10 rounded-full border border-[#00F2FE]/20"
+            <Image
+              src={post.authorAvatar || "/images/default-avatar.svg"}
+              alt={`${post.authorName || "Author"}'s avatar`}
+              width={40}
+              height={40}
+              className="rounded-full border border-[#00F2FE]/20"
+              unoptimized
             />
             <div>
               <p className="text-sm font-semibold text-white">{post.authorName || "Nexora Team"}</p>
@@ -101,10 +105,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       {/* Featured Image */}
       <div className="container-wide mb-12">
         <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-3xl overflow-hidden relative border border-[#203548]">
-          <img
+          <Image
             src={post.image}
-            alt={post.title}
-            className="w-full h-full object-cover"
+            alt={`Featured image for ${post.title}`}
+            fill
+            className="object-cover"
+            unoptimized
           />
         </div>
       </div>

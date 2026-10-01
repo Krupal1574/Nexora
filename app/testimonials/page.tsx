@@ -1,5 +1,7 @@
 import { Star, Sparkles } from "lucide-react";
+import Image from "next/image";
 import prisma from "@/lib/prisma";
+import PageHero from "@/components/motion/PageHero";
 import { testimonials as staticTestimonials } from "@/lib/testimonials";
 import TestimonialForm from "@/components/TestimonialForm";
 
@@ -31,28 +33,18 @@ export default async function TestimonialsPage() {
   }
 
   return (
-    <main className="overflow-x-hidden pb-24">
+    <main className="overflow-x-clip pb-24">
       <div className="container-wide">
         {/* Hero */}
-        <section className="text-center pt-8 sm:pt-12 mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#00F2FE]/30 bg-[#00F2FE]/5 px-3 py-1 text-[8px] font-semibold text-[#00F2FE] mb-5">
-            <Sparkles className="w-2.5 h-2.5" />
-            Success Stories
-          </div>
-
-          <h1
-            className="text-3xl sm:text-5xl font-bold text-white leading-tight mb-5"
-            style={{
-              fontFamily: "Space Grotesk, sans-serif",
-            }}
-          >
-            Hear from our <span className="text-[#00F2FE]">Clients</span>
-          </h1>
-
-          <p className="max-w-xl mx-auto text-xs sm:text-sm leading-relaxed text-[#94A3B8]">
-            Discover how Nexora has helped tech professionals land their dream roles, boost their salaries, and build lasting careers.
-          </p>
-        </section>
+        <PageHero
+          align="center"
+          eyebrow="Success Stories"
+          lines={[
+            "Hear from our ",
+            <span key="clients" className="accent">Clients</span>,
+          ]}
+          sub="Discover how Nexora has helped tech professionals land their dream roles, boost their salaries, and build lasting careers."
+        />
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -82,10 +74,12 @@ export default async function TestimonialsPage() {
 
               {/* Author */}
               <div className="flex items-center gap-4 mt-auto pt-4 border-t border-[#203548]">
-                <img
+                <Image
                   src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-10 h-10 rounded-full border border-[#00F2FE]/30"
+                  alt={`${testimonial.name}'s avatar`}
+                  width={40}
+                  height={40}
+                  className="rounded-full border border-[#00F2FE]/30"
                 />
                 <div>
                   <h4 className="text-white font-semibold text-sm">

@@ -1,4 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import PageHero from "@/components/motion/PageHero";
+import Reveal from "@/components/motion/Reveal";
+import CtaSection from "@/components/motion/CtaSection";
 import {
   Briefcase,
   FileText,
@@ -14,6 +18,10 @@ import {
   ClipboardCheck,
 } from "lucide-react";
 
+export const metadata: Metadata = {
+  title: "Our Services",
+  description: "From career counseling and resume optimization to technical training and active placement, Nexora provides end-to-end IT staffing solutions.",
+};
 const services = [
   {
     id: "career-counseling",
@@ -126,55 +134,34 @@ const processHighlights = [
 
 export default function ServicesPage() {
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-clip">
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-16 lg:pt-24 pb-16 lg:pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative container-wide text-center">
-          <span className="section-label">What We Do</span>
-          <h1 className="hero-title max-w-4xl mx-auto text-white mb-6">
-            Turning Your Tech Dreams{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+      {/* ════════════════════════════════════════════════════════
+          HERO
+      ════════════════════════════════════════════════════════ */}
+      <PageHero
+        align="center"
+        eyebrow="What We Do"
+        lines={[
+          "Turning Your Tech Dreams ",
+          <span key="reality" className="accent">Into Reality</span>,
+        ]}
+        sub="From your first career conversation to your first day on the job — Nexora provides a fully integrated suite of services designed to get you hired faster and in the right role."
+      >
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          {processHighlights.map(({ icon: Icon, label }) => (
+            <div
+              key={label}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
             >
-              Into Reality
-            </span>
-          </h1>
-          <p className="text-[#94A3B8] text-xl max-w-3xl mx-auto leading-relaxed mb-10">
-            From your first career conversation to your first day on the job — Nexora
-            provides a fully integrated suite of services designed to get you hired
-            faster and in the right role.
-          </p>
-
-          {/* Process highlights bar */}
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {processHighlights.map(({ icon: Icon, label }) => (
-              <div
-                key={label}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
-              >
-                <Icon className="w-4 h-4 text-[#00F2FE]" />
-                {label}
-              </div>
-            ))}
-          </div>
+              <Icon className="w-4 h-4 text-[#00F2FE]" />
+              {label}
+            </div>
+          ))}
         </div>
-      </section>
+      </PageHero>
 
       {/* ════════════════════════════════════════════════════════
           SERVICES DETAILED BREAKDOWN
@@ -285,37 +272,12 @@ export default function ServicesPage() {
       {/* ════════════════════════════════════════════════════════
           CTA
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
-        <div className="container-narrow text-center">
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Ready to Start Your{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Nexora Journey?
-            </span>
-          </h2>
-          <p className="text-[#94A3B8] mb-8 text-lg">
-            Speak with a Nexora specialist today and get a personalized roadmap for your career.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact" className="btn-primary text-base px-10 py-4">
-              Get a Free Consultation <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/refer-and-earn" className="btn-ghost text-base px-10 py-4">
-              Refer & Earn $500
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CtaSection
+        lines={["Ready to Start Your ", <span key="journey" className="accent">Nexora Journey?</span>]}
+        text="Speak with a Nexora specialist today and get a personalized roadmap for your career."
+        primary={{ href: "/contact", label: "Get a Free Consultation" }}
+        secondary={{ href: "/refer-and-earn", label: "Refer & Earn $500" }}
+      />
     </div>
   );
 }

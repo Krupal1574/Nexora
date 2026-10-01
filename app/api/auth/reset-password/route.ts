@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import * as argon2 from "argon2";
+import { isRateLimited } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
   try {
@@ -8,6 +9,11 @@ export async function POST(req: Request) {
 
     if (!token || typeof token !== "string") {
       return NextResponse.json({ message: "Invalid reset token." }, { status: 400 });
+    }
+
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
+    if (isRateLimited("reset_password", ip)) {
+      return NextResponse.json({ message: "Too many attempts. Please try again later." }, { status: 429 });
     }
 
     if (!password || typeof password !== "string" || password.length < 8) {

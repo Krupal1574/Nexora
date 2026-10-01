@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import PageHero from "@/components/motion/PageHero";
 import {
   UserPlus,
   Rocket,
@@ -121,60 +122,34 @@ export default function ReferAndEarnPage() {
   };
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-clip">
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      <section className="relative pt-16 lg:pt-24 pb-16 lg:pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        {/* Floating dollar signs */}
-        <div className="absolute top-24 left-12 text-6xl opacity-5 font-bold text-[#00F2FE] select-none">
-          $
-        </div>
-        <div className="absolute top-40 right-20 text-8xl opacity-5 font-bold text-[#00D2C4] select-none">
-          $
-        </div>
-        <div className="absolute bottom-16 left-1/4 text-4xl opacity-5 font-bold text-[#00F2FE] select-none">
-          $
-        </div>
-
-        <div className="relative container-wide text-center">
-          {/* Earnings badge */}
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-semibold mb-8">
+      {/* ════════════════════════════════════════════════════════
+          HERO
+      ════════════════════════════════════════════════════════ */}
+      <PageHero
+        align="center"
+        eyebrow="Referral Revolution"
+        lines={[
+          "Join Nexora's ",
+          <span key="referral" className="accent">Referral Revolution</span>,
+        ]}
+      >
+        <div className="mb-6">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-semibold">
             <Gift className="w-4 h-4" />
             Earn up to $500 per placed referral — unlimited referrals!
           </div>
-
-          <h1 className="hero-title max-w-4xl mx-auto text-white mb-6">
-            Join Nexora's{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Referral Revolution
-            </span>
-          </h1>
-          <p className="text-[#94A3B8] text-xl max-w-3xl mx-auto leading-relaxed">
-            Help a friend land their dream tech job. Nexora handles everything — the
-            career coaching, resume work, and placement. You earn up to{" "}
-            <span className="text-[#00F2FE] font-semibold">$500</span> for every
-            person you refer who gets placed.
-          </p>
         </div>
-      </section>
+        <p className="text-[#94A3B8] text-xl max-w-3xl mx-auto leading-relaxed">
+          Help a friend land their dream tech job. Nexora handles everything — the
+          career coaching, resume work, and placement. You earn up to{" "}
+          <span className="text-[#00F2FE] font-semibold">$500</span> for every
+          person you refer who gets placed.
+        </p>
+      </PageHero>
 
       {/* ════════════════════════════════════════════════════════
           3-STEP PROCESS

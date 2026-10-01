@@ -72,7 +72,7 @@ body {
   font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 h1,
@@ -268,4 +268,69 @@ h6 {
     font-size: 2rem;
   }
 }
+
+
+
+/* ═══ NEXORA — editorial redesign. Append to the END of app/globals.css ═══ */
+:root { --nx-cyan:#00f2fe; --nx-teal:#00d2c4; --nx-ink:#06080f; --nx-line:rgba(255,255,255,.1); --nx-ease:cubic-bezier(.22,1,.36,1); }
+
+/* Giant uppercase display type */
+.display {
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-weight: 700; text-transform: uppercase;
+  letter-spacing: -0.04em; line-height: .92;
+  font-size: clamp(2.8rem, 9vw, 8.5rem);
+}
+.display-md { font-size: clamp(2.2rem, 6vw, 5.2rem); }
+.display .thin { font-weight: 300; color: rgba(255,255,255,.35); }   /* "Not just design." contrast */
+.display .accent { color: var(--nx-cyan); }
+.outline-text { -webkit-text-stroke: 1px rgba(255,255,255,.35); color: transparent; }
+
+.text-gradient { background: linear-gradient(120deg,#fff 0%,var(--nx-cyan) 60%,var(--nx-teal) 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.bg-grid { background-image: linear-gradient(var(--nx-line) 1px,transparent 1px), linear-gradient(90deg,var(--nx-line) 1px,transparent 1px); background-size:64px 64px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 35%,#000 20%,transparent 75%); -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 35%,#000 20%,transparent 75%); }
+.eyebrow { font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:var(--nx-cyan); display:inline-flex; align-items:center; gap:.75rem; }
+.eyebrow::before { content:""; width:28px; height:1px; background:currentColor; }
+
+/* Numbered full-width list rows (hover fills with cyan) */
+.row-link { position:relative; display:grid; grid-template-columns:3.5rem 1fr auto; gap:1rem 2rem; align-items:center;
+  padding:2rem 0; border-top:1px solid var(--nx-line); transition:padding .5s var(--nx-ease), color .3s; isolation:isolate; }
+.row-link:last-child { border-bottom:1px solid var(--nx-line); }
+.row-link::before { content:""; position:absolute; inset:0 -1.5rem; background:var(--nx-cyan); transform:scaleY(0); transform-origin:bottom; transition:transform .5s var(--nx-ease); z-index:-1; border-radius:4px; }
+.row-link:hover { padding-inline:1.5rem; color:#06080f; }
+.row-link:hover::before { transform:scaleY(1); }
+.row-link:hover .muted { color:rgba(6,8,15,.7); }
+@media (max-width:768px){ .row-link{ grid-template-columns:2.5rem 1fr; } .row-link .row-tag{ display:none; } }
+
+/* Ticker */
+@keyframes nx-ticker { to { transform: translateX(-50%); } }
+.ticker { display:flex; width:max-content; animation: nx-ticker 35s linear infinite; }
+
+/* Horizontal project rail */
+.rail { display:flex; gap:1.25rem; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:1rem; scrollbar-width:none; }
+.rail::-webkit-scrollbar { display:none; }
+.rail > * { scroll-snap-align:start; flex:0 0 min(82vw,420px); }
+
+/* Buttons: sheen */
+.btn-primary { position:relative; overflow:hidden; }
+.btn-primary::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%); transform:translateX(-120%); transition:transform .7s var(--nx-ease); }
+.btn-primary:hover::after { transform:translateX(120%); }
+
+:focus-visible { outline:2px solid var(--nx-cyan); outline-offset:3px; }
+@media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
+
+/* ═══ ANIMATION SUPPORT ═══ */
+/* Lenis: must disable native smooth scroll or the two fight */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+html { scroll-behavior: auto !important; }
+
+/* Animated "scroll" cue in hero */
+@keyframes nx-scrollline { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.scroll-line { display:block; width:1px; height:48px; background:var(--nx-cyan); animation: nx-scrollline 2s var(--nx-ease) infinite; }
+
+/* Slow-drifting glow in hero */
+@keyframes nx-drift { 0%,100% { transform: translate(-50%,0) scale(1); } 50% { transform: translate(-46%,30px) scale(1.15); } }
+.glow-drift { animation: nx-drift 12s ease-in-out infinite; }
 

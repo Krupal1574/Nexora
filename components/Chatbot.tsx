@@ -181,7 +181,7 @@ export function Chatbot() {
               y: { duration: 2.5, repeat: Infinity, ease: "easeInOut" }
             }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg shadow-cyan-500/30 transition-shadow duration-300 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 bg-transparent"
+            className="fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg shadow-cyan-500/30 transition-shadow duration-300 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 bg-transparent"
             aria-label="Open Nexora AI Chat"
           >
             <div className="relative h-14 w-14 drop-shadow-[0_0_8px_rgba(0,242,254,0.6)]">
@@ -207,9 +207,9 @@ export function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="fixed bottom-6 right-6 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#2d3748]/60 shadow-2xl shadow-black/40 backdrop-blur-sm
-                       w-[calc(100vw-2rem)] max-w-[400px] h-[min(75vh,580px)]
-                       sm:w-[400px]"
+            className="fixed bottom-20 lg:bottom-6 right-2 lg:right-6 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#2d3748]/60 shadow-2xl shadow-black/40 backdrop-blur-sm
+                       w-[calc(100vw-1rem)] max-w-[400px] h-[min(70vh,580px)]
+                       sm:w-[400px] sm:right-6"
             style={{ background: "#121623" }}
           >
             {/* ── Header ──────────────────────────────────────────────────── */}

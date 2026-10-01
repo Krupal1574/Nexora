@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import PageHero from "@/components/motion/PageHero";
 import {
   ChevronRight,
   ShoppingCart,
@@ -471,39 +472,21 @@ export default function ShopPage() {
   // ───────────────────────────────────────────────────────
 
   return (
-    <main className="overflow-x-hidden pb-24">
+    <main className="overflow-x-clip pb-24">
       <div className="container-wide">
 
         {/* Hero */}
-        <section className="text-center pt-8 sm:pt-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#00F2FE]/30 bg-[#00F2FE]/5 px-3 py-1 text-[8px] font-semibold text-[#00F2FE]">
-            <Sparkles className="w-2.5 h-2.5" />
-            Limited Time Offers
-          </div>
-
-          <h1
-            className="mt-5 text-3xl sm:text-5xl font-bold text-white leading-tight"
-            style={{
-              fontFamily:
-                "Space Grotesk, sans-serif",
-            }}
-          >
-            Invest in Your{" "}
-            <span className="text-[#00F2FE]">
-              Career
-            </span>
-            <br />
-            <span className="text-[#00F2FE]">
-              Success
-            </span>
-          </h1>
-
-          <p className="max-w-xl mx-auto mt-5 text-xs sm:text-sm leading-relaxed text-[#94A3B8]">
-            Choose the perfect plan to accelerate
-            your job search, optimize your profile,
-            and land your dream role faster.
-          </p>
-        </section>
+        <PageHero
+          align="center"
+          eyebrow="Limited Time Offers"
+          lines={[
+            "Invest in Your ",
+            <span key="career" className="accent">Career</span>,
+            <br key="br" />,
+            <span key="success" className="accent">Success</span>,
+          ]}
+          sub="Choose the perfect plan to accelerate your job search, optimize your profile, and land your dream role faster."
+        />
 
         {/* Promo Banner */}
         <section className="mt-10 rounded-xl border border-[#00F2FE]/30 bg-[#06262d]/70 px-4 py-4 sm:px-5">

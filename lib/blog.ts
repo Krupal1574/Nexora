@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Jessica Wong",
       role: "Lead Career Coach",
-      avatar: "https://i.pravatar.cc/150?u=jessica",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Sep 01, 2026",
     readTime: "5 min read",
@@ -44,7 +44,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Marcus Chen",
       role: "Technical Recruiter",
-      avatar: "https://i.pravatar.cc/150?u=marcus",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Aug 28, 2026",
     readTime: "7 min read",
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "David Smith",
       role: "Senior Engineering Coach",
-      avatar: "https://i.pravatar.cc/150?u=dsmith",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Aug 15, 2026",
     readTime: "10 min read",
@@ -76,7 +76,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Rachel Torres",
       role: "Career Success Manager",
-      avatar: "https://i.pravatar.cc/150?u=rachel",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Aug 10, 2026",
     readTime: "6 min read",
@@ -92,7 +92,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Jessica Wong",
       role: "Lead Career Coach",
-      avatar: "https://i.pravatar.cc/150?u=jessica",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Aug 05, 2026",
     readTime: "8 min read",
@@ -108,7 +108,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Marcus Chen",
       role: "Technical Recruiter",
-      avatar: "https://i.pravatar.cc/150?u=marcus",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Jul 28, 2026",
     readTime: "12 min read",
@@ -124,7 +124,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "David Smith",
       role: "Senior Engineering Coach",
-      avatar: "https://i.pravatar.cc/150?u=dsmith",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Jul 20, 2026",
     readTime: "6 min read",
@@ -140,7 +140,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Rachel Torres",
       role: "Career Success Manager",
-      avatar: "https://i.pravatar.cc/150?u=rachel",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Jul 12, 2026",
     readTime: "7 min read",
@@ -156,7 +156,7 @@ export const blogPosts: BlogPost[] = [
     author: {
       name: "Jessica Wong",
       role: "Lead Career Coach",
-      avatar: "https://i.pravatar.cc/150?u=jessica",
+      avatar: "/images/default-avatar.svg",
     },
     date: "Jul 05, 2026",
     readTime: "9 min read",

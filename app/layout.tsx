@@ -7,6 +7,8 @@ import CartProvider from "@/components/CartProvider";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { Chatbot } from "@/components/Chatbot";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+import Preloader from "@/components/motion/Preloader";
 
 import { getSiteUrl } from "@/lib/site";
 
@@ -59,7 +61,9 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#0B0F19] text-white antialiased">
+        <Preloader />
         <AuthProvider>
+          <SmoothScroll>
           <CartProvider>
             <Navbar />
             <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-0">{children}</main>
@@ -67,6 +71,7 @@ export default function RootLayout({
             <MobileBottomNav />
             <Chatbot />
           </CartProvider>
+          </SmoothScroll>
         </AuthProvider>
         <Analytics />
       </body>

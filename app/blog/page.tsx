@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import PageHero from "@/components/motion/PageHero";
 import { Sparkles, Search, Clock, ArrowRight, ExternalLink } from "lucide-react";
 import { blogPosts as staticBlogPosts, type BlogCategory } from "@/lib/blog";
 
@@ -101,28 +103,18 @@ export default function BlogIndexPage() {
   };
 
   return (
-    <main className="overflow-x-hidden pb-24">
+    <main className="overflow-x-clip pb-24">
       <div className="container-wide">
         {/* Hero */}
-        <section className="text-center pt-8 sm:pt-12 mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#00F2FE]/30 bg-[#00F2FE]/5 px-3 py-1 text-[8px] font-semibold text-[#00F2FE] mb-5">
-            <Sparkles className="w-2.5 h-2.5" />
-            Insights & Resources
-          </div>
-
-          <h1
-            className="text-3xl sm:text-5xl font-bold text-white leading-tight mb-5"
-            style={{
-              fontFamily: "Space Grotesk, sans-serif",
-            }}
-          >
-            The Nexora <span className="text-[#00F2FE]">Blog</span>
-          </h1>
-
-          <p className="max-w-xl mx-auto text-xs sm:text-sm leading-relaxed text-[#94A3B8] mb-8">
-            Expert advice, industry trends, and practical guides to help you navigate your tech career.
-          </p>
-
+        <PageHero
+          align="center"
+          eyebrow="Insights & Resources"
+          lines={[
+            "The Nexora ",
+            <span key="blog" className="accent">Blog</span>,
+          ]}
+          sub="Expert advice, industry trends, and practical guides to help you navigate your tech career."
+        >
           {/* Tabs */}
           <div className="inline-flex bg-[#121923] p-1 rounded-full border border-[#203548]">
             <button
@@ -146,7 +138,7 @@ export default function BlogIndexPage() {
               Industry News
             </button>
           </div>
-        </section>
+        </PageHero>
 
         {/* Filters & Search */}
         <section className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-[#1e2b38] pb-6">
@@ -202,10 +194,12 @@ export default function BlogIndexPage() {
                   className="group rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden hover:border-[#00F2FE]/40 transition-all duration-300 flex flex-col"
                 >
                   <div className="relative h-48 w-full overflow-hidden bg-[#0a111a]">
-                    <img
+                    <Image
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized
                     />
                     <div className="absolute top-3 left-3">
                       <span className="inline-flex items-center rounded-md border border-[#00F2FE]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-white">
@@ -236,10 +230,13 @@ export default function BlogIndexPage() {
 
                     <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#203548]">
                       <div className="flex items-center gap-2">
-                        <img
-                          src={post.authorAvatar || post.author?.avatar || "https://i.pravatar.cc/150?img=2"}
-                          alt={post.authorName || post.author?.name || "Author"}
-                          className="w-6 h-6 rounded-full"
+                        <Image
+                          src={post.authorAvatar || post.author?.avatar || "/images/default-avatar.svg"}
+                          alt={`${post.authorName || post.author?.name || "Author"}'s avatar`}
+                          width={24}
+                          height={24}
+                          className="rounded-full"
+                          unoptimized
                         />
                         <span className="text-[10px] text-[#CBD5E1] font-medium">
                           {post.authorName || post.author?.name || "Nexora Team"}
@@ -265,10 +262,12 @@ export default function BlogIndexPage() {
                 >
                   <div className="relative h-48 w-full overflow-hidden bg-[#0a111a] flex items-center justify-center">
                     {post.imageUrl ? (
-                      <img
+                      <Image
                         src={post.imageUrl}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                        unoptimized
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-[#121923] to-[#203548] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">

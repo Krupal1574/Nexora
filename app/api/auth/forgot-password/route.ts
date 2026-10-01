@@ -1,13 +1,19 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { sendPasswordResetEmail } from "@/lib/email";
+import { isRateLimited } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
   try {
     const { email } = await req.json();
 
-    if (!email || typeof email !== "string") {
-      return NextResponse.json({ message: "Email is required" }, { status: 400 });
+    if (!email || typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ message: "Invalid email format" }, { status: 400 });
+    }
+
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "unknown";
+    if (isRateLimited("forgot_password", ip)) {
+      return NextResponse.json({ message: "Too many reset requests. Please try again later." }, { status: 429 });
     }
 
     const normalizedEmail = email.trim().toLowerCase();

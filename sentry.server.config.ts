@@ -7,10 +7,10 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: "https://d26dd5cb392384e8f0f8cfc802d2c66c@o4512124732243968.ingest.us.sentry.io/4512124740370432",
 
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
+  // Disable performance tracing in development to avoid accumulating
+  // close listeners on ServerResponse (MaxListenersExceededWarning).
+  // In production, capture 100% of transactions.
+  tracesSampleRate: process.env.NODE_ENV === "production" ? 1.0 : 0,
 
   integrations: [
     Sentry.vercelAIIntegration({

@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         name: body.name,
         role: body.role,
         content: body.content,
-        avatar: body.avatar || "https://i.pravatar.cc/150?img=1",
+        avatar: body.avatar || "/images/default-avatar.svg",
         rating: body.rating ? parseInt(body.rating) : 5,
         published: body.published ?? true,
         isApproved: body.isApproved ?? false,

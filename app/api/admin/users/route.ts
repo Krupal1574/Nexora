@@ -11,9 +11,13 @@ export async function GET() {
 
   try {
     const items = await prisma.user.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-  return NextResponse.json(items);
+      orderBy: { createdAt: "desc" },
+    });
+    const safeItems = items.map((u: any) => {
+      const { password, ...safeUser } = u;
+      return safeUser;
+    });
+    return NextResponse.json(safeItems);
   } catch (error) {
     console.error('GET Error in users:', error);
     return NextResponse.json({ error: String(error) }, { status: 500 });
@@ -31,7 +35,8 @@ export async function POST(req: NextRequest) {
     const item = await prisma.user.create({
       data: body,
     });
-    return NextResponse.json(item);
+    const { password, ...safeItem } = item;
+    return NextResponse.json(safeItem);
   } catch (error) {
     console.error('POST Error in users:', error);
     return NextResponse.json({ error: String(error) }, { status: 500 });

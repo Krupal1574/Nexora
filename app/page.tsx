@@ -2,617 +2,222 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ChevronRight,
-  Briefcase,
-  FileText,
-  Calendar,
-  Code2,
-  Shield,
-  Star,
-  Users,
-  TrendingUp,
-  CheckCircle2,
-  Quote,
-} from "lucide-react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-
-// ─── Services Data ────────────────────────────────────────────────────────────
-const services = [
-  {
-    icon: Briefcase,
-    title: "Career Counseling",
-    desc: "1-on-1 career mapping sessions with expert technical domain advisors to chart your ideal path.",
-    color: "#00F2FE",
-  },
-  {
-    icon: FileText,
-    title: "Resume Optimization",
-    desc: "ATS-tailored resume overhauls crafted for U.S. job market standards that get you noticed.",
-    color: "#00D2C4",
-  },
-  {
-    icon: Calendar,
-    title: "Interview Preparation",
-    desc: "Mock interviews, behavioral coaching, and technical drill sessions with industry veterans.",
-    color: "#00F2FE",
-  },
-  {
-    icon: Code2,
-    title: "Technical Training",
-    desc: "Skill upgrade sessions, weekly webinars, and mock tech assessments to sharpen your edge.",
-    color: "#00D2C4",
-  },
-];
-
-// ─── Candidate Journey Steps ──────────────────────────────────────────────────
-const journeySteps = [
-  { num: "01", label: "Screening & Counseling", icon: Users },
-  { num: "02", label: "Tech Training", icon: Code2 },
-  { num: "03", label: "Resume Building", icon: FileText },
-  { num: "04", label: "Resume Marketing", icon: TrendingUp },
-  { num: "05", label: "Mock Interviews", icon: Calendar },
-  { num: "06", label: "Placement", icon: Briefcase },
-  { num: "07", label: "Background Check", icon: Shield },
-  { num: "08", label: "Onboarding", icon: CheckCircle2 },
-];
-
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Star } from "lucide-react";
 import { testimonials as staticTestimonials } from "@/lib/testimonials";
+import MaskLines from "@/components/motion/MaskLines";
+import Marquee from "@/components/motion/Marquee";
+import Magnetic from "@/components/motion/Magnetic";
+import ScrollFillText from "@/components/motion/ScrollFillText";
+import ParallaxImage from "@/components/motion/ParallaxImage";
+import HorizontalScroll from "@/components/motion/HorizontalScroll";
+import HoverPreviewList from "@/components/motion/HoverPreviewList";
+import DragRail from "@/components/motion/DragRail";
+import { useSiteReady } from "@/components/motion/Preloader";
 
-// ─── Testimonials Slider Component ────────────────────────────────────────────
-function TestimonialsSlider() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const [testimonials, setTestimonials] = useState<any[]>(staticTestimonials);
+/* ─── Content ──────────────────────────────────────────────────────────── */
+const services = [
+  { title: "Career Counseling", desc: "1-on-1 career mapping with domain advisors.", tag: "Strategy", image: "/images/modern_tech_team.jpg" },
+  { title: "Resume Optimization", desc: "ATS-tailored resumes built to U.S. market standards.", tag: "Branding", image: "/images/software_developer.jpg" },
+  { title: "Interview Preparation", desc: "Mock interviews and behavioral coaching with veterans.", tag: "Coaching", image: "/images/tech_interview.jpg" },
+  { title: "Technical Training", desc: "Weekly webinars, skill upgrades and mock assessments.", tag: "Training", image: "/images/software_developer.jpg" },
+];
+const journey = ["Screening & Counseling", "Tech Training", "Resume Building", "Resume Marketing", "Mock Interviews", "Placement", "Background Check", "Onboarding"];
+const principles = [
+  { n: "01", t: "Personalized Approach", d: "Every candidate gets a plan built around their skills and goals." },
+  { n: "02", t: "End-to-End Support", d: "From first call to first day, one team walks the whole placement with you." },
+  { n: "03", t: "Direct Recruiter Access", d: "Talk to the people making the introductions, not a ticket queue." },
+];
+// TODO: replace with your real numbers
+const stats = [{ v: 500, s: "+", l: "Candidates coached" }, { v: 8, s: "", l: "Step process" }, { v: 100, s: "%", l: "U.S. market focus" }];
+const ticker = ["Career Counseling", "Resume Building", "Mock Interviews", "Tech Training", "Placement", "Onboarding"];
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
+function Counter({ to, suffix }: { to: number; suffix: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  const [n, setN] = useState(0);
   useEffect(() => {
-    fetch("/api/testimonials")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setTestimonials(data);
-        }
-      })
-      .catch(() => {});
+    if (!inView) return;
+    let raf = 0, t0: number | null = null;
+    const step = (t: number) => {
+      if (t0 === null) t0 = t;
+      const p = Math.min((t - t0) / 2000, 1);
+      setN(Math.round((1 - Math.pow(1 - p, 4)) * to));
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [inView, to]);
+  return <span ref={ref}>{n}{suffix}</span>;
+}
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.8, ease, delay },
+});
+
+/* ─── Testimonials ─────────────────────────────────────────────────────── */
+function Testimonials() {
+  const [items, setItems] = useState<any[]>(staticTestimonials);
+  useEffect(() => {
+    fetch("/api/testimonials").then((r) => r.json()).then((d) => Array.isArray(d) && d.length && setItems(d)).catch(() => {});
   }, []);
-
-  // Duplicate for seamless infinite scroll
-  const doubled = [...testimonials, ...testimonials];
-
   return (
-    <section className="section-spacing bg-[#121623] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,#00F2FE08_0%,transparent_70%)] pointer-events-none" />
-
-      <div className="relative z-10">
-        <div className="container-wide text-center mb-12">
-          <span className="section-label">Client Testimonials</span>
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            What Our Clients{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Say About Us
-            </span>
-          </h2>
-          <p className="text-[#94A3B8] mt-4 max-w-xl mx-auto">
-            Real stories from real professionals who transformed their careers with Nexora.
-          </p>
+    <section className="section-spacing">
+      <div className="container-wide">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <MaskLines as="h2" className="display display-md" lines={["What our", <><span key="c" className="thin">clients</span> say.</>]} />
+          <motion.p {...fadeUp(0.3)} className="text-[#94A3B8] max-w-sm">Real words from professionals we&apos;ve placed. No fluff, just results.</motion.p>
         </div>
-
-        {/* Sliding Track */}
-        <div
-          className="relative w-full overflow-hidden"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {/* Left/Right fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#121623] to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#121623] to-transparent pointer-events-none" />
-
-          <div
-            ref={scrollRef}
-            className="flex gap-6 py-2"
-            style={{
-              animation: `scroll-left 40s linear infinite`,
-              animationPlayState: isPaused ? "paused" : "running",
-              width: "max-content",
-            }}
-          >
-            {doubled.map((t, i) => (
-              <div
-                key={`${t.id}-${i}`}
-                className="flex-shrink-0 w-[340px] rounded-2xl bg-[#0B0F19] border border-[#203548] p-6 hover:border-[#00F2FE]/40 transition-all duration-300 flex flex-col"
-              >
-                {/* Rating */}
-                <div className="flex items-center gap-1 mb-4">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <Star
-                      key={j}
-                      className={`w-4 h-4 ${
-                        j < t.rating
-                          ? "text-[#00F2FE] fill-[#00F2FE]"
-                          : "text-[#203548]"
-                      }`}
-                    />
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <div className="flex-1 mb-5">
-                  <Quote className="w-5 h-5 text-[#00F2FE]/30 mb-2" />
-                  <p className="text-[#94A3B8] text-sm leading-relaxed line-clamp-4">
-                    {t.content}
-                  </p>
-                </div>
-
-                {/* Author */}
-                <div className="flex items-center gap-3 pt-4 border-t border-[#203548]">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-9 h-9 rounded-full border border-[#00F2FE]/30"
-                  />
-                  <div>
-                    <h4 className="text-white font-semibold text-sm">{t.name}</h4>
-                    <p className="text-[#64748B] text-[11px]">
-                      {t.role}
-                    </p>
-                  </div>
-                </div>
+        <DragRail>
+          {items.map((t, i) => (
+            <motion.figure key={t.id} {...fadeUp(i * 0.08)} whileHover={{ y: -8 }}
+              className="w-[82vw] sm:w-[400px] shrink-0 rounded-3xl border border-white/10 bg-white/[0.03] p-8 flex flex-col justify-between min-h-[320px] hover:border-[#00F2FE]/50 transition-colors">
+              <div>
+                <div className="font-display text-6xl leading-none text-[#00F2FE] mb-4">“</div>
+                <blockquote className="text-lg leading-relaxed text-white/90">{t.content}</blockquote>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* View All button */}
-        <div className="container-wide text-center mt-10">
-          <Link href="/testimonials" className="btn-primary inline-flex">
-            View All Testimonials <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+              <figcaption className="flex items-center gap-3 mt-8">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={t.avatar} alt="" className="w-11 h-11 rounded-full object-cover" />
+                <div className="flex-1"><div className="font-semibold text-sm">{t.name}</div><div className="text-xs text-[#7c8aa0]">{t.role}</div></div>
+                <div className="flex" aria-label={`${t.rating} out of 5`}>{Array.from({ length: t.rating }).map((_, j) => <Star key={j} className="w-3.5 h-3.5 text-[#00F2FE] fill-[#00F2FE]" />)}</div>
+              </figcaption>
+            </motion.figure>
+          ))}
+        </DragRail>
+        <div className="mt-8"><Link href="/testimonials" className="btn-ghost">All stories <ArrowRight className="w-4 h-4" /></Link></div>
       </div>
     </section>
   );
 }
-// ─── Animated Counter Hook ────────────────────────────────────────────────────
-function useCounter(target: number, duration = 2000, start = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let startTime: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [target, duration, start]);
-  return count;
-}
 
+/* ─── Page ─────────────────────────────────────────────────────────────── */
 export default function HomePage() {
+  const ready = useSiteReady();
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
+
   return (
-    <div className="overflow-x-hidden">
-      {/* ════════════════════════════════════════════════════════
-          HERO SECTION
-      ════════════════════════════════════════════════════════ */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="relative pt-20 lg:pt-28 pb-20 lg:pb-32 overflow-hidden"
-      >
-        {/* Background layers */}
-        <div className="absolute inset-0 bg-[#0B0F19]" />
-        
-        {/* Subtle Hero Stock Image with Strong Dark Overlay */}
-        <div className="absolute inset-0 z-0 opacity-20 mix-blend-luminosity">
-          <Image
-            src="/images/tech_interview.jpg"
-            alt="IT Staffing Interview"
-            fill
-            className="object-cover"
-            priority
-          />
+    <div className="overflow-x-clip bg-[#06080f]">
+      {/* HERO */}
+      <section ref={heroRef} className="relative min-h-[92vh] flex flex-col justify-center pt-10 pb-24">
+        <div className="absolute inset-0 bg-grid pointer-events-none" />
+        <div className="glow-drift absolute -top-40 left-1/2 w-[900px] h-[500px] bg-[#00F2FE]/15 blur-[140px] rounded-full pointer-events-none" />
+        <motion.div style={{ y, opacity: fade, scale }} className="container-wide relative z-10">
+          <motion.span initial={{ opacity: 0, x: -20 }} animate={ready ? { opacity: 1, x: 0 } : undefined} transition={{ duration: 0.8, ease }} className="eyebrow mb-8">
+            IT Staffing &amp; Talent Studio
+          </motion.span>
+          <MaskLines as="h1" onView={false} ready={ready} delay={0.1} className="display"
+            lines={[<>Careers <span key="a" className="outline-text">built</span></>, <>for the <span key="b" className="accent">U.S.</span> tech</>, "market."]} />
+          <div className="mt-10 grid md:grid-cols-[1fr_auto] gap-8 items-end">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={ready ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 0.8, ease, delay: 0.7 }}
+              className="text-lg sm:text-xl text-[#94A3B8] max-w-xl leading-relaxed">
+              We bridge elite tech talent and top U.S. enterprises, from resume and training to placement and onboarding.
+            </motion.p>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={ready ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 0.8, ease, delay: 0.85 }} className="flex flex-col sm:flex-row gap-4">
+              <Magnetic><Link href="/contact" className="btn-primary px-8 py-4 text-base">Start now <ArrowRight className="w-4 h-4" /></Link></Magnetic>
+              <Magnetic><Link href="/services" className="btn-ghost px-8 py-4 text-base">What we do</Link></Magnetic>
+            </motion.div>
+          </div>
+        </motion.div>
+        <div className="absolute bottom-6 left-0 right-0 container-wide flex justify-between items-end text-[11px] tracking-[0.25em] uppercase text-white/40">
+          <span>Nexora ©2026</span>
+          <span className="flex flex-col items-center gap-3">Scroll<i className="scroll-line" /></span>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B0F19]/80 via-[#0B0F19]/90 to-[#0B0F19]" />
+      </section>
 
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,#00F2FE18_0%,transparent_60%)]" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00F2FE]/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-[#00D2C4]/5 rounded-full blur-3xl animate-pulse delay-1000" />
+      <Marquee items={ticker} />
 
-        {/* Grid dots */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, #00F2FE 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        <div className="relative z-10 container-wide text-center">
-          {/* Badge */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-medium mb-8"
-          >
-            <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-pulse" />
-            IT Staffing & Talent Solutions
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="hero-title max-w-4xl mx-auto mb-6"
-          >
-            Your Dream Tech Career{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Is Waiting For You
-            </span>
-          </motion.h1>
-
-          {/* Subtext */}
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-lg sm:text-xl text-[#94A3B8] max-w-3xl mx-auto leading-relaxed mb-10"
-          >
-            Nexora bridges the gap between elite tech talent and top U.S. enterprises.
-            From resume optimization to placement, we're your career acceleration partner.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link href="/services" className="btn-primary text-base px-8 py-4">
-              Explore Services
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/contact" className="btn-ghost text-base px-8 py-4">
-              Contact Recruiters
-            </Link>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Mobile section divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
-
-      {/* ════════════════════════════════════════════════════════
-          COMPANY INTRO
-      ════════════════════════════════════════════════════════ */}
-      <motion.section 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="section-spacing bg-[#0B0F19]"
-      >
+      {/* ABOUT */}
+      <section className="section-spacing">
         <div className="container-wide">
-          <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
-            <div>
-              <span className="section-label">Who We Are</span>
-              <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
-                style={{ fontFamily: "Space Grotesk, sans-serif" }}
-              >
-                America's Leading IT{" "}
-                <span
-                  style={{
-                    background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Placement & Talent
-                </span>{" "}
-                Solutions Firm
-              </h2>
-              <p className="text-[#94A3B8] text-lg leading-relaxed mb-6">
-                At Nexora, we specialize in transforming careers. We are a full-spectrum
-                IT staffing and talent solutions company operating across the United
-                States, connecting highly skilled technology professionals with the
-                nation's most innovative companies.
-              </p>
-              <p className="text-[#94A3B8] leading-relaxed mb-8">
-                Our end-to-end approach covers everything from career counseling and
-                resume optimization to technical training, active placement, and
-                onboarding support — ensuring both candidates and employers experience
-                seamless, high-quality talent partnerships.
-              </p>
-              <Link href="/about" className="btn-primary inline-flex">
-                Learn About Nexora <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
+          <motion.span {...fadeUp()} className="eyebrow mb-8">About us</motion.span>
+          <MaskLines as="h2" className="display display-md mb-14" lines={["We place.", <><span key="t" className="thin">Not just</span> advise.</>]} />
+          <ScrollFillText className="text-2xl sm:text-4xl lg:text-5xl font-medium leading-[1.2] tracking-tight max-w-5xl mb-20"
+            text="We take on the roles that need real preparation. Not just a polished resume and a list of job boards, but coaching, positioning and a recruiter who picks up the phone." />
 
-            {/* Right Image & Capability Grid */}
-            <div className="space-y-6">
-              <div className="relative rounded-2xl overflow-hidden border border-[#203548] aspect-video group">
-                <Image
-                  src="/images/modern_tech_team.jpg"
-                  alt="Modern Tech Team Collaborating"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-[#0B0F19]/20 group-hover:bg-transparent transition-colors duration-500" />
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-14">
+            <motion.div {...fadeUp()} className="relative">
+              <ParallaxImage src="/images/modern_tech_team.jpg" alt="Tech team collaborating" sizes="(max-width:1024px) 100vw, 55vw" className="aspect-[4/3] rounded-3xl border border-white/10" />
+            </motion.div>
+            <div className="flex flex-col justify-between gap-10">
+              <div className="grid grid-cols-3 gap-4">
+                {stats.map((s, i) => (
+                  <motion.div key={s.l} {...fadeUp(i * 0.12)}>
+                    <div className="font-display text-4xl sm:text-6xl font-bold text-gradient"><Counter to={s.v} suffix={s.s} /></div>
+                    <div className="text-xs sm:text-sm text-[#94A3B8] mt-2">{s.l}</div>
+                  </motion.div>
+                ))}
               </div>
-              
-              <div className="grid sm:grid-cols-2 gap-4">
-                {[
-                  { label: "Personalized Approach", icon: Users },
-                  { label: "End-to-End Support", icon: Briefcase },
-                  { label: "U.S. Market Focus", icon: Calendar },
-                  { label: "Active Placement", icon: Star },
-                ].map(({ label, icon: Icon }, i) => (
-                  <motion.div
-                    key={label}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 * i, duration: 0.4 }}
-                    className="glass-card p-5 flex items-center gap-4"
-                  >
-                    <div className="w-10 h-10 shrink-0 rounded-xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-[#00F2FE]" />
-                    </div>
-                    <span
-                      className="text-[15px] font-bold text-white leading-tight"
-                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                    >
-                      {label}
-                    </span>
+              <div>
+                {principles.map((p, i) => (
+                  <motion.div key={p.n} {...fadeUp(i * 0.1)} className="relative flex gap-5 py-5">
+                    <motion.span initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.1, ease, delay: i * 0.1 }} className="absolute top-0 left-0 right-0 h-px bg-white/15 origin-left" />
+                    <span className="font-display text-[#00F2FE] text-sm pt-1">{p.n}</span>
+                    <div><h3 className="font-semibold text-lg">{p.t}</h3><p className="text-[#94A3B8] text-sm mt-1 leading-relaxed">{p.d}</p></div>
                   </motion.div>
                 ))}
               </div>
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Mobile section divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
-
-      {/* ════════════════════════════════════════════════════════
-          SERVICES OVERVIEW
-      ════════════════════════════════════════════════════════ */}
-      <motion.section 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="section-spacing bg-[#121623] relative"
-      >
-        {/* Soft Background Image behind Services */}
-        <div className="absolute right-0 top-0 w-1/2 h-full opacity-[0.05] pointer-events-none mix-blend-screen">
-          <Image
-            src="/images/software_developer.jpg"
-            alt="Software Developer Background"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-            style={{ objectPosition: 'right center' }}
-          />
+      {/* SERVICES */}
+      <section className="section-spacing">
+        <div className="container-wide">
+          <motion.span {...fadeUp()} className="eyebrow mb-8">What we actually do</motion.span>
+          <MaskLines as="h2" className="display display-md mb-6" lines={["Engineering", <><span key="y" className="thin">your</span> next role.</>]} />
+          <motion.p {...fadeUp(0.2)} className="text-[#94A3B8] max-w-xl mb-14">The parts of the job search most people get wrong, handled by people who do this every day.</motion.p>
+          <HoverPreviewList items={services} />
         </div>
-        
-        <div className="container-wide relative z-10">
-          <div className="text-center mb-14">
-            <span className="section-label">What We Offer</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
-              style={{ fontFamily: "Space Grotesk, sans-serif" }}
-            >
-              Services Built for Your{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Success
-              </span>
-            </h2>
-          </div>
+      </section>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map(({ icon: Icon, title, desc, color }, i) => (
-              <motion.div 
-                key={title} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 * i, duration: 0.5 }}
-                whileHover={{ y: -4 }}
-                className="glass-card p-7 flex flex-col gap-5 group bg-[#0B0F19]/80 backdrop-blur-sm"
-              >
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
-                  style={{
-                    background: `${color}18`,
-                    border: `1px solid ${color}30`,
-                  }}
-                >
-                  <Icon className="w-6 h-6" style={{ color }} />
-                </div>
-                <div>
-                  <h3
-                    className="text-white font-semibold text-lg mb-2"
-                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                  >
-                    {title}
-                  </h3>
-                  <p className="text-[#94A3B8] text-sm leading-relaxed">{desc}</p>
-                </div>
-                <Link
-                  href="/services"
-                  className="mt-auto flex items-center gap-2 text-[#00F2FE] text-sm font-medium hover:gap-3 transition-all"
-                >
-                  Learn More <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
+      {/* PROCESS — pinned horizontal scroll */}
+      <section className="border-t border-white/10">
+        <HorizontalScroll count={journey.length}
+          header={
+            <div className="flex items-end justify-between gap-6">
+              <div>
+                <span className="eyebrow mb-6">The process</span>
+                <MaskLines as="h2" className="display display-md" lines={["8 steps.", <><span key="o" className="thin">One</span> outcome.</>]} />
+              </div>
+              <span className="hidden sm:block text-xs uppercase tracking-[0.25em] text-white/40">Keep scrolling →</span>
+            </div>
+          }>
+          {journey.map((label, i) => (
+            <div key={label} className="group w-[72vw] sm:w-[340px] shrink-0 rounded-3xl border border-white/10 bg-white/[0.02] p-8 min-h-[260px] flex flex-col justify-between hover:bg-[#00F2FE] hover:text-[#06080f] transition-colors duration-500">
+              <span className="font-display text-7xl font-bold outline-text group-hover:[-webkit-text-stroke:1px_#06080f]">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <div className="text-xs uppercase tracking-[0.2em] opacity-60 mb-2">Step {i + 1}</div>
+                <h3 className="font-display text-2xl uppercase tracking-tight leading-none">{label}</h3>
+              </div>
+            </div>
+          ))}
+        </HorizontalScroll>
+      </section>
 
-      {/* Mobile section divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
+      <Testimonials />
 
-      {/* ════════════════════════════════════════════════════════
-          CANDIDATE JOURNEY — 8 STEPS
-      ════════════════════════════════════════════════════════ */}
-      <motion.section 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="section-spacing bg-[#0B0F19] relative overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_50%,#00F2FE08_0%,transparent_70%)] pointer-events-none" />
-        <div className="container-wide relative z-10">
-          <div className="text-center mb-16">
-            <span className="section-label">The Nexora Process</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
-              style={{ fontFamily: "Space Grotesk, sans-serif" }}
-            >
-              Your 8-Step Journey to{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Placement
-              </span>
-            </h2>
-            <p className="text-[#94A3B8] mt-4 max-w-xl mx-auto">
-              A structured, proven candidate lifecycle designed to maximize your chances
-              of landing the right role, fast.
-            </p>
-          </div>
-
-          {/* Journey steps: single column on mobile, 2 on sm, 4 on lg */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            {journeySteps.map(({ num, label, icon: Icon }, i) => (
-              <motion.div
-                key={num}
-                initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.05 * i, duration: 0.4 }}
-                className="glass-card p-6 flex flex-col items-center text-center gap-4 group relative overflow-hidden"
-              >
-                {/* connector arrow for desktop */}
-                {i % 4 !== 3 && (
-                  <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                    <ChevronRight className="w-5 h-5 text-[#00F2FE]/40" />
-                  </div>
-                )}
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00F2FE]/20 to-[#00D2C4]/10 border border-[#00F2FE]/25 flex items-center justify-center group-hover:shadow-[0_0_20px_#00F2FE33] transition-all duration-300 group-hover:-translate-y-1">
-                  <Icon className="w-6 h-6 text-[#00F2FE]" />
-                </div>
-                <div>
-                  <span
-                    className="text-xs font-bold tracking-widest text-[#00F2FE] block mb-1"
-                  >
-                    STEP {num}
-                  </span>
-                  <p
-                    className="text-white font-semibold text-sm"
-                    style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                  >
-                    {label}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-
-
-      {/* Mobile section divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
-
-      {/* ════════════════════════════════════════════════════════
-          TESTIMONIALS SLIDING CAROUSEL
-      ════════════════════════════════════════════════════════ */}
-      <TestimonialsSlider />
-
-      {/* Mobile section divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/20 to-transparent lg:hidden" />
-
-      {/* ════════════════════════════════════════════════════════
-          BOTTOM CTA BANNER
-      ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#121623] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_50%,#00F2FE12_0%,transparent_65%)] pointer-events-none" />
-        <div className="absolute inset-0 border-y border-[#00F2FE]/10 pointer-events-none" />
-        <div className="relative container-narrow text-center">
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Ready to Launch Your{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Tech Career?
-            </span>
-          </h2>
-          <p className="text-[#94A3B8] text-lg mb-10 max-w-2xl mx-auto">
-            Join the tech professionals who found their dream roles with Nexora.
-            Let's build your success story — together.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact" className="btn-primary text-base px-10 py-4">
-              Get Started Today <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/refer-and-earn" className="btn-ghost text-base px-10 py-4">
-              Refer & Earn $500
-            </Link>
-          </div>
+      {/* CLOSING CTA */}
+      <section className="relative section-spacing border-t border-white/10 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
+        <div className="glow-drift absolute bottom-0 left-1/2 w-[800px] h-[400px] bg-[#00F2FE]/20 blur-[140px] rounded-full pointer-events-none" />
+        <div className="container-wide relative">
+          <MaskLines as="h2" className="display" lines={["Let's build", <><span key="y" className="thin">your</span> <span key="c" className="accent">career.</span></>]} />
+          <motion.p {...fadeUp(0.3)} className="text-[#94A3B8] text-lg max-w-xl mx-auto mt-8 mb-10">Tell us where you want to be. We&apos;ll map the way there.</motion.p>
+          <motion.div {...fadeUp(0.4)} className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Magnetic><Link href="/contact" className="btn-primary px-10 py-4 text-base">Start a conversation <ArrowRight className="w-4 h-4" /></Link></Magnetic>
+            <Magnetic><Link href="/refer-and-earn" className="btn-ghost px-10 py-4 text-base">Refer &amp; earn $500</Link></Magnetic>
+          </motion.div>
         </div>
       </section>
     </div>

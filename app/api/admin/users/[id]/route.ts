@@ -25,7 +25,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
         isDisabled: body.isDisabled,
       },
     });
-    return NextResponse.json(item);
+    const { password, ...safeItem } = item;
+    return NextResponse.json(safeItem);
   } catch (error) {
     console.error('PUT Error in users:', error);
     return NextResponse.json({ error: String(error) }, { status: 500 });

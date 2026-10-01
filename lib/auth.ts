@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { Prisma8Adapter } from "@/lib/prisma8-adapter";
 import { db } from "@/lib/prisma8";
 import * as argon2 from "argon2";
+import { isRateLimited } from "@/lib/rate-limit";
 
 export const authOptions: NextAuthOptions = {
   // @ts-ignore
@@ -16,7 +17,12 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
+        const ip = req?.headers?.["x-forwarded-for"] || "unknown";
+        if (isRateLimited("login", ip as string)) {
+          throw new Error("Too many login attempts. Please try again later.");
+        }
+
         if (!credentials?.email || !credentials?.password) return null;
         
         const user = await db.orm.public.User

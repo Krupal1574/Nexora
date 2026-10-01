@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageHero from "@/components/motion/PageHero";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -36,16 +37,13 @@ const sections = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="overflow-x-hidden">
-      <section className="relative pt-12 lg:pt-16 pb-12 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0B0F19]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,#00F2FE14_0%,transparent_65%)]" />
-        <div className="relative container-narrow text-center">
-          <span className="section-label">Legal</span>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white leading-[1.1] mb-5">Privacy <span className="text-[#00F2FE]">Policy</span></h1>
-          <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">A technical privacy baseline for information submitted through this website.</p>
-        </div>
-      </section>
+    <div className="overflow-x-clip">
+      <PageHero
+        align="center"
+        eyebrow="Legal"
+        lines={["Privacy ", <span key="policy" className="accent">Policy</span>]}
+        sub="A technical privacy baseline for information submitted through this website."
+      />
       <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
         <article className="container-narrow space-y-6">
           <div className="rounded-xl border border-amber-300/30 bg-amber-300/10 p-5 text-sm leading-relaxed text-amber-100">

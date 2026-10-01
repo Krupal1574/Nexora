@@ -33,7 +33,7 @@ export default function ProductDetailPage({
   const Icon = product.icon;
 
   return (
-    <div className="overflow-x-hidden pt-8 pb-24">
+    <div className="overflow-x-clip pt-8 pb-24">
       <div className="container-wide">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-[#64748B] mb-8">
