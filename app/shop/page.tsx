@@ -209,107 +209,120 @@ function ProductCard({
     openCart();
   };
 
-  return (
-    <div className="group relative rounded-2xl bg-[#121923] border border-[#203548] p-5 flex flex-col min-h-[300px] hover:border-[#00F2FE]/40 transition-all duration-300">
-      {/* Discount */}
-      <div className="absolute top-2 left-2 z-10">
-        <span className="inline-flex items-center rounded-md bg-[#00F2FE] px-2 py-1 text-[9px] font-bold text-[#061018]">
-          {discount}% OFF
-        </span>
+  // Product image mapping
+  const productImage = `/images/products/${product.slug}.png`;
 
-        {meta?.badge && (
-          <div className="mt-1">
-            <span className="inline-flex items-center rounded-md border border-[#00F2FE]/40 bg-[#07151d] px-2 py-1 text-[8px] font-bold text-white">
-              {meta.badge}
+  return (
+    <div className="group relative rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden flex flex-col min-h-[420px] hover:border-[#00F2FE]/40 transition-all duration-300">
+      {/* Product Image */}
+      <div className="relative w-full h-40 overflow-hidden bg-[#0a111a]">
+        <img
+          src={productImage}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        {/* Discount Badge on Image */}
+        <div className="absolute top-2 left-2 z-10">
+          <span className="inline-flex items-center rounded-md bg-[#00F2FE] px-2 py-1 text-[9px] font-bold text-[#061018]">
+            {discount}% OFF
+          </span>
+          {meta?.badge && (
+            <div className="mt-1">
+              <span className="inline-flex items-center rounded-md border border-[#00F2FE]/40 bg-[#07151d]/90 backdrop-blur-sm px-2 py-1 text-[8px] font-bold text-white">
+                {meta.badge}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-1">
+        {/* Icon */}
+        <div className="mb-3">
+          <div className="w-10 h-10 rounded-xl bg-[#06242b] border border-[#00F2FE]/30 flex items-center justify-center">
+            <Icon className="w-5 h-5 text-[#00F2FE]" />
+          </div>
+        </div>
+
+        {/* Name */}
+        <h3
+          className="text-base font-bold text-white mb-1"
+          style={{
+            fontFamily: "Space Grotesk, sans-serif",
+          }}
+        >
+          {product.name}
+        </h3>
+
+        {/* Description */}
+        <p className="text-[9px] leading-relaxed text-[#94A3B8] line-clamp-3 min-h-[40px]">
+          {meta?.tagline || product.description}
+        </p>
+
+        {/* Price */}
+        <div className="mt-3 pt-3 border-t border-[#263241]">
+          <div className="flex items-baseline gap-2">
+            <span
+              className="text-2xl font-bold text-white"
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+              }}
+            >
+              ${price.toLocaleString()}
+            </span>
+
+            <span className="text-[10px] text-[#64748B] line-through">
+              ${originalPrice.toLocaleString()}
             </span>
           </div>
-        )}
-      </div>
 
-      {/* Icon */}
-      <div className="mt-7 mb-3">
-        <div className="w-10 h-10 rounded-xl bg-[#06242b] border border-[#00F2FE]/30 flex items-center justify-center">
-          <Icon className="w-5 h-5 text-[#00F2FE]" />
-        </div>
-      </div>
-
-      {/* Name */}
-      <h3
-        className="text-base font-bold text-white mb-1"
-        style={{
-          fontFamily: "Space Grotesk, sans-serif",
-        }}
-      >
-        {product.name}
-      </h3>
-
-      {/* Description */}
-      <p className="text-[9px] leading-relaxed text-[#94A3B8] line-clamp-3 min-h-[40px]">
-        {meta?.tagline || product.description}
-      </p>
-
-      {/* Price */}
-      <div className="mt-3 pt-3 border-t border-[#263241]">
-        <div className="flex items-baseline gap-2">
-          <span
-            className="text-2xl font-bold text-white"
-            style={{
-              fontFamily: "Space Grotesk, sans-serif",
-            }}
-          >
-            ${price.toLocaleString()}
-          </span>
-
-          <span className="text-[10px] text-[#64748B] line-through">
-            ${originalPrice.toLocaleString()}
-          </span>
+          <p className="text-[9px] text-[#00D2C4] mt-1">
+            You save ${savings.toLocaleString()}
+          </p>
         </div>
 
-        <p className="text-[9px] text-[#00D2C4] mt-1">
-          You save ${savings.toLocaleString()}
-        </p>
-      </div>
+        {/* Features */}
+        <ul className="mt-3 space-y-1.5 flex-1">
+          {(meta?.features || []).slice(0, 4).map(
+            (feature, index) => (
+              <li
+                key={index}
+                className="flex items-start gap-2 text-[8px] text-[#CBD5E1]"
+              >
+                <CheckCircle2 className="w-2.5 h-2.5 mt-0.5 flex-shrink-0 text-[#00F2FE]" />
+                <span className="line-clamp-1">
+                  {feature}
+                </span>
+              </li>
+            )
+          )}
 
-      {/* Features */}
-      <ul className="mt-3 space-y-1.5 flex-1">
-        {(meta?.features || []).slice(0, 4).map(
-          (feature, index) => (
-            <li
-              key={index}
-              className="flex items-start gap-2 text-[8px] text-[#CBD5E1]"
-            >
-              <CheckCircle2 className="w-2.5 h-2.5 mt-0.5 flex-shrink-0 text-[#00F2FE]" />
-              <span className="line-clamp-1">
-                {feature}
-              </span>
+          {(meta?.features?.length || 0) > 4 && (
+            <li className="text-[7px] text-[#64748B] pl-4">
+              + {(meta?.features?.length || 0) - 4} more
+              features
             </li>
-          )
-        )}
+          )}
+        </ul>
 
-        {(meta?.features?.length || 0) > 4 && (
-          <li className="text-[7px] text-[#64748B] pl-4">
-            + {(meta?.features?.length || 0) - 4} more
-            features
-          </li>
-        )}
-      </ul>
+        {/* Buttons */}
+        <div className="mt-4 space-y-2">
+          <button
+            onClick={handleAddToCart}
+            className="w-full h-8 rounded-full bg-[#00D2D2] hover:bg-[#00F2FE] text-[#061018] text-[9px] font-bold flex items-center justify-center gap-2 transition-colors"
+          >
+            <ShoppingCart className="w-3 h-3" />
+            Add to Cart
+          </button>
 
-      {/* Buttons */}
-      <div className="mt-4 space-y-2">
-        <button
-          onClick={handleAddToCart}
-          className="w-full h-8 rounded-full bg-[#00D2D2] hover:bg-[#00F2FE] text-[#061018] text-[9px] font-bold flex items-center justify-center gap-2 transition-colors"
-        >
-          <ShoppingCart className="w-3 h-3" />
-          Add to Cart
-        </button>
-
-        <Link
-          href={`/shop/${product.slug}`}
-          className="w-full h-8 rounded-full border border-[#00F2FE] text-[#00F2FE] hover:bg-[#00F2FE]/10 text-[9px] font-bold flex items-center justify-center transition-colors"
-        >
-          View Details
-        </Link>
+          <Link
+            href={`/shop/${product.slug}`}
+            className="w-full h-8 rounded-full border border-[#00F2FE] text-[#00F2FE] hover:bg-[#00F2FE]/10 text-[9px] font-bold flex items-center justify-center transition-colors"
+          >
+            View Details
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -321,16 +334,18 @@ function ProductCard({
 
 function LoadingCard() {
   return (
-    <div className="rounded-2xl bg-[#121923] border border-[#203548] p-5 min-h-[300px] animate-pulse">
-      <div className="w-12 h-4 rounded bg-[#1d2a38] mb-5" />
-      <div className="w-10 h-10 rounded-xl bg-[#1d2a38] mb-4" />
-      <div className="w-32 h-4 rounded bg-[#1d2a38] mb-2" />
-      <div className="w-full h-8 rounded bg-[#1d2a38] mb-5" />
-      <div className="w-24 h-7 rounded bg-[#1d2a38] mb-4" />
-      <div className="space-y-2">
-        <div className="w-full h-2 rounded bg-[#1d2a38]" />
-        <div className="w-4/5 h-2 rounded bg-[#1d2a38]" />
-        <div className="w-3/5 h-2 rounded bg-[#1d2a38]" />
+    <div className="rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden min-h-[420px] animate-pulse flex flex-col">
+      <div className="w-full h-40 bg-[#1d2a38]" />
+      <div className="p-5 flex flex-col flex-1">
+        <div className="w-10 h-10 rounded-xl bg-[#1d2a38] mb-4" />
+        <div className="w-32 h-4 rounded bg-[#1d2a38] mb-2" />
+        <div className="w-full h-8 rounded bg-[#1d2a38] mb-5" />
+        <div className="w-24 h-7 rounded bg-[#1d2a38] mb-4" />
+        <div className="space-y-2">
+          <div className="w-full h-2 rounded bg-[#1d2a38]" />
+          <div className="w-4/5 h-2 rounded bg-[#1d2a38]" />
+          <div className="w-3/5 h-2 rounded bg-[#1d2a38]" />
+        </div>
       </div>
     </div>
   );

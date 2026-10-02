@@ -1,0 +1,62 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-coach" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1422;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="coach-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00d2c4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="coach-glow">
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bg-coach)"/>
+
+  <!-- Grid -->
+  <g opacity="0.06">
+    <path d="M0 100 L800 100 M0 200 L800 200 M0 300 L800 300 M0 400 L800 400 M0 500 L800 500" stroke="#00f2fe" stroke-width="0.5"/>
+  </g>
+
+  <!-- Glow -->
+  <circle cx="400" cy="300" r="200" fill="#00f2fe" opacity="0.05" filter="url(#coach-glow)"/>
+
+  <!-- Two people icon - mentor and mentee -->
+  <g transform="translate(300, 250)">
+    <!-- Person 1 (mentor) -->
+    <circle cx="0" cy="0" r="35" fill="url(#coach-gradient)" opacity="0.8"/>
+    <circle cx="0" cy="0" r="30" fill="#121623"/>
+    <path d="M -25,40 Q -25,25 0,25 Q 25,25 25,40 L 25,80 Q 25,90 15,90 L -15,90 Q -25,90 -25,80 Z" fill="url(#coach-gradient)" opacity="0.8"/>
+    <path d="M -20,45 Q -20,30 0,30 Q 20,30 20,45 L 20,80 Q 20,85 15,85 L -15,85 Q -20,85 -20,80 Z" fill="#121623"/>
+  </g>
+
+  <g transform="translate(500, 270)">
+    <!-- Person 2 (mentee) -->
+    <circle cx="0" cy="0" r="30" fill="#00f2fe" opacity="0.6"/>
+    <circle cx="0" cy="0" r="25" fill="#121623"/>
+    <path d="M -20,35 Q -20,22 0,22 Q 20,22 20,35 L 20,70 Q 20,78 12,78 L -12,78 Q -20,78 -20,70 Z" fill="#00f2fe" opacity="0.6"/>
+    <path d="M -16,38 Q -16,26 0,26 Q 16,26 16,38 L 16,70 Q 16,75 12,75 L -12,75 Q -16,75 -16,70 Z" fill="#121623"/>
+  </g>
+
+  <!-- Connection line -->
+  <path d="M 320,300 L 480,320" stroke="url(#coach-gradient)" stroke-width="2" opacity="0.5" stroke-dasharray="5,5"/>
+
+  <!-- Target/goal icon -->
+  <g transform="translate(600, 180)">
+    <circle cx="0" cy="0" r="40" stroke="#00f2fe" stroke-width="2" fill="none" opacity="0.4"/>
+    <circle cx="0" cy="0" r="25" stroke="#00f2fe" stroke-width="2" fill="none" opacity="0.6"/>
+    <circle cx="0" cy="0" r="8" fill="url(#coach-gradient)"/>
+  </g>
+
+  <!-- Growth arrow -->
+  <g transform="translate(200, 400)">
+    <path d="M 0,0 L 150,-80" stroke="url(#coach-gradient)" stroke-width="3"/>
+    <path d="M 150,-80 L 135,-75 M 150,-80 L 145,-95" stroke="url(#coach-gradient)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -32,7 +32,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Sep 01, 2026",
     readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/career-tips.svg",
   },
   {
     id: "b2",
@@ -48,7 +48,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Aug 28, 2026",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/tech-trends.svg",
   },
   {
     id: "b3",
@@ -64,7 +64,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Aug 15, 2026",
     readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/interview-prep.svg",
   },
   {
     id: "b4",
@@ -80,7 +80,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Aug 10, 2026",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/success-stories.svg",
   },
   {
     id: "b5",
@@ -96,7 +96,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Aug 05, 2026",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/career-tips.svg",
   },
   {
     id: "b6",
@@ -112,7 +112,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Jul 28, 2026",
     readTime: "12 min read",
-    image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/tech-trends.svg",
   },
   {
     id: "b7",
@@ -128,7 +128,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Jul 20, 2026",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/interview-prep.svg",
   },
   {
     id: "b8",
@@ -144,7 +144,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Jul 12, 2026",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/success-stories.svg",
   },
   {
     id: "b9",
@@ -160,7 +160,7 @@ export const blogPosts: BlogPost[] = [
     },
     date: "Jul 05, 2026",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&auto=format&fit=crop&q=60",
+    image: "/images/blog/career-tips.svg",
   },
 ];
 

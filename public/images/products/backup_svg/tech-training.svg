@@ -1,0 +1,110 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tech training visual -->
+  <defs>
+    <linearGradient id="bg-tech" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0c1422;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="code-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00d2c4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="tech-glow">
+      <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg-tech)"/>
+
+  <!-- Grid -->
+  <g opacity="0.08">
+    <path d="M0 100 L1200 100 M0 200 L1200 200 M0 300 L1200 300 M0 400 L1200 400 M0 500 L1200 500 M0 600 L1200 600 M0 700 L1200 700" stroke="#00f2fe" stroke-width="0.5"/>
+    <path d="M200 0 L200 800 M400 0 L400 800 M600 0 L600 800 M800 0 L800 800 M1000 0 L1000 800" stroke="#00f2fe" stroke-width="0.5"/>
+  </g>
+
+  <!-- Glows -->
+  <circle cx="300" cy="300" r="200" fill="#00f2fe" opacity="0.05" filter="url(#tech-glow)"/>
+  <circle cx="900" cy="500" r="180" fill="#00d2c4" opacity="0.05" filter="url(#tech-glow)"/>
+
+  <!-- Code editor window -->
+  <g transform="translate(350, 200)">
+    <!-- Window frame -->
+    <rect x="0" y="0" width="500" height="380" rx="8" fill="#121623" stroke="url(#code-gradient)" stroke-width="2"/>
+    <rect x="0" y="0" width="500" height="380" rx="8" fill="#00f2fe" opacity="0.02"/>
+
+    <!-- Title bar -->
+    <rect x="0" y="0" width="500" height="40" rx="8" fill="#1a202c"/>
+    <circle cx="20" cy="20" r="6" fill="#ff5f57"/>
+    <circle cx="40" cy="20" r="6" fill="#ffbd2e"/>
+    <circle cx="60" cy="20" r="6" fill="#28ca42"/>
+
+    <!-- Code lines -->
+    <g font-family="monospace" font-size="14">
+      <!-- Line numbers -->
+      <g fill="#64748b" opacity="0.5">
+        <text x="15" y="70">1</text>
+        <text x="15" y="95">2</text>
+        <text x="15" y="120">3</text>
+        <text x="15" y="145">4</text>
+        <text x="15" y="170">5</text>
+        <text x="15" y="195">6</text>
+        <text x="15" y="220">7</text>
+        <text x="15" y="245">8</text>
+        <text x="15" y="270">9</text>
+        <text x="10" y="295">10</text>
+        <text x="10" y="320">11</text>
+        <text x="10" y="345">12</text>
+      </g>
+
+      <!-- Code content -->
+      <g>
+        <text x="45" y="70" fill="#00d2c4">import</text>
+        <text x="100" y="70" fill="#00f2fe"> React </text>
+        <text x="155" y="70" fill="#00d2c4">from</text>
+        <text x="200" y="70" fill="#94a3b8"> 'react';</text>
+
+        <text x="45" y="120" fill="#00d2c4">function</text>
+        <text x="120" y="120" fill="#00f2fe"> Component</text>
+        <text x="225" y="120" fill="#94a3b8">() {</text>
+
+        <text x="70" y="145" fill="#00d2c4">const</text>
+        <text x="125" y="145" fill="#94a3b8"> [state, setState] =</text>
+
+        <text x="95" y="170" fill="#00f2fe">useState</text>
+        <text x="165" y="170" fill="#94a3b8">(0);</text>
+
+        <text x="70" y="220" fill="#00d2c4">return</text>
+        <text x="130" y="220" fill="#94a3b8"> (</text>
+
+        <text x="95" y="245" fill="#00d2c4">&lt;div</text>
+        <text x="135" y="245" fill="#00f2fe"> className</text>
+        <text x="215" y="245" fill="#94a3b8">=</text>
+        <text x="225" y="245" fill="#00d2c4">"container"</text>
+        <text x="315" y="245" fill="#94a3b8">&gt;</text>
+
+        <text x="120" y="270" fill="#94a3b8">{'{'}state{'}'}</text>
+
+        <text x="95" y="295" fill="#00d2c4">&lt;/div&gt;</text>
+
+        <text x="70" y="320" fill="#94a3b8">);</text>
+
+        <text x="45" y="345" fill="#94a3b8">}</text>
+      </g>
+    </g>
+
+    <!-- Cursor blink -->
+    <rect x="195" y="330" width="2" height="16" fill="#00f2fe" opacity="0.8"/>
+  </g>
+
+  <!-- Tech icons floating -->
+  <g opacity="0.3">
+    <!-- Brackets -->
+    <text x="200" y="500" fill="#00f2fe" font-size="48" font-family="monospace">{'{}'}</text>
+    <text x="950" y="250" fill="#00d2c4" font-size="48" font-family="monospace">&lt;/&gt;</text>
+    <text x="180" y="680" fill="#00f2fe" font-size="36" font-family="monospace">[ ]</text>
+  </g>
+</svg>

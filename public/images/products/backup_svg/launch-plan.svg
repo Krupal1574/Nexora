@@ -1,0 +1,72 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Premium dark tech office background -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0d1321;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0e1a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cyan-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#00d2c4;stop-opacity:0.08" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="800" fill="url(#bg-gradient)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.08">
+    <path d="M0 100 L1200 100 M0 200 L1200 200 M0 300 L1200 300 M0 400 L1200 400 M0 500 L1200 500 M0 600 L1200 600 M0 700 L1200 700" stroke="#00f2fe" stroke-width="0.5"/>
+    <path d="M100 0 L100 800 M200 0 L200 800 M300 0 L300 800 M400 0 L400 800 M500 0 L500 800 M600 0 L600 800 M700 0 L700 800 M800 0 L800 800 M900 0 L900 800 M1000 0 L1000 800 M1100 0 L1100 800" stroke="#00f2fe" stroke-width="0.5"/>
+  </g>
+
+  <!-- Glowing orbs for depth -->
+  <ellipse cx="300" cy="200" rx="200" ry="200" fill="url(#cyan-glow)" filter="url(#glow)"/>
+  <ellipse cx="900" cy="600" rx="250" ry="250" fill="url(#cyan-glow)" filter="url(#glow)"/>
+
+  <!-- Abstract rocket/launch icon -->
+  <g transform="translate(500, 250)">
+    <!-- Rocket body -->
+    <path d="M 0,-120 L 30,-60 L 30,80 L 20,100 L -20,100 L -30,80 L -30,-60 Z" fill="#121623" stroke="#00f2fe" stroke-width="2"/>
+    <path d="M 0,-120 L 30,-60 L 30,80 L 20,100 L -20,100 L -30,80 L -30,-60 Z" fill="url(#cyan-glow)" opacity="0.3"/>
+
+    <!-- Window -->
+    <circle cx="0" cy="-40" r="20" fill="#00f2fe" opacity="0.4"/>
+    <circle cx="0" cy="-40" r="15" fill="#00d2c4" opacity="0.6"/>
+
+    <!-- Fins -->
+    <path d="M -30,-20 L -60,40 L -30,60 Z" fill="#1a202c" stroke="#00f2fe" stroke-width="1.5"/>
+    <path d="M 30,-20 L 60,40 L 30,60 Z" fill="#1a202c" stroke="#00f2fe" stroke-width="1.5"/>
+
+    <!-- Flame effect -->
+    <g opacity="0.8">
+      <ellipse cx="0" cy="110" rx="18" ry="30" fill="#00f2fe" opacity="0.6"/>
+      <ellipse cx="-8" cy="120" rx="12" ry="25" fill="#00d2c4" opacity="0.7"/>
+      <ellipse cx="8" cy="120" rx="12" ry="25" fill="#00d2c4" opacity="0.7"/>
+    </g>
+
+    <!-- Stars around -->
+    <circle cx="-100" cy="-80" r="2" fill="#00f2fe" opacity="0.8"/>
+    <circle cx="90" cy="-100" r="2" fill="#00f2fe" opacity="0.8"/>
+    <circle cx="-80" cy="20" r="2" fill="#00d2c4" opacity="0.8"/>
+    <circle cx="100" cy="-30" r="2" fill="#00d2c4" opacity="0.8"/>
+    <circle cx="-60" cy="-120" r="1.5" fill="#00f2fe" opacity="0.6"/>
+    <circle cx="70" cy="-50" r="1.5" fill="#00f2fe" opacity="0.6"/>
+  </g>
+
+  <!-- Decorative tech elements -->
+  <g opacity="0.15" stroke="#00f2fe" stroke-width="1.5" fill="none">
+    <rect x="100" y="100" width="120" height="80" rx="8"/>
+    <rect x="980" y="600" width="140" height="90" rx="8"/>
+    <circle cx="180" cy="650" r="40"/>
+    <circle cx="1050" cy="150" r="50"/>
+  </g>
+</svg>

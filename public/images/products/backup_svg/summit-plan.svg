@@ -1,0 +1,85 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Premium summit/crown visual -->
+  <defs>
+    <linearGradient id="bg-summit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1220;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0a0f1c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1220;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="crown-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00d2c4;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow-radial" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:0" />
+    </radialGradient>
+    <filter id="premium-glow">
+      <feGaussianBlur stdDeviation="30" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg-summit)"/>
+
+  <!-- Premium grid -->
+  <g opacity="0.08">
+    <path d="M0 100 L1200 100 M0 200 L1200 200 M0 300 L1200 300 M0 400 L1200 400 M0 500 L1200 500 M0 600 L1200 600 M0 700 L1200 700" stroke="#00f2fe" stroke-width="0.5"/>
+    <path d="M100 0 L100 800 M200 0 L200 800 M300 0 L300 800 M400 0 L400 800 M500 0 L500 800 M600 0 L600 800 M700 0 L700 800 M800 0 L800 800 M900 0 L900 800 M1000 0 L1000 800 M1100 0 L1100 800" stroke="#00f2fe" stroke-width="0.5"/>
+  </g>
+
+  <!-- Multiple glowing orbs -->
+  <circle cx="300" cy="250" r="200" fill="url(#glow-radial)" filter="url(#premium-glow)"/>
+  <circle cx="900" cy="550" r="220" fill="url(#glow-radial)" filter="url(#premium-glow)"/>
+  <circle cx="600" cy="400" r="150" fill="url(#glow-radial)" filter="url(#premium-glow)"/>
+
+  <!-- Crown/Summit icon -->
+  <g transform="translate(600, 350)">
+    <!-- Base circle -->
+    <circle cx="0" cy="0" r="120" fill="#121623" stroke="url(#crown-gradient)" stroke-width="3"/>
+    <circle cx="0" cy="0" r="115" fill="#00f2fe" opacity="0.05"/>
+
+    <!-- Crown -->
+    <g transform="translate(0, -15)">
+      <!-- Crown base -->
+      <path d="M -50,30 L -50,40 L 50,40 L 50,30 Z" fill="url(#crown-gradient)"/>
+
+      <!-- Crown points -->
+      <path d="M -50,30 L -40,-10 L -30,20 L -15,-20 L 0,25 L 15,-20 L 30,20 L 40,-10 L 50,30 Z" fill="url(#crown-gradient)" filter="url(#premium-glow)"/>
+
+      <!-- Jewels on crown -->
+      <circle cx="-40" cy="-10" r="4" fill="#00f2fe"/>
+      <circle cx="0" cy="25" r="5" fill="#00f2fe"/>
+      <circle cx="40" cy="-10" r="4" fill="#00f2fe"/>
+
+      <!-- Center diamond -->
+      <path d="M 0,-25 L 6,-15 L 0,-5 L -6,-15 Z" fill="#00f2fe" filter="url(#premium-glow)"/>
+    </g>
+
+    <!-- Orbiting stars -->
+    <g opacity="0.8">
+      <circle cx="-90" cy="-70" r="3" fill="#00f2fe"/>
+      <circle cx="95" cy="-80" r="3" fill="#00d2c4"/>
+      <circle cx="-100" cy="60" r="2.5" fill="#00f2fe"/>
+      <circle cx="90" cy="70" r="2.5" fill="#00d2c4"/>
+      <circle cx="0" cy="-110" r="3" fill="#00f2fe"/>
+    </g>
+  </g>
+
+  <!-- Premium badge elements -->
+  <g transform="translate(250, 150)">
+    <rect x="-60" y="-25" width="120" height="50" rx="25" fill="#121623" stroke="#00f2fe" stroke-width="2"/>
+    <text x="0" y="5" text-anchor="middle" fill="#00f2fe" font-size="16" font-weight="bold" font-family="Space Grotesk, sans-serif">PREMIUM</text>
+  </g>
+
+  <!-- Decorative premium elements -->
+  <g opacity="0.12" stroke="#00f2fe" fill="none" stroke-width="1.5">
+    <circle cx="950" cy="200" r="50"/>
+    <rect x="100" y="600" width="100" height="100" rx="8"/>
+    <circle cx="1050" cy="680" r="35"/>
+  </g>
+</svg>

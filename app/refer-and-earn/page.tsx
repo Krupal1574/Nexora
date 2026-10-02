@@ -137,6 +137,15 @@ export default function ReferAndEarnPage() {
           <span key="referral" className="accent">Referral Revolution</span>,
         ]}
       >
+        {/* Hero Visual */}
+        <div className="relative w-full max-w-4xl mx-auto mb-8 h-64 rounded-2xl overflow-hidden">
+          <img
+            src="/images/refer/refer-hero.svg"
+            alt="Refer and Earn"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
         <div className="mb-6">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-semibold">
             <Gift className="w-4 h-4" />

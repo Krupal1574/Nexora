@@ -1,0 +1,75 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Interview prep visual -->
+  <defs>
+    <linearGradient id="bg-interview" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1424;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mic-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f2fe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00d2c4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="interview-glow">
+      <feGaussianBlur stdDeviation="18" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg-interview)"/>
+
+  <!-- Grid -->
+  <g opacity="0.06">
+    <path d="M0 100 L1200 100 M0 300 L1200 300 M0 500 L1200 500 M0 700 L1200 700" stroke="#00f2fe" stroke-width="0.5"/>
+  </g>
+
+  <!-- Glow -->
+  <circle cx="600" cy="400" r="250" fill="#00f2fe" opacity="0.06" filter="url(#interview-glow)"/>
+
+  <!-- Microphone/Interview icon -->
+  <g transform="translate(600, 350)">
+    <!-- Mic body -->
+    <rect x="-35" y="-120" width="70" height="140" rx="35" fill="url(#mic-gradient)" filter="url(#interview-glow)"/>
+    <rect x="-30" y="-115" width="60" height="130" rx="30" fill="#121623"/>
+    <rect x="-25" y="-110" width="50" height="120" rx="25" fill="url(#mic-gradient)" opacity="0.3"/>
+
+    <!-- Mic grid lines -->
+    <g stroke="#00f2fe" stroke-width="1" opacity="0.3">
+      <line x1="-20" y1="-90" x2="20" y2="-90"/>
+      <line x1="-20" y1="-60" x2="20" y2="-60"/>
+      <line x1="-20" y1="-30" x2="20" y2="-30"/>
+      <line x1="-20" y1="0" x2="20" y2="0"/>
+    </g>
+
+    <!-- Mic stand -->
+    <line x1="0" y1="25" x2="0" y2="100" stroke="url(#mic-gradient)" stroke-width="4"/>
+    <ellipse cx="0" cy="25" rx="40" ry="8" fill="url(#mic-gradient)" opacity="0.5"/>
+
+    <!-- Base -->
+    <ellipse cx="0" cy="100" rx="60" ry="12" fill="url(#mic-gradient)"/>
+    <ellipse cx="0" cy="100" rx="55" ry="10" fill="#121623"/>
+
+    <!-- Sound waves -->
+    <g stroke="#00f2fe" stroke-width="2" fill="none" opacity="0.6">
+      <path d="M -70,-60 Q -85,-40 -70,-20"/>
+      <path d="M 70,-60 Q 85,-40 70,-20"/>
+      <path d="M -90,-80 Q -110,-40 -90,0"/>
+      <path d="M 90,-80 Q 110,-40 90,0"/>
+    </g>
+  </g>
+
+  <!-- Question marks floating -->
+  <g fill="#00f2fe" opacity="0.4" font-size="48" font-family="Space Grotesk, sans-serif" font-weight="bold">
+    <text x="250" y="250">?</text>
+    <text x="900" y="300">?</text>
+    <text x="280" y="580">?</text>
+  </g>
+
+  <!-- Speech bubbles -->
+  <g opacity="0.15" stroke="#00f2fe" stroke-width="2" fill="none">
+    <rect x="800" y="180" width="120" height="70" rx="35"/>
+    <rect x="220" y="420" width="100" height="60" rx="30"/>
+  </g>
+</svg>

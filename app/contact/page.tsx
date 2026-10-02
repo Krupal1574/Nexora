@@ -118,6 +118,15 @@ export default function ContactPage() {
         ]}
         sub="Whether you're ready to start your job search or just have questions, the Nexora team is here to help. Reach out — we respond fast."
       >
+        {/* Hero Visual */}
+        <div className="relative w-full max-w-4xl mx-auto mb-8 h-64 rounded-2xl overflow-hidden">
+          <img
+            src="/images/contact/contact-hero.svg"
+            alt="Contact Nexora"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
         <div className="flex flex-wrap items-center justify-center gap-4">
           {features.map(({ icon: Icon, label }) => (
             <div

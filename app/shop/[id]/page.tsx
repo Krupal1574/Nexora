@@ -47,29 +47,46 @@ export default function ProductDetailPage({
         {/* Product Details Section */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-24">
           {/* Left Column: Visual/Hero */}
-          <div className="rounded-3xl bg-gradient-to-br from-[#1A202C] to-[#121623] border border-[#2D3748] p-8 sm:p-12 relative overflow-hidden flex flex-col items-center justify-center min-h-[400px]">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#00F2FE]/[0.03] rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#00D2C4]/[0.03] rounded-full blur-[80px] pointer-events-none" />
+          <div className="rounded-3xl bg-[#0a111a] border border-[#2D3748] relative overflow-hidden min-h-[500px]">
+            {/* Product Image */}
+            <div className="relative w-full h-full">
+              <img
+                src={`/images/products/${product.slug}.png`}
+                alt={product.name}
+                className="w-full h-full object-cover"
+              />
 
-            {product.badge && (
-              <span className="absolute top-6 left-6 bg-[#00F2FE]/10 border border-[#00F2FE]/30 text-[#00F2FE] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest z-10">
-                {product.badge}
-              </span>
-            )}
+              {/* Badge Overlay */}
+              {product.badge && (
+                <span className="absolute top-6 left-6 bg-[#00F2FE]/90 backdrop-blur-sm border border-[#00F2FE] text-[#061018] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest z-10 shadow-lg">
+                  {product.badge}
+                </span>
+              )}
 
-            <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-[#00F2FE]/20 to-[#00D2C4]/10 border border-[#00F2FE]/30 flex items-center justify-center shadow-[0_0_40px_rgba(0,242,254,0.15)] mb-8">
-                <Icon className="w-12 h-12 text-[#00F2FE]" />
+              {/* Discount Badge */}
+              <div className="absolute top-6 right-6 bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] text-[#061018] px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
+                {product.discountPercent}% OFF
               </div>
-              <h1
-                className="text-3xl sm:text-4xl font-bold text-white mb-4"
-                style={{ fontFamily: "Space Grotesk, sans-serif" }}
-              >
-                {product.name}
-              </h1>
-              <p className="text-[#00F2FE] font-medium max-w-md mx-auto">
-                {product.tagline}
-              </p>
+
+              {/* Bottom Gradient Overlay for Text */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a111a] via-[#0a111a]/80 to-transparent p-8">
+                <div className="flex items-center gap-4 mb-3">
+                  <div className="w-16 h-16 rounded-2xl bg-[#00F2FE]/10 border border-[#00F2FE]/30 flex items-center justify-center backdrop-blur-sm">
+                    <Icon className="w-8 h-8 text-[#00F2FE]" />
+                  </div>
+                  <div>
+                    <h1
+                      className="text-2xl sm:text-3xl font-bold text-white"
+                      style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                    >
+                      {product.name}
+                    </h1>
+                    <p className="text-[#00F2FE] font-medium text-sm">
+                      {product.tagline}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

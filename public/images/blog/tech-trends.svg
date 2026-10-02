@@ -1,0 +1,41 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-blog-2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0b0f19;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1826;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="icon-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d2c4;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg-blog-2)"/>
+
+  <!-- Grid -->
+  <g opacity="0.05">
+    <path d="M0 105 L1200 105 M0 210 L1200 210 M0 315 L1200 315 M0 420 L1200 420 M0 525 L1200 525" stroke="#00d2c4" stroke-width="0.5"/>
+  </g>
+
+  <!-- Upward trend -->
+  <g transform="translate(500, 400)">
+    <path d="M -100,50 L -50,20 L 0,-30 L 50,-60 L 100,-90" stroke="url(#icon-grad-2)" stroke-width="4" fill="none"/>
+    <circle cx="-100" cy="50" r="6" fill="#00d2c4"/>
+    <circle cx="-50" cy="20" r="6" fill="#00d2c4"/>
+    <circle cx="0" cy="-30" r="6" fill="#00f2fe"/>
+    <circle cx="50" cy="-60" r="6" fill="#00f2fe"/>
+    <circle cx="100" cy="-90" r="6" fill="#00f2fe"/>
+
+    <!-- Arrow -->
+    <path d="M 100,-90 L 85,-85 M 100,-90 L 95,-105" stroke="#00f2fe" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Tech symbols -->
+  <g opacity="0.4" fill="#00d2c4" font-size="48" font-family="monospace">
+    <text x="300" y="250">&lt;/&gt;</text>
+    <text x="850" y="380">{}</text>
+  </g>
+
+  <!-- Category label -->
+  <text x="600" y="530" text-anchor="middle" fill="#00d2c4" font-size="24" font-weight="600" font-family="Space Grotesk, sans-serif">TECH TRENDS</text>
+</svg>
