@@ -18,25 +18,21 @@ export async function POST(req: Request) {
 
     const normalizedEmail = email.trim().toLowerCase();
 
-    console.log("[forgot-password] finding user...");
     // Always return success to prevent email enumeration
     const user = await prisma.user.findUnique({
       where: { email: normalizedEmail },
     });
-    console.log("[forgot-password] user found:", !!user);
 
     if (user && user.password) {
       // Only send reset for credential-based accounts (not Google-only)
       const token = crypto.randomUUID().replace(/-/g, "");
       const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-      console.log("[forgot-password] deleting existing tokens...");
       // Clean up any existing tokens for this email
       await prisma.verificationToken.deleteMany({
         where: { identifier: normalizedEmail },
       });
 
-      console.log("[forgot-password] creating new token...");
       // Create new reset token
       await prisma.verificationToken.create({
         data: {
@@ -50,10 +46,8 @@ export async function POST(req: Request) {
       const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
       const resetUrl = `${baseUrl}/auth/reset-password?token=${token}`;
 
-      console.log("[forgot-password] sending email...");
       try {
         await sendPasswordResetEmail(normalizedEmail, resetUrl);
-        console.log("[forgot-password] email sent.");
       } catch (emailError) {
         console.error("Failed to send reset email:", emailError);
       }

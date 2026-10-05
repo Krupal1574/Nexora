@@ -35,8 +35,7 @@ export async function POST(req: Request) {
     // await sendSmsOtp(newPhone, otp);
     // await saveOtpToDb(session.user.id, otp);
     
-    // For MVP, we mock it by returning success and accepting any 6-digit code in PUT
-    console.log(`[MOCK SMS] OTP sent to ${newPhone}`);
+    // NOTE: SMS OTP is mocked for MVP. Integrate Twilio or similar before production.
 
     // Update rate limit
     await prisma.rateLimit.upsert({

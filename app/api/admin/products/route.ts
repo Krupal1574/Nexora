@@ -11,8 +11,6 @@ export async function GET() {
   }
 
   try {
-    Sentry.captureMessage("Test log from admin products API", "info");
-    Sentry.metrics.count('test_metric', 1);
     const items = await prisma.product.findMany({
     orderBy: { createdAt: "desc" },
   });

@@ -23,7 +23,7 @@ import { useCart } from "@/lib/cart";
 // Types
 // ─────────────────────────────────────────────────────────────────────────────
 
-type ProductCategory = "package" | "individual";
+type ProductCategory = string;
 
 interface ApiProduct {
   id: string;
@@ -48,7 +48,7 @@ type SortOption =
   | "price-desc"
   | "discount";
 
-type CategoryFilter = "all" | "package" | "individual";
+type CategoryFilter = "all" | "pro-services" | "add-on-services" | "service-extensions" | "placement-charges";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Extra presentation data
@@ -525,7 +525,7 @@ export default function ShopPage() {
 
             <button
               onClick={() =>
-                setCategory("package")
+                setCategory("pro-services")
               }
               className="shrink-0 rounded-full bg-[#00D2D2] hover:bg-[#00F2FE] px-5 py-2 text-[9px] font-bold text-[#061018] flex items-center gap-2 transition-colors"
             >
@@ -540,7 +540,7 @@ export default function ShopPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
             {/* Categories */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={() =>
                   setCategory("all")
@@ -555,26 +555,50 @@ export default function ShopPage() {
 
               <button
                 onClick={() =>
-                  setCategory("package")
+                  setCategory("pro-services")
                 }
-                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "package"
+                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "pro-services"
                     ? "bg-[#00F2FE] text-[#061018]"
                     : "text-[#94A3B8] hover:text-white"
                   }`}
               >
-                Career Packages
+                Pro Services
               </button>
 
               <button
                 onClick={() =>
-                  setCategory("individual")
+                  setCategory("add-on-services")
                 }
-                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "individual"
+                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "add-on-services"
                     ? "bg-[#00F2FE] text-[#061018]"
                     : "text-[#94A3B8] hover:text-white"
                   }`}
               >
-                Individual Services
+                Add-On Services
+              </button>
+              
+              <button
+                onClick={() =>
+                  setCategory("service-extensions")
+                }
+                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "service-extensions"
+                    ? "bg-[#00F2FE] text-[#061018]"
+                    : "text-[#94A3B8] hover:text-white"
+                  }`}
+              >
+                Service Extensions
+              </button>
+              
+              <button
+                onClick={() =>
+                  setCategory("placement-charges")
+                }
+                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "placement-charges"
+                    ? "bg-[#00F2FE] text-[#061018]"
+                    : "text-[#94A3B8] hover:text-white"
+                  }`}
+              >
+                Placement Charges
               </button>
             </div>
 
