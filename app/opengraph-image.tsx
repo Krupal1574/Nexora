@@ -40,7 +40,7 @@ export default async function Image() {
             style={{
               fontSize: 80,
               fontWeight: 800,
-              background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+              background: "linear-gradient(135deg, #F26A21 0%, #8FB8D8 100%)",
               backgroundClip: "text",
               color: "transparent",
               marginBottom: "20px",

@@ -128,7 +128,7 @@ export default function MediaLibraryPage() {
                       </td>
                       <td className="p-4">
                         <div className="flex flex-col gap-1">
-                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-white text-sm font-bold flex items-center gap-1 hover:text-[#00F2FE] truncate max-w-[300px]">
+                          <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-white text-sm font-bold flex items-center gap-1 hover:text-[#F26A21] truncate max-w-[300px]">
                             {item.url} <ExternalLink className="w-3 h-3" />
                           </a>
                           <div className="flex gap-2 text-xs text-[#94A3B8]">
@@ -139,7 +139,7 @@ export default function MediaLibraryPage() {
                         </div>
                       </td>
                       <td className="p-4 text-right">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors mr-2">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors mr-2">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button onClick={() => handleDelete(item.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -167,7 +167,7 @@ export default function MediaLibraryPage() {
                 type="url"
                 value={url} 
                 onChange={(e) => setUrl(e.target.value)} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 required
                 placeholder="https://..."
               />
@@ -178,7 +178,7 @@ export default function MediaLibraryPage() {
               <select 
                 value={type} 
                 onChange={(e) => setType(e.target.value)} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
               >
                 <option value="IMAGE">Image</option>
                 <option value="VIDEO">Video</option>
@@ -194,7 +194,7 @@ export default function MediaLibraryPage() {
                   value={format} 
                   onChange={(e) => setFormat(e.target.value)} 
                   placeholder="e.g. png, mp4"
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
 
@@ -205,13 +205,13 @@ export default function MediaLibraryPage() {
                   min="0"
                   value={size} 
                   onChange={(e) => setSize(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
             </div>
 
             <div className="flex gap-2 pt-4">
-              <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+              <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                 {editingId ? "Update Media" : "Add Media"}
               </button>
               {editingId && (

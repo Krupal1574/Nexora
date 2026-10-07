@@ -27,12 +27,12 @@ export default function AdminLayoutWrapper({ children }: { children: React.React
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white flex flex-col md:flex-row relative w-full overflow-hidden">
+    <div className="min-h-screen bg-[#F5F1E8] text-[#171717] flex flex-col md:flex-row relative w-full overflow-hidden">
       
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between bg-[#121623] border-b border-[#203548] p-4 sticky top-0 z-20">
-        <h2 className="text-xl font-bold text-[#00F2FE]">Nexora Admin</h2>
-        <button onClick={() => setIsOpen(true)} className="p-2 text-[#94A3B8] hover:text-white">
+      <div className="md:hidden flex items-center justify-between bg-[#FFFFFF] border-b border-[#203548] p-4 sticky top-0 z-20">
+        <h2 className="text-xl font-bold text-[#F26A21]">Nexora Admin</h2>
+        <button onClick={() => setIsOpen(true)} className="p-2 text-[#77736D] hover:text-[#171717]">
           <Menu className="w-6 h-6" />
         </button>
       </div>
@@ -48,14 +48,14 @@ export default function AdminLayoutWrapper({ children }: { children: React.React
       {/* Sidebar */}
       <aside className={`
         fixed md:sticky top-0 left-0 z-40 h-screen
-        w-64 bg-[#121623] border-r border-[#203548] p-6 flex flex-col overflow-y-auto
+        w-64 bg-[#FFFFFF] border-r border-[#203548] p-6 flex flex-col overflow-y-auto
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         md:translate-x-0
       `}>
         <div className="flex justify-between items-center mb-10 shrink-0">
-          <h2 className="text-2xl font-bold text-[#00F2FE]">Nexora Admin</h2>
-          <button onClick={() => setIsOpen(false)} className="md:hidden p-2 text-[#94A3B8] hover:text-white -mr-2">
+          <h2 className="text-2xl font-bold text-[#F26A21]">Nexora Admin</h2>
+          <button onClick={() => setIsOpen(false)} className="md:hidden p-2 text-[#77736D] hover:text-[#171717] -mr-2">
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -71,8 +71,8 @@ export default function AdminLayoutWrapper({ children }: { children: React.React
                 onClick={() => setIsOpen(false)}
                 className={`flex items-center gap-3 p-2 rounded transition-colors ${
                   isActive 
-                    ? "text-[#00F2FE] bg-[#1A202C]" 
-                    : "text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#1A202C]"
+                    ? "text-[#F26A21] bg-[#FFFFFF]" 
+                    : "text-[#77736D] hover:text-[#F26A21] hover:bg-[#FFFFFF]"
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -83,7 +83,7 @@ export default function AdminLayoutWrapper({ children }: { children: React.React
         </nav>
 
         <div className="mt-auto space-y-4 pt-8 border-t border-[#203548]">
-          <Link href="/" className="flex items-center gap-3 text-[#94A3B8] hover:text-white transition-colors p-2">
+          <Link href="/" className="flex items-center gap-3 text-[#77736D] hover:text-[#171717] transition-colors p-2">
             <Home className="w-5 h-5" />
             Back to Site
           </Link>

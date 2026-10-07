@@ -37,17 +37,17 @@ export default function ProductDetailPage({
       <div className="container-wide">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-2 text-sm text-[#64748B] mb-8">
-          <Link href="/shop" className="hover:text-[#00F2FE] transition-colors">
+          <Link href="/shop" className="hover:text-[#F26A21] transition-colors">
             Shop
           </Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-[#94A3B8]">{product.name}</span>
+          <span className="text-[#77736D]">{product.name}</span>
         </nav>
 
         {/* Product Details Section */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-24">
           {/* Left Column: Visual/Hero */}
-          <div className="rounded-3xl bg-[#0a111a] border border-[#2D3748] relative overflow-hidden min-h-[500px]">
+          <div className="rounded-3xl bg-[#0a111a] border border-[#E5E5E5] relative overflow-hidden min-h-[500px]">
             {/* Product Image */}
             <div className="relative w-full h-full">
               <img
@@ -58,30 +58,30 @@ export default function ProductDetailPage({
 
               {/* Badge Overlay */}
               {product.badge && (
-                <span className="absolute top-6 left-6 bg-[#00F2FE]/90 backdrop-blur-sm border border-[#00F2FE] text-[#061018] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest z-10 shadow-lg">
+                <span className="absolute top-6 left-6 bg-[#F26A21]/90 backdrop-blur-sm border border-[#F26A21] text-[#171717] px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest z-10 shadow-lg">
                   {product.badge}
                 </span>
               )}
 
               {/* Discount Badge */}
-              <div className="absolute top-6 right-6 bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] text-[#061018] px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
+              <div className="absolute top-6 right-6 bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
                 {product.discountPercent}% OFF
               </div>
 
               {/* Bottom Gradient Overlay for Text */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a111a] via-[#0a111a]/80 to-transparent p-8">
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="w-16 h-16 rounded-2xl bg-[#00F2FE]/10 border border-[#00F2FE]/30 flex items-center justify-center backdrop-blur-sm">
-                    <Icon className="w-8 h-8 text-[#00F2FE]" />
+                  <div className="w-16 h-16 rounded-2xl bg-[#F26A21]/10 border border-[#F26A21]/30 flex items-center justify-center backdrop-blur-sm">
+                    <Icon className="w-8 h-8 text-[#F26A21]" />
                   </div>
                   <div>
                     <h1
-                      className="text-2xl sm:text-3xl font-bold text-white"
+                      className="text-2xl sm:text-3xl font-bold text-[#171717]"
                       style={{ fontFamily: "Space Grotesk, sans-serif" }}
                     >
                       {product.name}
                     </h1>
-                    <p className="text-[#00F2FE] font-medium text-sm">
+                    <p className="text-[#F26A21] font-medium text-sm">
                       {product.tagline}
                     </p>
                   </div>
@@ -92,7 +92,7 @@ export default function ProductDetailPage({
 
           {/* Right Column: Pricing & Features */}
           <div className="flex flex-col h-full">
-            <p className="text-[#94A3B8] text-lg leading-relaxed mb-8">
+            <p className="text-[#77736D] text-lg leading-relaxed mb-8">
               {product.description}
             </p>
 
@@ -100,7 +100,7 @@ export default function ProductDetailPage({
             <div className="glass-card mb-8">
               <div className="flex flex-wrap items-baseline gap-4 mb-2">
                 <span
-                  className="text-5xl font-bold text-white"
+                  className="text-5xl font-bold text-[#171717]"
                   style={{ fontFamily: "Space Grotesk, sans-serif" }}
                 >
                   ${product.salePrice.toLocaleString()}
@@ -135,7 +135,7 @@ export default function ProductDetailPage({
             {/* Feature List */}
             <div className="flex-1">
               <h3
-                className="text-xl font-bold text-white mb-6"
+                className="text-xl font-bold text-[#171717] mb-6"
                 style={{ fontFamily: "Space Grotesk, sans-serif" }}
               >
                 What's Included
@@ -143,10 +143,10 @@ export default function ProductDetailPage({
               <ul className="space-y-4">
                 {product.features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-4">
-                    <div className="mt-1 w-6 h-6 rounded-full bg-[#00F2FE]/10 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-4 h-4 text-[#00F2FE]" />
+                    <div className="mt-1 w-6 h-6 rounded-full bg-[#F26A21]/10 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-[#F26A21]" />
                     </div>
-                    <span className="text-[#CBD5E1] leading-relaxed">
+                    <span className="text-[#77736D] leading-relaxed">
                       {feature}
                     </span>
                   </li>
@@ -158,9 +158,9 @@ export default function ProductDetailPage({
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="pt-16 border-t border-[#1A202C]">
+          <div className="pt-16 border-t border-[#FFFFFF]">
             <h2
-              className="text-2xl sm:text-3xl font-bold text-white mb-8"
+              className="text-2xl sm:text-3xl font-bold text-[#171717] mb-8"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               You Might Also Like
@@ -172,16 +172,16 @@ export default function ProductDetailPage({
                   <Link
                     href={`/shop/${rel.slug}`}
                     key={rel.id}
-                    className="glass-card group flex items-start gap-4 hover:border-[#00F2FE]/30"
+                    className="glass-card group flex items-start gap-4 hover:border-[#F26A21]/30"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-[#121623] border border-[#2D3748] flex items-center justify-center flex-shrink-0 group-hover:border-[#00F2FE]/40 transition-colors">
-                      <RelIcon className="w-6 h-6 text-[#94A3B8] group-hover:text-[#00F2FE] transition-colors" />
+                    <div className="w-12 h-12 rounded-xl bg-[#FFFFFF] border border-[#E5E5E5] flex items-center justify-center flex-shrink-0 group-hover:border-[#F26A21]/40 transition-colors">
+                      <RelIcon className="w-6 h-6 text-[#77736D] group-hover:text-[#F26A21] transition-colors" />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1 group-hover:text-[#00F2FE] transition-colors">
+                      <h4 className="text-[#171717] font-semibold mb-1 group-hover:text-[#F26A21] transition-colors">
                         {rel.name}
                       </h4>
-                      <p className="text-[#00F2FE] font-medium text-sm">
+                      <p className="text-[#F26A21] font-medium text-sm">
                         ${rel.salePrice.toLocaleString()}{" "}
                         <span className="text-[#64748B] line-through ml-1 text-xs">
                           ${rel.originalPrice.toLocaleString()}
@@ -198,7 +198,7 @@ export default function ProductDetailPage({
         <div className="mt-16 text-center">
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 text-[#94A3B8] hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-[#77736D] hover:text-[#171717] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Shop

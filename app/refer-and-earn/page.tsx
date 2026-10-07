@@ -25,7 +25,7 @@ const steps = [
     title: "Refer a Friend or Colleague",
     description:
       "Know someone looking for a job in the U.S. tech industry? Submit their details using our simple referral form. It takes less than 2 minutes.",
-    color: "#00F2FE",
+    color: "#F26A21",
   },
   {
     number: "02",
@@ -33,7 +33,7 @@ const steps = [
     title: "Empower Their Career",
     description:
       "Nexora's team takes it from there — providing your referral with full career counseling, resume optimization, and active placement support.",
-    color: "#00D2C4",
+    color: "#8FB8D8",
   },
   {
     number: "03",
@@ -41,7 +41,7 @@ const steps = [
     title: "Collect Your Referral Bonus",
     description:
       "Once your referral is successfully placed in a role, you receive up to $500 directly to your account. No limits — refer as many people as you like.",
-    color: "#00F2FE",
+    color: "#F26A21",
   },
 ];
 
@@ -147,15 +147,15 @@ export default function ReferAndEarnPage() {
         </div>
 
         <div className="mb-6">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#00F2FE]/25 bg-[#00F2FE]/8 text-[#00F2FE] text-sm font-semibold">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#F26A21]/25 bg-[#F26A21]/8 text-[#F26A21] text-sm font-semibold">
             <Gift className="w-4 h-4" />
             Earn up to $500 per placed referral — unlimited referrals!
           </div>
         </div>
-        <p className="text-[#94A3B8] text-xl max-w-3xl mx-auto leading-relaxed">
+        <p className="text-[#77736D] text-xl max-w-3xl mx-auto leading-relaxed">
           Help a friend land their dream tech job. Nexora handles everything — the
           career coaching, resume work, and placement. You earn up to{" "}
-          <span className="text-[#00F2FE] font-semibold">$500</span> for every
+          <span className="text-[#F26A21] font-semibold">$500</span> for every
           person you refer who gets placed.
         </p>
       </PageHero>
@@ -163,18 +163,18 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           3-STEP PROCESS
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#121623] border-y border-[#1A202C]">
+      <section className="section-spacing bg-[#FFFFFF] border-y border-[#FFFFFF]">
         <div className="container-wide">
           <div className="text-center mb-14">
             <span className="section-label">How It Works</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#171717]"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               3 Simple Steps to Your{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #F26A21 0%, #8FB8D8 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -187,7 +187,7 @@ export default function ReferAndEarnPage() {
 
           <div className="grid md:grid-cols-3 gap-6 relative">
             {/* Connector lines */}
-            <div className="hidden md:block absolute top-16 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] opacity-30 z-0" />
+            <div className="hidden md:block absolute top-16 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] opacity-30 z-0" />
 
             {steps.map(({ number, icon: Icon, title, description, color }) => (
               <div
@@ -206,9 +206,9 @@ export default function ReferAndEarnPage() {
                     <Icon className="w-9 h-9" style={{ color }} />
                   </div>
                   <span
-                    className="absolute -top-2 -right-2 w-7 h-7 rounded-full text-[#0B0F19] text-xs font-bold flex items-center justify-center"
+                    className="absolute -top-2 -right-2 w-7 h-7 rounded-full text-[#F5F1E8] text-xs font-bold flex items-center justify-center"
                     style={{
-                      background: `linear-gradient(135deg, ${color} 0%, #00D2C4 100%)`,
+                      background: `linear-gradient(135deg, ${color} 0%, #8FB8D8 100%)`,
                     }}
                   >
                     {number}
@@ -216,12 +216,12 @@ export default function ReferAndEarnPage() {
                 </div>
                 <div>
                   <h3
-                    className="text-xl font-bold text-white mb-3"
+                    className="text-xl font-bold text-[#171717] mb-3"
                     style={{ fontFamily: "Space Grotesk, sans-serif" }}
                   >
                     {title}
                   </h3>
-                  <p className="text-[#94A3B8] text-sm leading-relaxed">
+                  <p className="text-[#77736D] text-sm leading-relaxed">
                     {description}
                   </p>
                 </div>
@@ -238,10 +238,10 @@ export default function ReferAndEarnPage() {
             ].map(({ icon: Icon, text }) => (
               <div
                 key={text}
-                className="flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#0B0F19] border border-[#00F2FE]/15"
+                className="flex items-center gap-3 px-5 py-3.5 rounded-xl bg-[#F5F1E8] border border-[#F26A21]/15"
               >
-                <Icon className="w-5 h-5 text-[#00F2FE] flex-shrink-0" />
-                <span className="text-white text-sm font-medium">{text}</span>
+                <Icon className="w-5 h-5 text-[#F26A21] flex-shrink-0" />
+                <span className="text-[#171717] text-sm font-medium">{text}</span>
               </div>
             ))}
           </div>
@@ -251,18 +251,18 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           REFERRAL FORM
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#0B0F19]">
+      <section className="section-spacing bg-[#F5F1E8]">
         <div className="container-narrow">
           <div className="text-center mb-10">
             <span className="section-label">Submit a Referral</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#171717]"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Refer Someone Today &{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #F26A21 0%, #8FB8D8 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -275,16 +275,16 @@ export default function ReferAndEarnPage() {
 
           {submitted ? (
             <div className="glass-card p-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-[#00F2FE]/15 border border-[#00F2FE]/30 flex items-center justify-center mx-auto mb-5">
-                <CheckCircle2 className="w-8 h-8 text-[#00F2FE]" />
+              <div className="w-16 h-16 rounded-full bg-[#F26A21]/15 border border-[#F26A21]/30 flex items-center justify-center mx-auto mb-5">
+                <CheckCircle2 className="w-8 h-8 text-[#F26A21]" />
               </div>
               <h3
-                className="text-2xl font-bold text-white mb-3"
+                className="text-2xl font-bold text-[#171717] mb-3"
                 style={{ fontFamily: "Space Grotesk, sans-serif" }}
               >
                 Referral Delivered
               </h3>
-              <p className="text-[#94A3B8] mb-6">
+              <p className="text-[#77736D] mb-6">
                 Thank you. Your referral has been sent to the Nexora team for review.
               </p>
               <button
@@ -315,13 +315,13 @@ export default function ReferAndEarnPage() {
                 {/* Your Info */}
                 <div>
                   <h4
-                    className="text-white font-semibold mb-4 text-sm uppercase tracking-wider text-[#00F2FE]"
+                    className="text-[#171717] font-semibold mb-4 text-sm uppercase tracking-wider text-[#F26A21]"
                   >
                     Your Details
                   </h4>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="yourName" className="text-[#94A3B8] text-sm mb-2 block">
+                      <label htmlFor="yourName" className="text-[#77736D] text-sm mb-2 block">
                         Your Full Name
                       </label>
                       <div className="relative">
@@ -343,7 +343,7 @@ export default function ReferAndEarnPage() {
                       {fieldErrors.yourName && <p id="your-name-error" className="mt-2 text-sm text-red-200">{fieldErrors.yourName}</p>}
                     </div>
                     <div>
-                      <label htmlFor="yourEmail" className="text-[#94A3B8] text-sm mb-2 block">
+                      <label htmlFor="yourEmail" className="text-[#77736D] text-sm mb-2 block">
                         Your Email Address
                       </label>
                       <div className="relative">
@@ -369,12 +369,12 @@ export default function ReferAndEarnPage() {
 
                 {/* Referral Info */}
                 <div>
-                  <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider text-[#00F2FE]">
+                  <h4 className="text-[#171717] font-semibold mb-4 text-sm uppercase tracking-wider text-[#F26A21]">
                     Referral's Details
                   </h4>
                   <div className="space-y-4">
                     <div>
-                      <label htmlFor="refName" className="text-[#94A3B8] text-sm mb-2 block">
+                      <label htmlFor="refName" className="text-[#77736D] text-sm mb-2 block">
                         Referral Full Name
                       </label>
                       <div className="relative">
@@ -397,7 +397,7 @@ export default function ReferAndEarnPage() {
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="refPhone" className="text-[#94A3B8] text-sm mb-2 block">
+                        <label htmlFor="refPhone" className="text-[#77736D] text-sm mb-2 block">
                           Referral Phone Number
                         </label>
                         <div className="relative">
@@ -419,7 +419,7 @@ export default function ReferAndEarnPage() {
                         {fieldErrors.refPhone && <p id="ref-phone-error" className="mt-2 text-sm text-red-200">{fieldErrors.refPhone}</p>}
                       </div>
                       <div>
-                        <label htmlFor="refEmail" className="text-[#94A3B8] text-sm mb-2 block">
+                        <label htmlFor="refEmail" className="text-[#77736D] text-sm mb-2 block">
                           Referral Email Address
                         </label>
                         <div className="relative">
@@ -442,7 +442,7 @@ export default function ReferAndEarnPage() {
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="message" className="text-[#94A3B8] text-sm mb-2 block">
+                      <label htmlFor="message" className="text-[#77736D] text-sm mb-2 block">
                         Additional Notes (Optional)
                       </label>
                       <textarea
@@ -466,11 +466,11 @@ export default function ReferAndEarnPage() {
                       name="authorizedToRefer"
                       checked={form.authorizedToRefer}
                       onChange={handleChange}
-                      className="mt-1 h-4 w-4 rounded border-[#4A5568] bg-transparent text-[#00F2FE] focus:ring-[#00F2FE]"
+                      className="mt-1 h-4 w-4 rounded border-[#4A5568] bg-transparent text-[#F26A21] focus:ring-[#F26A21]"
                       aria-invalid={Boolean(fieldErrors.authorizedToRefer)}
                       aria-describedby={fieldErrors.authorizedToRefer ? "authorization-error" : undefined}
                     />
-                    <span className="text-[#94A3B8] text-sm leading-relaxed">
+                    <span className="text-[#77736D] text-sm leading-relaxed">
                       I confirm that I am authorized to share this person's contact details and that they expect to hear from Nexora about this referral.
                     </span>
                   </label>
@@ -482,7 +482,7 @@ export default function ReferAndEarnPage() {
                   {loading ? "Sending Referral..." : "Submit Referral"}
                 </button>
                 <p className="text-center text-[#64748B] text-xs">
-                  By submitting, you acknowledge the <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-[#00F2FE]">Privacy Policy</Link> and <Link href="/terms-and-conditions" className="underline underline-offset-2 hover:text-[#00F2FE]">Terms &amp; Conditions</Link>.
+                  By submitting, you acknowledge the <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-[#F26A21]">Privacy Policy</Link> and <Link href="/terms-and-conditions" className="underline underline-offset-2 hover:text-[#F26A21]">Terms &amp; Conditions</Link>.
                 </p>
               </form>
             </div>
@@ -493,12 +493,12 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           FAQ
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
+      <section className="section-spacing bg-[#FFFFFF] border-t border-[#FFFFFF]">
         <div className="container-narrow">
           <div className="text-center mb-12">
             <span className="section-label">FAQs</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#171717]"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               Common Questions
@@ -508,15 +508,15 @@ export default function ReferAndEarnPage() {
             {faqs.map(({ q, a }) => (
               <div key={q} className="glass-card p-6">
                 <div className="flex items-start gap-3">
-                  <ChevronRight className="w-4 h-4 text-[#00F2FE] mt-1 flex-shrink-0" />
+                  <ChevronRight className="w-4 h-4 text-[#F26A21] mt-1 flex-shrink-0" />
                   <div>
                     <p
-                      className="text-white font-semibold mb-2"
+                      className="text-[#171717] font-semibold mb-2"
                       style={{ fontFamily: "Space Grotesk, sans-serif" }}
                     >
                       {q}
                     </p>
-                    <p className="text-[#94A3B8] text-sm leading-relaxed">{a}</p>
+                    <p className="text-[#77736D] text-sm leading-relaxed">{a}</p>
                   </div>
                 </div>
               </div>

@@ -39,7 +39,7 @@ const STATUS_CONFIG: Record<string, { label: string; color: string; icon: React.
   PENDING:    { label: "Pending",    color: "text-yellow-400 bg-yellow-400/10 border-yellow-400/20",   icon: Clock },
   CONFIRMED:  { label: "Confirmed",  color: "text-blue-400 bg-blue-400/10 border-blue-400/20",         icon: CheckCircle },
   PROCESSING: { label: "Processing", color: "text-purple-400 bg-purple-400/10 border-purple-400/20",   icon: RefreshCw },
-  SHIPPED:    { label: "Shipped",    color: "text-[#00F2FE] bg-[#00F2FE]/10 border-[#00F2FE]/20",      icon: Truck },
+  SHIPPED:    { label: "Shipped",    color: "text-[#F26A21] bg-[#F26A21]/10 border-[#F26A21]/20",      icon: Truck },
   DELIVERED:  { label: "Delivered",  color: "text-green-400 bg-green-400/10 border-green-400/20",      icon: CheckCircle },
   CANCELLED:  { label: "Cancelled",  color: "text-red-400 bg-red-400/10 border-red-400/20",            icon: XCircle },
   REFUNDED:   { label: "Refunded",   color: "text-orange-400 bg-orange-400/10 border-orange-400/20",   icon: RefreshCw },
@@ -70,13 +70,13 @@ function OrderCard({ order }: { order: Order }) {
   const StatusIcon = cfg.icon;
 
   return (
-    <div className="bg-[#121923] border border-[#203548] rounded-2xl overflow-hidden hover:border-[#00F2FE]/20 transition-all duration-300">
+    <div className="bg-[#FFFFFF] border border-[#203548] rounded-2xl overflow-hidden hover:border-[#F26A21]/20 transition-all duration-300">
       {/* Header */}
       <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
           <div>
             <p className="text-xs text-[#64748B] mb-1">Order #</p>
-            <p className="text-white font-mono font-semibold text-sm">{order.orderNumber}</p>
+            <p className="text-[#171717] font-mono font-semibold text-sm">{order.orderNumber}</p>
           </div>
           <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${cfg.color}`}>
             <StatusIcon className="w-3.5 h-3.5" />
@@ -87,15 +87,15 @@ function OrderCard({ order }: { order: Order }) {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
           <div>
             <p className="text-[#64748B] text-xs mb-0.5">Date</p>
-            <p className="text-[#94A3B8]">{formatDate(order.createdAt)}</p>
+            <p className="text-[#77736D]">{formatDate(order.createdAt)}</p>
           </div>
           <div>
             <p className="text-[#64748B] text-xs mb-0.5">Items</p>
-            <p className="text-[#94A3B8]">{order.items.length} item{order.items.length !== 1 ? "s" : ""}</p>
+            <p className="text-[#77736D]">{order.items.length} item{order.items.length !== 1 ? "s" : ""}</p>
           </div>
           <div>
             <p className="text-[#64748B] text-xs mb-0.5">Total</p>
-            <p className="text-white font-semibold">{formatCurrency(order.total, order.currency)}</p>
+            <p className="text-[#171717] font-semibold">{formatCurrency(order.total, order.currency)}</p>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ function OrderCard({ order }: { order: Order }) {
       {/* Expand toggle */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between px-5 sm:px-6 py-3 border-t border-[#203548] text-sm text-[#64748B] hover:text-[#94A3B8] hover:bg-[#0B0F19]/40 transition-colors"
+        className="w-full flex items-center justify-between px-5 sm:px-6 py-3 border-t border-[#203548] text-sm text-[#64748B] hover:text-[#77736D] hover:bg-[#F5F1E8]/40 transition-colors"
       >
         <span>{expanded ? "Hide" : "Show"} order details</span>
         {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -111,7 +111,7 @@ function OrderCard({ order }: { order: Order }) {
 
       {/* Expanded details */}
       {expanded && (
-        <div className="border-t border-[#203548] bg-[#0B0F19]/30 px-5 sm:px-6 py-5 space-y-4">
+        <div className="border-t border-[#203548] bg-[#F5F1E8]/30 px-5 sm:px-6 py-5 space-y-4">
           {/* Items */}
           <div>
             <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-3">Items</p>
@@ -120,10 +120,10 @@ function OrderCard({ order }: { order: Order }) {
                 <div key={item.id} className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2 min-w-0">
                     <Package className="w-4 h-4 text-[#64748B] shrink-0" />
-                    <span className="text-[#94A3B8] truncate">{item.productName}</span>
+                    <span className="text-[#77736D] truncate">{item.productName}</span>
                     <span className="text-[#475569] shrink-0">×{item.quantity}</span>
                   </div>
-                  <span className="text-white font-medium shrink-0 ml-3">
+                  <span className="text-[#171717] font-medium shrink-0 ml-3">
                     {formatCurrency(item.totalPrice, order.currency)}
                   </span>
                 </div>
@@ -134,23 +134,23 @@ function OrderCard({ order }: { order: Order }) {
           {/* Pricing breakdown */}
           <div className="border-t border-[#203548] pt-4">
             <div className="space-y-1.5 text-sm">
-              <div className="flex justify-between text-[#94A3B8]">
+              <div className="flex justify-between text-[#77736D]">
                 <span>Subtotal</span>
                 <span>{formatCurrency(order.subtotal, order.currency)}</span>
               </div>
               {parseFloat(order.shippingCost) > 0 && (
-                <div className="flex justify-between text-[#94A3B8]">
+                <div className="flex justify-between text-[#77736D]">
                   <span>Shipping</span>
                   <span>{formatCurrency(order.shippingCost, order.currency)}</span>
                 </div>
               )}
               {parseFloat(order.tax) > 0 && (
-                <div className="flex justify-between text-[#94A3B8]">
+                <div className="flex justify-between text-[#77736D]">
                   <span>Tax</span>
                   <span>{formatCurrency(order.tax, order.currency)}</span>
                 </div>
               )}
-              <div className="flex justify-between text-white font-semibold border-t border-[#203548] pt-2 mt-2">
+              <div className="flex justify-between text-[#171717] font-semibold border-t border-[#203548] pt-2 mt-2">
                 <span>Total</span>
                 <span>{formatCurrency(order.total, order.currency)}</span>
               </div>
@@ -160,7 +160,7 @@ function OrderCard({ order }: { order: Order }) {
           {order.notes && (
             <div className="border-t border-[#203548] pt-4">
               <p className="text-xs text-[#64748B] mb-1">Notes</p>
-              <p className="text-sm text-[#94A3B8]">{order.notes}</p>
+              <p className="text-sm text-[#77736D]">{order.notes}</p>
             </div>
           )}
         </div>
@@ -197,11 +197,11 @@ export default function MyOrdersPage() {
 
   if (status === "loading" || status === "unauthenticated") {
     return (
-      <div className="min-h-screen bg-[#0B0F19] text-white flex flex-col">
+      <div className="min-h-screen bg-[#F5F1E8] text-[#171717] flex flex-col">
         <Navbar />
         <main className="flex-grow flex items-center justify-center pt-24">
-          <div className="flex items-center gap-3 text-[#94A3B8]">
-            <div className="w-5 h-5 border-2 border-[#00F2FE]/30 border-t-[#00F2FE] rounded-full animate-spin" />
+          <div className="flex items-center gap-3 text-[#77736D]">
+            <div className="w-5 h-5 border-2 border-[#F26A21]/30 border-t-[#F26A21] rounded-full animate-spin" />
             Loading...
           </div>
         </main>
@@ -211,7 +211,7 @@ export default function MyOrdersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F5F1E8] text-[#171717] flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-grow pt-32 pb-20 px-4 sm:px-6">
@@ -219,14 +219,14 @@ export default function MyOrdersPage() {
           {/* Page header */}
           <div className="mb-10">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 rounded-xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center">
-                <ShoppingBag className="w-5 h-5 text-[#00F2FE]" />
+              <div className="w-10 h-10 rounded-xl bg-[#F26A21]/10 border border-[#F26A21]/20 flex items-center justify-center">
+                <ShoppingBag className="w-5 h-5 text-[#F26A21]" />
               </div>
               <h1 className="text-3xl font-bold" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                 My Orders
               </h1>
             </div>
-            <p className="text-[#94A3B8] text-sm ml-1">
+            <p className="text-[#77736D] text-sm ml-1">
               View and track your order history.
             </p>
           </div>
@@ -243,7 +243,7 @@ export default function MyOrdersPage() {
           {loading && !error && (
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-[#121923] border border-[#203548] rounded-2xl p-6 animate-pulse">
+                <div key={i} className="bg-[#FFFFFF] border border-[#203548] rounded-2xl p-6 animate-pulse">
                   <div className="flex justify-between mb-4">
                     <div className="h-4 w-28 bg-[#203548] rounded" />
                     <div className="h-6 w-20 bg-[#203548] rounded-full" />
@@ -270,16 +270,16 @@ export default function MyOrdersPage() {
           {/* Empty state */}
           {!loading && !error && orders.length === 0 && (
             <div className="text-center py-20">
-              <div className="w-20 h-20 rounded-2xl bg-[#121923] border border-[#203548] flex items-center justify-center mx-auto mb-6">
+              <div className="w-20 h-20 rounded-2xl bg-[#FFFFFF] border border-[#203548] flex items-center justify-center mx-auto mb-6">
                 <ShoppingBag className="w-9 h-9 text-[#203548]" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">No orders yet</h3>
+              <h3 className="text-xl font-semibold text-[#171717] mb-2">No orders yet</h3>
               <p className="text-[#64748B] text-sm mb-8 max-w-xs mx-auto">
                 When you place an order it will appear here so you can track its status.
               </p>
               <a
                 href="/shop"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#00F2FE] text-black font-bold rounded-xl hover:bg-[#00D2C4] transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#F26A21] text-black font-bold rounded-xl hover:bg-[#8FB8D8] transition-colors"
               >
                 <ShoppingBag className="w-4 h-4" />
                 Browse the Shop

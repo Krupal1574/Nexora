@@ -23,7 +23,7 @@ const contactCards = [
     value: siteConfig.contact.phoneDisplay,
     sublabel: "Mon–Fri, 9AM–6PM EST",
     href: siteConfig.contact.phoneHref,
-    color: "#00F2FE",
+    color: "#F26A21",
   },
   {
     icon: Mail,
@@ -31,14 +31,14 @@ const contactCards = [
     value: siteConfig.contact.email,
     sublabel: "We respond within 24 hours",
     href: `mailto:${siteConfig.contact.email}`,
-    color: "#00D2C4",
+    color: "#8FB8D8",
   },
   {
     icon: MapPin,
     title: "Headquarters",
     value: "Tampa, FL, USA",
     sublabel: "Serving clients nationwide",
-    color: "#00F2FE",
+    color: "#F26A21",
   },
 ];
 
@@ -131,9 +131,9 @@ export default function ContactPage() {
           {features.map(({ icon: Icon, label }) => (
             <div
               key={label}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFFFFF] border border-[#E5E5E5] text-[#77736D] text-sm"
             >
-              <Icon className="w-4 h-4 text-[#00F2FE]" />
+              <Icon className="w-4 h-4 text-[#F26A21]" />
               {label}
             </div>
           ))}
@@ -143,7 +143,7 @@ export default function ContactPage() {
       {/* ════════════════════════════════════════════════════════
           QUICK INFO CARDS
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#0B0F19]">
+      <section className="section-spacing bg-[#F5F1E8]">
         <div className="container-wide">
           <div className="grid sm:grid-cols-3 gap-5">
             {contactCards.map(({ icon: Icon, title, value, sublabel, href, color }) => {
@@ -172,7 +172,7 @@ export default function ContactPage() {
                       {title}
                     </p>
                     <p
-                      className={`text-white font-semibold text-base transition-colors ${href ? 'group-hover:text-[#00F2FE]' : ''}`}
+                      className={`text-[#171717] font-semibold text-base transition-colors ${href ? 'group-hover:text-[#F26A21]' : ''}`}
                       style={{ fontFamily: "Space Grotesk, sans-serif" }}
                     >
                       {value}
@@ -190,18 +190,18 @@ export default function ContactPage() {
       {/* ════════════════════════════════════════════════════════
           CONTACT FORM
       ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
+      <section className="section-spacing bg-[#FFFFFF] border-t border-[#FFFFFF]">
         <div className="container-narrow">
           <div className="text-center mb-10">
             <span className="section-label">Send a Message</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#171717]"
               style={{ fontFamily: "Space Grotesk, sans-serif" }}
             >
               We'd Love to{" "}
               <span
                 style={{
-                  background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  background: "linear-gradient(135deg, #F26A21 0%, #8FB8D8 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -214,21 +214,21 @@ export default function ContactPage() {
 
           {submitted ? (
             <div className="glass-card p-12 text-center">
-              <div className="w-20 h-20 rounded-full bg-[#00F2FE]/15 border border-[#00F2FE]/30 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_#00F2FE33]">
-                <CheckCircle2 className="w-10 h-10 text-[#00F2FE]" />
+              <div className="w-20 h-20 rounded-full bg-[#F26A21]/15 border border-[#F26A21]/30 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_#F26A2133]">
+                <CheckCircle2 className="w-10 h-10 text-[#F26A21]" />
               </div>
               <h3
-                className="text-2xl font-bold text-white mb-3"
+                className="text-2xl font-bold text-[#171717] mb-3"
                 style={{ fontFamily: "Space Grotesk, sans-serif" }}
               >
                 Message Delivered
               </h3>
-              <p className="text-[#94A3B8] mb-2">
-                Thank you for reaching out, <span className="text-white font-medium">{form.name}</span>.
+              <p className="text-[#77736D] mb-2">
+                Thank you for reaching out, <span className="text-[#171717] font-medium">{form.name}</span>.
               </p>
-              <p className="text-[#94A3B8] text-sm mb-8">
+              <p className="text-[#77736D] text-sm mb-8">
                 Your message has been sent to the Nexora team. We will use{" "}
-                <span className="text-[#00F2FE]">{form.email}</span> to reply.
+                <span className="text-[#F26A21]">{form.email}</span> to reply.
               </p>
               <button
                 onClick={() => {
@@ -259,9 +259,9 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="name"
-                    className="text-[#94A3B8] text-sm mb-2 block font-medium"
+                    className="text-[#77736D] text-sm mb-2 block font-medium"
                   >
-                    Full Name <span className="text-[#00F2FE]">*</span>
+                    Full Name <span className="text-[#F26A21]">*</span>
                   </label>
                   <div className="relative">
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
@@ -286,9 +286,9 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="phone"
-                    className="text-[#94A3B8] text-sm mb-2 block font-medium"
+                    className="text-[#77736D] text-sm mb-2 block font-medium"
                   >
-                    Phone Number <span className="text-[#00F2FE]">*</span>
+                    Phone Number <span className="text-[#F26A21]">*</span>
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
@@ -318,18 +318,18 @@ export default function ContactPage() {
                         className="peer sr-only"
                       />
                       <div
-                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#00F2FE] ${
+                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#F26A21] ${
                           form.smsOptIn
-                            ? "bg-[#00F2FE] border-[#00F2FE]"
-                            : "bg-transparent border-[#4A5568] group-hover:border-[#00F2FE]/60"
+                            ? "bg-[#F26A21] border-[#F26A21]"
+                            : "bg-transparent border-[#4A5568] group-hover:border-[#F26A21]/60"
                         }`}
                       >
                         {form.smsOptIn && (
-                          <CheckCircle2 className="w-3 h-3 text-[#0B0F19]" />
+                          <CheckCircle2 className="w-3 h-3 text-[#F5F1E8]" />
                         )}
                       </div>
                     </div>
-                    <span className="text-[#94A3B8] text-sm">
+                    <span className="text-[#77736D] text-sm">
                       I agree to receive SMS updates about this inquiry. Consent is optional and not required to submit. Message frequency varies; message and data rates may apply. Reply STOP to opt out.
                     </span>
                   </label>
@@ -340,9 +340,9 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="text-[#94A3B8] text-sm mb-2 block font-medium"
+                    className="text-[#77736D] text-sm mb-2 block font-medium"
                   >
-                    Email Address <span className="text-[#00F2FE]">*</span>
+                    Email Address <span className="text-[#F26A21]">*</span>
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
@@ -367,9 +367,9 @@ export default function ContactPage() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="text-[#94A3B8] text-sm mb-2 block font-medium"
+                    className="text-[#77736D] text-sm mb-2 block font-medium"
                   >
-                    Message <span className="text-[#00F2FE]">*</span>
+                    Message <span className="text-[#F26A21]">*</span>
                   </label>
                   <div className="relative">
                     <MessageSquare className="absolute left-4 top-4 w-4 h-4 text-[#64748B]" />
@@ -397,7 +397,7 @@ export default function ContactPage() {
                 >
                   {loading ? (
                     <>
-                      <span className="w-4 h-4 border-2 border-[#0B0F19]/30 border-t-[#0B0F19] rounded-full animate-spin" />
+                      <span className="w-4 h-4 border-2 border-[#F5F1E8]/30 border-t-[#F5F1E8] rounded-full animate-spin" />
                       Sending...
                     </>
                   ) : (
@@ -409,7 +409,7 @@ export default function ContactPage() {
                 </button>
 
                 <p className="text-center text-[#64748B] text-xs">
-                  By submitting, you acknowledge the <Link href="/privacy-policy" className="text-[#94A3B8] underline underline-offset-2 hover:text-[#00F2FE]">Privacy Policy</Link>. Do not include sensitive personal information in this form.
+                  By submitting, you acknowledge the <Link href="/privacy-policy" className="text-[#77736D] underline underline-offset-2 hover:text-[#F26A21]">Privacy Policy</Link>. Do not include sensitive personal information in this form.
                 </p>
               </form>
             </div>

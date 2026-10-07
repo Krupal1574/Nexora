@@ -138,7 +138,7 @@ export default function CouponsPage() {
                         )}
                       </td>
                       <td className="p-4 flex justify-end gap-2">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors mr-2">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors mr-2">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button onClick={() => handleDelete(item.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -166,7 +166,7 @@ export default function CouponsPage() {
                 type="text"
                 value={code} 
                 onChange={(e) => setCode(e.target.value.toUpperCase().replace(/\s/g, ''))} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 required
               />
             </div>
@@ -177,7 +177,7 @@ export default function CouponsPage() {
                 <select 
                   value={type} 
                   onChange={(e) => setType(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 >
                   <option value="PERCENTAGE">Percentage (%)</option>
                   <option value="FIXED">Fixed Amount ($)</option>
@@ -192,7 +192,7 @@ export default function CouponsPage() {
                   min="0"
                   value={discount} 
                   onChange={(e) => setDiscount(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                   required
                 />
               </div>
@@ -205,7 +205,7 @@ export default function CouponsPage() {
                 min="1"
                 value={maxUses} 
                 onChange={(e) => setMaxUses(e.target.value)} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
               />
             </div>
 
@@ -215,7 +215,7 @@ export default function CouponsPage() {
                 type="date"
                 value={expiryDate} 
                 onChange={(e) => setExpiryDate(e.target.value)} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none [color-scheme:dark]"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none [color-scheme:dark]"
               />
             </div>
 
@@ -224,13 +224,13 @@ export default function CouponsPage() {
                 type="checkbox"
                 checked={active}
                 onChange={(e) => setActive(e.target.checked)}
-                className="w-4 h-4 accent-[#00F2FE]"
+                className="w-4 h-4 accent-[#F26A21]"
               />
               <span className="text-sm font-medium text-[#94A3B8]">Coupon Active</span>
             </div>
 
             <div className="flex gap-2 pt-4">
-              <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+              <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                 {editingId ? "Update Coupon" : "Create Coupon"}
               </button>
               {editingId && (

@@ -140,7 +140,7 @@ export default function SettingsPage() {
                         <div className="text-xs text-[#94A3B8] mt-1">by {item.updatedBy}</div>
                       </td>
                       <td className="p-4 flex justify-end gap-2">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors mr-2">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors mr-2">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button onClick={() => handleDelete(item.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -168,7 +168,7 @@ export default function SettingsPage() {
                 type="text"
                 value={settingKey} 
                 onChange={(e) => setSettingKey(e.target.value.toUpperCase().replace(/\s/g, '_'))} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none font-mono text-sm"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none font-mono text-sm"
                 required
                 placeholder="SITE_NAME"
               />
@@ -179,7 +179,7 @@ export default function SettingsPage() {
               <textarea 
                 value={value} 
                 onChange={(e) => setValue(e.target.value)} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none min-h-[100px]"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none min-h-[100px]"
                 required
               />
             </div>
@@ -190,12 +190,12 @@ export default function SettingsPage() {
                 type="text"
                 value={description} 
                 onChange={(e) => setDescription(e.target.value)} 
-                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
               />
             </div>
 
             <div className="flex gap-2 pt-4">
-              <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+              <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                 {editingId ? "Update Setting" : "Add Setting"}
               </button>
               {editingId && (

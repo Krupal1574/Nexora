@@ -44,18 +44,18 @@ export default function PrivacyPolicyPage() {
         lines={["Privacy ", <span key="policy" className="accent">Policy</span>]}
         sub="A technical privacy baseline for information submitted through this website."
       />
-      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
+      <section className="section-spacing bg-[#FFFFFF] border-t border-[#FFFFFF]">
         <article className="container-narrow space-y-6">
           <div className="rounded-xl border border-amber-300/30 bg-amber-300/10 p-5 text-sm leading-relaxed text-amber-100">
             This page requires review and approval by Nexora's authorized legal and privacy owner before public launch. It does not replace legal advice or verified business-specific disclosures.
           </div>
           {sections.map((section) => (
             <section key={section.title} className="glass-card p-6 sm:p-8">
-              <h2 className="text-xl font-bold text-white mb-3">{section.title}</h2>
-              <p className="text-[#94A3B8] leading-relaxed">{section.body}</p>
+              <h2 className="text-xl font-bold text-[#171717] mb-3">{section.title}</h2>
+              <p className="text-[#77736D] leading-relaxed">{section.body}</p>
             </section>
           ))}
-          <p className="text-sm text-[#94A3B8]">See also the <Link href="/terms-and-conditions" className="text-[#00F2FE] underline underline-offset-2">Terms &amp; Conditions</Link>.</p>
+          <p className="text-sm text-[#77736D]">See also the <Link href="/terms-and-conditions" className="text-[#F26A21] underline underline-offset-2">Terms &amp; Conditions</Link>.</p>
         </article>
       </section>
     </div>

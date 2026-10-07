@@ -27,12 +27,12 @@ type AccountInfo = {
 function InfoRow({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) {
   return (
     <div className="flex items-start gap-3 py-3 border-b border-[#203548] last:border-0">
-      <div className="w-8 h-8 rounded-lg bg-[#1A202C] flex items-center justify-center shrink-0 mt-0.5">
+      <div className="w-8 h-8 rounded-lg bg-[#FFFFFF] flex items-center justify-center shrink-0 mt-0.5">
         <Icon className="w-4 h-4 text-[#64748B]" />
       </div>
       <div className="min-w-0">
         <p className="text-xs text-[#64748B] mb-0.5">{label}</p>
-        <p className="text-sm text-[#94A3B8] break-all">{value}</p>
+        <p className="text-sm text-[#77736D] break-all">{value}</p>
       </div>
     </div>
   );
@@ -54,7 +54,7 @@ function PasswordInput({
   const [show, setShow] = useState(false);
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium text-[#94A3B8] mb-1.5">
+      <label htmlFor={id} className="block text-sm font-medium text-[#77736D] mb-1.5">
         {label}
       </label>
       <div className="relative">
@@ -65,12 +65,12 @@ function PasswordInput({
           onChange={(e) => onChange(e.target.value)}
           required
           placeholder={placeholder}
-          className="w-full p-3 pr-10 rounded-xl bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none transition-colors"
+          className="w-full p-3 pr-10 rounded-xl bg-[#F5F1E8] border border-[#203548] text-[#171717] focus:border-[#F26A21] outline-none transition-colors"
         />
         <button
           type="button"
           onClick={() => setShow(!show)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#94A3B8] transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#77736D] transition-colors"
           aria-label={show ? "Hide password" : "Show password"}
         >
           {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -116,11 +116,11 @@ export default function AccountSettingsPage() {
 
   if (status === "loading" || status === "unauthenticated") {
     return (
-      <div className="min-h-screen bg-[#0B0F19] text-white flex flex-col">
+      <div className="min-h-screen bg-[#F5F1E8] text-[#171717] flex flex-col">
         <Navbar />
         <main className="flex-grow flex items-center justify-center pt-24">
-          <div className="flex items-center gap-3 text-[#94A3B8]">
-            <div className="w-5 h-5 border-2 border-[#00F2FE]/30 border-t-[#00F2FE] rounded-full animate-spin" />
+          <div className="flex items-center gap-3 text-[#77736D]">
+            <div className="w-5 h-5 border-2 border-[#F26A21]/30 border-t-[#F26A21] rounded-full animate-spin" />
             Loading...
           </div>
         </main>
@@ -171,21 +171,21 @@ export default function AccountSettingsPage() {
   const displayName = accountInfo?.name || session?.user?.email || "User";
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F5F1E8] text-[#171717] flex flex-col font-sans">
       <Navbar />
 
       <main className="flex-grow pt-32 pb-20 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto space-y-6">
           {/* Page header */}
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center">
-              <Settings className="w-5 h-5 text-[#00F2FE]" />
+            <div className="w-10 h-10 rounded-xl bg-[#F26A21]/10 border border-[#F26A21]/20 flex items-center justify-center">
+              <Settings className="w-5 h-5 text-[#F26A21]" />
             </div>
             <div>
               <h1 className="text-3xl font-bold" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                 Account Settings
               </h1>
-              <p className="text-[#94A3B8] text-sm">Manage your account information and security.</p>
+              <p className="text-[#77736D] text-sm">Manage your account information and security.</p>
             </div>
           </div>
 
@@ -197,11 +197,11 @@ export default function AccountSettingsPage() {
           )}
 
           {/* Account Information */}
-          <section className="bg-[#121923] border border-[#203548] rounded-2xl overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-[#00F2FE]/5 rounded-full blur-[80px] pointer-events-none" />
+          <section className="bg-[#FFFFFF] border border-[#203548] rounded-2xl overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-[#F26A21]/5 rounded-full blur-[80px] pointer-events-none" />
 
             <div className="px-6 py-5 border-b border-[#203548]">
-              <h2 className="text-lg font-semibold text-white">Account Information</h2>
+              <h2 className="text-lg font-semibold text-[#171717]">Account Information</h2>
               <p className="text-xs text-[#64748B] mt-0.5">Your profile details and account type.</p>
             </div>
 
@@ -221,7 +221,7 @@ export default function AccountSettingsPage() {
               <div className="px-6 py-4 relative z-10">
                 {/* Avatar + name row */}
                 <div className="flex items-center gap-4 py-3 border-b border-[#203548]">
-                  <div className="w-14 h-14 rounded-full border-2 border-[#203548] overflow-hidden shrink-0 ring-2 ring-[#00F2FE]/10">
+                  <div className="w-14 h-14 rounded-full border-2 border-[#203548] overflow-hidden shrink-0 ring-2 ring-[#F26A21]/10">
                     {userImage ? (
                       <img
                         src={userImage}
@@ -232,13 +232,13 @@ export default function AccountSettingsPage() {
                         referrerPolicy="no-referrer"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center text-xl font-bold text-black">
+                      <div className="w-full h-full bg-gradient-to-br from-[#F26A21] to-[#8FB8D8] flex items-center justify-center text-xl font-bold text-black">
                         {displayName.charAt(0).toUpperCase()}
                       </div>
                     )}
                   </div>
                   <div>
-                    <p className="text-white font-semibold">{displayName}</p>
+                    <p className="text-[#171717] font-semibold">{displayName}</p>
                     <p className="text-xs text-[#64748B]">{accountInfo.email}</p>
                   </div>
                 </div>
@@ -273,10 +273,10 @@ export default function AccountSettingsPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2.5 p-3 bg-[#00F2FE]/5 border border-[#00F2FE]/20 rounded-xl">
-                      <Key className="w-5 h-5 text-[#00F2FE] shrink-0" />
+                    <div className="flex items-center gap-2.5 p-3 bg-[#F26A21]/5 border border-[#F26A21]/20 rounded-xl">
+                      <Key className="w-5 h-5 text-[#F26A21] shrink-0" />
                       <div>
-                        <p className="text-sm font-medium text-[#00F2FE]">Email & Password account</p>
+                        <p className="text-sm font-medium text-[#F26A21]">Email & Password account</p>
                         <p className="text-xs text-[#64748B]">You log in with your email and password.</p>
                       </div>
                     </div>
@@ -287,9 +287,9 @@ export default function AccountSettingsPage() {
           </section>
 
           {/* Security / Password Change */}
-          <section className="bg-[#121923] border border-[#203548] rounded-2xl overflow-hidden">
+          <section className="bg-[#FFFFFF] border border-[#203548] rounded-2xl overflow-hidden">
             <div className="px-6 py-5 border-b border-[#203548]">
-              <h2 className="text-lg font-semibold text-white">Security</h2>
+              <h2 className="text-lg font-semibold text-[#171717]">Security</h2>
               <p className="text-xs text-[#64748B] mt-0.5">Manage your password and login security.</p>
             </div>
 
@@ -308,7 +308,7 @@ export default function AccountSettingsPage() {
                     <p className="text-sm font-medium text-blue-300 mb-1">
                       Password managed by Google
                     </p>
-                    <p className="text-sm text-[#94A3B8]">
+                    <p className="text-sm text-[#77736D]">
                       You signed in using Google OAuth. To change your password, visit your{" "}
                       <a
                         href="https://myaccount.google.com/security"
@@ -327,7 +327,7 @@ export default function AccountSettingsPage() {
                 <form onSubmit={handlePasswordChange} className="space-y-4">
                   <div className="flex items-center gap-2 mb-4">
                     <Lock className="w-4 h-4 text-[#64748B]" />
-                    <p className="text-sm font-medium text-[#94A3B8]">Change Password</p>
+                    <p className="text-sm font-medium text-[#77736D]">Change Password</p>
                   </div>
 
                   {pwStatus === "success" && (
@@ -369,7 +369,7 @@ export default function AccountSettingsPage() {
                   <button
                     type="submit"
                     disabled={pwStatus === "loading"}
-                    className="w-full flex items-center justify-center gap-2 py-3 bg-[#00F2FE] text-black font-bold rounded-xl hover:bg-[#00D2C4] transition-colors disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-2 py-3 bg-[#F26A21] text-black font-bold rounded-xl hover:bg-[#8FB8D8] transition-colors disabled:opacity-50"
                   >
                     {pwStatus === "loading" ? (
                       <>
@@ -390,11 +390,11 @@ export default function AccountSettingsPage() {
 
           {/* Quick links */}
           <div className="flex gap-3 justify-center pt-2">
-            <a href="/profile" className="text-sm text-[#64748B] hover:text-[#00F2FE] transition-colors">
+            <a href="/profile" className="text-sm text-[#64748B] hover:text-[#F26A21] transition-colors">
               Edit Profile
             </a>
             <span className="text-[#203548]">·</span>
-            <a href="/my/orders" className="text-sm text-[#64748B] hover:text-[#00F2FE] transition-colors">
+            <a href="/my/orders" className="text-sm text-[#64748B] hover:text-[#F26A21] transition-colors">
               My Orders
             </a>
           </div>

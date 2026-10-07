@@ -122,7 +122,7 @@ export default function AdminTestimonials() {
                       )}
                     </td>
                     <td className="p-4 text-right">
-                      <button onClick={() => handleEdit(t)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors mr-2">
+                      <button onClick={() => handleEdit(t)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors mr-2">
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button onClick={() => handleDelete(t.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -144,28 +144,28 @@ export default function AdminTestimonials() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Name</label>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Role / Position</label>
-              <input type="text" value={role} onChange={(e) => setRole(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              <input type="text" value={role} onChange={(e) => setRole(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Content</label>
-              <textarea value={content} onChange={(e) => setContent(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none min-h-[100px]" />
+              <textarea value={content} onChange={(e) => setContent(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none min-h-[100px]" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Avatar URL</label>
-              <input type="url" value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder="https://..." className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              <input type="url" value={avatar} onChange={(e) => setAvatar(e.target.value)} placeholder="https://..." className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Rating (1-5)</label>
-              <input type="number" min="1" max="5" value={rating} onChange={(e) => setRating(parseInt(e.target.value) || 5)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              <input type="number" min="1" max="5" value={rating} onChange={(e) => setRating(parseInt(e.target.value) || 5)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             
             <div className="flex flex-col gap-2 pt-2">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#00F2FE]" />
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#F26A21]" />
                 <span className="text-sm font-medium text-[#94A3B8]">Published (visible on site)</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
@@ -175,7 +175,7 @@ export default function AdminTestimonials() {
             </div>
 
             <div className="flex gap-2 pt-4">
-              <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+              <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                 {editingId ? "Update" : "Create"}
               </button>
               {editingId && (

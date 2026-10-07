@@ -65,7 +65,7 @@ function StarRating({ rating, size = "sm" }: { rating: number; size?: "sm" | "md
         <Star
           key={i}
           className={`${sizeClasses[size]} ${
-            i < rating ? "text-[#00F2FE] fill-[#00F2FE]" : "text-[#203548] fill-[#203548]"
+            i < rating ? "text-[#F26A21] fill-[#F26A21]" : "text-[#203548] fill-[#203548]"
           } transition-all`}
         />
       ))}
@@ -127,14 +127,14 @@ export default function TestimonialsPage() {
   const regularTestimonials = testimonials.filter(t => !t.isFeatured);
 
   return (
-    <div className="overflow-x-clip bg-[#06080f]">
+    <div className="overflow-x-clip bg-[#F5F1E8]">
       {/* ═══════════════════════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-[85vh] flex flex-col justify-center pt-32 pb-24">
         {/* Background elements */}
         <div className="absolute inset-0 bg-grid pointer-events-none" />
-        <div className="glow-drift absolute -top-40 left-1/2 w-[900px] h-[500px] bg-[#00F2FE]/15 blur-[140px] rounded-full pointer-events-none" />
+        <div className="glow-drift absolute -top-40 left-1/2 w-[900px] h-[500px] bg-[#F26A21]/15 blur-[140px] rounded-full pointer-events-none" />
 
         <motion.div style={{ y, opacity: fade }} className="container-wide relative z-10">
           {/* Eyebrow */}
@@ -159,7 +159,7 @@ export default function TestimonialsPage() {
 
           {/* Subtext */}
           <motion.div {...fadeUp(0.4)} className="grid md:grid-cols-[1fr_auto] gap-8 items-end">
-            <p className="text-lg sm:text-xl text-[#94A3B8] max-w-xl leading-relaxed">
+            <p className="text-lg sm:text-xl text-[#77736D] max-w-xl leading-relaxed">
               Discover how Nexora has helped tech professionals land career-defining roles,
               negotiate better offers, and build lasting careers in the U.S. market.
             </p>
@@ -184,8 +184,8 @@ export default function TestimonialsPage() {
                 {...fadeUp(delay)}
                 className="glass-card text-center"
               >
-                <Icon className="w-5 h-5 text-[#00F2FE] mx-auto mb-3" />
-                <div className="text-3xl font-bold text-white mb-1" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                <Icon className="w-5 h-5 text-[#F26A21] mx-auto mb-3" />
+                <div className="text-3xl font-bold text-[#171717] mb-1" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                   {value.includes('%') || value.includes('+') ? value : <Counter to={parseFloat(value)} suffix="" duration={1500} />}
                 </div>
                 <div className="text-xs text-[#64748B]">{label}</div>
@@ -216,17 +216,17 @@ export default function TestimonialsPage() {
                   key={testimonial.id}
                   {...fadeUp(index * 0.2)}
                   whileHover={{ y: -8 }}
-                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] hover:border-[#00F2FE]/50 transition-all duration-500"
+                  className="group relative overflow-hidden rounded-3xl border border-black/10 bg-black/[0.03] hover:border-[#F26A21]/50 transition-all duration-500"
                 >
                   {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00F2FE]/0 via-[#00F2FE]/5 to-[#00D2C4]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#F26A21]/0 via-[#F26A21]/5 to-[#8FB8D8]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <div className="relative p-8 sm:p-12 lg:p-16">
                     <div className="grid lg:grid-cols-[1fr,auto] gap-8 lg:gap-12 items-center">
                       {/* Content */}
                       <div>
                         {/* Quote icon */}
-                        <div className="font-display text-7xl leading-none text-[#00F2FE] mb-6">"</div>
+                        <div className="font-display text-7xl leading-none text-[#F26A21] mb-6">"</div>
 
                         {/* Rating */}
                         <div className="mb-6">
@@ -234,24 +234,24 @@ export default function TestimonialsPage() {
                         </div>
 
                         {/* Quote */}
-                        <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white/90 leading-relaxed mb-8">
+                        <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#171717]/90 leading-relaxed mb-8">
                           {testimonial.content}
                         </blockquote>
 
                         {/* Author */}
-                        <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                        <div className="flex items-center gap-4 pt-6 border-t border-black/10">
                           <Image
                             src={testimonial.avatar}
                             alt={`${testimonial.name}'s avatar`}
                             width={64}
                             height={64}
-                            className="rounded-full border-2 border-[#00F2FE]/30"
+                            className="rounded-full border-2 border-[#F26A21]/30"
                           />
                           <div>
-                            <h4 className="text-xl font-bold text-white mb-1" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                            <h4 className="text-xl font-bold text-[#171717] mb-1" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                               {testimonial.name}
                             </h4>
-                            <p className="text-[#00F2FE] text-sm font-semibold mb-1">{testimonial.role}</p>
+                            <p className="text-[#F26A21] text-sm font-semibold mb-1">{testimonial.role}</p>
                             {testimonial.company && (
                               <p className="text-[#64748B] text-sm">{testimonial.company}</p>
                             )}
@@ -263,14 +263,14 @@ export default function TestimonialsPage() {
                       <div className="lg:text-right">
                         <motion.div
                           whileHover={{ scale: 1.05 }}
-                          className="inline-flex flex-col items-center lg:items-end gap-4 p-8 rounded-2xl bg-[#00F2FE]/5 border border-[#00F2FE]/10"
+                          className="inline-flex flex-col items-center lg:items-end gap-4 p-8 rounded-2xl bg-[#F26A21]/5 border border-[#F26A21]/10"
                         >
-                          <TrendingUp className="w-12 h-12 text-[#00F2FE]" />
+                          <TrendingUp className="w-12 h-12 text-[#F26A21]" />
                           <div className="text-center lg:text-right">
-                            <div className="text-5xl font-bold text-white mb-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                            <div className="text-5xl font-bold text-[#171717] mb-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                               {index === 0 ? "40%" : "6wk"}
                             </div>
-                            <div className="text-sm text-[#94A3B8]">
+                            <div className="text-sm text-[#77736D]">
                               {index === 0 ? "Salary Increase" : "Time to Offer"}
                             </div>
                           </div>
@@ -296,14 +296,14 @@ export default function TestimonialsPage() {
               className="display display-md"
               lines={["More", <><span key="s" className="thin">success</span> stories.</>]}
             />
-            <motion.p {...fadeUp(0.3)} className="text-[#94A3B8] max-w-sm">
+            <motion.p {...fadeUp(0.3)} className="text-[#77736D] max-w-sm">
               Every testimonial represents a real person whose career was transformed through Nexora.
             </motion.p>
           </div>
 
           {loading ? (
             <div className="text-center py-20">
-              <div className="inline-block w-12 h-12 border-4 border-[#00F2FE]/20 border-t-[#00F2FE] rounded-full animate-spin" />
+              <div className="inline-block w-12 h-12 border-4 border-[#F26A21]/20 border-t-[#F26A21] rounded-full animate-spin" />
             </div>
           ) : (
             <DragRail>
@@ -312,7 +312,7 @@ export default function TestimonialsPage() {
                   key={testimonial.id}
                   {...fadeUp(i * 0.08)}
                   whileHover={{ y: -8 }}
-                  className="w-[82vw] sm:w-[420px] shrink-0 rounded-3xl border border-white/10 bg-white/[0.03] p-8 flex flex-col justify-between min-h-[340px] hover:border-[#00F2FE]/50 transition-all duration-300"
+                  className="w-[82vw] sm:w-[420px] shrink-0 rounded-3xl border border-black/10 bg-black/[0.03] p-8 flex flex-col justify-between min-h-[340px] hover:border-[#F26A21]/50 transition-all duration-300"
                 >
                   <div>
                     {/* Rating */}
@@ -321,28 +321,28 @@ export default function TestimonialsPage() {
                     </div>
 
                     {/* Quote */}
-                    <blockquote className="text-lg leading-relaxed text-white/90 mb-6 italic">
+                    <blockquote className="text-lg leading-relaxed text-[#171717]/90 mb-6 italic">
                       &quot;{testimonial.content}&quot;
                     </blockquote>
                   </div>
 
                   {/* Author */}
-                  <figcaption className="flex items-center gap-3 mt-auto pt-6 border-t border-white/10">
+                  <figcaption className="flex items-center gap-3 mt-auto pt-6 border-t border-black/10">
                     <div className="relative">
                       <Image
                         src={testimonial.avatar}
                         alt={`${testimonial.name}'s avatar`}
                         width={48}
                         height={48}
-                        className="rounded-full border border-[#00F2FE]/20"
+                        className="rounded-full border border-[#F26A21]/20"
                       />
-                      <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#00D2C4] border-2 border-[#0B0F19] flex items-center justify-center">
-                        <CheckCircle2 className="w-3 h-3 text-[#0B0F19]" />
+                      <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#8FB8D8] border-2 border-[#F5F1E8] flex items-center justify-center">
+                        <CheckCircle2 className="w-3 h-3 text-[#F5F1E8]" />
                       </div>
                     </div>
                     <div className="flex-1">
-                      <div className="font-semibold text-sm text-white">{testimonial.name}</div>
-                      <div className="text-xs text-[#00F2FE]">{testimonial.role}</div>
+                      <div className="font-semibold text-sm text-[#171717]">{testimonial.name}</div>
+                      <div className="text-xs text-[#F26A21]">{testimonial.role}</div>
                       {testimonial.company && (
                         <div className="text-xs text-[#64748B]">{testimonial.company}</div>
                       )}
@@ -358,7 +358,7 @@ export default function TestimonialsPage() {
       {/* ═══════════════════════════════════════════════════════
           TRUST SECTION
       ═══════════════════════════════════════════════════════ */}
-      <section className="section-spacing border-t border-white/10">
+      <section className="section-spacing border-t border-black/10">
         <div className="container-wide">
           <Reveal>
             <span className="eyebrow mb-8">Why our testimonials matter</span>
@@ -381,13 +381,13 @@ export default function TestimonialsPage() {
                 whileHover={{ y: -8 }}
                 className="glass-card text-center group"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#00F2FE]/10 border border-[#00F2FE]/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#00F2FE]/20 transition-all">
-                  <Icon className="w-7 h-7 text-[#00F2FE]" />
+                <div className="w-14 h-14 rounded-2xl bg-[#F26A21]/10 border border-[#F26A21]/20 flex items-center justify-center mx-auto mb-5 group-hover:bg-[#F26A21]/20 transition-all">
+                  <Icon className="w-7 h-7 text-[#F26A21]" />
                 </div>
-                <h3 className="text-white font-bold mb-3 text-lg" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                <h3 className="text-[#171717] font-bold mb-3 text-lg" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                   {title}
                 </h3>
-                <p className="text-[#94A3B8] text-sm leading-relaxed">{desc}</p>
+                <p className="text-[#77736D] text-sm leading-relaxed">{desc}</p>
               </motion.div>
             ))}
           </div>
@@ -397,7 +397,7 @@ export default function TestimonialsPage() {
       {/* ═══════════════════════════════════════════════════════
           SUBMISSION FORM
       ═══════════════════════════════════════════════════════ */}
-      <section id="submit" className="section-spacing bg-gradient-to-b from-transparent to-[#0B0F19]">
+      <section id="submit" className="section-spacing bg-gradient-to-b from-transparent to-[#F5F1E8]">
         <div className="container-wide">
           <motion.div {...fadeUp()}>
             <TestimonialForm />

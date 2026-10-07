@@ -15,7 +15,7 @@ export default function PageHero({
   return (
     <section className="relative pt-12 sm:pt-16 lg:pt-24 pb-14 sm:pb-20 overflow-hidden">
       <div className="absolute inset-0 bg-grid pointer-events-none" />
-      <div className="glow-drift absolute -top-40 left-1/2 w-[min(900px,140vw)] h-[420px] bg-[#00F2FE]/15 blur-[120px] rounded-full pointer-events-none" />
+      <div className="glow-drift absolute -top-40 left-1/2 w-[min(900px,140vw)] h-[420px] bg-[#F26A21]/15 blur-[120px] rounded-full pointer-events-none" />
       <div className={`container-wide relative z-10 ${center ? "text-center" : ""}`}>
         <motion.span
           initial={{ opacity: 0, x: -16 }} animate={ready ? { opacity: 1, x: 0 } : undefined}
@@ -28,7 +28,7 @@ export default function PageHero({
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={ready ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.8, ease, delay: 0.55 }}
-            className={`mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-[#94A3B8] leading-relaxed max-w-2xl ${center ? "mx-auto" : ""}`}
+            className={`mt-6 sm:mt-8 text-base sm:text-lg lg:text-xl text-[#77736D] leading-relaxed max-w-2xl ${center ? "mx-auto" : ""}`}
           >
             {sub}
           </motion.p>

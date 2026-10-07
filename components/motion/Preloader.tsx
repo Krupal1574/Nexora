@@ -45,20 +45,20 @@ export default function Preloader() {
       {show && (
         <motion.div
           key="pre"
-          className="fixed inset-0 z-[200] bg-[#06080f] flex flex-col justify-between p-6 sm:p-10"
+          className="fixed inset-0 z-[200] bg-[#F5F1E8] flex flex-col justify-between p-6 sm:p-10"
           exit={{ y: "-100%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >
-          <div className="flex justify-between text-[11px] tracking-[0.3em] uppercase text-white/50">
+          <div className="flex justify-between text-[11px] tracking-[0.3em] uppercase text-[#171717]/50">
             <span>Nexora</span><span>IT Staffing Studio</span>
           </div>
           <div className="flex items-end justify-between">
-            <div className="font-display font-bold leading-none text-[#00F2FE] text-[22vw] sm:text-[16vw] tabular-nums">
+            <div className="font-display font-bold leading-none text-[#F26A21] text-[22vw] sm:text-[16vw] tabular-nums">
               {String(n).padStart(3, "0")}
             </div>
-            <span className="text-[11px] tracking-[0.3em] uppercase text-white/50 pb-4">Loading</span>
+            <span className="text-[11px] tracking-[0.3em] uppercase text-[#171717]/50 pb-4">Loading</span>
           </div>
-          <div className="absolute left-0 bottom-0 h-[3px] bg-[#00F2FE]" style={{ width: `${n}%` }} />
+          <div className="absolute left-0 bottom-0 h-[3px] bg-[#F26A21]" style={{ width: `${n}%` }} />
         </motion.div>
       )}
     </AnimatePresence>

@@ -27,13 +27,13 @@ export default function Marquee({ items, speed = 4 }: { items: string[]; speed?:
   const row = [...items, ...items];
 
   return (
-    <div className="overflow-hidden border-y border-white/10 py-5" aria-hidden>
+    <div className="overflow-hidden border-y border-black/10 py-5" aria-hidden>
       <motion.div style={{ x }} className="flex w-max">
         {[0, 1].map((k) => (
           <div key={k} className="flex shrink-0">
             {row.map((t, i) => (
               <span key={i} className="flex items-center gap-8 pr-8 font-display uppercase text-xl sm:text-3xl tracking-tight whitespace-nowrap">
-                {t}<span className="text-[#00F2FE]">✦</span>
+                {t}<span className="text-[#F26A21]">✦</span>
               </span>
             ))}
           </div>

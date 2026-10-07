@@ -109,7 +109,7 @@ export default function CoursesPage() {
         <h1 className="text-3xl font-bold text-white">Courses</h1>
         <button 
           onClick={handleAddNew}
-          className="bg-[#00F2FE] text-black px-4 py-2 rounded font-bold hover:bg-[#00D2C4] transition-colors flex items-center gap-2"
+          className="bg-[#F26A21] text-black px-4 py-2 rounded font-bold hover:bg-[#8FB8D8] transition-colors flex items-center gap-2"
         >
           <Plus className="w-4 h-4" /> Add New
         </button>
@@ -151,7 +151,7 @@ export default function CoursesPage() {
                         </span>
                       </td>
                       <td className="p-4 flex justify-end gap-2">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button onClick={() => handleDelete(item.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -181,7 +181,7 @@ export default function CoursesPage() {
                   value={title} 
                   onChange={(e) => setTitle(e.target.value)} 
                   required
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
               
@@ -192,7 +192,7 @@ export default function CoursesPage() {
                   value={slug} 
                   onChange={(e) => setSlug(e.target.value)} 
                   required
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
 
@@ -202,7 +202,7 @@ export default function CoursesPage() {
                   value={description} 
                   onChange={(e) => setDescription(e.target.value)} 
                   rows={3}
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
 
@@ -212,7 +212,7 @@ export default function CoursesPage() {
                   type="text" 
                   value={image} 
                   onChange={(e) => setImage(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
 
@@ -225,7 +225,7 @@ export default function CoursesPage() {
                     value={price} 
                     onChange={(e) => setPrice(e.target.value)} 
                     required
-                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                   />
                 </div>
                 <div>
@@ -233,7 +233,7 @@ export default function CoursesPage() {
                   <select 
                     value={status} 
                     onChange={(e) => setStatus(e.target.value)} 
-                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                   >
                     <option value="DRAFT">Draft</option>
                     <option value="ACTIVE">Active</option>
@@ -244,7 +244,7 @@ export default function CoursesPage() {
               </div>
 
               <div className="flex gap-2 pt-4">
-                <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+                <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                   {editingId ? 'Update' : 'Create'}
                 </button>
                 <button type="button" onClick={handleReset} className="px-4 py-2 bg-[#203548] text-white font-bold rounded hover:bg-gray-600 transition-colors">

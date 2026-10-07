@@ -46,9 +46,9 @@ export default function DragRail({ children }: { children: ReactNode }) {
         </motion.div>
       </div>
       <div className="mt-8 flex items-center gap-5">
-        <span className="text-[11px] uppercase tracking-[0.25em] text-white/40">Drag</span>
-        <div className="relative h-px flex-1 bg-white/15">
-          <motion.div style={{ scaleX: bar }} className="absolute inset-0 origin-left bg-[#00F2FE]" />
+        <span className="text-[11px] uppercase tracking-[0.25em] text-[#171717]/40">Drag</span>
+        <div className="relative h-px flex-1 bg-black/15">
+          <motion.div style={{ scaleX: bar }} className="absolute inset-0 origin-left bg-[#F26A21]" />
         </div>
       </div>
     </div>

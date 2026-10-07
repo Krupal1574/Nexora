@@ -79,27 +79,27 @@ export function ResumeUpload({ hasResume, onParsed }: { hasResume: boolean, onPa
   };
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-      <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+    <div className="bg-black/5 border border-black/10 rounded-xl p-6">
+      <h3 className="text-xl font-semibold text-[#171717] mb-4 flex items-center gap-2">
         <FileText className="text-primary" />
         Resume
       </h3>
       
       {hasResume && !file ? (
-        <div className="flex items-center justify-between bg-white/5 p-4 rounded-lg border border-white/10">
+        <div className="flex items-center justify-between bg-black/5 p-4 rounded-lg border border-black/10">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-primary/20 rounded-lg">
               <Check className="text-primary w-5 h-5" />
             </div>
             <div>
-              <p className="text-white font-medium">Resume Uploaded</p>
+              <p className="text-[#171717] font-medium">Resume Uploaded</p>
               <a href="/api/user/profile/resume" className="text-sm text-primary hover:underline">
                 Download current resume
               </a>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <label className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm cursor-pointer transition-colors">
+            <label className="px-4 py-2 bg-black/10 hover:bg-white/20 text-[#171717] rounded-lg text-sm cursor-pointer transition-colors">
               Replace
               <input type="file" className="hidden" accept=".pdf,.docx" onChange={handleFileChange} />
             </label>
@@ -109,13 +109,13 @@ export function ResumeUpload({ hasResume, onParsed }: { hasResume: boolean, onPa
           </div>
         </div>
       ) : (
-        <div className="border-2 border-dashed border-white/20 rounded-xl p-8 text-center hover:bg-white/5 transition-colors">
+        <div className="border-2 border-dashed border-black/20 rounded-xl p-8 text-center hover:bg-black/5 transition-colors">
           {file ? (
             <div className="flex flex-col items-center gap-4">
-              <FileText className="w-12 h-12 text-white/70" />
-              <div className="text-white">
+              <FileText className="w-12 h-12 text-[#171717]/70" />
+              <div className="text-[#171717]">
                 <p className="font-medium">{file.name}</p>
-                <p className="text-sm text-white/50">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                <p className="text-sm text-[#171717]/50">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
               </div>
               <div className="flex gap-3">
                 <button
@@ -129,7 +129,7 @@ export function ResumeUpload({ hasResume, onParsed }: { hasResume: boolean, onPa
                 <button
                   onClick={() => setFile(null)}
                   disabled={loading}
-                  className="px-6 py-2 bg-white/10 text-white rounded-lg hover:bg-white/20"
+                  className="px-6 py-2 bg-black/10 text-[#171717] rounded-lg hover:bg-white/20"
                 >
                   Cancel
                 </button>
@@ -141,8 +141,8 @@ export function ResumeUpload({ hasResume, onParsed }: { hasResume: boolean, onPa
                 <Upload className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <p className="text-white font-medium">Click to upload your resume</p>
-                <p className="text-sm text-white/50 mt-1">PDF or DOCX up to 5MB</p>
+                <p className="text-[#171717] font-medium">Click to upload your resume</p>
+                <p className="text-sm text-[#171717]/50 mt-1">PDF or DOCX up to 5MB</p>
               </div>
               <input type="file" className="hidden" accept=".pdf,.docx" onChange={handleFileChange} />
             </label>

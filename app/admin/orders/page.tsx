@@ -115,7 +115,7 @@ export default function OrdersPage() {
                         </div>
                       </td>
                       <td className="p-4 flex justify-end gap-2">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors">
                           <Edit2 className="w-4 h-4" />
                         </button>
                       </td>
@@ -140,7 +140,7 @@ export default function OrdersPage() {
                 <select 
                   value={status} 
                   onChange={(e) => setStatus(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 >
                   <option value="PENDING">Pending</option>
                   <option value="CONFIRMED">Confirmed</option>
@@ -157,7 +157,7 @@ export default function OrdersPage() {
                 <select 
                   value={paymentStatus} 
                   onChange={(e) => setPaymentStatus(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 >
                   <option value="PENDING">Pending</option>
                   <option value="PAID">Paid</option>
@@ -168,7 +168,7 @@ export default function OrdersPage() {
               </div>
 
               <div className="flex gap-2 pt-4">
-                <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+                <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                   Update Status
                 </button>
                 <button type="button" onClick={handleReset} className="px-4 py-2 bg-[#203548] text-white font-bold rounded hover:bg-gray-600 transition-colors">

@@ -53,18 +53,18 @@ export default function ShopPromo() {
 
       {/* Desktop modal / Mobile bottom-sheet */}
       <div
-        className="fixed z-[90] left-0 right-0 bottom-0 sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-md sm:rounded-2xl rounded-t-2xl bg-[#121623] border border-[#00F2FE]/20 shadow-[0_0_60px_rgba(0,242,254,0.15)] overflow-hidden animate-[slideUp_0.4s_ease]"
+        className="fixed z-[90] left-0 right-0 bottom-0 sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-md sm:rounded-2xl rounded-t-2xl bg-[#FFFFFF] border border-[#F26A21]/20 shadow-[0_0_60px_rgba(0,242,254,0.15)] overflow-hidden animate-[slideUp_0.4s_ease]"
         role="dialog"
         aria-modal="true"
         aria-label="Special offer"
       >
         {/* Glow effect */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] bg-[#00F2FE]/[0.06] rounded-full blur-[60px] pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[200px] bg-[#F26A21]/[0.06] rounded-full blur-[60px] pointer-events-none" />
 
         {/* Close button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-lg bg-[#1A202C]/80 border border-[#2D3748] text-[#94A3B8] hover:text-white hover:border-[#00F2FE]/30 transition-all"
+          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-lg bg-[#FFFFFF]/80 border border-[#E5E5E5] text-[#77736D] hover:text-[#171717] hover:border-[#F26A21]/30 transition-all"
           aria-label="Close offer"
         >
           <X className="w-4 h-4" />
@@ -72,25 +72,25 @@ export default function ShopPromo() {
 
         <div className="relative p-8 sm:p-10 text-center">
           {/* Icon */}
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00F2FE]/20 to-[#00D2C4]/10 border border-[#00F2FE]/25 flex items-center justify-center mx-auto mb-6">
-            <Sparkles className="w-7 h-7 text-[#00F2FE]" />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#F26A21]/20 to-[#8FB8D8]/10 border border-[#F26A21]/25 flex items-center justify-center mx-auto mb-6">
+            <Sparkles className="w-7 h-7 text-[#F26A21]" />
           </div>
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#00F2FE]/10 border border-[#00F2FE]/20 text-[#00F2FE] text-xs font-bold tracking-wider uppercase mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F26A21]/10 border border-[#F26A21]/20 text-[#F26A21] text-xs font-bold tracking-wider uppercase mb-4">
             Limited-Time Offer
           </div>
 
           {/* Headline */}
           <h3
-            className="text-2xl sm:text-3xl font-bold text-white mb-3"
+            className="text-2xl sm:text-3xl font-bold text-[#171717] mb-3"
             style={{ fontFamily: "Space Grotesk, sans-serif" }}
           >
             Save Up to{" "}
             <span
               style={{
                 background:
-                  "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                  "linear-gradient(135deg, #F26A21 0%, #8FB8D8 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
@@ -100,7 +100,7 @@ export default function ShopPromo() {
             </span>
           </h3>
 
-          <p className="text-[#94A3B8] text-sm sm:text-base leading-relaxed mb-8 max-w-sm mx-auto">
+          <p className="text-[#77736D] text-sm sm:text-base leading-relaxed mb-8 max-w-sm mx-auto">
             Explore our career plans and individual services at special introductory pricing.
           </p>
 
@@ -121,7 +121,7 @@ export default function ShopPromo() {
 
         {/* Bottom handle for mobile (visual affordance) */}
         <div className="sm:hidden flex justify-center pb-4">
-          <div className="w-10 h-1 rounded-full bg-[#2D3748]" />
+          <div className="w-10 h-1 rounded-full bg-[#E5E5E5]" />
         </div>
       </div>
     </>

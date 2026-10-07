@@ -33,9 +33,9 @@ export default function MobileBottomNav() {
       aria-label="Mobile navigation"
     >
       {/* Top gradient border */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#00F2FE]/40 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#F26A21]/40 to-transparent" />
 
-      <div className="bg-[#0B0F19]/95 backdrop-blur-xl border-t border-[#1A202C]">
+      <div className="bg-[#F5F1E8]/95 backdrop-blur-xl border-t border-[#FFFFFF]">
         <div className="flex items-center justify-around px-2 py-1.5">
           {mobileNavItems.map(({ label, href, icon: Icon }) => {
             const isActive =
@@ -48,20 +48,20 @@ export default function MobileBottomNav() {
                 href={href}
                 className={`flex flex-col items-center gap-0.5 px-2 py-1.5 rounded-xl min-w-[56px] transition-all duration-200 ${
                   isActive
-                    ? "text-[#00F2FE]"
-                    : "text-[#64748B] active:text-[#94A3B8]"
+                    ? "text-[#F26A21]"
+                    : "text-[#64748B] active:text-[#77736D]"
                 }`}
               >
                 <div
                   className={`relative p-1.5 rounded-lg transition-all duration-200 ${
                     isActive
-                      ? "bg-[#00F2FE]/10"
+                      ? "bg-[#F26A21]/10"
                       : ""
                   }`}
                 >
                   <Icon className="w-5 h-5" strokeWidth={isActive ? 2.5 : 2} />
                   {isActive && (
-                    <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#00F2FE] shadow-[0_0_6px_#00F2FE]" />
+                    <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#F26A21] shadow-[0_0_6px_#F26A21]" />
                   )}
                 </div>
                 <span

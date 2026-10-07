@@ -1,277 +1,511 @@
+"use client";
+
 import Link from "next/link";
-import type { Metadata } from "next";
+import { useState } from "react";
 import PageHero from "@/components/motion/PageHero";
-import Reveal from "@/components/motion/Reveal";
 import CtaSection from "@/components/motion/CtaSection";
 import {
-  Briefcase,
-  FileText,
-  TrendingUp,
-  Code2,
-  Shield,
   CheckCircle2,
-  ArrowRight,
   Sparkles,
-  Users,
-  BarChart3,
-  BookOpen,
-  ClipboardCheck,
+  Shield,
+  Layers,
+  Zap,
+  DollarSign,
+  Plus,
+  Tag,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Our Services",
-  description: "From career counseling and resume optimization to technical training and active placement, Nexora provides end-to-end IT staffing solutions.",
-};
-const services = [
+// ─── Plans & Packages ────────────────────────────────────────────────────────
+const plansPackages = [
   {
-    id: "career-counseling",
-    icon: Briefcase,
-    number: "01",
-    title: "Career Counseling",
-    tagline: "Clarity meets strategy",
-    description:
-      "Navigating the tech job market without direction is the biggest career killer. Nexora's career counseling connects you with specialized technical domain advisors who understand exactly what employers in your target field are looking for.",
-    details: [
-      "1-on-1 sessions with dedicated domain advisors (Cloud, Data, DevOps, Full-Stack, AI/ML)",
-      "Comprehensive skills gap analysis against current market demands",
-      "Personalized career roadmap with 30/60/90-day milestones",
-      "Salary benchmarking and negotiation coaching",
-      "Domain pivot guidance for professionals transitioning into tech",
+    id: "application-guarantee",
+    name: "Application Guarantee Plan",
+    badge: "POPULAR",
+    badgeColor: "#F26A21",
+    accent: "#F26A21",
+    borderColor: "#F26A2130",
+    bgAccent: "#F26A2108",
+    afterPlacementFee: "14%",
+    features: [
+      "Resume crafting",
+      "Resume understanding session",
+      "Profile marketing",
+      "Candidate profile optimization",
+      "60 days of marketing",
+      "After placement fees: 14%",
     ],
-    accent: "#00F2FE",
-    bgAccent: "#00F2FE12",
-    iconBg: "#00F2FE18",
-    borderColor: "#00F2FE30",
   },
   {
-    id: "resume-optimization",
-    icon: FileText,
-    number: "02",
-    title: "Resume & Portfolio Optimization",
-    tagline: "Get past the ATS, land the interview",
-    description:
-      "Most resumes never make it past automated screening systems. Our expert writers rebuild your resume from the ground up using ATS-compliant formatting, keyword optimization, and compelling achievement-driven narratives tailored to the U.S. job market.",
-    details: [
-      "Complete ATS audit and keyword optimization for target roles",
-      "Professional rewrite using the CAR (Challenge-Action-Result) framework",
-      "Tailored cover letter templates for top employers",
-      "LinkedIn profile overhaul and SEO optimization",
-      "Quantified achievement highlights that stand out to hiring managers",
+    id: "interview-coaching",
+    name: "Interview Coaching",
+    badge: "BEST SELLER",
+    badgeColor: "#F59E0B",
+    accent: "#8FB8D8",
+    borderColor: "#8FB8D830",
+    bgAccent: "#8FB8D808",
+    afterPlacementFee: "12%",
+    features: [
+      "Resume crafting",
+      "Resume understanding session",
+      "Mock interview",
+      "Guidance in initial OPT",
+      "100 working days profile marketing",
+      "Interview guarantee",
+      "After placement fees: 12%",
     ],
-    accent: "#00D2C4",
-    bgAccent: "#00D2C412",
-    iconBg: "#00D2C418",
-    borderColor: "#00D2C430",
   },
   {
-    id: "resume-marketing",
-    icon: TrendingUp,
-    number: "03",
-    title: "Resume Marketing & Interview Scheduling",
-    tagline: "Your personal recruiter, actively working for you",
-    description:
-      "This is where Nexora truly sets itself apart. You get a dedicated personal recruiter who actively markets your resume directly to decision-makers at top companies, bypassing the black hole of job boards.",
-    details: [
-      "Direct outreach to hiring managers at U.S. tech employers",
-      "Personalized resume submission tailored to each target company",
-      "Interview scheduling and calendar management handled for you",
-      "Continuous pipeline updates and feedback loops from employers",
-      "Negotiation support during offer stage",
+    id: "ultimate-session",
+    name: "Ultimate Session",
+    badge: "PREMIUM",
+    badgeColor: "#A855F7",
+    accent: "#F26A21",
+    borderColor: "#F26A2130",
+    bgAccent: "#F26A2108",
+    afterPlacementFee: "12%",
+    features: [
+      "Resume crafting",
+      "Resume understanding session",
+      "Profile marketing",
+      "Interview assessment",
+      "Interview guarantee",
+      "Unlimited Live Interview Sessions",
+      "After placement fees: 12%",
     ],
-    accent: "#00F2FE",
-    bgAccent: "#00F2FE12",
-    iconBg: "#00F2FE18",
-    borderColor: "#00F2FE30",
   },
   {
-    id: "technical-training",
-    icon: Code2,
-    number: "04",
-    title: "Technical Training & Guidance",
-    tagline: "Sharpen your skills. Outperform the competition",
-    description:
-      "The tech landscape evolves rapidly. Nexora keeps you ahead with structured learning paths, weekly live webinars, and hands-on mock technical assessments delivered by industry practitioners.",
-    details: [
-      "Domain-specific learning paths (AWS, Azure, GCP, Python, SQL, React, and more)",
-      "Weekly live webinars with Q&A from industry practitioners",
-      "Mock technical assessments mirroring real interview formats (LeetCode-style, system design)",
-      "Project portfolio building guidance for hands-on skill demonstration",
-      "Access to curated learning resources and certification preparation",
+    id: "all-in-one",
+    name: "All In One",
+    badge: "BEST VALUE",
+    badgeColor: "#10B981",
+    accent: "#8FB8D8",
+    borderColor: "#8FB8D830",
+    bgAccent: "#8FB8D808",
+    afterPlacementFee: "10%",
+    features: [
+      "Resume crafting",
+      "Resume understanding session",
+      "Profile marketing",
+      "Interview assessment",
+      "Interview guarantee",
+      "Unlimited Live Interview Sessions",
+      "After placement fees: 10%",
     ],
-    accent: "#00D2C4",
-    bgAccent: "#00D2C412",
-    iconBg: "#00D2C418",
-    borderColor: "#00D2C430",
-  },
-  {
-    id: "compliance-onboarding",
-    icon: Shield,
-    number: "05",
-    title: "Compliance, Onboarding & Background Verification",
-    tagline: "Seamless from offer to Day 1",
-    description:
-      "The final mile between an accepted offer and your first day can be filled with administrative friction. Nexora's compliance team handles every piece of documentation, verification, and onboarding coordination so nothing falls through the cracks.",
-    details: [
-      "End-to-end documentation review and compliance support",
-      "Background verification coordination with employers",
-      "I-9, E-Verify, and tax form assistance",
-      "Benefits enrollment guidance and HR system onboarding",
-      "Dedicated point-of-contact through your first 90 days",
-    ],
-    accent: "#00F2FE",
-    bgAccent: "#00F2FE12",
-    iconBg: "#00F2FE18",
-    borderColor: "#00F2FE30",
   },
 ];
 
-const processHighlights = [
-  { icon: Users, label: "Dedicated Recruiter" },
-  { icon: BarChart3, label: "Data-Driven Matching" },
-  { icon: BookOpen, label: "Ongoing Support" },
-  { icon: ClipboardCheck, label: "End-to-End Handling" },
+// ─── Individual Services ──────────────────────────────────────────────────────
+const individualServices = [
+  {
+    id: "resume-crafting",
+    name: "Resume Crafting",
+    description: "Professional resume creation tailored to your target role and tech-industry standards.",
+    accent: "#F26A21",
+  },
+  {
+    id: "resume-understanding-session",
+    name: "Resume Understanding Session",
+    description: "One-on-one session to walk through your resume, identify gaps, and align it with market expectations.",
+    accent: "#8FB8D8",
+  },
+  {
+    id: "profile-marketing",
+    name: "Profile Marketing",
+    description: "Active marketing of your candidate profile directly to hiring managers and decision-makers.",
+    accent: "#F26A21",
+  },
+  {
+    id: "candidate-profile-optimization",
+    name: "Candidate Profile Optimization",
+    description: "End-to-end optimization of your LinkedIn, resume, and online presence for maximum visibility.",
+    accent: "#8FB8D8",
+  },
+  {
+    id: "mock-interview",
+    name: "Mock Interview",
+    description: "Realistic mock interview sessions with detailed performance feedback and improvement guidance.",
+    accent: "#F26A21",
+  },
+  {
+    id: "interview-guarantee",
+    name: "Interview Guarantee",
+    description: "Guaranteed interview opportunities through our employer network and active outreach campaigns.",
+    accent: "#8FB8D8",
+  },
 ];
+
+// ─── Placement Charges ────────────────────────────────────────────────────────
+const placementCharges = [
+  {
+    plan: "Application Guarantee Plan",
+    fee: "14%",
+    note: "After placement, 14% of first-year CTC",
+    accent: "#F26A21",
+  },
+  {
+    plan: "Interview Coaching",
+    fee: "12%",
+    note: "After placement, 12% of first-year CTC",
+    accent: "#8FB8D8",
+  },
+  {
+    plan: "Ultimate Session",
+    fee: "12%",
+    note: "After placement, 12% of first-year CTC",
+    accent: "#F26A21",
+  },
+  {
+    plan: "All In One",
+    fee: "10%",
+    note: "After placement, 10% of first-year CTC — lowest fee",
+    accent: "#8FB8D8",
+  },
+];
+
+// ─── Add-ons ──────────────────────────────────────────────────────────────────
+const addOns = [
+  {
+    id: "opt-guidance",
+    name: "OPT Guidance",
+    description: "Step-by-step guidance through OPT application and initial placement phase.",
+    accent: "#F26A21",
+  },
+  {
+    id: "linkedin-overhaul",
+    name: "LinkedIn Overhaul",
+    description: "Complete LinkedIn profile rewrite with SEO optimization and keyword targeting.",
+    accent: "#8FB8D8",
+  },
+  {
+    id: "60-day-marketing",
+    name: "60-Day Marketing Extension",
+    description: "Extend your profile marketing campaign by 60 additional days for broader reach.",
+    accent: "#F26A21",
+  },
+  {
+    id: "unlimited-live-sessions",
+    name: "Unlimited Live Interview Sessions",
+    description: "Access to unlimited live mock interview sessions with industry mentors.",
+    accent: "#8FB8D8",
+  },
+  {
+    id: "100-day-marketing",
+    name: "100 Working Days Profile Marketing",
+    description: "Sustained 100 working-day profile marketing campaign across premium job boards and direct outreach.",
+    accent: "#F26A21",
+  },
+];
+
+// ─── Section Nav ──────────────────────────────────────────────────────────────
+const sections = [
+  { id: "plans-packages", label: "Plans & Packages", icon: Layers },
+  { id: "individual-services", label: "Individual Services", icon: Zap },
+  { id: "placement-charges", label: "Placement Charges", icon: DollarSign },
+  { id: "add-ons", label: "Add-ons", icon: Plus },
+];
+
+function PlanCard({ plan }: { plan: typeof plansPackages[0] }) {
+  return (
+    <div
+      className="rounded-2xl border p-6 lg:p-8 relative overflow-hidden transition-all duration-300 hover:shadow-[0_12px_40px_rgba(23,23,23,0.08)]"
+      style={{
+        background: plan.bgAccent,
+        borderColor: plan.borderColor,
+        backgroundColor: "#FFFFFF",
+      }}
+    >
+      {/* Orb */}
+      <div
+        className="absolute top-0 right-0 w-52 h-52 rounded-full blur-3xl opacity-15 pointer-events-none"
+        style={{ background: plan.accent }}
+      />
+
+      <div className="relative z-10">
+        {/* Badge + discount */}
+        <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+          <span
+            className="text-[10px] font-bold tracking-widest px-3 py-1 rounded-full"
+            style={{ background: `${plan.badgeColor}22`, color: plan.badgeColor, border: `1px solid ${plan.badgeColor}44` }}
+          >
+            {plan.badge}
+          </span>
+          <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-[#F26A2122] text-[#F26A21] border border-[#F26A2133]">
+            35% OFF
+          </span>
+        </div>
+
+        {/* Name */}
+        <h3
+          className="text-xl sm:text-2xl font-bold text-[#171717] mb-2"
+          style={{ fontFamily: "Space Grotesk, sans-serif" }}
+        >
+          {plan.name}
+        </h3>
+
+        <p className="text-xs text-[#64748B] mb-5">
+          After placement fee:{" "}
+          <span className="font-bold" style={{ color: plan.accent }}>
+            {plan.afterPlacementFee}
+          </span>
+        </p>
+
+        {/* What's Included */}
+        <div className="flex items-center gap-2 mb-3">
+          <Sparkles className="w-3.5 h-3.5" style={{ color: plan.accent }} />
+          <span className="text-[#171717] font-semibold text-xs" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+            What's Included
+          </span>
+        </div>
+
+        <ul className="space-y-2.5">
+          {plan.features.map((f) => (
+            <li key={f} className="flex items-start gap-2.5">
+              <CheckCircle2 className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" style={{ color: plan.accent }} />
+              <span className="text-[#77736D] text-sm leading-relaxed">{f}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex flex-col sm:flex-row gap-2">
+          <Link
+            href="/shop"
+            className="flex-1 text-center rounded-full py-2.5 text-xs font-bold transition-colors"
+            style={{ background: plan.accent, color: "#171717" }}
+          >
+            Get This Plan
+          </Link>
+          <Link
+            href="/contact"
+            className="flex-1 text-center rounded-full py-2.5 text-xs font-bold border transition-colors hover:bg-black/5"
+            style={{ borderColor: plan.accent, color: plan.accent }}
+          >
+            Talk to an Advisor
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ServicesPage() {
+  const [activeSection, setActiveSection] = useState("plans-packages");
+
+  const scrollTo = (id: string) => {
+    setActiveSection(id);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="overflow-x-clip">
-      {/* ════════════════════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════════════════════ */}
-      {/* ════════════════════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════════════════════ */}
+      {/* ══════════ HERO ══════════ */}
       <PageHero
         align="center"
-        eyebrow="What We Do"
+        eyebrow="What We Offer"
         lines={[
-          "Turning Your Tech Dreams ",
-          <span key="reality" className="accent">Into Reality</span>,
+          "Your Career, ",
+          <span key="our" className="accent">Our Commitment</span>,
         ]}
-        sub="From your first career conversation to your first day on the job — Nexora provides a fully integrated suite of services designed to get you hired faster and in the right role."
+        sub="Choose from our career packages, individual services, or add-ons. Transparent pricing, real results."
       >
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          {processHighlights.map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A202C] border border-[#2D3748] text-[#94A3B8] text-sm"
+        {/* Section Nav Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
+          {sections.map(({ id, label, icon: Icon }) => (
+            <button
+              key={id}
+              onClick={() => scrollTo(id)}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 border ${
+                activeSection === id
+                  ? "bg-[#F26A21] text-[#171717] border-[#F26A21]"
+                  : "bg-[#FFFFFF] text-[#77736D] border-[#E5E5E5] hover:text-[#171717]"
+              }`}
             >
-              <Icon className="w-4 h-4 text-[#00F2FE]" />
+              <Icon className="w-3.5 h-3.5" />
               {label}
-            </div>
+            </button>
           ))}
+        </div>
+
+        {/* Offer banner */}
+        <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F26A21]/10 border border-[#F26A21]/30">
+          <Tag className="w-3.5 h-3.5 text-[#F26A21]" />
+          <span className="text-xs font-semibold text-[#F26A21]">35% off Plans &amp; Packages · 15% off Individual Services</span>
         </div>
       </PageHero>
 
-      {/* ════════════════════════════════════════════════════════
-          SERVICES DETAILED BREAKDOWN
-      ════════════════════════════════════════════════════════ */}
-      <section className="section-spacing bg-[#0B0F19]">
+      {/* ══════════════════════════════════════════════
+          SECTION 1 — PLANS & PACKAGES
+      ══════════════════════════════════════════════ */}
+      <section id="plans-packages" className="section-spacing bg-[#F5F1E8]">
         <div className="container-wide">
-          <div className="space-y-8">
-            {services.map(
-              (
-                {
-                  id,
-                  icon: Icon,
-                  number,
-                  title,
-                  tagline,
-                  description,
-                  details,
-                  accent,
-                  bgAccent,
-                  iconBg,
-                  borderColor,
-                },
-                index
-              ) => (
-                <div
-                  key={id}
-                  id={id}
-                  className="rounded-2xl border p-8 lg:p-12 relative overflow-hidden transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,242,254,0.08)]"
-                  style={{
-                    background: `${bgAccent}`,
-                    borderColor: borderColor,
-                    backgroundColor: "#1A202C",
-                  }}
-                >
-                  {/* Background accent orb */}
-                  <div
-                    className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl opacity-20 pointer-events-none"
-                    style={{ background: accent }}
-                  />
+          <div className="mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+              Plans &amp; Packages
+            </h2>
+            <p className="text-[#77736D] mt-2 max-w-xl">
+              All plans include a{" "}
+              <span className="text-[#F26A21] font-semibold">35% limited-time discount</span>. Pick the plan that fits your goals.
+            </p>
+          </div>
 
-                  <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-start">
-                    {/* Left: Heading & description */}
-                    <div>
-                      <div className="flex items-center gap-4 mb-6">
-                        <div
-                          className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
-                          style={{ background: iconBg, border: `1px solid ${borderColor}` }}
-                        >
-                          <Icon className="w-7 h-7" style={{ color: accent }} />
-                        </div>
-                        <div>
-                          <span
-                            className="text-xs font-bold tracking-widest block mb-1"
-                            style={{ color: accent }}
-                          >
-                            SERVICE {number}
-                          </span>
-                          <h2
-                            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white"
-                            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                          >
-                            {title}
-                          </h2>
-                        </div>
-                      </div>
-                      <p
-                        className="text-sm font-semibold mb-4 italic"
-                        style={{ color: accent }}
-                      >
-                        {tagline}
-                      </p>
-                      <p className="text-[#94A3B8] leading-relaxed">{description}</p>
-                    </div>
-
-                    {/* Right: Feature list */}
-                    <div>
-                      <div className="flex items-center gap-2 mb-4">
-                        <Sparkles className="w-4 h-4" style={{ color: accent }} />
-                        <span
-                          className="text-white font-semibold text-sm"
-                          style={{ fontFamily: "Space Grotesk, sans-serif" }}
-                        >
-                          What's Included
-                        </span>
-                      </div>
-                      <ul className="space-y-3.5">
-                        {details.map((item) => (
-                          <li key={item} className="flex items-start gap-3">
-                            <CheckCircle2
-                              className="w-4 h-4 mt-0.5 flex-shrink-0"
-                              style={{ color: accent }}
-                            />
-                            <span className="text-[#94A3B8] text-sm leading-relaxed">
-                              {item}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              )
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {plansPackages.map((plan) => (
+              <PlanCard key={plan.id} plan={plan} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════════════
-          CTA
-      ════════════════════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════════════
+          SECTION 2 — INDIVIDUAL SERVICES
+      ══════════════════════════════════════════════ */}
+      <section id="individual-services" className="section-spacing bg-[#F5F1E8]">
+        <div className="container-wide">
+          <div className="mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+              Individual Services
+            </h2>
+            <p className="text-[#77736D] mt-2 max-w-xl">
+              Pick only what you need.{" "}
+              <span className="text-[#F26A21] font-semibold">15% off</span> all individual services.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {individualServices.map((svc) => (
+              <div
+                key={svc.id}
+                className="rounded-2xl border border-[#E5E5E5] bg-[#FFFFFF] p-6 hover:border-[#F26A21]/40 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(23,23,23,0.08)] flex flex-col gap-3"
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: `${svc.accent}15`, border: `1px solid ${svc.accent}30` }}
+                >
+                  <CheckCircle2 className="w-5 h-5" style={{ color: svc.accent }} />
+                </div>
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <h3 className="text-sm font-bold text-[#171717]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                      {svc.name}
+                    </h3>
+                    <span
+                      className="text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0"
+                      style={{ background: `${svc.accent}18`, color: svc.accent, border: `1px solid ${svc.accent}30` }}
+                    >
+                      15% OFF
+                    </span>
+                  </div>
+                  <p className="text-[#77736D] text-xs leading-relaxed">{svc.description}</p>
+                </div>
+                <Link
+                  href="/contact"
+                  className="mt-auto text-center rounded-full py-2 text-[10px] font-bold border transition-colors hover:bg-black/5"
+                  style={{ borderColor: svc.accent, color: svc.accent }}
+                >
+                  Enquire
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 3 — PLACEMENT CHARGES
+      ══════════════════════════════════════════════ */}
+      <section id="placement-charges" className="section-spacing bg-[#F5F1E8]">
+        <div className="container-wide">
+          <div className="mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+              Placement Charges
+            </h2>
+            <p className="text-[#77736D] mt-2 max-w-xl">
+              After-placement fees are charged as a percentage of your first-year CTC. You only pay after you land the job.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {placementCharges.map((pc) => (
+              <div
+                key={pc.plan}
+                className="rounded-2xl border p-6 text-center flex flex-col items-center gap-3 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(23,23,23,0.08)]"
+                style={{
+                  borderColor: `${pc.accent}30`,
+                  backgroundColor: "#FFFFFF",
+                  background: `${pc.accent}06`,
+                }}
+              >
+                <div
+                  className="w-14 h-14 rounded-full flex items-center justify-center"
+                  style={{ background: `${pc.accent}15`, border: `2px solid ${pc.accent}30` }}
+                >
+                  <span className="text-xl font-black" style={{ color: pc.accent, fontFamily: "Space Grotesk, sans-serif" }}>
+                    {pc.fee}
+                  </span>
+                </div>
+                <h3 className="text-sm font-bold text-[#171717] text-center" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                  {pc.plan}
+                </h3>
+                <p className="text-[10px] text-[#77736D] leading-relaxed">{pc.note}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 rounded-xl border border-[#F26A21]/20 bg-[#F26A21]/5 px-6 py-4 flex items-start gap-3">
+            <Shield className="w-4 h-4 text-[#F26A21] mt-0.5 shrink-0" />
+            <p className="text-xs text-[#77736D] leading-relaxed">
+              <span className="text-[#171717] font-semibold">Pay after placement.</span> Placement fees are only due once you successfully land a job through Nexora. No placement, no fee.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 4 — ADD-ONS
+      ══════════════════════════════════════════════ */}
+      <section id="add-ons" className="section-spacing bg-[#F5F1E8]">
+        <div className="container-wide">
+          <div className="mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+              Add-ons
+            </h2>
+            <p className="text-[#77736D] mt-2 max-w-xl">
+              Enhance any plan or service with targeted add-ons for extra reach, sessions, or support.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {addOns.map((addon) => (
+              <div
+                key={addon.id}
+                className="rounded-2xl border border-[#E5E5E5] bg-[#FFFFFF] p-6 hover:border-[#F26A21]/40 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(23,23,23,0.08)] flex flex-col gap-3"
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ background: `${addon.accent}15`, border: `1px solid ${addon.accent}30` }}
+                >
+                  <Plus className="w-5 h-5" style={{ color: addon.accent }} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-[#171717] mb-1" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                    {addon.name}
+                  </h3>
+                  <p className="text-[#77736D] text-xs leading-relaxed">{addon.description}</p>
+                </div>
+                <Link
+                  href="/contact"
+                  className="mt-auto text-center rounded-full py-2 text-[10px] font-bold border transition-colors hover:bg-black/5"
+                  style={{ borderColor: addon.accent, color: addon.accent }}
+                >
+                  Add to Plan
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════ CTA ══════════ */}
       <CtaSection
         lines={["Ready to Start Your ", <span key="journey" className="accent">Nexora Journey?</span>]}
         text="Speak with a Nexora specialist today and get a personalized roadmap for your career."

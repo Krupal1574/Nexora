@@ -60,7 +60,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#0B0F19] text-white antialiased">
+      <body className="bg-[#F5F1E8] text-[#171717] antialiased">
         <Preloader />
         <AuthProvider>
           <SmoothScroll>

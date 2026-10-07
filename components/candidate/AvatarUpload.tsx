@@ -64,17 +64,17 @@ export function AvatarUpload({ currentImage, name }: { currentImage?: string | n
   return (
     <div className="flex flex-col items-center space-y-4">
       <div className="relative group">
-        <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-white/10 bg-white/5 flex items-center justify-center">
+        <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-black/10 bg-black/5 flex items-center justify-center">
           {image ? (
             <img src={image} alt="Avatar" className="w-full h-full object-cover" />
           ) : (
-            <span className="text-4xl text-white/50">{name?.[0]?.toUpperCase() || <User size={48} />}</span>
+            <span className="text-4xl text-[#171717]/50">{name?.[0]?.toUpperCase() || <User size={48} />}</span>
           )}
         </div>
         
         {loading && (
           <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center">
-            <Loader2 className="animate-spin text-white w-8 h-8" />
+            <Loader2 className="animate-spin text-[#171717] w-8 h-8" />
           </div>
         )}
 

@@ -32,7 +32,7 @@ export default function HoverPreviewList({ items }: { items: PreviewItem[] }) {
           <span className="font-display text-sm">{String(i + 1).padStart(2, "0")}</span>
           <div>
             <h3 className="font-display text-2xl sm:text-4xl uppercase tracking-tight">{s.title}</h3>
-            <p className="muted text-sm text-[#94A3B8] mt-2 max-w-lg">{s.desc}</p>
+            <p className="muted text-sm text-[#77736D] mt-2 max-w-lg">{s.desc}</p>
           </div>
           <div className="flex items-center gap-6">
             <span className="row-tag text-xs uppercase tracking-widest border border-current/30 rounded-full px-3 py-1">{s.tag}</span>
@@ -51,7 +51,7 @@ export default function HoverPreviewList({ items }: { items: PreviewItem[] }) {
               animate={{ opacity: 1, scale: 1, rotate: -3 }}
               exit={{ opacity: 0, scale: 0.85 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="relative h-56 w-72 overflow-hidden rounded-2xl border border-white/20 shadow-[0_30px_80px_-20px_rgba(0,242,254,.45)]"
+              className="relative h-56 w-72 overflow-hidden rounded-2xl border border-black/20 shadow-[0_30px_80px_-20px_rgba(0,242,254,.45)]"
             >
               <Image src={items[active].image} alt="" fill sizes="288px" className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#06080f]/60 to-transparent" />

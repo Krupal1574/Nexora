@@ -111,7 +111,7 @@ export default function AdminBlogs() {
                       </span>
                     </td>
                     <td className="p-4 flex justify-end gap-2">
-                      <button onClick={() => handleEdit(b)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors">
+                      <button onClick={() => handleEdit(b)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors">
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button onClick={() => handleDelete(b.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -138,36 +138,36 @@ export default function AdminBlogs() {
                 if (!editingId) {
                   setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
                 }
-              }} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              }} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Slug</label>
-              <input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              <input type="text" value={slug} onChange={(e) => setSlug(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Category</label>
-              <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Excerpt</label>
-              <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none min-h-[60px]" />
+              <textarea value={excerpt} onChange={(e) => setExcerpt(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none min-h-[60px]" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Content (Markdown-like)</label>
-              <textarea value={content} onChange={(e) => setContent(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none min-h-[150px]" />
+              <textarea value={content} onChange={(e) => setContent(e.target.value)} required className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none min-h-[150px]" />
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-[#94A3B8]">Cover Image URL</label>
-              <input type="url" value={image} onChange={(e) => setImage(e.target.value)} className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none" />
+              <input type="url" value={image} onChange={(e) => setImage(e.target.value)} className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none" />
             </div>
             <div className="flex items-center gap-4">
               <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#00F2FE]" />
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 accent-[#F26A21]" />
                 <span className="text-sm font-medium text-[#94A3B8]">Published</span>
               </label>
             </div>
             <div className="flex gap-2 pt-4">
-              <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+              <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                 {editingId ? "Update" : "Create"}
               </button>
               {editingId && (

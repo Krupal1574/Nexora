@@ -26,7 +26,7 @@ export default function AuditLogsPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-white">Audit Logs</h1>
-        <button className="bg-[#00F2FE] text-black px-4 py-2 rounded font-bold hover:bg-[#00D2C4] transition-colors">
+        <button className="bg-[#F26A21] text-black px-4 py-2 rounded font-bold hover:bg-[#8FB8D8] transition-colors">
           Add New
         </button>
       </div>
@@ -51,7 +51,7 @@ export default function AuditLogsPage() {
                   <tr key={item.id} className="hover:bg-[#1A202C]/50 transition-colors">
                     <td className="p-4 text-sm text-white">{item.id}</td>
                     <td className="p-4 text-sm text-[#94A3B8]">{new Date(item.createdAt).toLocaleDateString()}</td>
-                    <td className="p-4 text-sm text-[#00F2FE] cursor-pointer hover:underline">Edit</td>
+                    <td className="p-4 text-sm text-[#F26A21] cursor-pointer hover:underline">Edit</td>
                   </tr>
                 ))
               )}

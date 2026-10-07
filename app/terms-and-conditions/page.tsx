@@ -40,18 +40,18 @@ export default function TermsAndConditionsPage() {
         lines={["Terms & ", <span key="conditions" className="accent">Conditions</span>]}
         sub="Terms for using this website and submitting an inquiry or referral."
       />
-      <section className="section-spacing bg-[#121623] border-t border-[#1A202C]">
+      <section className="section-spacing bg-[#FFFFFF] border-t border-[#FFFFFF]">
         <article className="container-narrow space-y-6">
           <div className="rounded-xl border border-amber-300/30 bg-amber-300/10 p-5 text-sm leading-relaxed text-amber-100">
             This page requires review and approval by Nexora's authorized legal owner before public launch. It does not replace legal advice.
           </div>
           {sections.map((section) => (
             <section key={section.title} className="glass-card p-6 sm:p-8">
-              <h2 className="text-xl font-bold text-white mb-3">{section.title}</h2>
-              <p className="text-[#94A3B8] leading-relaxed">{section.body}</p>
+              <h2 className="text-xl font-bold text-[#171717] mb-3">{section.title}</h2>
+              <p className="text-[#77736D] leading-relaxed">{section.body}</p>
             </section>
           ))}
-          <p className="text-sm text-[#94A3B8]">Read the <Link href="/privacy-policy" className="text-[#00F2FE] underline underline-offset-2">Privacy Policy</Link> for information-handling details.</p>
+          <p className="text-sm text-[#77736D]">Read the <Link href="/privacy-policy" className="text-[#F26A21] underline underline-offset-2">Privacy Policy</Link> for information-handling details.</p>
         </article>
       </section>
     </div>

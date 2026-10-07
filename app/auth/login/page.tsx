@@ -50,24 +50,24 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Background glow effects */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#00F2FE]/10 rounded-full blur-[128px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#00D2C4]/8 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#F26A21]/10 rounded-full blur-[128px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#8FB8D8]/8 rounded-full blur-[128px] pointer-events-none" />
 
       <div className="w-full max-w-md fade-up">
         {/* Card */}
         <div className="glass-card relative overflow-hidden">
           {/* Top accent gradient */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00F2FE] to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#F26A21] to-transparent" />
 
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00F2FE]/20 to-[#00D2C4]/10 border border-[#00F2FE]/20 mb-4">
-              <Lock className="w-6 h-6 text-[#00F2FE]" />
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#F26A21]/20 to-[#8FB8D8]/10 border border-[#F26A21]/20 mb-4">
+              <Lock className="w-6 h-6 text-[#F26A21]" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+            <h1 className="text-2xl font-bold text-[#171717] mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               Welcome Back
             </h1>
-            <p className="text-sm text-[#94A3B8]">Sign in to your Nexora account</p>
+            <p className="text-sm text-[#77736D]">Sign in to your Nexora account</p>
           </div>
 
           {/* Error message */}
@@ -81,7 +81,7 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-[#94A3B8] mb-2">Email Address</label>
+              <label className="block text-sm font-medium text-[#77736D] mb-2">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
                 <input
@@ -99,10 +99,10 @@ export default function Login() {
             {/* Password */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="block text-sm font-medium text-[#94A3B8]">Password</label>
+                <label className="block text-sm font-medium text-[#77736D]">Password</label>
                 <Link
                   href="/auth/forgot-password"
-                  className="text-xs text-[#00F2FE] hover:text-[#00D2C4] transition-colors"
+                  className="text-xs text-[#F26A21] hover:text-[#8FB8D8] transition-colors"
                 >
                   Forgot password?
                 </Link>
@@ -121,7 +121,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#94A3B8] transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#64748B] hover:text-[#77736D] transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -133,9 +133,9 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-xl font-bold text-[#0B0F19] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 rounded-xl font-bold text-[#F5F1E8] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
-                background: "linear-gradient(135deg, #00F2FE 0%, #00D2C4 100%)",
+                background: "linear-gradient(135deg, #F26A21 0%, #8FB8D8 100%)",
                 fontFamily: "'Space Grotesk', sans-serif",
               }}
             >
@@ -152,16 +152,16 @@ export default function Login() {
 
           {/* Divider */}
           <div className="flex items-center gap-4 my-6">
-            <span className="flex-1 h-px bg-gradient-to-r from-transparent to-[#2D3748]" />
+            <span className="flex-1 h-px bg-gradient-to-r from-transparent to-[#E5E5E5]" />
             <span className="text-xs text-[#64748B] uppercase tracking-wider">or continue with</span>
-            <span className="flex-1 h-px bg-gradient-to-l from-transparent to-[#2D3748]" />
+            <span className="flex-1 h-px bg-gradient-to-l from-transparent to-[#E5E5E5]" />
           </div>
 
           {/* Google */}
           <button
             onClick={handleGoogleSignIn}
             disabled={googleLoading}
-            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-white/5 border border-[#2D3748] text-white font-medium hover:bg-white/10 hover:border-[#00F2FE]/30 transition-all duration-300 disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-black/5 border border-[#E5E5E5] text-[#171717] font-medium hover:bg-black/10 hover:border-[#F26A21]/30 transition-all duration-300 disabled:opacity-50"
           >
             {googleLoading ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -177,9 +177,9 @@ export default function Login() {
           </button>
 
           {/* Register link */}
-          <p className="mt-8 text-center text-sm text-[#94A3B8]">
+          <p className="mt-8 text-center text-sm text-[#77736D]">
             Don&apos;t have an account?{" "}
-            <Link href="/auth/register" className="text-[#00F2FE] font-medium hover:text-[#00D2C4] transition-colors">
+            <Link href="/auth/register" className="text-[#F26A21] font-medium hover:text-[#8FB8D8] transition-colors">
               Create account
             </Link>
           </p>

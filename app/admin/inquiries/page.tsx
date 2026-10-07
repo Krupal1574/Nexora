@@ -112,7 +112,7 @@ export default function InquiriesPage() {
                         </span>
                       </td>
                       <td className="p-4 flex justify-end gap-2">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors mr-2">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors mr-2">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button onClick={() => handleDelete(item.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -140,7 +140,7 @@ export default function InquiriesPage() {
                 <select 
                   value={status} 
                   onChange={(e) => setStatus(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 >
                   <option value="NEW">New</option>
                   <option value="IN_PROGRESS">In Progress</option>
@@ -154,12 +154,12 @@ export default function InquiriesPage() {
                   value={notes} 
                   onChange={(e) => setNotes(e.target.value)} 
                   placeholder="Add notes for admin team..."
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none min-h-[100px]"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none min-h-[100px]"
                 />
               </div>
 
               <div className="flex gap-2 pt-4">
-                <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+                <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                   Update Inquiry
                 </button>
                 <button type="button" onClick={handleReset} className="px-4 py-2 bg-[#203548] text-white font-bold rounded hover:bg-gray-600 transition-colors">

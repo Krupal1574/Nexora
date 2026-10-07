@@ -1,4 +1,6 @@
-import type { Config } from "tailwindcss";
+const fs = require('fs');
+
+const config = `import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -70,3 +72,6 @@ const config: Config = {
 };
 
 export default config;
+`;
+
+fs.writeFileSync('tailwind.config.ts', config);

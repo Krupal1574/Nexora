@@ -99,7 +99,7 @@ export default function UsersPage() {
                         <div className="text-[#94A3B8]">{item.email}</div>
                       </td>
                       <td className="p-4 text-sm">
-                        <span className={`px-2 py-1 rounded text-xs font-bold mr-2 ${item.role === 'ADMIN' ? 'bg-purple-400/10 text-purple-400' : 'bg-[#00F2FE]/10 text-[#00F2FE]'}`}>
+                        <span className={`px-2 py-1 rounded text-xs font-bold mr-2 ${item.role === 'ADMIN' ? 'bg-purple-400/10 text-purple-400' : 'bg-[#F26A21]/10 text-[#F26A21]'}`}>
                           {item.role}
                         </span>
                         {item.isDisabled && (
@@ -110,7 +110,7 @@ export default function UsersPage() {
                       </td>
                       <td className="p-4 text-sm text-[#94A3B8]">{new Date(item.createdAt).toLocaleDateString()}</td>
                       <td className="p-4 flex justify-end gap-2">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button onClick={() => handleDelete(item.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -138,7 +138,7 @@ export default function UsersPage() {
                 <select 
                   value={role} 
                   onChange={(e) => setRole(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 >
                   <option value="CUSTOMER">Customer</option>
                   <option value="ADMIN">Admin</option>
@@ -158,7 +158,7 @@ export default function UsersPage() {
               </div>
 
               <div className="flex gap-2 pt-4">
-                <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+                <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                   Update
                 </button>
                 <button type="button" onClick={handleReset} className="px-4 py-2 bg-[#203548] text-white font-bold rounded hover:bg-gray-600 transition-colors">

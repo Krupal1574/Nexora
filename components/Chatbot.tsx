@@ -194,7 +194,7 @@ export function Chatbot() {
               />
             </div>
             {/* Online dot */}
-            <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#0B0F19] bg-emerald-400" />
+            <span className="absolute -top-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#F5F1E8] bg-emerald-400" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -207,14 +207,14 @@ export function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="fixed bottom-20 lg:bottom-6 right-2 lg:right-6 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#2d3748]/60 shadow-2xl shadow-black/40 backdrop-blur-sm
+            className="fixed bottom-20 lg:bottom-6 right-2 lg:right-6 z-50 flex flex-col overflow-hidden rounded-2xl border border-[#E5E5E5]/60 shadow-2xl shadow-black/40 backdrop-blur-sm
                        w-[calc(100vw-1rem)] max-w-[400px] h-[min(70vh,580px)]
                        sm:w-[400px] sm:right-6"
-            style={{ background: "#121623" }}
+            style={{ background: "#FFFFFF" }}
           >
             {/* ── Header ──────────────────────────────────────────────────── */}
             <div
-              className="flex items-center gap-3 px-4 py-3 border-b border-[#2d3748]/60"
+              className="flex items-center gap-3 px-4 py-3 border-b border-[#E5E5E5]/60"
               style={{
                 background: "linear-gradient(135deg, rgba(0,210,196,.12) 0%, rgba(0,242,254,.06) 100%)",
               }}
@@ -231,7 +231,7 @@ export function Chatbot() {
               </div>
 
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-semibold text-white leading-tight" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+                <h3 className="text-sm font-semibold text-[#171717] leading-tight" style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
                   Nexora AI
                 </h3>
                 <div className="flex items-center gap-1.5">
@@ -246,7 +246,7 @@ export function Chatbot() {
                 {hasMessages && (
                   <button
                     onClick={handleNewChat}
-                    className="rounded-lg p-1.5 text-[#94a3b8] transition-colors hover:bg-white/5 hover:text-white"
+                    className="rounded-lg p-1.5 text-[#94a3b8] transition-colors hover:bg-black/5 hover:text-[#171717]"
                     aria-label="New chat"
                     title="New chat"
                   >
@@ -255,14 +255,14 @@ export function Chatbot() {
                 )}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-1.5 text-[#94a3b8] transition-colors hover:bg-white/5 hover:text-white"
+                  className="rounded-lg p-1.5 text-[#94a3b8] transition-colors hover:bg-black/5 hover:text-[#171717]"
                   aria-label="Minimize chat"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-1.5 text-[#94a3b8] transition-colors hover:bg-white/5 hover:text-white"
+                  className="rounded-lg p-1.5 text-[#94a3b8] transition-colors hover:bg-black/5 hover:text-[#171717]"
                   aria-label="Close chat"
                 >
                   <X className="h-4 w-4" />
@@ -275,7 +275,7 @@ export function Chatbot() {
               className="flex-1 overflow-y-auto px-4 py-4 space-y-4"
               style={{
                 scrollbarWidth: "thin",
-                scrollbarColor: "#2d3748 transparent",
+                scrollbarColor: "#E5E5E5 transparent",
               }}
             >
               {/* Welcome state */}
@@ -298,7 +298,7 @@ export function Chatbot() {
                   </div>
 
                   <h4
-                    className="text-lg font-bold text-white mb-1"
+                    className="text-lg font-bold text-[#171717] mb-1"
                     style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif" }}
                   >
                     Nexora AI
@@ -313,7 +313,7 @@ export function Chatbot() {
                       <button
                         key={s}
                         onClick={() => handleSuggestion(s)}
-                        className="rounded-full border border-[#2d3748] bg-[#1a202c] px-3.5 py-2 text-xs text-[#94a3b8] transition-all hover:border-[#00d2c4]/50 hover:text-[#00f2fe] hover:bg-[#00d2c4]/5 active:scale-95"
+                        className="rounded-full border border-[#E5E5E5] bg-[#FFFFFF] px-3.5 py-2 text-xs text-[#94a3b8] transition-all hover:border-[#8FB8D8]/50 hover:text-[#F26A21] hover:bg-[#8FB8D8]/5 active:scale-95"
                       >
                         {s}
                       </button>
@@ -353,12 +353,12 @@ export function Chatbot() {
                     <div
                       className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap break-words ${
                         isUser
-                          ? "rounded-br-md text-[#0B0F19]"
-                          : "rounded-bl-md bg-[#1a202c] text-[#e2e8f0] border border-[#2d3748]/40"
+                          ? "rounded-br-md text-[#F5F1E8]"
+                          : "rounded-bl-md bg-[#FFFFFF] text-[#e2e8f0] border border-[#E5E5E5]/40"
                       }`}
                       style={
                         isUser
-                          ? { background: "linear-gradient(135deg, #00d2c4 0%, #00f2fe 100%)" }
+                          ? { background: "linear-gradient(135deg, #8FB8D8 0%, #F26A21 100%)" }
                           : undefined
                       }
                     >
@@ -378,16 +378,16 @@ export function Chatbot() {
                   <div
                     className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full mt-0.5"
                     style={{
-                      background: "linear-gradient(135deg, #00d2c4 0%, #00f2fe 100%)",
+                      background: "linear-gradient(135deg, #8FB8D8 0%, #F26A21 100%)",
                     }}
                   >
-                    <Sparkles className="h-3.5 w-3.5 text-[#0B0F19]" />
+                    <Sparkles className="h-3.5 w-3.5 text-[#F5F1E8]" />
                   </div>
-                  <div className="rounded-2xl rounded-bl-md bg-[#1a202c] border border-[#2d3748]/40 px-4 py-3">
+                  <div className="rounded-2xl rounded-bl-md bg-[#FFFFFF] border border-[#E5E5E5]/40 px-4 py-3">
                     <div className="flex gap-1.5 items-center">
-                      <span className="h-2 w-2 rounded-full bg-[#00d2c4] animate-bounce [animation-delay:0ms]" />
-                      <span className="h-2 w-2 rounded-full bg-[#00d2c4] animate-bounce [animation-delay:150ms]" />
-                      <span className="h-2 w-2 rounded-full bg-[#00d2c4] animate-bounce [animation-delay:300ms]" />
+                      <span className="h-2 w-2 rounded-full bg-[#8FB8D8] animate-bounce [animation-delay:0ms]" />
+                      <span className="h-2 w-2 rounded-full bg-[#8FB8D8] animate-bounce [animation-delay:150ms]" />
+                      <span className="h-2 w-2 rounded-full bg-[#8FB8D8] animate-bounce [animation-delay:300ms]" />
                     </div>
                   </div>
                 </motion.div>
@@ -408,8 +408,8 @@ export function Chatbot() {
             </div>
 
             {/* ── Input area ──────────────────────────────────────────────── */}
-            <div className="border-t border-[#2d3748]/60 px-3 py-3 bg-[#0f1320]">
-              <div className="flex items-end gap-2 rounded-xl border border-[#2d3748]/60 bg-[#1a202c] px-3 py-2 transition-colors focus-within:border-[#00d2c4]/40">
+            <div className="border-t border-[#E5E5E5]/60 px-3 py-3 bg-[#0f1320]">
+              <div className="flex items-end gap-2 rounded-xl border border-[#E5E5E5]/60 bg-[#FFFFFF] px-3 py-2 transition-colors focus-within:border-[#8FB8D8]/40">
                 <textarea
                   ref={textareaRef}
                   value={input}
@@ -418,7 +418,7 @@ export function Chatbot() {
                   placeholder="Ask Nexora AI anything..."
                   disabled={isStreaming}
                   rows={1}
-                  className="flex-1 resize-none bg-transparent text-sm text-white placeholder-[#64748b] outline-none disabled:opacity-50"
+                  className="flex-1 resize-none bg-transparent text-sm text-[#171717] placeholder-[#64748b] outline-none disabled:opacity-50"
                   style={{
                     maxHeight: "120px",
                     lineHeight: "1.5",
@@ -432,12 +432,12 @@ export function Chatbot() {
                   style={{
                     background:
                       !isStreaming && input.trim()
-                        ? "linear-gradient(135deg, #00d2c4 0%, #00f2fe 100%)"
-                        : "#2d3748",
+                        ? "linear-gradient(135deg, #8FB8D8 0%, #F26A21 100%)"
+                        : "#E5E5E5",
                   }}
                   aria-label="Send message"
                 >
-                  <Send className="h-4 w-4 text-[#0B0F19]" />
+                  <Send className="h-4 w-4 text-[#F5F1E8]" />
                 </button>
               </div>
               <p className="mt-1.5 text-center text-[10px] text-[#475569]">

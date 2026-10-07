@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { PinpointSMSVoiceV2Client, SendTextMessageCommand } from "@aws-sdk/client-pinpoint-sms-voice-v2";
+
+const smsClient = new PinpointSMSVoiceV2Client({
+  region: process.env.AWS_REGION || "us-east-1",
+});
 
 export async function POST(req: Request) {
   try {
@@ -30,12 +35,32 @@ export async function POST(req: Request) {
       data: { pendingPhone: newPhone },
     });
 
-    // In a real app, integrate Twilio here
-    // const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    // await sendSmsOtp(newPhone, otp);
-    // await saveOtpToDb(session.user.id, otp);
-    
-    // NOTE: SMS OTP is mocked for MVP. Integrate Twilio or similar before production.
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Store OTP in verification tokens
+    await prisma.verificationToken.deleteMany({
+      where: { identifier: `phone_${session.user.id}` },
+    });
+
+    await prisma.verificationToken.create({
+      data: {
+        identifier: `phone_${session.user.id}`,
+        token: otp,
+        expires: new Date(Date.now() + 15 * 60 * 1000), // 15 mins
+      },
+    });
+
+    try {
+      const command = new SendTextMessageCommand({
+        DestinationPhoneNumber: newPhone,
+        MessageBody: `Your Nexora verification code is ${otp}`,
+        MessageType: "TRANSACTIONAL",
+      });
+      await smsClient.send(command);
+    } catch (smsError) {
+      console.error("[MOBILE_OTP_POST] AWS SMS Error:", smsError);
+      return new NextResponse("Failed to send SMS", { status: 500 });
+    }
 
     // Update rate limit
     await prisma.rateLimit.upsert({
@@ -75,12 +100,25 @@ export async function PUT(req: Request) {
 
     if (!user?.pendingPhone) return new NextResponse("No pending phone", { status: 400 });
 
-    // In a real app, verify OTP against DB/Redis
-    // For MVP, any 6-digit string works since it's mocked
+    const verification = await prisma.verificationToken.findFirst({
+      where: {
+        identifier: `phone_${session.user.id}`,
+        token: otp,
+        expires: { gt: new Date() }
+      }
+    });
+
+    if (!verification) {
+      return new NextResponse("Invalid or expired OTP", { status: 400 });
+    }
 
     await prisma.user.update({
       where: { id: session.user.id },
       data: { phone: user.pendingPhone, pendingPhone: null },
+    });
+
+    await prisma.verificationToken.deleteMany({
+      where: { identifier: `phone_${session.user.id}` },
     });
 
     return NextResponse.json({ success: true });

@@ -28,11 +28,11 @@ export default function HorizontalScroll({ header, children, count }: { header: 
           {children}
         </motion.div>
         <div className="container-wide w-full flex items-center gap-5">
-          <motion.span className="font-display text-sm tabular-nums text-[#00F2FE]">{current}</motion.span>
-          <div className="relative h-px flex-1 bg-white/15">
-            <motion.div style={{ scaleX: scrollYProgress }} className="absolute inset-0 origin-left bg-[#00F2FE]" />
+          <motion.span className="font-display text-sm tabular-nums text-[#F26A21]">{current}</motion.span>
+          <div className="relative h-px flex-1 bg-black/15">
+            <motion.div style={{ scaleX: scrollYProgress }} className="absolute inset-0 origin-left bg-[#F26A21]" />
           </div>
-          <span className="font-display text-sm tabular-nums text-white/40">{String(count).padStart(2, "0")}</span>
+          <span className="font-display text-sm tabular-nums text-[#171717]/40">{String(count).padStart(2, "0")}</span>
         </div>
       </div>
     </div>

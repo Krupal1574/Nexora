@@ -63,7 +63,7 @@ export default function TestimonialForm() {
         <h2 className="display display-md mb-6">
           Your <span className="accent">success</span> story.
         </h2>
-        <p className="text-[#94A3B8] text-lg max-w-2xl mx-auto">
+        <p className="text-[#77736D] text-lg max-w-2xl mx-auto">
           Help others by sharing your experience working with Nexora.
           Your testimonial will be reviewed before publishing.
         </p>
@@ -75,10 +75,10 @@ export default function TestimonialForm() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease, delay: 0.2 }}
-        className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 sm:p-10 lg:p-12"
+        className="relative overflow-hidden rounded-3xl border border-black/10 bg-black/[0.03] p-8 sm:p-10 lg:p-12"
       >
         {/* Background glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#00F2FE] opacity-[0.02] blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#F26A21] opacity-[0.02] blur-3xl rounded-full pointer-events-none" />
 
         <div className="relative z-10">
           {status === "success" ? (
@@ -92,14 +92,14 @@ export default function TestimonialForm() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.6, ease, delay: 0.2 }}
-                className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-[#00D2C4]/20 border border-[#00D2C4]/30 mb-8 mx-auto"
+                className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-[#8FB8D8]/20 border border-[#8FB8D8]/30 mb-8 mx-auto"
               >
-                <CheckCircle2 className="w-12 h-12 text-[#00D2C4]" />
+                <CheckCircle2 className="w-12 h-12 text-[#8FB8D8]" />
               </motion.div>
-              <h3 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+              <h3 className="text-3xl font-bold text-[#171717] mb-4" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
                 Thank You!
               </h3>
-              <p className="text-[#94A3B8] text-lg mb-2">
+              <p className="text-[#77736D] text-lg mb-2">
                 Your testimonial has been submitted successfully.
               </p>
               <p className="text-[#64748B] text-sm">
@@ -131,8 +131,8 @@ export default function TestimonialForm() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, ease }}
                 >
-                  <label htmlFor="name" className="block text-sm font-bold text-white mb-3 tracking-wide">
-                    YOUR NAME <span className="text-[#00F2FE]">*</span>
+                  <label htmlFor="name" className="block text-sm font-bold text-[#171717] mb-3 tracking-wide">
+                    YOUR NAME <span className="text-[#F26A21]">*</span>
                   </label>
                   <input
                     id="name"
@@ -151,8 +151,8 @@ export default function TestimonialForm() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, ease, delay: 0.1 }}
                 >
-                  <label htmlFor="role" className="block text-sm font-bold text-white mb-3 tracking-wide">
-                    ROLE & COMPANY <span className="text-[#00F2FE]">*</span>
+                  <label htmlFor="role" className="block text-sm font-bold text-[#171717] mb-3 tracking-wide">
+                    ROLE & COMPANY <span className="text-[#F26A21]">*</span>
                   </label>
                   <input
                     id="role"
@@ -173,8 +173,8 @@ export default function TestimonialForm() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease, delay: 0.2 }}
               >
-                <label className="block text-sm font-bold text-white mb-4 tracking-wide">
-                  YOUR RATING <span className="text-[#00F2FE]">*</span>
+                <label className="block text-sm font-bold text-[#171717] mb-4 tracking-wide">
+                  YOUR RATING <span className="text-[#F26A21]">*</span>
                 </label>
                 <div className="flex items-center gap-3">
                   {[1, 2, 3, 4, 5].map((star) => (
@@ -191,13 +191,13 @@ export default function TestimonialForm() {
                       <Star
                         className={`w-10 h-10 transition-all ${
                           star <= (hoveredRating || rating)
-                            ? "text-[#00F2FE] fill-[#00F2FE]"
+                            ? "text-[#F26A21] fill-[#F26A21]"
                             : "text-[#203548] fill-[#203548]"
                         }`}
                       />
                     </motion.button>
                   ))}
-                  <span className="ml-4 text-base text-[#94A3B8] font-medium">
+                  <span className="ml-4 text-base text-[#77736D] font-medium">
                     {rating === 5 && "Excellent!"}
                     {rating === 4 && "Very Good"}
                     {rating === 3 && "Good"}
@@ -214,8 +214,8 @@ export default function TestimonialForm() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease, delay: 0.3 }}
               >
-                <label htmlFor="content" className="block text-sm font-bold text-white mb-3 tracking-wide">
-                  YOUR EXPERIENCE <span className="text-[#00F2FE]">*</span>
+                <label htmlFor="content" className="block text-sm font-bold text-[#171717] mb-3 tracking-wide">
+                  YOUR EXPERIENCE <span className="text-[#F26A21]">*</span>
                 </label>
                 <textarea
                   id="content"
@@ -242,10 +242,10 @@ export default function TestimonialForm() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease, delay: 0.4 }}
-                className="p-5 rounded-2xl bg-[#00F2FE]/5 border border-[#00F2FE]/10"
+                className="p-5 rounded-2xl bg-[#F26A21]/5 border border-[#F26A21]/10"
               >
-                <p className="text-xs text-[#94A3B8] leading-relaxed">
-                  <strong className="text-white font-semibold">Privacy Note:</strong> Your testimonial
+                <p className="text-xs text-[#77736D] leading-relaxed">
+                  <strong className="text-[#171717] font-semibold">Privacy Note:</strong> Your testimonial
                   will be reviewed by our team before being published. We may edit for
                   length or clarity. By submitting, you agree to let Nexora use your
                   testimonial on our website and marketing materials.
@@ -268,7 +268,7 @@ export default function TestimonialForm() {
                 >
                   {status === "loading" ? (
                     <>
-                      <div className="w-5 h-5 border-3 border-[#0B0F19]/30 border-t-[#0B0F19] rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-3 border-[#F5F1E8]/30 border-t-[#F5F1E8] rounded-full animate-spin" />
                       Submitting...
                     </>
                   ) : (

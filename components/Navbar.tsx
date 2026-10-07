@@ -30,7 +30,7 @@ function UserAvatar({ image, name, size = 24 }: { image?: string | null; name?: 
 
   return (
     <div
-      className="rounded-full bg-gradient-to-br from-[#00F2FE] to-[#00D2C4] flex items-center justify-center font-bold text-black"
+      className="rounded-full bg-gradient-to-br from-[#F26A21] to-[#8FB8D8] flex items-center justify-center font-bold text-black"
       style={{ width: size, height: size, fontSize: size * 0.42 }}
     >
       {initial}
@@ -96,8 +96,8 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#0B0F19]/95 backdrop-blur-xl border-b border-[#00F2FE]/20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
-            : "bg-[#0B0F19]/80 backdrop-blur-md border-b border-[#00F2FE]/10"
+            ? "bg-[#F5F1E8]/95 backdrop-blur-xl border-b border-[#F26A21]/20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+            : "bg-[#F5F1E8]/80 backdrop-blur-md border-b border-[#F26A21]/10"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -109,13 +109,13 @@ export default function Navbar() {
                 alt="Nexora logo"
                 width={36}
                 height={36}
-                className="rounded-full shadow-[0_0_16px_#00F2FE44] group-hover:shadow-[0_0_24px_#00F2FE88] transition-all duration-300"
+                className="rounded-full shadow-[0_0_16px_#F26A2144] group-hover:shadow-[0_0_24px_#F26A2188] transition-all duration-300"
               />
               <span
                 className="text-2xl font-bold tracking-tight"
                 style={{
                   fontFamily: "Space Grotesk, sans-serif",
-                  background: "linear-gradient(135deg, #ffffff 0%, #00F2FE 100%)",
+                  background: "linear-gradient(135deg, #ffffff 0%, #F26A21 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -133,13 +133,13 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative text-sm font-medium transition-all duration-200 group whitespace-nowrap ${
                     pathname === link.href
-                      ? "text-[#00F2FE]"
-                      : "text-[#94A3B8] hover:text-white"
+                      ? "text-[#F26A21]"
+                      : "text-[#77736D] hover:text-[#171717]"
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] rounded-full transition-all duration-300 ${
+                    className={`absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] rounded-full transition-all duration-300 ${
                       pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -162,22 +162,22 @@ export default function Navbar() {
                   <div className="relative" ref={userMenuRef}>
                     <button
                       onClick={() => setUserMenuOpen(!userMenuOpen)}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1A202C] border border-[#203548] hover:border-[#00F2FE]/40 transition-all duration-200"
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FFFFFF] border border-[#203548] hover:border-[#F26A21]/40 transition-all duration-200"
                     >
                       <UserAvatar
                         image={session.user?.image}
                         name={session.user?.name}
                         size={24}
                       />
-                      <span className="text-sm font-medium text-white max-w-[100px] truncate">
+                      <span className="text-sm font-medium text-[#171717] max-w-[100px] truncate">
                         {session.user?.name || session.user?.email}
                       </span>
-                      <ChevronDown className={`w-3.5 h-3.5 text-[#94A3B8] transition-transform duration-200 ${userMenuOpen ? "rotate-180" : ""}`} />
+                      <ChevronDown className={`w-3.5 h-3.5 text-[#77736D] transition-transform duration-200 ${userMenuOpen ? "rotate-180" : ""}`} />
                     </button>
 
                     {/* Dropdown */}
                     {userMenuOpen && (
-                      <div className="absolute right-0 top-full mt-2 w-60 rounded-xl bg-[#121623] border border-[#203548] shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2 z-50">
+                      <div className="absolute right-0 top-full mt-2 w-60 rounded-xl bg-[#FFFFFF] border border-[#203548] shadow-[0_8px_32px_rgba(0,0,0,0.5)] py-2 z-50">
                         {/* User header */}
                         <div className="px-4 py-3 border-b border-[#203548] flex items-center gap-3">
                           <UserAvatar
@@ -186,7 +186,7 @@ export default function Navbar() {
                             size={36}
                           />
                           <div className="min-w-0">
-                            <p className="text-sm font-semibold text-white truncate">{session.user?.name || "User"}</p>
+                            <p className="text-sm font-semibold text-[#171717] truncate">{session.user?.name || "User"}</p>
                             <p className="text-xs text-[#64748B] truncate">{session.user?.email}</p>
                           </div>
                         </div>
@@ -197,7 +197,7 @@ export default function Navbar() {
                             <Link
                               key={label}
                               href={href}
-                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#1A202C] transition-colors"
+                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#77736D] hover:text-[#F26A21] hover:bg-[#FFFFFF] transition-colors"
                               onClick={() => setUserMenuOpen(false)}
                             >
                               <Icon className="w-4 h-4 shrink-0" />
@@ -211,7 +211,7 @@ export default function Navbar() {
                           <div className="border-t border-[#203548] pt-1">
                             <Link
                               href="/admin"
-                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#1A202C] transition-colors"
+                              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#77736D] hover:text-[#F26A21] hover:bg-[#FFFFFF] transition-colors"
                               onClick={() => setUserMenuOpen(false)}
                             >
                               <LayoutDashboard className="w-4 h-4" />
@@ -224,7 +224,7 @@ export default function Navbar() {
                         <div className="border-t border-[#203548] pt-1">
                           <button
                             onClick={() => { setUserMenuOpen(false); signOut(); }}
-                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#94A3B8] hover:text-red-400 hover:bg-[#1A202C] transition-colors"
+                            className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#77736D] hover:text-red-400 hover:bg-[#FFFFFF] transition-colors"
                           >
                             <LogOut className="w-4 h-4" />
                             Logout
@@ -235,10 +235,10 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div className="flex items-center gap-3">
-                    <Link href="/auth/login" className="text-sm font-medium text-[#94A3B8] hover:text-white transition-colors">
+                    <Link href="/auth/login" className="text-sm font-medium text-[#77736D] hover:text-[#171717] transition-colors">
                       Login
                     </Link>
-                    <Link href="/auth/register" className="text-sm font-medium px-4 py-2 rounded-full border border-[#00F2FE]/30 text-[#00F2FE] hover:bg-[#00F2FE]/10 transition-colors">
+                    <Link href="/auth/register" className="text-sm font-medium px-4 py-2 rounded-full border border-[#F26A21]/30 text-[#F26A21] hover:bg-[#F26A21]/10 transition-colors">
                       Register
                     </Link>
                   </div>
@@ -251,7 +251,7 @@ export default function Navbar() {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 ref={menuButtonRef}
-                className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#94A3B8] hover:text-[#00F2FE] hover:bg-[#00F2FE]/10 transition-all"
+                className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#77736D] hover:text-[#F26A21] hover:bg-[#F26A21]/10 transition-all"
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
@@ -277,13 +277,13 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 z-50 bg-[#121623] border-l border-[#00F2FE]/15 transform transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`fixed top-0 right-0 h-full w-80 z-50 bg-[#FFFFFF] border-l border-[#F26A21]/15 transform transition-transform duration-300 ease-in-out lg:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Drawer Header */}
-          <div className="flex items-center justify-between p-6 border-b border-[#1A202C]">
+          <div className="flex items-center justify-between p-6 border-b border-[#FFFFFF]">
             <Link href="/" className="flex items-center gap-2">
               <Image
                 src="/logo.jpg"
@@ -296,7 +296,7 @@ export default function Navbar() {
                 className="text-xl font-bold"
                 style={{
                   fontFamily: "Space Grotesk, sans-serif",
-                  background: "linear-gradient(135deg, #ffffff 0%, #00F2FE 100%)",
+                  background: "linear-gradient(135deg, #ffffff 0%, #F26A21 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -308,7 +308,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(false)}
               ref={closeButtonRef}
-              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#94A3B8] hover:text-white hover:bg-[#1A202C] transition-all"
+              className="w-8 h-8 flex items-center justify-center rounded-lg text-[#77736D] hover:text-[#171717] hover:bg-[#FFFFFF] transition-all"
               aria-label="Close navigation menu"
             >
               <X className="w-4 h-4" />
@@ -324,15 +324,15 @@ export default function Navbar() {
                 style={{ animationDelay: `${i * 60}ms` }}
                 className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium transition-all duration-200 ${
                   pathname === link.href
-                    ? "bg-[#00F2FE]/10 text-[#00F2FE] border border-[#00F2FE]/20"
-                    : "text-[#94A3B8] hover:bg-[#1A202C] hover:text-white"
+                    ? "bg-[#F26A21]/10 text-[#F26A21] border border-[#F26A21]/20"
+                    : "text-[#77736D] hover:bg-[#FFFFFF] hover:text-[#171717]"
                 }`}
               >
                 {link.label}
               </Link>
             ))}
 
-            <div className="my-2 border-t border-[#1A202C]" />
+            <div className="my-2 border-t border-[#FFFFFF]" />
 
             {session ? (
               <>
@@ -340,7 +340,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-3 px-4 py-3 mb-1">
                   <UserAvatar image={session.user?.image} name={session.user?.name} size={36} />
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold text-white truncate">{session.user?.name || "User"}</p>
+                    <p className="text-sm font-semibold text-[#171717] truncate">{session.user?.name || "User"}</p>
                     <p className="text-xs text-[#64748B] truncate">{session.user?.email}</p>
                   </div>
                 </div>
@@ -349,7 +349,7 @@ export default function Navbar() {
                   <Link
                     key={label}
                     href={href}
-                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-white transition-all"
+                    className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#77736D] hover:bg-[#FFFFFF] hover:text-[#171717] transition-all"
                   >
                     <Icon className="w-5 h-5" />
                     {label}
@@ -357,15 +357,15 @@ export default function Navbar() {
                 ))}
 
                 {session.user?.role === "ADMIN" && (
-                  <Link href="/admin" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-[#00F2FE] transition-all">
+                  <Link href="/admin" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#77736D] hover:bg-[#FFFFFF] hover:text-[#F26A21] transition-all">
                     <LayoutDashboard className="w-5 h-5" /> Admin Dashboard
                   </Link>
                 )}
 
-                <div className="border-t border-[#1A202C] mt-1 pt-1">
+                <div className="border-t border-[#FFFFFF] mt-1 pt-1">
                   <button
                     onClick={() => signOut()}
-                    className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-red-400 transition-all"
+                    className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#77736D] hover:bg-[#FFFFFF] hover:text-red-400 transition-all"
                   >
                     <LogOut className="w-5 h-5" /> Logout
                   </button>
@@ -373,10 +373,10 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/auth/login" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#94A3B8] hover:bg-[#1A202C] hover:text-white">
+                <Link href="/auth/login" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#77736D] hover:bg-[#FFFFFF] hover:text-[#171717]">
                   <User className="w-5 h-5" /> Login
                 </Link>
-                <Link href="/auth/register" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#00F2FE] hover:bg-[#1A202C]">
+                <Link href="/auth/register" className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium text-[#F26A21] hover:bg-[#FFFFFF]">
                   Register
                 </Link>
               </>
@@ -384,7 +384,7 @@ export default function Navbar() {
           </nav>
 
           {/* Drawer CTA */}
-          <div className="p-6 border-t border-[#1A202C]">
+          <div className="p-6 border-t border-[#FFFFFF]">
             <a
               href={siteConfig.contact.phoneHref}
               className="btn-primary w-full justify-center"

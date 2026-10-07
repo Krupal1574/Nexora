@@ -130,7 +130,7 @@ export default function ProductsPage() {
         <h1 className="text-3xl font-bold text-white">Products</h1>
         <button 
           onClick={handleAddNew}
-          className="bg-[#00F2FE] text-black px-4 py-2 rounded font-bold hover:bg-[#00D2C4] transition-colors flex items-center gap-2"
+          className="bg-[#F26A21] text-black px-4 py-2 rounded font-bold hover:bg-[#8FB8D8] transition-colors flex items-center gap-2"
         >
           <Plus className="w-4 h-4" /> Add New
         </button>
@@ -173,13 +173,13 @@ export default function ProductsPage() {
                           {item.status}
                         </span>
                         {item.featured && (
-                          <span className="ml-2 px-2 py-1 rounded text-xs font-bold bg-[#00F2FE]/10 text-[#00F2FE]">
+                          <span className="ml-2 px-2 py-1 rounded text-xs font-bold bg-[#F26A21]/10 text-[#F26A21]">
                             Featured
                           </span>
                         )}
                       </td>
                       <td className="p-4 flex justify-end gap-2">
-                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#00F2FE] hover:text-black rounded transition-colors">
+                        <button onClick={() => handleEdit(item)} className="p-2 bg-[#203548] hover:bg-[#F26A21] hover:text-black rounded transition-colors">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button onClick={() => handleDelete(item.id)} className="p-2 bg-[#203548] hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -209,7 +209,7 @@ export default function ProductsPage() {
                   value={name} 
                   onChange={(e) => setName(e.target.value)} 
                   required
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
               
@@ -220,7 +220,7 @@ export default function ProductsPage() {
                   value={slug} 
                   onChange={(e) => setSlug(e.target.value)} 
                   required
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
 
@@ -230,7 +230,7 @@ export default function ProductsPage() {
                   value={description} 
                   onChange={(e) => setDescription(e.target.value)} 
                   rows={3}
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
 
@@ -240,7 +240,7 @@ export default function ProductsPage() {
                   type="text" 
                   value={image} 
                   onChange={(e) => setImage(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
               
@@ -250,7 +250,7 @@ export default function ProductsPage() {
                   type="text" 
                   value={category} 
                   onChange={(e) => setCategory(e.target.value)} 
-                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                  className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                 />
               </div>
 
@@ -263,7 +263,7 @@ export default function ProductsPage() {
                     value={price} 
                     onChange={(e) => setPrice(e.target.value)} 
                     required
-                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                   />
                 </div>
                 <div>
@@ -273,7 +273,7 @@ export default function ProductsPage() {
                     step="0.01"
                     value={originalPrice} 
                     onChange={(e) => setOriginalPrice(e.target.value)} 
-                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                   />
                 </div>
               </div>
@@ -286,7 +286,7 @@ export default function ProductsPage() {
                     value={stock} 
                     onChange={(e) => setStock(e.target.value)} 
                     required
-                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                   />
                 </div>
                 <div>
@@ -294,7 +294,7 @@ export default function ProductsPage() {
                   <select 
                     value={status} 
                     onChange={(e) => setStatus(e.target.value)} 
-                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#00F2FE] outline-none"
+                    className="w-full p-2 rounded bg-[#0B0F19] border border-[#203548] text-white focus:border-[#F26A21] outline-none"
                   >
                     <option value="ACTIVE">Active</option>
                     <option value="INACTIVE">Inactive</option>
@@ -309,14 +309,14 @@ export default function ProductsPage() {
                     type="checkbox" 
                     checked={featured} 
                     onChange={(e) => setFeatured(e.target.checked)} 
-                    className="w-4 h-4 accent-[#00F2FE]" 
+                    className="w-4 h-4 accent-[#F26A21]" 
                   />
                   <span className="text-sm font-medium text-white">Featured Product</span>
                 </label>
               </div>
 
               <div className="flex gap-2 pt-4">
-                <button type="submit" className="flex-1 py-2 bg-[#00F2FE] text-black font-bold rounded hover:bg-[#00D2C4] transition-colors">
+                <button type="submit" className="flex-1 py-2 bg-[#F26A21] text-black font-bold rounded hover:bg-[#8FB8D8] transition-colors">
                   {editingId ? 'Update' : 'Create'}
                 </button>
                 <button type="button" onClick={handleReset} className="px-4 py-2 bg-[#203548] text-white font-bold rounded hover:bg-gray-600 transition-colors">

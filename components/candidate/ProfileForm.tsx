@@ -81,103 +81,103 @@ export function ProfileForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-white/70 mb-2">Full Name</label>
+          <label className="block text-sm font-medium text-[#171717]/70 mb-2">Full Name</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/70 mb-2">Professional Headline</label>
+          <label className="block text-sm font-medium text-[#171717]/70 mb-2">Professional Headline</label>
           <input
             type="text"
             name="headline"
             value={formData.headline}
             onChange={handleChange}
             placeholder="e.g. Senior Software Engineer"
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/70 mb-2">Location</label>
+          <label className="block text-sm font-medium text-[#171717]/70 mb-2">Location</label>
           <input
             type="text"
             name="location"
             value={formData.location}
             onChange={handleChange}
             placeholder="e.g. San Francisco, CA"
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/70 mb-2">Availability</label>
+          <label className="block text-sm font-medium text-[#171717]/70 mb-2">Availability</label>
           <input
             type="text"
             name="availability"
             value={formData.availability}
             onChange={handleChange}
             placeholder="e.g. 2 weeks notice"
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-white/70 mb-2">Career Summary</label>
+        <label className="block text-sm font-medium text-[#171717]/70 mb-2">Career Summary</label>
         <textarea
           name="summary"
           value={formData.summary}
           onChange={handleChange}
           rows={4}
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+          className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-white/70 mb-2">Skills (comma separated)</label>
+        <label className="block text-sm font-medium text-[#171717]/70 mb-2">Skills (comma separated)</label>
         <input
           type="text"
           name="skills"
           value={formData.skills}
           onChange={handleChange}
           placeholder="e.g. React, Node.js, TypeScript"
-          className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+          className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label className="block text-sm font-medium text-white/70 mb-2">LinkedIn URL</label>
+          <label className="block text-sm font-medium text-[#171717]/70 mb-2">LinkedIn URL</label>
           <input
             type="url"
             name="linkedinUrl"
             value={formData.linkedinUrl}
             onChange={handleChange}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/70 mb-2">GitHub URL</label>
+          <label className="block text-sm font-medium text-[#171717]/70 mb-2">GitHub URL</label>
           <input
             type="url"
             name="githubUrl"
             value={formData.githubUrl}
             onChange={handleChange}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-white/70 mb-2">Portfolio URL</label>
+          <label className="block text-sm font-medium text-[#171717]/70 mb-2">Portfolio URL</label>
           <input
             type="url"
             name="portfolioUrl"
             value={formData.portfolioUrl}
             onChange={handleChange}
-            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full bg-black/5 border border-black/10 rounded-lg px-4 py-2 text-[#171717] focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
       </div>

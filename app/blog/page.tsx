@@ -116,13 +116,13 @@ export default function BlogIndexPage() {
           sub="Expert advice, industry trends, and practical guides to help you navigate your tech career."
         >
           {/* Tabs */}
-          <div className="inline-flex bg-[#121923] p-1 rounded-full border border-[#203548]">
+          <div className="inline-flex bg-[#FFFFFF] p-1 rounded-full border border-[#203548]">
             <button
               onClick={() => setActiveTab("Nexora")}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
                 activeTab === "Nexora"
-                  ? "bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] text-[#061018] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
-                  : "text-[#94A3B8] hover:text-white"
+                  ? "bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+                  : "text-[#77736D] hover:text-[#171717]"
               }`}
             >
               Nexora Articles
@@ -131,8 +131,8 @@ export default function BlogIndexPage() {
               onClick={() => setActiveTab("Industry")}
               className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
                 activeTab === "Industry"
-                  ? "bg-gradient-to-r from-[#00F2FE] to-[#00D2C4] text-[#061018] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
-                  : "text-[#94A3B8] hover:text-white"
+                  ? "bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+                  : "text-[#77736D] hover:text-[#171717]"
               }`}
             >
               Industry News
@@ -141,7 +141,7 @@ export default function BlogIndexPage() {
         </PageHero>
 
         {/* Filters & Search */}
-        <section className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-[#1e2b38] pb-6">
+        <section className="mb-10 flex flex-col md:flex-row items-center justify-between gap-4 border-b border-[#E5E5E5] pb-6">
           {/* Categories */}
           <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
             {currentCategories.map((cat) => (
@@ -150,8 +150,8 @@ export default function BlogIndexPage() {
                 onClick={() => setCategory(cat)}
                 className={`rounded-full px-4 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors ${
                   currentCategory === cat
-                    ? "bg-[#00F2FE] text-[#061018]"
-                    : "text-[#94A3B8] bg-[#121923] border border-[#203548] hover:border-[#00F2FE]/50 hover:text-white"
+                    ? "bg-[#F26A21] text-[#171717]"
+                    : "text-[#77736D] bg-[#FFFFFF] border border-[#203548] hover:border-[#F26A21]/50 hover:text-[#171717]"
                 }`}
               >
                 {cat}
@@ -167,7 +167,7 @@ export default function BlogIndexPage() {
               placeholder="Search articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#101821] border border-[#203548] rounded-full py-2 pl-9 pr-4 text-xs text-white placeholder:text-[#64748B] focus:outline-none focus:border-[#00F2FE]/50 transition-colors"
+              className="w-full bg-[#101821] border border-[#203548] rounded-full py-2 pl-9 pr-4 text-xs text-[#171717] placeholder:text-[#64748B] focus:outline-none focus:border-[#F26A21]/50 transition-colors"
             />
           </div>
         </section>
@@ -175,12 +175,12 @@ export default function BlogIndexPage() {
         {/* Blog Grid */}
         {!isLoaded ? (
           <div className="text-center py-20">
-            <p className="text-[#94A3B8]">Loading articles...</p>
+            <p className="text-[#77736D]">Loading articles...</p>
           </div>
         ) : visiblePosts.length === 0 ? (
           <div className="text-center py-20">
             <Search className="w-10 h-10 text-[#64748B] mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-white">No articles found</h3>
+            <h3 className="text-lg font-semibold text-[#171717]">No articles found</h3>
             <p className="text-sm text-[#64748B] mt-2">Try adjusting your search or filters.</p>
           </div>
         ) : (
@@ -191,7 +191,7 @@ export default function BlogIndexPage() {
                 <Link
                   key={post.id}
                   href={`/blog/${post.slug}`}
-                  className="group rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden hover:border-[#00F2FE]/40 transition-all duration-300 flex flex-col"
+                  className="group rounded-2xl bg-[#FFFFFF] border border-[#203548] overflow-hidden hover:border-[#F26A21]/40 transition-all duration-300 flex flex-col"
                 >
                   <div className="relative h-48 w-full overflow-hidden bg-[#0a111a]">
                     <Image
@@ -202,7 +202,7 @@ export default function BlogIndexPage() {
                       unoptimized
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="inline-flex items-center rounded-md border border-[#00F2FE]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-white">
+                      <span className="inline-flex items-center rounded-md border border-[#F26A21]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-[#171717]">
                         {post.category}
                       </span>
                     </div>
@@ -218,13 +218,13 @@ export default function BlogIndexPage() {
                     </div>
 
                     <h3
-                      className="text-lg font-bold text-white mb-2 group-hover:text-[#00F2FE] transition-colors"
+                      className="text-lg font-bold text-[#171717] mb-2 group-hover:text-[#F26A21] transition-colors"
                       style={{ fontFamily: "Space Grotesk, sans-serif" }}
                     >
                       {post.title}
                     </h3>
 
-                    <p className="text-xs text-[#94A3B8] leading-relaxed mb-5 line-clamp-3">
+                    <p className="text-xs text-[#77736D] leading-relaxed mb-5 line-clamp-3">
                       {post.excerpt}
                     </p>
 
@@ -238,12 +238,12 @@ export default function BlogIndexPage() {
                           className="rounded-full"
                           unoptimized
                         />
-                        <span className="text-[10px] text-[#CBD5E1] font-medium">
+                        <span className="text-[10px] text-[#77736D] font-medium">
                           {post.authorName || post.author?.name || "Nexora Team"}
                         </span>
                       </div>
                       
-                      <span className="text-[10px] text-[#00F2FE] font-bold flex items-center gap-1">
+                      <span className="text-[10px] text-[#F26A21] font-bold flex items-center gap-1">
                         Read More <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                       </span>
                     </div>
@@ -258,7 +258,7 @@ export default function BlogIndexPage() {
                   href={post.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group rounded-2xl bg-[#121923] border border-[#203548] overflow-hidden hover:border-[#00D2C4]/40 transition-all duration-300 flex flex-col"
+                  className="group rounded-2xl bg-[#FFFFFF] border border-[#203548] overflow-hidden hover:border-[#8FB8D8]/40 transition-all duration-300 flex flex-col"
                 >
                   <div className="relative h-48 w-full overflow-hidden bg-[#0a111a] flex items-center justify-center">
                     {post.imageUrl ? (
@@ -270,12 +270,12 @@ export default function BlogIndexPage() {
                         unoptimized
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-[#121923] to-[#203548] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                      <div className="w-full h-full bg-gradient-to-br from-[#FFFFFF] to-[#203548] flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
                         <Sparkles className="w-10 h-10 text-[#203548]" />
                       </div>
                     )}
                     <div className="absolute top-3 left-3">
-                      <span className="inline-flex items-center rounded-md border border-[#00D2C4]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-white">
+                      <span className="inline-flex items-center rounded-md border border-[#8FB8D8]/40 bg-[#07151d]/80 backdrop-blur-md px-2 py-1 text-[8px] font-bold text-[#171717]">
                         {post.category}
                       </span>
                     </div>
@@ -284,28 +284,28 @@ export default function BlogIndexPage() {
                   <div className="p-5 flex flex-col flex-grow">
                     <div className="flex items-center gap-4 text-[10px] text-[#64748B] mb-3">
                       <span>{formatDate(post.publishedAt)}</span>
-                      <span className="text-[#00D2C4] font-semibold flex items-center gap-1">
+                      <span className="text-[#8FB8D8] font-semibold flex items-center gap-1">
                         Source: {post.source}
                       </span>
                     </div>
 
                     <h3
-                      className="text-lg font-bold text-white mb-2 group-hover:text-[#00D2C4] transition-colors line-clamp-2"
+                      className="text-lg font-bold text-[#171717] mb-2 group-hover:text-[#8FB8D8] transition-colors line-clamp-2"
                       style={{ fontFamily: "Space Grotesk, sans-serif" }}
                     >
                       {post.title}
                     </h3>
 
-                    <p className="text-xs text-[#94A3B8] leading-relaxed mb-5 line-clamp-3">
+                    <p className="text-xs text-[#77736D] leading-relaxed mb-5 line-clamp-3">
                       {post.description}
                     </p>
 
                     <div className="mt-auto flex items-center justify-between pt-4 border-t border-[#203548]">
-                      <span className="text-[10px] text-[#94A3B8]">
+                      <span className="text-[10px] text-[#77736D]">
                         External Article
                       </span>
                       
-                      <span className="text-[10px] text-[#00D2C4] font-bold flex items-center gap-1">
+                      <span className="text-[10px] text-[#8FB8D8] font-bold flex items-center gap-1">
                         Read Original <ExternalLink className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                       </span>
                     </div>

@@ -234,12 +234,12 @@ export async function sendPasswordResetEmail(email: string, resetUrl: string) {
         <h2>Password Reset Request</h2>
         <p>We received a request to reset your password. Click the button below to set a new password:</p>
         <p style="margin: 24px 0;">
-          <a href="${escapeHtml(resetUrl)}" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#00F2FE,#00D2C4);color:#0B0F19;font-weight:bold;text-decoration:none;border-radius:8px;">
+          <a href="${escapeHtml(resetUrl)}" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#F26A21,#8FB8D8);color:#0B0F19;font-weight:bold;text-decoration:none;border-radius:8px;">
             Reset Password
           </a>
         </p>
         <p style="color:#94A3B8;font-size:14px;">If the button doesn't work, copy and paste this URL into your browser:</p>
-        <p style="color:#00F2FE;font-size:14px;word-break:break-all;">${escapeHtml(resetUrl)}</p>
+        <p style="color:#F26A21;font-size:14px;word-break:break-all;">${escapeHtml(resetUrl)}</p>
         <hr style="border-color:#2D3748;margin:24px 0;" />
         <p style="color:#64748B;font-size:12px;">This link expires in 1 hour. If you didn't request a password reset, you can safely ignore this email.</p>
       `,
@@ -265,12 +265,12 @@ export async function sendEmailChangeVerification(email: string, verifyUrl: stri
         <h2>Email Change Request</h2>
         <p>We received a request to change your email address. Click the button below to confirm this change:</p>
         <p style="margin: 24px 0;">
-          <a href="${escapeHtml(verifyUrl)}" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#00F2FE,#00D2C4);color:#0B0F19;font-weight:bold;text-decoration:none;border-radius:8px;">
+          <a href="${escapeHtml(verifyUrl)}" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#F26A21,#8FB8D8);color:#0B0F19;font-weight:bold;text-decoration:none;border-radius:8px;">
             Verify Email
           </a>
         </p>
         <p style="color:#94A3B8;font-size:14px;">If the button doesn't work, copy and paste this URL into your browser:</p>
-        <p style="color:#00F2FE;font-size:14px;word-break:break-all;">${escapeHtml(verifyUrl)}</p>
+        <p style="color:#F26A21;font-size:14px;word-break:break-all;">${escapeHtml(verifyUrl)}</p>
         <hr style="border-color:#2D3748;margin:24px 0;" />
         <p style="color:#64748B;font-size:12px;">This link expires in 1 hour. If you didn't request an email change, you can safely ignore this email.</p>
       `,

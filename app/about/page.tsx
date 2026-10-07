@@ -20,7 +20,7 @@ const values = [
 
 const pillars = [
   {
-    icon: Target, n: "01", title: "Our Mission", color: "#00F2FE",
+    icon: Target, n: "01", title: "Our Mission", color: "#F26A21",
     paras: [
       "Nexora's mission is to bridge the widening gap between elite tech talent and forward-thinking enterprise employers across the United States, through a holistic, candidate-centric career acceleration program that goes far beyond traditional staffing.",
       "We invest deeply in each candidate, understanding strengths, aspirations and market positioning, to craft personalized pathways to meaningful employment.",
@@ -28,7 +28,7 @@ const pillars = [
     points: ["Democratize access to top U.S. tech opportunities", "Provide end-to-end career development support", "Build long-term employer-candidate relationships"],
   },
   {
-    icon: Eye, n: "02", title: "Our Vision", color: "#00D2C4",
+    icon: Eye, n: "02", title: "Our Vision", color: "#8FB8D8",
     paras: [
       "We envision a future where geography, background and access are no longer barriers to a thriving technology career, with Nexora as the most trusted name in IT staffing.",
       "By continuously innovating our methodology, deepening employer partnerships and expanding our talent network, we aim to place professionals into career-defining roles.",
@@ -47,7 +47,7 @@ export default function AboutPage() {
       />
 
       {/* Statement */}
-      <section className="section-spacing border-t border-white/10">
+      <section className="section-spacing border-t border-black/10">
         <div className="container-wide">
           <Reveal><span className="eyebrow mb-8">Why we exist</span></Reveal>
           <ScrollFillText
@@ -65,15 +65,15 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-5 sm:gap-6">
             {pillars.map(({ icon: Icon, n, title, color, paras, points }, i) => (
               <Reveal key={title} delay={i * 0.1}>
-                <article className="relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-10 transition-colors hover:border-[#00F2FE]/40">
+                <article className="relative h-full overflow-hidden rounded-3xl border border-black/10 bg-black/[0.03] p-6 sm:p-10 transition-colors hover:border-[#F26A21]/40">
                   <span className="absolute -top-4 right-4 sm:right-8 font-display font-bold text-[7rem] sm:text-[10rem] leading-none outline-text opacity-60 select-none pointer-events-none">{n}</span>
                   <div className="relative">
                     <div className="w-12 h-12 rounded-2xl grid place-items-center mb-6" style={{ background: `${color}18`, border: `1px solid ${color}40` }}>
                       <Icon className="w-6 h-6" style={{ color }} />
                     </div>
                     <h3 className="font-display uppercase text-3xl sm:text-4xl tracking-tight mb-5">{title}</h3>
-                    {paras.map((p) => <p key={p} className="text-[#94A3B8] leading-relaxed mb-4">{p}</p>)}
-                    <ul className="mt-6 space-y-3 border-t border-white/10 pt-6">
+                    {paras.map((p) => <p key={p} className="text-[#77736D] leading-relaxed mb-4">{p}</p>)}
+                    <ul className="mt-6 space-y-3 border-t border-black/10 pt-6">
                       {points.map((pt) => (
                         <li key={pt} className="flex items-start gap-3 text-sm text-[#B6C2D2]">
                           <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" style={{ color }} />{pt}
@@ -89,7 +89,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-spacing border-t border-white/10">
+      <section className="section-spacing border-t border-black/10">
         <div className="container-wide">
           <Reveal><span className="eyebrow mb-8">What drives us</span></Reveal>
           <MaskLines as="h2" className="display display-md mb-12 sm:mb-16" lines={["Four", <><span key="v" className="thin">core</span> values.</>]} />
@@ -100,7 +100,7 @@ export default function AboutPage() {
                   <span className="font-display text-sm">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="font-display text-xl sm:text-3xl uppercase tracking-tight">{title}</h3>
-                    <p className="muted text-sm text-[#94A3B8] mt-2 max-w-xl">{desc}</p>
+                    <p className="muted text-sm text-[#77736D] mt-2 max-w-xl">{desc}</p>
                   </div>
                   <Icon className="row-tag w-7 h-7" />
                 </div>
