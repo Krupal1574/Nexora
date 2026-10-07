@@ -231,9 +231,9 @@ function ProductCard({
   const productImage = `/images/products/${product.slug}.png`;
 
   return (
-    <div className="group relative rounded-2xl bg-[#FFFFFF] border border-[#203548] overflow-hidden flex flex-col min-h-[420px] hover:border-[#F26A21]/40 transition-all duration-300">
+    <div className="group relative rounded-2xl bg-[#FFFFFF] border border-[#E5E5E5] overflow-hidden flex flex-col min-h-[420px] hover:border-[#F26A21]/40 transition-all duration-300">
       {/* Product Image */}
-      <div className="relative w-full h-40 overflow-hidden bg-[#0a111a]">
+      <div className="relative w-full h-40 overflow-hidden bg-[#F5F1E8]">
         <img
           src={productImage}
           alt={product.name}
@@ -246,7 +246,7 @@ function ProductCard({
           </span>
           {meta?.badge && (
             <div className="mt-1">
-              <span className="inline-flex items-center rounded-md border border-[#F26A21]/40 bg-[#07151d]/90 backdrop-blur-sm px-2 py-1 text-[8px] font-bold text-[#171717]">
+              <span className="inline-flex items-center rounded-md border border-[#F26A21]/40 bg-white/90 backdrop-blur-sm px-2 py-1 text-[8px] font-bold text-[#171717]">
                 {meta.badge}
               </span>
             </div>
@@ -258,7 +258,7 @@ function ProductCard({
       <div className="p-5 flex flex-col flex-1">
         {/* Icon */}
         <div className="mb-3">
-          <div className="w-10 h-10 rounded-xl bg-[#06242b] border border-[#F26A21]/30 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-[#F26A21]/10 border border-[#F26A21]/30 flex items-center justify-center">
             <Icon className="w-5 h-5 text-[#F26A21]" />
           </div>
         </div>
@@ -279,7 +279,7 @@ function ProductCard({
         </p>
 
         {/* Price */}
-        <div className="mt-3 pt-3 border-t border-[#263241]">
+        <div className="mt-3 pt-3 border-t border-[#E5E5E5]">
           <div className="flex items-baseline gap-2">
             <span
               className="text-2xl font-bold text-[#171717]"
@@ -328,7 +328,7 @@ function ProductCard({
         <div className="mt-4 space-y-2">
           <button
             onClick={handleAddToCart}
-            className="w-full h-8 rounded-full bg-[#00D2D2] hover:bg-[#F26A21] text-[#171717] text-[9px] font-bold flex items-center justify-center gap-2 transition-colors"
+            className="w-full h-8 rounded-full bg-[#8FB8D8] hover:bg-[#F26A21] text-[#171717] text-[11px] font-bold flex items-center justify-center gap-2 transition-colors"
           >
             <ShoppingCart className="w-3 h-3" />
             Add to Cart
@@ -352,17 +352,17 @@ function ProductCard({
 
 function LoadingCard() {
   return (
-    <div className="rounded-2xl bg-[#FFFFFF] border border-[#203548] overflow-hidden min-h-[420px] animate-pulse flex flex-col">
-      <div className="w-full h-40 bg-[#1d2a38]" />
+    <div className="rounded-2xl bg-[#FFFFFF] border border-[#E5E5E5] overflow-hidden min-h-[420px] animate-pulse flex flex-col">
+      <div className="w-full h-40 bg-[#E5E5E5]" />
       <div className="p-5 flex flex-col flex-1">
-        <div className="w-10 h-10 rounded-xl bg-[#1d2a38] mb-4" />
-        <div className="w-32 h-4 rounded bg-[#1d2a38] mb-2" />
-        <div className="w-full h-8 rounded bg-[#1d2a38] mb-5" />
-        <div className="w-24 h-7 rounded bg-[#1d2a38] mb-4" />
+        <div className="w-10 h-10 rounded-xl bg-[#E5E5E5] mb-4" />
+        <div className="w-32 h-4 rounded bg-[#E5E5E5] mb-2" />
+        <div className="w-full h-8 rounded bg-[#E5E5E5] mb-5" />
+        <div className="w-24 h-7 rounded bg-[#E5E5E5] mb-4" />
         <div className="space-y-2">
-          <div className="w-full h-2 rounded bg-[#1d2a38]" />
-          <div className="w-4/5 h-2 rounded bg-[#1d2a38]" />
-          <div className="w-3/5 h-2 rounded bg-[#1d2a38]" />
+          <div className="w-full h-2 rounded bg-[#E5E5E5]" />
+          <div className="w-4/5 h-2 rounded bg-[#E5E5E5]" />
+          <div className="w-3/5 h-2 rounded bg-[#E5E5E5]" />
         </div>
       </div>
     </div>
@@ -383,7 +383,7 @@ export default function ShopPage() {
   const [error, setError] = useState("");
 
   const [category, setCategory] =
-    useState<CategoryFilter>("all");
+    useState<CategoryFilter>("pro-services");
 
   const [sort, setSort] =
     useState<SortOption>("popular");
@@ -522,7 +522,7 @@ export default function ShopPage() {
         />
 
         {/* Promo Banner */}
-        <section className="mt-10 rounded-xl border border-[#F26A21]/30 bg-[#06262d]/70 px-4 py-4 sm:px-5">
+        <section className="mt-10 rounded-xl border border-[#F26A21]/30 bg-[#F26A21]/5 px-4 py-4 sm:px-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-lg bg-[#F26A21]/10 border border-[#F26A21]/20 flex items-center justify-center">
@@ -544,7 +544,7 @@ export default function ShopPage() {
               onClick={() =>
                 setCategory("pro-services")
               }
-              className="shrink-0 rounded-full bg-[#00D2D2] hover:bg-[#F26A21] px-5 py-2 text-[9px] font-bold text-[#171717] flex items-center gap-2 transition-colors"
+              className="shrink-0 rounded-full bg-[#8FB8D8] hover:bg-[#F26A21] px-5 py-2 text-sm font-bold text-[#171717] flex items-center gap-2 transition-colors"
             >
               Explore Plans
               <ArrowRight className="w-3 h-3" />
@@ -557,24 +557,12 @@ export default function ShopPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
             {/* Categories */}
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                onClick={() =>
-                  setCategory("all")
-                }
-                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "all"
-                    ? "bg-[#F26A21] text-[#171717]"
-                    : "text-[#77736D] hover:text-[#171717]"
-                  }`}
-              >
-                All
-              </button>
-
+            <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={() =>
                   setCategory("pro-services")
                 }
-                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "pro-services"
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${category === "pro-services"
                     ? "bg-[#F26A21] text-[#171717]"
                     : "text-[#77736D] hover:text-[#171717]"
                   }`}
@@ -586,7 +574,7 @@ export default function ShopPage() {
                 onClick={() =>
                   setCategory("add-on-services")
                 }
-                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "add-on-services"
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${category === "add-on-services"
                     ? "bg-[#F26A21] text-[#171717]"
                     : "text-[#77736D] hover:text-[#171717]"
                   }`}
@@ -598,7 +586,7 @@ export default function ShopPage() {
                 onClick={() =>
                   setCategory("placement-charges")
                 }
-                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "placement-charges"
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${category === "placement-charges"
                     ? "bg-[#F26A21] text-[#171717]"
                     : "text-[#77736D] hover:text-[#171717]"
                   }`}
@@ -610,7 +598,7 @@ export default function ShopPage() {
                 onClick={() =>
                   setCategory("service-extensions")
                 }
-                className={`rounded-full px-3 py-1.5 text-[8px] font-semibold transition-colors ${category === "service-extensions"
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${category === "service-extensions"
                     ? "bg-[#F26A21] text-[#171717]"
                     : "text-[#77736D] hover:text-[#171717]"
                   }`}
@@ -621,7 +609,7 @@ export default function ShopPage() {
 
             {/* Sort */}
             <div className="flex items-center gap-2">
-              <span className="text-[8px] text-[#64748B]">
+              <span className="text-sm text-[#77736D]">
                 Sort by
               </span>
 
@@ -632,7 +620,7 @@ export default function ShopPage() {
                     e.target.value as SortOption
                   )
                 }
-                className="rounded-md border border-[#294052] bg-[#101821] px-2 py-1.5 text-[8px] text-[#171717] outline-none focus:border-[#F26A21]"
+                className="rounded-md border border-[#E5E5E5] bg-white px-3 py-2 text-sm text-[#171717] outline-none focus:border-[#F26A21] cursor-pointer"
               >
                 <option value="popular">
                   Most Popular

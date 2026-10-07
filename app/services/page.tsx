@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageHero from "@/components/motion/PageHero";
 import CtaSection from "@/components/motion/CtaSection";
 import {
@@ -55,7 +55,7 @@ const plansPackages = [
     ],
   },
   {
-    id: "ultimate-session",
+    id: "ultimate-support",
     name: "Ultimate Session",
     badge: "PREMIUM",
     badgeColor: "#A855F7",
@@ -204,7 +204,12 @@ const sections = [
   { id: "add-ons", label: "Add-ons", icon: Plus },
 ];
 
-function PlanCard({ plan }: { plan: typeof plansPackages[0] }) {
+function PlanCard({ plan, pricing }: { plan: typeof plansPackages[0]; pricing?: { price: number; originalPrice: number; discount: number } }) {
+  const price = pricing?.price ?? 0;
+  const originalPrice = pricing?.originalPrice ?? 0;
+  const discount = pricing?.discount ?? (originalPrice > 0 ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0);
+  const savings = Math.max(originalPrice - price, 0);
+
   return (
     <div
       className="rounded-2xl border p-6 lg:p-8 relative overflow-hidden transition-all duration-300 hover:shadow-[0_12px_40px_rgba(23,23,23,0.08)]"
@@ -229,18 +234,48 @@ function PlanCard({ plan }: { plan: typeof plansPackages[0] }) {
           >
             {plan.badge}
           </span>
-          <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-[#F26A2122] text-[#F26A21] border border-[#F26A2133]">
-            35% OFF
-          </span>
+          {discount > 0 && (
+            <span className="text-[10px] font-bold px-3 py-1 rounded-full bg-[#F26A2122] text-[#F26A21] border border-[#F26A2133]">
+              {discount}% OFF
+            </span>
+          )}
         </div>
 
         {/* Name */}
         <h3
-          className="text-xl sm:text-2xl font-bold text-[#171717] mb-2"
+          className="text-xl sm:text-2xl font-bold text-[#171717] mb-3"
           style={{ fontFamily: "Space Grotesk, sans-serif" }}
         >
           {plan.name}
         </h3>
+
+        {/* Price */}
+        {price > 0 ? (
+          <div className="mb-4">
+            <div className="flex items-baseline gap-2">
+              <span
+                className="text-3xl sm:text-4xl font-bold text-[#171717]"
+                style={{ fontFamily: "Space Grotesk, sans-serif" }}
+              >
+                ${price.toLocaleString()}
+              </span>
+              {originalPrice > price && (
+                <span className="text-sm text-[#77736D] line-through">
+                  ${originalPrice.toLocaleString()}
+                </span>
+              )}
+            </div>
+            {savings > 0 && (
+              <p className="text-xs mt-1" style={{ color: plan.accent }}>
+                You save ${savings.toLocaleString()}
+              </p>
+            )}
+          </div>
+        ) : (
+          <div className="mb-4">
+            <div className="h-10 w-32 rounded bg-[#E5E5E5] animate-pulse" />
+          </div>
+        )}
 
         <p className="text-xs text-[#64748B] mb-5">
           After placement fee:{" "}
@@ -253,7 +288,7 @@ function PlanCard({ plan }: { plan: typeof plansPackages[0] }) {
         <div className="flex items-center gap-2 mb-3">
           <Sparkles className="w-3.5 h-3.5" style={{ color: plan.accent }} />
           <span className="text-[#171717] font-semibold text-xs" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-            What's Included
+            What&apos;s Included
           </span>
         </div>
 
@@ -289,6 +324,27 @@ function PlanCard({ plan }: { plan: typeof plansPackages[0] }) {
 
 export default function ServicesPage() {
   const [activeSection, setActiveSection] = useState("plans-packages");
+  const [priceMap, setPriceMap] = useState<Record<string, { price: number; originalPrice: number; discount: number }>>({});
+
+  // Fetch live prices from the same API the shop uses
+  useEffect(() => {
+    fetch("/api/products", { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.products)) {
+          const map: Record<string, { price: number; originalPrice: number; discount: number }> = {};
+          for (const p of data.products) {
+            map[p.slug] = {
+              price: Number(p.price),
+              originalPrice: Number(p.originalPrice),
+              discount: p.discount || Math.round(((Number(p.originalPrice) - Number(p.price)) / Number(p.originalPrice)) * 100),
+            };
+          }
+          setPriceMap(map);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const scrollTo = (id: string) => {
     setActiveSection(id);
@@ -350,7 +406,7 @@ export default function ServicesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {plansPackages.map((plan) => (
-              <PlanCard key={plan.id} plan={plan} />
+              <PlanCard key={plan.id} plan={plan} pricing={priceMap[plan.id]} />
             ))}
           </div>
         </div>
