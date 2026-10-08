@@ -6,6 +6,7 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import CartProvider from "@/components/CartProvider";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Chatbot } from "@/components/Chatbot";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import Preloader from "@/components/motion/Preloader";
@@ -74,6 +75,7 @@ export default function RootLayout({
           </SmoothScroll>
         </AuthProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
