@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Target, Eye, CheckCircle2, Globe, Award, Zap } from "lucide-react";
 import PageHero from "@/components/motion/PageHero";
@@ -106,6 +107,37 @@ export default function AboutPage() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership */}
+      <section className="section-spacing border-t border-black/10">
+        <div className="container-wide">
+          <Reveal><span className="eyebrow mb-8">Leadership</span></Reveal>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <Reveal>
+              <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 overflow-hidden rounded-3xl border border-black/10">
+                <Image 
+                  src="/images/founder.jpg" 
+                  alt="Company Founder" 
+                  fill 
+                  className="object-cover object-center"
+                />
+              </div>
+            </Reveal>
+            <div>
+              <MaskLines as="h2" className="display display-sm mb-6" lines={["Meet Om Patel,", <><span key="f" className="thin">Founder</span> & CEO</>]} />
+              <Reveal delay={0.1}>
+                <h3 className="text-2xl font-medium mb-4">Leading with purpose</h3>
+                <p className="text-[#77736D] leading-relaxed mb-6">
+                  Our founder brings years of experience in the staffing and technology sectors, driven by a passion for connecting elite talent with extraordinary opportunities. Under his leadership, Nexora has grown into a trusted partner for both candidates and enterprise employers.
+                </p>
+                <p className="text-[#77736D] leading-relaxed">
+                  "At Nexora, we believe that talent is everywhere, but opportunity is not. We're here to bridge that gap, providing the coaching, positioning, and placement support needed to help professionals achieve their true potential."
+                </p>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
