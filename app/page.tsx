@@ -14,6 +14,9 @@ import HorizontalScroll from "@/components/motion/HorizontalScroll";
 import HoverPreviewList from "@/components/motion/HoverPreviewList";
 import DragRail from "@/components/motion/DragRail";
 import { useSiteReady } from "@/components/motion/Preloader";
+import CompanyLogos from "@/components/home/CompanyLogos";
+import BenefitsSection from "@/components/home/BenefitsSection";
+import ServicesSolutionsSection from "@/components/home/ServicesSolutionsSection";
 
 /* ─── Content ──────────────────────────────────────────────────────────── */
 const services = [
@@ -135,6 +138,7 @@ export default function HomePage() {
       </section>
 
       <Marquee items={ticker} />
+      <CompanyLogos />
 
       {/* ABOUT */}
       <section className="section-spacing">
@@ -171,15 +175,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="section-spacing">
-        <div className="container-wide">
-          <motion.span {...fadeUp()} className="eyebrow mb-8">What we actually do</motion.span>
-          <MaskLines as="h2" className="display display-md mb-6" lines={["Engineering", <><span key="y" className="thin">your</span> next role.</>]} />
-          <motion.p {...fadeUp(0.2)} className="text-[#77736D] max-w-xl mb-14">The parts of the job search most people get wrong, handled by people who do this every day.</motion.p>
-          <HoverPreviewList items={services} />
-        </div>
-      </section>
+      <ServicesSolutionsSection />
+
+      <BenefitsSection />
 
       {/* PROCESS — pinned horizontal scroll */}
       <section className="border-t border-black/10">
