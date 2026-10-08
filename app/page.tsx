@@ -17,6 +17,7 @@ import { useSiteReady } from "@/components/motion/Preloader";
 import CompanyLogos from "@/components/home/CompanyLogos";
 import BenefitsSection from "@/components/home/BenefitsSection";
 import ServicesSolutionsSection from "@/components/home/ServicesSolutionsSection";
+import MissionValuesSection from "@/components/home/MissionValuesSection";
 
 /* ─── Content ──────────────────────────────────────────────────────────── */
 const services = [
@@ -176,6 +177,8 @@ export default function HomePage() {
       </section>
 
       <ServicesSolutionsSection />
+
+      <MissionValuesSection />
 
       <BenefitsSection />
 

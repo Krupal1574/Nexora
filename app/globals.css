@@ -408,3 +408,7 @@ html { scroll-behavior: auto !important; }
   }
 }
 
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
