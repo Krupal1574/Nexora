@@ -4,7 +4,6 @@ import Image from "next/image";
 
 const companies = [
   { name: "TikTok", src: "/company-logos/tiktok.svg" },
-  { name: "Freddie Mac", src: "/company-logos/freddie-mac.png" },
   { name: "Meta", src: "/company-logos/meta.svg" },
   { name: "Amazon", src: "/company-logos/amazon.svg" },
   { name: "PayPal", src: "/company-logos/paypal.svg" },
@@ -14,9 +13,7 @@ const companies = [
   { name: "Google", src: "/company-logos/google.svg" },
   { name: "Accenture", src: "/company-logos/accenture.png" },
   { name: "Fidelity", src: "/company-logos/fidelity.svg" },
-  { name: "Bank of America", src: "/company-logos/bank-of-america.jpg" },
   { name: "Citi", src: "/company-logos/citi.svg" },
-  { name: "Deloitte", src: "/company-logos/deloitte.png" },
   { name: "Qualcomm", src: "/company-logos/qualcomm.svg" },
   { name: "Slalom", src: "/company-logos/slalom.svg" },
   { name: "Stripe", src: "/company-logos/stripe.svg" },

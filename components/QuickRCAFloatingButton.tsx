@@ -12,7 +12,7 @@ export default function QuickRCAFloatingButton() {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => window.dispatchEvent(new Event('open-rca-modal'))}
-      className="fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F26A21] to-[#E55A11] px-5 py-3.5 text-sm font-bold text-white shadow-[0_8px_32px_rgba(242,106,33,0.4)] transition-all hover:shadow-[0_8px_32px_rgba(242,106,33,0.6)] sm:bottom-8 sm:right-8 group"
+      className="fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F26A21] to-[#E55A11] px-5 py-3.5 text-sm font-bold text-white shadow-[0_8px_32px_rgba(242,106,33,0.4)] transition-all hover:shadow-[0_8px_32px_rgba(242,106,33,0.6)] sm:bottom-8 sm:left-8 group"
     >
       <Activity className="h-5 w-5 animate-pulse" />
       <span>Get Free Diagnosis</span>

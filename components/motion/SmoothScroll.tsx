@@ -10,6 +10,8 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
+    // Expose globally so modals can stop/start Lenis
+    (window as any).__lenis = lenis;
     let raf = 0;
     const loop = (time: number) => {
       lenis.raf(time);
@@ -19,6 +21,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     return () => {
       cancelAnimationFrame(raf);
       lenis.destroy();
+      delete (window as any).__lenis;
     };
   }, []);
   return <>{children}</>;

@@ -11,6 +11,7 @@ import SmoothScroll from "@/components/motion/SmoothScroll";
 import Preloader from "@/components/motion/Preloader";
 import QuickRCAModal from "@/components/QuickRCAModal";
 import QuickRCAFloatingButton from "@/components/QuickRCAFloatingButton";
+import SeminarAnnouncement from "@/components/home/SeminarAnnouncement";
 
 import { getSiteUrl } from "@/lib/site";
 
@@ -73,6 +74,7 @@ export default function RootLayout({
             <MobileBottomNav />
             <QuickRCAFloatingButton />
             <QuickRCAModal />
+            <SeminarAnnouncement />
           </CartProvider>
           </SmoothScroll>
         </AuthProvider>

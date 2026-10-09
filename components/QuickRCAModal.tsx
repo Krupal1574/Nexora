@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, AlertCircle } from "lucide-react";
+import { useModalScrollLock } from "@/hooks/useModalScrollLock";
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -38,6 +39,8 @@ export default function QuickRCAModal() {
     window.addEventListener("open-rca-modal", handleOpen);
     return () => window.removeEventListener("open-rca-modal", handleOpen);
   }, []);
+
+  useModalScrollLock(isOpen);
 
   if (!isOpen) return null;
 
@@ -147,12 +150,12 @@ export default function QuickRCAModal() {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm overflow-y-auto" style={{ overscrollBehavior: 'none' }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-[#F9FBF9] shadow-2xl flex flex-col max-h-[90vh]"
+          className="relative w-full max-w-3xl overflow-hidden rounded-2xl bg-[#F9FBF9] shadow-2xl flex flex-col" style={{ maxHeight: 'calc(100dvh - 2rem)', overscrollBehavior: 'contain' }}
         >
           {/* Close button */}
           <button
