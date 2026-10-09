@@ -7,9 +7,10 @@ import CartProvider from "@/components/CartProvider";
 import AuthProvider from "@/components/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Chatbot } from "@/components/Chatbot";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import Preloader from "@/components/motion/Preloader";
+import QuickRCAModal from "@/components/QuickRCAModal";
+import QuickRCAFloatingButton from "@/components/QuickRCAFloatingButton";
 
 import { getSiteUrl } from "@/lib/site";
 
@@ -70,7 +71,8 @@ export default function RootLayout({
             <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-0">{children}</main>
             <Footer />
             <MobileBottomNav />
-            <Chatbot />
+            <QuickRCAFloatingButton />
+            <QuickRCAModal />
           </CartProvider>
           </SmoothScroll>
         </AuthProvider>

@@ -127,8 +127,8 @@ export default function HomePage() {
               We bridge elite tech talent and top U.S. enterprises, from resume and training to placement and onboarding.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={ready ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 0.8, ease, delay: 0.85 }} className="flex flex-col sm:flex-row gap-4">
-              <Magnetic><Link href="/contact" className="btn-primary px-8 py-4 text-base">Start now <ArrowRight className="w-4 h-4" /></Link></Magnetic>
-              <Magnetic><Link href="/services" className="btn-ghost px-8 py-4 text-base">What we do</Link></Magnetic>
+              <Magnetic><button onClick={() => window.dispatchEvent(new Event('open-rca-modal'))} className="btn-primary px-8 py-4 text-base bg-[#F26A21] hover:bg-[#D95A19] border-none text-white shadow-lg shadow-[#F26A21]/20">Start Quick RCA <ArrowRight className="w-4 h-4" /></button></Magnetic>
+              <Magnetic><Link href="/contact" className="btn-ghost px-8 py-4 text-base">Contact Us</Link></Magnetic>
             </motion.div>
           </div>
         </motion.div>

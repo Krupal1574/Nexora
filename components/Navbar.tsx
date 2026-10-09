@@ -389,7 +389,7 @@ export default function Navbar() {
               href={siteConfig.contact.phoneHref}
               className="btn-primary w-full justify-center"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-4 h-4 mr-1.5" />
               Call Us Now!
             </a>
             <p className="text-center text-[#64748B] text-xs mt-3">
