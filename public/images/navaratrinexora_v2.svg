@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="560" viewBox="0 0 1440 560" fill="none">
+  <defs>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F68A3A"/><stop offset="1" stop-color="#E85A1B"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#E9B77F" opacity=".35"/>
+    </pattern>
+    <linearGradient id="diyaGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop stop-color="#FFD700" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#FF8C00" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Dots -->
+  <rect width="1440" height="560" rx="26" fill="url(#dots)"/>
+
+  <!-- Top Hanging Marigold / Toran -->
+  <path d="M0 0 Q120 60 240 0 Q360 60 480 0 Q600 60 720 0 Q840 60 960 0 Q1080 60 1200 0 Q1320 60 1440 0" fill="none" stroke="#F26A21" stroke-width="4" opacity="0.6"/>
+  <path d="M0 15 Q120 75 240 15 Q360 75 480 15 Q600 75 720 15 Q840 75 960 15 Q1080 75 1200 15 Q1320 75 1440 15" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.8"/>
+  
+  <g fill="#F26A21">
+    <circle cx="120" cy="30" r="12"/><circle cx="360" cy="30" r="12"/><circle cx="600" cy="30" r="12"/><circle cx="840" cy="30" r="12"/><circle cx="1080" cy="30" r="12"/><circle cx="1320" cy="30" r="12"/>
+  </g>
+  <g fill="#FFD700">
+    <circle cx="240" cy="10" r="8"/><circle cx="480" cy="10" r="8"/><circle cx="720" cy="10" r="8"/><circle cx="960" cy="10" r="8"/><circle cx="1200" cy="10" r="8"/>
+  </g>
+
+  <!-- Bottom Left and Right Waves -->
+  <path d="M0 420C210 350 300 530 520 490S880 390 1080 470s260 20 360-35v125H0V420Z" fill="#F8E0C9" opacity=".65"/>
+  <path d="M0 455C230 390 360 555 600 510s410-95 600-20 190 20 240 0" stroke="#E9A56D" stroke-width="2" opacity=".65"/>
+
+  <!-- Left Accent Lines -->
+  <path d="M42 0V105M1398 0V105" stroke="#F26A21" stroke-width="2" opacity=".6"/>
+  <g fill="#F26A21" opacity=".9">
+    <path d="M42 104l8 8-8 8-8-8 8-8Z"/><path d="M1398 104l8 8-8 8-8-8 8-8Z"/>
+    <circle cx="42" cy="140" r="3"/><circle cx="1398" cy="140" r="3"/>
+  </g>
+
+  <!-- Text Content -->
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="92" y="118" font-size="27" font-weight="700" letter-spacing="5" fill="#171717">NEX<tspan fill="#F26A21">O</tspan>RA</text>
+    <text x="94" y="142" font-size="10" letter-spacing="4.8" fill="#77736D">STAFFING LLP</text>
+    <path d="M94 175H174" stroke="#F26A21" stroke-width="3"/>
+    
+    <text x="92" y="256" font-family="Georgia, 'Times New Roman', serif" font-size="76" font-weight="700" fill="#171717">NAVARATRI</text>
+    <text x="96" y="316" font-size="45" font-weight="700" letter-spacing="12" fill="#F26A21">SPECIAL OFFERS</text>
+    <text x="98" y="362" font-size="21" fill="#5F5B55">Celebrate the season of dance and lights.</text>
+    <text x="98" y="391" font-size="21" fill="#5F5B55">Explore Nexora's featured shop offers.</text>
+    
+    <rect x="96" y="427" width="242" height="58" rx="29" fill="#F26A21"/>
+    <text x="128" y="463" font-size="16" font-weight="700" letter-spacing="1.5" fill="#FFFFFF">EXPLORE OFFERS</text>
+    <path d="M303 456H321M314 449L321 456L314 463" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <text x="98" y="530" font-size="12" letter-spacing="2" fill="#77736D">PEOPLE • TRUST • GROWTH</text>
+  </g>
+
+  <!-- Garba Dancers Graphic (Right Side) -->
+  <g transform="translate(1150 280)">
+    <!-- Dancer 1 (Left) -->
+    <g transform="translate(-100, 20)">
+      <!-- Skirt / Chaniya -->
+      <path d="M0,0 Q-40,80 -60,120 L60,120 Q40,80 0,0" fill="#E85A1B"/>
+      <!-- Details on Chaniya -->
+      <path d="M-50,110 L50,110" stroke="#FFD700" stroke-width="4"/>
+      <path d="M-40,90 L40,90" stroke="#FFD700" stroke-width="2" stroke-dasharray="4,4"/>
+      <!-- Torso -->
+      <path d="M-15,-30 L15,-30 L10,0 L-10,0 Z" fill="#F26A21"/>
+      <!-- Head -->
+      <circle cx="0" cy="-45" r="15" fill="#171717"/>
+      <!-- Arms -->
+      <path d="M-15,-25 Q-40,-40 -50,-10" fill="none" stroke="#F26A21" stroke-width="6" stroke-linecap="round"/>
+      <path d="M15,-25 Q40,-40 50,-10" fill="none" stroke="#F26A21" stroke-width="6" stroke-linecap="round"/>
+      <!-- Dandiya Sticks -->
+      <line x1="-50" y1="-10" x2="-30" y2="20" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+      <line x1="50" y1="-10" x2="30" y2="20" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <!-- Dancer 2 (Right) -->
+    <g transform="translate(60, 0)">
+      <!-- Skirt / Chaniya -->
+      <path d="M0,0 Q-50,90 -70,140 L70,140 Q50,90 0,0" fill="#F26A21"/>
+      <path d="M-60,130 L60,130" stroke="#FFD700" stroke-width="4"/>
+      <path d="M-50,110 L50,110" stroke="#171717" stroke-width="2" stroke-dasharray="6,4"/>
+      <!-- Torso -->
+      <path d="M-15,-35 L15,-35 L10,0 L-10,0 Z" fill="#E85A1B"/>
+      <!-- Head -->
+      <circle cx="0" cy="-55" r="18" fill="#171717"/>
+      <!-- Arms -->
+      <path d="M-15,-30 Q-50,-50 -60,-20" fill="none" stroke="#F26A21" stroke-width="6" stroke-linecap="round"/>
+      <path d="M15,-30 Q50,-50 60,-20" fill="none" stroke="#F26A21" stroke-width="6" stroke-linecap="round"/>
+      <!-- Dandiya Sticks -->
+      <line x1="-60" y1="-20" x2="-40" y2="-50" stroke="#171717" stroke-width="4" stroke-linecap="round"/>
+      <line x1="60" y1="-20" x2="40" y2="-50" stroke="#FFD700" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Floating Diyas (Lamps) -->
+  <g transform="translate(850, 420)">
+    <!-- Diya Base -->
+    <path d="M-30,0 Q0,25 30,0 Q0,5 -30,0" fill="#E85A1B"/>
+    <path d="M-30,0 Q0,-5 30,0" fill="#F26A21"/>
+    <!-- Flame Glow -->
+    <circle cx="0" cy="-15" r="25" fill="url(#diyaGlow)"/>
+    <!-- Flame -->
+    <path d="M0,-5 Q-10,-15 0,-30 Q10,-15 0,-5" fill="#FFD700"/>
+  </g>
+
+  <g transform="translate(1350, 380) scale(0.8)">
+    <path d="M-30,0 Q0,25 30,0 Q0,5 -30,0" fill="#E85A1B"/>
+    <path d="M-30,0 Q0,-5 30,0" fill="#F26A21"/>
+    <circle cx="0" cy="-15" r="25" fill="url(#diyaGlow)"/>
+    <path d="M0,-5 Q-10,-15 0,-30 Q10,-15 0,-5" fill="#FFD700"/>
+  </g>
+  
+  <g transform="translate(950, 200) scale(0.6)">
+    <path d="M-30,0 Q0,25 30,0 Q0,5 -30,0" fill="#E85A1B"/>
+    <path d="M-30,0 Q0,-5 30,0" fill="#F26A21"/>
+    <circle cx="0" cy="-15" r="25" fill="url(#diyaGlow)"/>
+    <path d="M0,-5 Q-10,-15 0,-30 Q10,-15 0,-5" fill="#FFD700"/>
+  </g>
+</svg>

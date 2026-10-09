@@ -72,7 +72,7 @@ export const products: Product[] = [
     icon: Briefcase,
   },
   {
-    id: "ultimate-support",
+    id: "3-support",
     slug: "ultimate-support",
     name: "Ultimate Support",
     tagline: "Complete career transformation package including resume, Lin...",

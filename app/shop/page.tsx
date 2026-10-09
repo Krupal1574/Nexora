@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { useCart } from "@/lib/cart";
+import NavaratriPromo from "@/components/home/NavaratriPromo";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -520,6 +521,9 @@ export default function ShopPage() {
           ]}
           sub="Choose the perfect plan to accelerate your job search, optimize your profile, and land your dream role faster."
         />
+
+        {/* Navaratri Promo Artwork */}
+        <NavaratriPromo />
 
         {/* Promo Banner */}
         <section className="mt-10 rounded-xl border border-[#F26A21]/30 bg-[#F26A21]/5 px-4 py-4 sm:px-5">
