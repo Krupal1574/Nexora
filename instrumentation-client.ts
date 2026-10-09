@@ -3,6 +3,7 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from "@sentry/nextjs";
+import { initBotId } from 'botid/client/core';
 
 Sentry.init({
   dsn: "https://d26dd5cb392384e8f0f8cfc802d2c66c@o4512124732243968.ingest.us.sentry.io/4512124740370432",
@@ -32,3 +33,12 @@ Sentry.init({
 });
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
+
+initBotId({
+  protect: [
+    {
+      path: '/api/chat',
+      method: 'POST',
+    },
+  ],
+});

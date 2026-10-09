@@ -2,6 +2,7 @@ import { createOpenAI } from '@ai-sdk/openai';
 import { createGroq } from '@ai-sdk/groq';
 import { streamText, convertToModelMessages } from 'ai';
 import { NextRequest, NextResponse } from 'next/server';
+import { checkBotId } from 'botid/server';
 
 // ─── Providers ────────────────────────────────────────────────────────────────
 // Primary: AgentRouter (OpenAI-compatible)
@@ -69,6 +70,15 @@ export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for') || 'unknown';
+  
+  const verification = await checkBotId();
+  if (verification.isBot) {
+    return NextResponse.json(
+      { error: 'Bot detected. Access denied.' },
+      { status: 403 }
+    );
+  }
+
   if (!checkRateLimit(ip)) {
     return NextResponse.json(
       { error: 'Too many requests. Please wait a moment.' },
