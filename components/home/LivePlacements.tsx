@@ -8,11 +8,11 @@ const PLACEMENTS = [
   { role: "Product Manager", co: "Citi", slug: "citi", bg: "#2a5be0", loc: "Texas", pay: "$130k", text: "A candidate has officially secured a Product Mgmt Lead Analyst C13, Vice President role at Citibank, Irving, Texas, with an annual base salary of $130K! A senior-level opportunity with a global financial powerhouse and a career milestone that opens the door to bigger things ahead." },
   { role: "Architect", co: "Slalom", slug: "slalom", bg: "#0c64ff", loc: "Seattle", pay: "$150k", text: "A candidate has secured an Architect role at Slalom with an annual salary of $150K. A bigger role. A bigger opportunity. And another career milestone unlocked. The next chapter starts October 26, 2026." },
   { role: "Marketing Analyst", co: "LifeStance", slug: "lifestance", bg: "#000", loc: "California", pay: "$110k", text: "A candidate has secured the role of Senior Marketing Analyst at LifeStance Health in California, with a starting salary of $110K. A new role, a new milestone, and another career chapter unlocked." },
-  { role: "Product Manager", co: "Unilever", slug: "uniliver", bg: "#ffffff", loc: "Hoboken", pay: "$120k", text: "A candidate has officially received an offer from Unilever, Hoboken, New Jersey as an Associate CO Data & Analytics Product Manager, with an annual base salary of $120K, plus a $7.5K sign-on bonus! A global company, a high-impact role, and a new chapter built around bigger opportunities." },
-  { role: "Software Developer", co: "Amazon", slug: "amazon", bg: "#ffffff", loc: "Washington", pay: "$165k", text: "A candidate has officially received an offer from Amazon, Redmond, Washington as a Software Development Engineer Big Data, AWS Elastic MapReduce (EMR) with an annual base salary of $165K! A massive career milestone, a dream opportunity, and a new chapter in innovation and growth." },
-  { role: "Senior Consultant", co: "Deloitte", slug: "deloitte", bg: "#ffffff", loc: "Georgia", pay: "$133k", text: "A candidate has officially received an offer from Deloitte, Atlanta, Georgia as a Senior Consultant Strategy, Growth & Transformation, with an annual salary of $133K! A big career milestone, a new chapter of growth, and another opportunity to make an impact." },
+  { role: "Product Manager", co: "Unilever", slug: "uniliver", bg: "#0070CE", loc: "Hoboken", pay: "$120k", text: "A candidate has officially received an offer from Unilever, Hoboken, New Jersey as an Associate CO Data & Analytics Product Manager, with an annual base salary of $120K, plus a $7.5K sign-on bonus! A global company, a high-impact role, and a new chapter built around bigger opportunities." },
+  { role: "Software Developer", co: "Amazon", slug: "amazon", bg: "#000000", loc: "Washington", pay: "$165k", text: "A candidate has officially received an offer from Amazon, Redmond, Washington as a Software Development Engineer Big Data, AWS Elastic MapReduce (EMR) with an annual base salary of $165K! A massive career milestone, a dream opportunity, and a new chapter in innovation and growth." },
+  { role: "Senior Consultant", co: "Deloitte", slug: "deloitte", bg: "#86BC25", loc: "Georgia", pay: "$133k", text: "A candidate has officially received an offer from Deloitte, Atlanta, Georgia as a Senior Consultant Strategy, Growth & Transformation, with an annual salary of $133K! A big career milestone, a new chapter of growth, and another opportunity to make an impact." },
   { role: "Data Scientist", co: "American Airlines", slug: "american-airlines", bg: "#0078d2", loc: "Texas", pay: "$124k", text: "A candidate has officially received an offer from American Airlines as a Data Scientist / Senior Data Scientist – Safety, with an annual salary of $124K! A major career milestone and an exciting new chapter with one of the world’s leading airlines." },
-  { role: "Developer", co: "Neuberger Berman", slug: "neuberg", bg: "#ffffff", loc: "New York", pay: "$140k", text: "A candidate has officially stepped into a Developer III, Assistant Vice President role at Neuberger Berman, New York, with an impressive $140K annual base salary! A well-earned opportunity that reflects the effort behind the journey." },
+  { role: "Developer", co: "Neuberger Berman", slug: "neuberg", bg: "#6B1A3C", loc: "New York", pay: "$140k", text: "A candidate has officially stepped into a Developer III, Assistant Vice President role at Neuberger Berman, New York, with an impressive $140K annual base salary! A well-earned opportunity that reflects the effort behind the journey." },
   { role: "Software Engineer", co: "DriveWealth", slug: "drivewealth", bg: "#0e9f6e", loc: "Chicago", pay: "$190k", text: "A candidate has secured a Software Development Engineer role at DriveWealth, Chicago, in a hybrid setup, with an impressive $190K annual package! A huge payoff for the skills, consistency, and effort that went into the journey." },
   { role: "Engineer", co: "Qualcomm", slug: "qualcomm", bg: "#3253dc", loc: "San Diego", pay: "$229k", text: "A candidate has officially joined Qualcomm, San Diego, California as an Engineer, with a total compensation of $229.3K! One incredible offer, a major milestone, and a well-earned opportunity to take the career to the next level." },
   { role: "Software Engineer", co: "Strategic Insurance", slug: "strategic-insurance", bg: "#7a1f2b", loc: "Texas", pay: "$145k", text: "A candidate has secured a Software Engineer role at Strategic Insurance, Texas, with an impressive $145K package! Months of learning, sharpening skills, and staying committed have led to this moment." },
@@ -182,7 +182,11 @@ export default function LivePlacements() {
                 src={`/fwd/${p.slug}.png`}
                 alt={`${p.co} logo`}
                 loading="lazy"
-                className="max-w-[62%] max-h-[110px] object-contain z-10 relative pointer-events-none"
+                className={`z-10 relative pointer-events-none ${
+                  ["uniliver", "neuberg"].includes(p.slug)
+                    ? "absolute inset-0 w-full h-full object-cover"
+                    : "max-w-[62%] max-h-[110px] object-contain"
+                }`}
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = "none";
                   const prev = (e.target as HTMLImageElement).previousElementSibling as HTMLElement;
@@ -238,7 +242,11 @@ export default function LivePlacements() {
                 <img
                   src={`/fwd/${selectedPlacement.slug}.png`}
                   alt={`${selectedPlacement.co} logo`}
-                  className="max-w-[62%] max-h-[110px] object-contain"
+                  className={`${ 
+                    ["uniliver", "neuberg"].includes(selectedPlacement.slug)
+                      ? "absolute inset-0 w-full h-full object-cover rounded-t-[28px]"
+                      : "max-w-[62%] max-h-[110px] object-contain"
+                  }`}
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
                     const prev = (e.target as HTMLImageElement).previousElementSibling as HTMLElement;
