@@ -1,5 +1,7 @@
+"use client";
+
+
 import Image from "next/image";
-import Link from "next/link";
 
 export default function NavaratriPromo() {
   return (
@@ -19,11 +21,20 @@ export default function NavaratriPromo() {
         <h2 id="navaratri-promo-title" className="sr-only">
           Navaratri special offers from Nexora
         </h2>
-        {/* Overlay CTA makes the artwork's visual button functional. */}
-        <Link
-          href="/shop"
+
+        {/* Clickable overlay positioned over the SVG's "EXPLORE OFFERS" button */}
+        <button
+          type="button"
+          onClick={() => {
+            const el = document.getElementById("shop-products");
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+              window.scrollBy({ top: 600, behavior: "smooth" });
+            }
+          }}
           aria-label="Explore Nexora shop offers"
-          className="absolute left-[6.7%] top-[71%] h-[10.5%] w-[17.5%] rounded-full outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#171717]"
+          className="absolute left-[5%] bottom-[12%] h-[12%] w-[20%] z-10 cursor-pointer rounded-full outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#F26A21]"
         />
       </div>
     </section>

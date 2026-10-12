@@ -525,39 +525,9 @@ export default function ShopPage() {
         {/* Navaratri Promo Artwork */}
         <NavaratriPromo />
 
-        {/* Promo Banner */}
-        <section className="mt-10 rounded-xl border border-[#F26A21]/30 bg-[#F26A21]/5 px-4 py-4 sm:px-5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-[#F26A21]/10 border border-[#F26A21]/20 flex items-center justify-center">
-                <Rocket className="w-4 h-4 text-[#F26A21]" />
-              </div>
-
-              <div>
-                <p className="text-[10px] sm:text-xs font-bold text-[#171717]">
-                  35% off Plans &amp; Packages · 15% off Individual Services
-                </p>
-
-                <p className="text-[8px] text-[#77736D] mt-0.5">
-                  Limited-time introductory pricing — don't miss out.
-                </p>
-              </div>
-            </div>
-
-            <button
-              onClick={() =>
-                setCategory("pro-services")
-              }
-              className="shrink-0 rounded-full bg-[#8FB8D8] hover:bg-[#F26A21] px-5 py-2 text-sm font-bold text-[#171717] flex items-center gap-2 transition-colors"
-            >
-              Explore Plans
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-        </section>
 
         {/* Filters */}
-        <section className="mt-8 border-b border-[#E5E5E5] pb-3">
+        <section id="shop-products" className="mt-8 border-b border-[#E5E5E5] pb-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 
             {/* Categories */}
