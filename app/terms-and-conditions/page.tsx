@@ -42,9 +42,7 @@ export default function TermsAndConditionsPage() {
       />
       <section className="section-spacing bg-[#FFFFFF] border-t border-[#FFFFFF]">
         <article className="container-narrow space-y-6">
-          <div className="rounded-xl border border-amber-300/30 bg-amber-300/10 p-5 text-sm leading-relaxed text-amber-100">
-            This page requires review and approval by Nexora's authorized legal owner before public launch. It does not replace legal advice.
-          </div>
+
           {sections.map((section) => (
             <section key={section.title} className="glass-card p-6 sm:p-8">
               <h2 className="text-xl font-bold text-[#171717] mb-3">{section.title}</h2>
