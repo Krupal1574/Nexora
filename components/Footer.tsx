@@ -80,10 +80,15 @@ export default function Footer() {
               navigating their next opportunity.
             </p>
             {/* Location badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#FFFFFF]/60 border border-[#E5E5E5]/60 text-xs text-[#77736D]">
+            <a
+              href={siteConfig.contact.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#FFFFFF]/60 border border-[#E5E5E5]/60 text-xs text-[#77736D] hover:text-[#F26A21] hover:border-[#F26A21]/30 transition-colors duration-200"
+            >
               <span className="w-1.5 h-1.5 rounded-full bg-[#F26A21] animate-pulse" />
-              Tampa, FL — Serving Nationwide
-            </div>
+              Casper, WY — Serving Nationwide
+            </a>
           </div>
 
           {/* Quick Links */}

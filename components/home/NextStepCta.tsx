@@ -18,7 +18,10 @@ const CONTACTS: ContactItem[] = [
   {
     label: "Visit Us",
     icon: <MapPin className="w-5 h-5 text-[#F26A21]" />,
-    lines: [{ text: "Tampa, FL" }, { text: "Serving Nationwide" }],
+    lines: [
+      { text: "Casper, WY", href: "https://www.google.com/maps/search/?api=1&query=5830+E+2nd+St+Ste+7000+Casper+WY+82609" },
+      { text: "Serving Nationwide" },
+    ],
   },
 ];
 

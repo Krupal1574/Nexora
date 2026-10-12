@@ -9,6 +9,9 @@ export const siteConfig = {
     email: "Support@nexorastaffingllp.com",
     instagram: "https://www.instagram.com/nexorastaffingllp?stkn=MXd6bHExejU3cm9iZA==",
     linkedin: "https://www.linkedin.com/company/nexora-staffing-llp/",
+    address: "5830 E 2nd St, Ste 7000, Casper, WY 82609, USA",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=5830+E+2nd+St+Ste+7000+Casper+WY+82609",
+    mapsEmbed: "https://maps.google.com/maps?q=5830+E+2nd+St+Ste+7000+Casper+WY+82609&output=embed&z=15",
   },
 } as const;
 
