@@ -142,6 +142,46 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ─── E-Verify & EIN ───────────────────────────────────────── */}
+      <section className="section-spacing border-t border-black/10">
+        <div className="container-wide">
+          <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-14 justify-center">
+            {/* E-Verify logo */}
+            <a
+              href="https://www.e-verify.gov"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="E-Verify Employer — opens E-Verify website"
+              className="shrink-0 group"
+            >
+              <Image
+                src="/imagec/everyfiy.png"
+                alt="E-Verify Employer"
+                width={220}
+                height={55}
+                className="h-12 sm:h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              />
+            </a>
+
+            {/* Divider */}
+            <div className="hidden sm:block w-px h-20 bg-black/10" />
+
+            {/* EIN + description */}
+            <div className="text-center sm:text-left max-w-md">
+              <p className="text-xs font-bold tracking-widest uppercase text-[#F26A21] mb-2">
+                Employer Identification
+              </p>
+              <p className="text-2xl font-bold text-[#171717] mb-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                EIN: 61-2392732
+              </p>
+              <p className="text-sm text-[#77736D] leading-relaxed">
+                Nexora Staffing LLP is a registered E-Verify employer. We verify the employment eligibility of all new hires in compliance with federal law, ensuring a fully authorized and compliant U.S. workforce.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <NextStepCta />
     </div>
   );

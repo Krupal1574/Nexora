@@ -218,11 +218,10 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="container-wide pb-24 lg:pb-0">
         <div className="h-px bg-gradient-to-r from-transparent via-[#E5E5E5] to-transparent" />
-        <div className="py-7 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[#64748B] text-sm text-center">
             © {new Date().getFullYear()}{" "}
-            <span className="text-[#77736D]">Nexora</span>. All rights
-            reserved.
+            <span className="text-[#77736D]">Nexora</span>. All rights reserved.
           </p>
           <div className="flex items-center gap-1">
             <Link
@@ -239,6 +238,33 @@ export default function Footer() {
               Terms &amp; Conditions
             </Link>
           </div>
+        </div>
+
+        {/* E-Verify + EIN row */}
+        <div className="py-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#E5E5E5]/60">
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.e-verify.gov"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="E-Verify Employer"
+              className="group"
+            >
+              <Image
+                src="/imagec/everyfiy.png"
+                alt="E-Verify Employer"
+                width={130}
+                height={32}
+                className="h-8 w-auto object-contain hover:opacity-85 transition-opacity duration-200"
+              />
+            </a>
+            <span className="text-[#64748B] text-xs">
+              EIN: <span className="font-semibold text-[#171717]">61-2392732</span>
+            </span>
+          </div>
+          <p className="text-[#64748B] text-xs text-center">
+            Authorized E-Verify Employer · Employment eligibility verified per federal law
+          </p>
         </div>
       </div>
     </footer>
