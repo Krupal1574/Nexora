@@ -5,7 +5,7 @@ import PageHero from "@/components/motion/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import MaskLines from "@/components/motion/MaskLines";
 import ScrollFillText from "@/components/motion/ScrollFillText";
-import CtaSection from "@/components/motion/CtaSection";
+import NextStepCta from "@/components/home/NextStepCta";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -142,12 +142,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <CtaSection
-        lines={["Be our next", <><span key="s" className="accent">success</span> <span key="t" className="thin">story.</span></>]}
-        text="Join tech professionals who chose Nexora to accelerate their careers."
-        primary={{ href: "/contact", label: "Talk to a recruiter" }}
-        secondary={{ href: "/services", label: "View services" }}
-      />
+      <NextStepCta />
     </div>
   );
 }

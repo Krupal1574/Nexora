@@ -18,6 +18,8 @@ import CompanyLogos from "@/components/home/CompanyLogos";
 import BenefitsSection from "@/components/home/BenefitsSection";
 import ServicesSolutionsSection from "@/components/home/ServicesSolutionsSection";
 import MissionValuesSection from "@/components/home/MissionValuesSection";
+import LivePlacements from "@/components/home/LivePlacements";
+import NextStepCta from "@/components/home/NextStepCta";
 
 /* ─── Content ──────────────────────────────────────────────────────────── */
 const services = [
@@ -206,7 +208,11 @@ export default function HomePage() {
         </HorizontalScroll>
       </section>
 
+      <LivePlacements />
+
       <Testimonials />
+
+      <NextStepCta />
 
       {/* CLOSING CTA */}
       <section className="relative section-spacing border-t border-black/10 text-center overflow-hidden">
