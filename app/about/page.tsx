@@ -112,7 +112,7 @@ export default function AboutPage() {
       </section>
 
 
-      {/* ─── E-Verify & EIN ───────────────────────────────────────── */}
+      {/* ─── E-Verify ─────────────────────────────────────────────── */}
       <section className="section-spacing border-t border-black/10">
         <div className="container-wide">
           <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-14 justify-center">
@@ -136,14 +136,14 @@ export default function AboutPage() {
             {/* Divider */}
             <div className="hidden sm:block w-px h-20 bg-black/10" />
 
-            {/* EIN + description */}
+            {/* Compliance description */}
             <div className="text-center sm:text-left max-w-md">
               <p className="text-xs font-bold tracking-widest uppercase text-[#F26A21] mb-2">
-                Employer Identification
+                Employment Eligibility
               </p>
-              <p className="text-2xl font-bold text-[#171717] mb-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-                EIN: 61-2392732
-              </p>
+              <h3 className="text-2xl font-bold text-[#171717] mb-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                Authorized E-Verify Employer
+              </h3>
               <p className="text-sm text-[#77736D] leading-relaxed">
                 Nexora Staffing LLP is a registered E-Verify employer. We verify the employment eligibility of all new hires in compliance with federal law, ensuring a fully authorized and compliant U.S. workforce.
               </p>

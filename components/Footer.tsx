@@ -240,7 +240,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* E-Verify + EIN row */}
+        {/* E-Verify row */}
         <div className="py-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-[#E5E5E5]/60">
           <div className="flex items-center gap-4">
             <a
@@ -258,9 +258,6 @@ export default function Footer() {
                 className="h-8 w-auto object-contain hover:opacity-85 transition-opacity duration-200"
               />
             </a>
-            <span className="text-[#64748B] text-xs">
-              EIN: <span className="font-semibold text-[#171717]">61-2392732</span>
-            </span>
           </div>
           <p className="text-[#64748B] text-xs text-center">
             Authorized E-Verify Employer · Employment eligibility verified per federal law
