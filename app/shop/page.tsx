@@ -692,57 +692,50 @@ export default function ShopPage() {
           </div>
 
           <div className="max-w-3xl mx-auto space-y-3">
-            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
-              <summary className="cursor-pointer list-none text-sm font-semibold text-[#171717] flex items-center justify-between">
-                What's included in each plan?
-                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform" />
+            <details className="group rounded-xl border border-[#E5E5E5] bg-white p-4 sm:p-5 shadow-sm hover:border-[#F26A21]/40 transition-all duration-200">
+              <summary className="cursor-pointer list-none text-sm sm:text-base font-bold text-[#171717] flex items-center justify-between group-hover:text-[#F26A21] transition-colors">
+                What&apos;s included in each plan?
+                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform duration-200 shrink-0 ml-4" />
               </summary>
 
-              <p className="mt-3 text-xs leading-relaxed text-[#77736D]">
-                Each plan builds on the previous one.
-                Launch covers resume and career
-                foundations, Accelerate adds recruitment
-                and interview preparation, and Summit
+              <p className="mt-3.5 pt-3.5 border-t border-[#E5E5E5]/70 text-xs sm:text-sm leading-relaxed text-[#77736D]">
+                Each plan builds on the previous one. Launch covers resume and career
+                foundations, Accelerate adds recruitment and interview preparation, and Summit
                 provides comprehensive career support.
               </p>
             </details>
 
-            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
-              <summary className="cursor-pointer list-none text-sm font-semibold text-[#171717] flex items-center justify-between">
+            <details className="group rounded-xl border border-[#E5E5E5] bg-white p-4 sm:p-5 shadow-sm hover:border-[#F26A21]/40 transition-all duration-200">
+              <summary className="cursor-pointer list-none text-sm sm:text-base font-bold text-[#171717] flex items-center justify-between group-hover:text-[#F26A21] transition-colors">
                 Can I upgrade my plan later?
-                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform duration-200 shrink-0 ml-4" />
               </summary>
 
-              <p className="mt-3 text-xs leading-relaxed text-[#77736D]">
-                Yes. If you start with a Launch or
-                Accelerate plan, you can upgrade later.
+              <p className="mt-3.5 pt-3.5 border-t border-[#E5E5E5]/70 text-xs sm:text-sm leading-relaxed text-[#77736D]">
+                Yes. If you start with a Launch or Accelerate plan, you can upgrade later.
               </p>
             </details>
 
-            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
-              <summary className="cursor-pointer list-none text-sm font-semibold text-[#171717] flex items-center justify-between">
+            <details className="group rounded-xl border border-[#E5E5E5] bg-white p-4 sm:p-5 shadow-sm hover:border-[#F26A21]/40 transition-all duration-200">
+              <summary className="cursor-pointer list-none text-sm sm:text-base font-bold text-[#171717] flex items-center justify-between group-hover:text-[#F26A21] transition-colors">
                 Do you guarantee job placement?
-                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform duration-200 shrink-0 ml-4" />
               </summary>
 
-              <p className="mt-3 text-xs leading-relaxed text-[#77736D]">
-                We do not guarantee placement because
-                final hiring decisions are made by
-                employers. We do provide dedicated
-                professional support throughout the
-                process.
+              <p className="mt-3.5 pt-3.5 border-t border-[#E5E5E5]/70 text-xs sm:text-sm leading-relaxed text-[#77736D]">
+                We do not guarantee placement because final hiring decisions are made by
+                employers. We do provide dedicated professional support throughout the process.
               </p>
             </details>
 
-            <details className="group rounded-xl border border-[#203548] bg-[#101821] p-4">
-              <summary className="cursor-pointer list-none text-sm font-semibold text-[#171717] flex items-center justify-between">
+            <details className="group rounded-xl border border-[#E5E5E5] bg-white p-4 sm:p-5 shadow-sm hover:border-[#F26A21]/40 transition-all duration-200">
+              <summary className="cursor-pointer list-none text-sm sm:text-base font-bold text-[#171717] flex items-center justify-between group-hover:text-[#F26A21] transition-colors">
                 What payment methods are accepted?
-                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform" />
+                <ChevronRight className="w-4 h-4 text-[#F26A21] group-open:rotate-90 transition-transform duration-200 shrink-0 ml-4" />
               </summary>
 
-              <p className="mt-3 text-xs leading-relaxed text-[#77736D]">
-                We accept ACH, wire transfer, Zelle,
-                and debit card. Credit card payments are
+              <p className="mt-3.5 pt-3.5 border-t border-[#E5E5E5]/70 text-xs sm:text-sm leading-relaxed text-[#77736D]">
+                We accept ACH, wire transfer, Zelle, and debit card. Credit card payments are
                 accepted for qualifying transactions.
               </p>
             </details>

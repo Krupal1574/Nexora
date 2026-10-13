@@ -7,10 +7,8 @@ import CtaSection from "@/components/motion/CtaSection";
 import {
   CheckCircle2,
   Sparkles,
-  Shield,
   Layers,
   Zap,
-  DollarSign,
   Plus,
   Tag,
 } from "lucide-react";
@@ -134,34 +132,6 @@ const individualServices = [
   },
 ];
 
-// ─── Placement Charges ────────────────────────────────────────────────────────
-const placementCharges = [
-  {
-    plan: "Application Guarantee Plan",
-    fee: "14%",
-    note: "After placement, 14% of first-year CTC",
-    accent: "#F26A21",
-  },
-  {
-    plan: "Interview Coaching",
-    fee: "12%",
-    note: "After placement, 12% of first-year CTC",
-    accent: "#8FB8D8",
-  },
-  {
-    plan: "Ultimate Session",
-    fee: "12%",
-    note: "After placement, 12% of first-year CTC",
-    accent: "#F26A21",
-  },
-  {
-    plan: "All In One",
-    fee: "10%",
-    note: "After placement, 10% of first-year CTC — lowest fee",
-    accent: "#8FB8D8",
-  },
-];
-
 // ─── Add-ons ──────────────────────────────────────────────────────────────────
 const addOns = [
   {
@@ -200,7 +170,6 @@ const addOns = [
 const sections = [
   { id: "plans-packages", label: "Plans & Packages", icon: Layers },
   { id: "individual-services", label: "Individual Services", icon: Zap },
-  { id: "placement-charges", label: "Placement Charges", icon: DollarSign },
   { id: "add-ons", label: "Add-ons", icon: Plus },
 ];
 
@@ -466,58 +435,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════
-          SECTION 3 — PLACEMENT CHARGES
-      ══════════════════════════════════════════════ */}
-      <section id="placement-charges" className="section-spacing bg-[#F5F1E8]">
-        <div className="container-wide">
-          <div className="mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-              Placement Charges
-            </h2>
-            <p className="text-[#77736D] mt-2 max-w-xl">
-              After-placement fees are charged as a percentage of your first-year CTC. You only pay after you land the job.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {placementCharges.map((pc) => (
-              <div
-                key={pc.plan}
-                className="rounded-2xl border p-6 text-center flex flex-col items-center gap-3 transition-all duration-300 hover:shadow-[0_12px_40px_rgba(23,23,23,0.08)]"
-                style={{
-                  borderColor: `${pc.accent}30`,
-                  backgroundColor: "#FFFFFF",
-                  background: `${pc.accent}06`,
-                }}
-              >
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center"
-                  style={{ background: `${pc.accent}15`, border: `2px solid ${pc.accent}30` }}
-                >
-                  <span className="text-xl font-black" style={{ color: pc.accent, fontFamily: "Space Grotesk, sans-serif" }}>
-                    {pc.fee}
-                  </span>
-                </div>
-                <h3 className="text-sm font-bold text-[#171717] text-center" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-                  {pc.plan}
-                </h3>
-                <p className="text-[10px] text-[#77736D] leading-relaxed">{pc.note}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 rounded-xl border border-[#F26A21]/20 bg-[#F26A21]/5 px-6 py-4 flex items-start gap-3">
-            <Shield className="w-4 h-4 text-[#F26A21] mt-0.5 shrink-0" />
-            <p className="text-xs text-[#77736D] leading-relaxed">
-              <span className="text-[#171717] font-semibold">Pay after placement.</span> Placement fees are only due once you successfully land a job through Nexora. No placement, no fee.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════════════
-          SECTION 4 — ADD-ONS
+          SECTION 3 — ADD-ONS
       ══════════════════════════════════════════════ */}
       <section id="add-ons" className="section-spacing bg-[#F5F1E8]">
         <div className="container-wide">

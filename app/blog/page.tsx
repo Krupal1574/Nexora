@@ -74,6 +74,9 @@ export default function BlogIndexPage() {
 
   const visibleExternalPosts = useMemo(() => {
     return externalPosts.filter((post) => {
+      if (post.source?.toLowerCase() === "techcrunch" || post.url?.toLowerCase().includes("techcrunch.com")) {
+        return false;
+      }
       const matchesSearch =
         (post.title || "").toLowerCase().includes((searchQuery || "").toLowerCase()) ||
         (post.description || "").toLowerCase().includes((searchQuery || "").toLowerCase()) ||

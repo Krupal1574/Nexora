@@ -9,13 +9,14 @@ const parser = new Parser({
     item: [
       ['media:content', 'mediaContent'],
       ['media:thumbnail', 'mediaThumbnail'],
-      ['content:encoded', 'contentEncoded']
+      ['content:encoded', 'contentEncoded'],
+      ['enclosure', 'enclosure']
     ]
   }
 });
 
 const FEEDS = [
-  { url: "https://techcrunch.com/feed/", source: "TechCrunch" },
+  { url: "https://azure.microsoft.com/en-us/blog/feed/", source: "Microsoft Azure" },
   { url: "https://cloudblog.withgoogle.com/rss/", source: "Google Cloud Blog" },
   { url: "https://aws.amazon.com/blogs/aws/feed/", source: "AWS News" },
   { url: "https://github.blog/feed/", source: "GitHub Blog" },
@@ -24,10 +25,11 @@ const FEEDS = [
 function extractImage(item: any): string | null {
   if (item.mediaContent && item.mediaContent.$ && item.mediaContent.$.url) return item.mediaContent.$.url;
   if (item.mediaThumbnail && item.mediaThumbnail.$ && item.mediaThumbnail.$.url) return item.mediaThumbnail.$.url;
+  if (item.enclosure && item.enclosure.url) return item.enclosure.url;
   
   // Try to find image in content:encoded or description
   const content = item.contentEncoded || item.content || item.description || "";
-  const match = content.match(/<img[^>]+src="([^">]+)"/);
+  const match = content.match(/<img[^>]+src=["']([^"']+)["']/i);
   if (match) return match[1];
 
   return null;
@@ -51,8 +53,8 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const cronSecret = searchParams.get("secret");
 
-    // Secure the endpoint
-    if (process.env.CRON_SECRET && cronSecret !== process.env.CRON_SECRET) {
+    // Secure the endpoint in production
+    if (process.env.NODE_ENV !== "development" && process.env.CRON_SECRET && cronSecret !== process.env.CRON_SECRET) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 

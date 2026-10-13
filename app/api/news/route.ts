@@ -22,7 +22,13 @@ export async function GET(req: Request) {
       take: 50, // Limit to reasonable number
     });
 
-    return NextResponse.json(articles);
+    const filtered = (articles || []).filter(
+      (a: any) =>
+        a.source?.toLowerCase() !== "techcrunch" &&
+        !a.url?.toLowerCase().includes("techcrunch.com")
+    );
+
+    return NextResponse.json(filtered);
   } catch (error) {
     console.error("Error fetching external articles:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
