@@ -27,11 +27,12 @@ export const navigation = [
 ] as const;
 
 export const servicesList = [
-  { label: "Career Counseling", href: "/services#career-counseling" },
-  { label: "Resume Support", href: "/services#resume-optimization" },
-  { label: "Interview Preparation", href: "/services#resume-marketing" },
-  { label: "Technical Guidance", href: "/services#technical-training" },
-  { label: "Career Transition Support", href: "/services#compliance-onboarding" },
+  { label: "Job Placement", href: "/services/job-placement" },
+  { label: "Recruitment & Staffing", href: "/services/recruitment-and-staffing" },
+  { label: "Talent Acquisition", href: "/services/talent-acquisition" },
+  { label: "Background Verification", href: "/services/background-verification" },
+  { label: "Accounting & Taxes", href: "/services/accounting-and-taxes" },
+  { label: "IT Training", href: "/services/it-training" },
 ];
 
 export function getSiteUrl() {

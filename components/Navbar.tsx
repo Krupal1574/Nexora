@@ -6,11 +6,22 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Menu, X, Phone, LogOut, User, LayoutDashboard, ChevronDown,
-  Settings, ShoppingBag, UserCircle, Edit3,
+  Settings, ShoppingBag, UserCircle, Edit3, ShieldCheck, Globe2,
+  Users, BadgeCheck, Calculator, GraduationCap, ArrowRight,
 } from "lucide-react";
 import { navigation, siteConfig } from "@/lib/site";
+import { servicesData } from "@/lib/services-data";
 import CartIcon from "@/components/CartIcon";
 import { useSession, signOut } from "next-auth/react";
+
+const serviceIcons = {
+  ShieldCheck,
+  Globe2,
+  Users,
+  BadgeCheck,
+  Calculator,
+  GraduationCap,
+};
 
 function UserAvatar({ image, name, size = 24 }: { image?: string | null; name?: string | null; size?: number }) {
   const initial = (name || "U").charAt(0).toUpperCase();
@@ -48,6 +59,21 @@ export default function Navbar() {
   const userMenuRef = useRef<HTMLDivElement>(null);
   const { data: session } = useSession();
 
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const servicesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleServicesMouseEnter = () => {
+    if (servicesTimeoutRef.current) clearTimeout(servicesTimeoutRef.current);
+    setServicesOpen(true);
+  };
+
+  const handleServicesMouseLeave = () => {
+    servicesTimeoutRef.current = setTimeout(() => {
+      setServicesOpen(false);
+    }, 180);
+  };
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
@@ -57,6 +83,8 @@ export default function Navbar() {
   useEffect(() => {
     setIsOpen(false);
     setUserMenuOpen(false);
+    setServicesOpen(false);
+    setMobileServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -72,17 +100,21 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  // Close user dropdown when clicking outside
+  const servicesMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdowns when clicking outside
   useEffect(() => {
-    if (!userMenuOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+      if (userMenuOpen && userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
         setUserMenuOpen(false);
+      }
+      if (servicesOpen && servicesMenuRef.current && !servicesMenuRef.current.contains(event.target as Node)) {
+        setServicesOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [userMenuOpen]);
+  }, [userMenuOpen, servicesOpen]);
 
   const dropdownLinks = [
     { href: "/profile", label: "My Profile", icon: UserCircle },
@@ -127,24 +159,117 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-              {navigation.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`relative text-sm font-medium transition-all duration-200 group whitespace-nowrap ${
-                    pathname === link.href
-                      ? "text-[#F26A21]"
-                      : "text-[#77736D] hover:text-[#171717]"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] rounded-full transition-all duration-300 ${
-                      pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+              {navigation.map((link) => {
+                if (link.href === "/services") {
+                  return (
+                    <div
+                      key={link.href}
+                      className="relative"
+                      onMouseEnter={handleServicesMouseEnter}
+                      onMouseLeave={handleServicesMouseLeave}
+                    >
+                      <Link
+                        href="/services"
+                        className={`relative text-sm font-medium transition-all duration-200 group whitespace-nowrap flex items-center gap-1.5 py-2 ${
+                          pathname.startsWith("/services")
+                            ? "text-[#F26A21]"
+                            : "text-[#77736D] hover:text-[#171717]"
+                        }`}
+                      >
+                        <span>{link.label}</span>
+                        <ChevronDown
+                          className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                            servicesOpen ? "rotate-180 text-[#F26A21]" : ""
+                          }`}
+                        />
+                        <span
+                          className={`absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] rounded-full transition-all duration-300 ${
+                            pathname.startsWith("/services") ? "w-full" : "w-0 group-hover:w-full"
+                          }`}
+                        />
+                      </Link>
+
+                      {/* Mega Menu Dropdown */}
+                      {servicesOpen && (
+                        <div
+                          className="absolute top-full -left-28 xl:-left-48 pt-3 z-50 w-[780px] xl:w-[860px] animate-in fade-in slide-in-from-top-1 duration-150"
+                          onMouseEnter={handleServicesMouseEnter}
+                          onMouseLeave={handleServicesMouseLeave}
+                        >
+                          <div className="rounded-[2rem] bg-[#FFFFFF] border border-[#E5E5E5] p-6 lg:p-7 shadow-[0_24px_60px_rgba(23,23,23,0.14)]">
+                            <div className="grid grid-cols-3 gap-x-5 gap-y-4">
+                              {servicesData.map((service) => {
+                                const IconComponent = serviceIcons[service.iconName] || ShieldCheck;
+                                const isCurrent = pathname === `/services/${service.slug}`;
+                                return (
+                                  <Link
+                                    key={service.slug}
+                                    href={`/services/${service.slug}`}
+                                    onClick={() => setServicesOpen(false)}
+                                    className={`group flex items-start gap-3 p-3 rounded-2xl transition-all duration-200 ${
+                                      isCurrent
+                                        ? "bg-[#F26A21]/10 border border-[#F26A21]/30"
+                                        : "hover:bg-[#F5F1E8]/70 border border-transparent hover:border-[#E5E5E5]"
+                                    }`}
+                                  >
+                                    <div className="w-10 h-10 rounded-xl bg-[#F5F1E8] group-hover:bg-[#F26A21]/15 group-hover:text-[#F26A21] border border-[#E5E5E5] group-hover:border-[#F26A21]/30 transition-all flex items-center justify-center shrink-0 text-[#171717]">
+                                      <IconComponent className="w-5 h-5 transition-transform group-hover:scale-110" />
+                                    </div>
+                                    <div className="min-w-0">
+                                      <h4
+                                        className="text-sm font-bold text-[#171717] group-hover:text-[#F26A21] transition-colors leading-tight mb-1"
+                                        style={{ fontFamily: "Space Grotesk, sans-serif" }}
+                                      >
+                                        {service.title}
+                                      </h4>
+                                      <p className="text-[11px] text-[#77736D] leading-snug line-clamp-2">
+                                        {service.subtext}
+                                      </p>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+
+                            {/* Bottom Bar in Mega Menu */}
+                            <div className="mt-5 pt-4 border-t border-[#E5E5E5] flex items-center justify-between text-xs">
+                              <span className="text-[#77736D]">
+                                Looking for individual services, add-ons, or custom packages?
+                              </span>
+                              <Link
+                                href="/services"
+                                onClick={() => setServicesOpen(false)}
+                                className="inline-flex items-center gap-1.5 font-bold text-[#F26A21] hover:text-[#E05A10] transition-colors"
+                              >
+                                All Services Overview <ArrowRight className="w-3.5 h-3.5" />
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`relative text-sm font-medium transition-all duration-200 group whitespace-nowrap ${
+                      pathname === link.href
+                        ? "text-[#F26A21]"
+                        : "text-[#77736D] hover:text-[#171717]"
                     }`}
-                  />
-                </Link>
-              ))}
+                  >
+                    {link.label}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] rounded-full transition-all duration-300 ${
+                        pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Right side controls */}
@@ -317,20 +442,80 @@ export default function Navbar() {
 
           {/* Drawer Links */}
           <nav className="flex flex-col gap-1 p-4 flex-1 overflow-y-auto">
-            {navigation.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{ animationDelay: `${i * 60}ms` }}
-                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium transition-all duration-200 ${
-                  pathname === link.href
-                    ? "bg-[#F26A21]/10 text-[#F26A21] border border-[#F26A21]/20"
-                    : "text-[#77736D] hover:bg-[#FFFFFF] hover:text-[#171717]"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navigation.map((link, i) => {
+              if (link.href === "/services") {
+                return (
+                  <div key={link.href} className="flex flex-col">
+                    <button
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                      className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-base font-medium transition-all duration-200 ${
+                        pathname.startsWith("/services")
+                          ? "bg-[#F26A21]/10 text-[#F26A21] border border-[#F26A21]/20"
+                          : "text-[#77736D] hover:bg-[#FFFFFF] hover:text-[#171717]"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          mobileServicesOpen ? "rotate-180 text-[#F26A21]" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {mobileServicesOpen && (
+                      <div className="flex flex-col gap-1 pl-2 pr-1 py-2 my-1 bg-[#F5F1E8]/70 rounded-xl border border-[#E5E5E5]/70">
+                        <Link
+                          href="/services"
+                          onClick={() => setIsOpen(false)}
+                          className="flex items-center justify-between px-3 py-2 text-xs font-bold text-[#F26A21] hover:underline"
+                        >
+                          <span>All Services Overview</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                        {servicesData.map((service) => {
+                          const IconComponent = serviceIcons[service.iconName] || ShieldCheck;
+                          const isCurrent = pathname === `/services/${service.slug}`;
+                          return (
+                            <Link
+                              key={service.slug}
+                              href={`/services/${service.slug}`}
+                              onClick={() => setIsOpen(false)}
+                              className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs transition-colors ${
+                                isCurrent
+                                  ? "bg-[#F26A21] text-white font-bold"
+                                  : "text-[#171717] hover:bg-[#FFFFFF]"
+                              }`}
+                            >
+                              <IconComponent
+                                className={`w-4 h-4 shrink-0 ${
+                                  isCurrent ? "text-white" : "text-[#F26A21]"
+                                }`}
+                              />
+                              <span className="truncate">{service.title}</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  style={{ animationDelay: `${i * 60}ms` }}
+                  className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-medium transition-all duration-200 ${
+                    pathname === link.href
+                      ? "bg-[#F26A21]/10 text-[#F26A21] border border-[#F26A21]/20"
+                      : "text-[#77736D] hover:bg-[#FFFFFF] hover:text-[#171717]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
 
             <div className="my-2 border-t border-[#FFFFFF]" />
 

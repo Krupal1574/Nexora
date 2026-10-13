@@ -7,7 +7,24 @@ import {
   CheckCircle2,
   Zap,
   Plus,
+  ShieldCheck,
+  Globe2,
+  Users,
+  BadgeCheck,
+  Calculator,
+  GraduationCap,
+  ArrowRight,
 } from "lucide-react";
+import { servicesData } from "@/lib/services-data";
+
+const serviceIcons = {
+  ShieldCheck,
+  Globe2,
+  Users,
+  BadgeCheck,
+  Calculator,
+  GraduationCap,
+};
 
 // ─── Individual Services ──────────────────────────────────────────────────────
 const individualServices = [
@@ -85,6 +102,7 @@ const addOns = [
 
 // ─── Section Nav ──────────────────────────────────────────────────────────────
 const sections = [
+  { id: "core-services", label: "Core Services", icon: ShieldCheck },
   { id: "individual-services", label: "Individual Services", icon: Zap },
   { id: "add-ons", label: "Add-ons", icon: Plus },
 ];
@@ -105,7 +123,7 @@ export default function ServicesPage() {
           "Your Career, ",
           <span key="our" className="accent">Our Commitment</span>,
         ]}
-        sub="Choose from our individual services or add-ons. Looking for full packages? Browse our Plans & Packages in the Shop."
+        sub="Explore our specialized core programs, individual services, and targeted add-ons. Looking for full packaged plans? Browse our Shop."
       >
         {/* Section Nav Pills */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
@@ -129,6 +147,55 @@ export default function ServicesPage() {
           </Link>
         </div>
       </PageHero>
+
+
+      {/* ══════════════════════════════════════════════
+          SECTION 1 — CORE SERVICES
+      ══════════════════════════════════════════════ */}
+      <section id="core-services" className="section-spacing bg-[#FFFFFF] border-b border-[#E5E5E5]">
+        <div className="container-wide">
+          <div className="mb-10 max-w-2xl">
+            <span className="eyebrow">OUR SPECIALIZED SOLUTIONS</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#171717] mt-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+              Core Services &amp; Programs
+            </h2>
+            <p className="text-[#77736D] mt-2 text-sm sm:text-base">
+              Comprehensive technical placement, enterprise staffing, and career consulting designed for the modern US market.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {servicesData.map((svc) => {
+              const Icon = serviceIcons[svc.iconName] || ShieldCheck;
+              return (
+                <div
+                  key={svc.slug}
+                  className="rounded-3xl border border-[#E5E5E5] bg-[#F5F1E8]/50 p-7 hover:bg-white hover:border-[#F26A21]/40 transition-all duration-300 hover:shadow-[0_16px_40px_rgba(23,23,23,0.06)] flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="w-12 h-12 rounded-2xl bg-white border border-[#E5E5E5] group-hover:border-[#F26A21]/30 group-hover:bg-[#F26A21]/10 flex items-center justify-center text-[#F26A21] mb-5 transition-all">
+                      <Icon className="w-6 h-6 transition-transform group-hover:scale-110" />
+                    </div>
+                    <h3 className="text-xl font-bold text-[#171717] group-hover:text-[#F26A21] transition-colors mb-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                      {svc.title}
+                    </h3>
+                    <p className="text-[#77736D] text-xs sm:text-sm leading-relaxed mb-6">
+                      {svc.subtext}
+                    </p>
+                  </div>
+
+                  <Link
+                    href={`/services/${svc.slug}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#F26A21] hover:text-[#E05A10] group-hover:translate-x-0.5 transition-all"
+                  >
+                    Explore Service Details <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
 
       {/* ══════════════════════════════════════════════
