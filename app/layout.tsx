@@ -68,7 +68,7 @@ export default function RootLayout({
           <SmoothScroll>
           <CartProvider>
             <Navbar />
-            <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-0">{children}</main>
+            <main className="min-h-screen pt-16 lg:pt-20 pb-20 lg:pb-12">{children}</main>
             <Footer />
             <MobileBottomNav />
             <QuickRCAFloatingButton />

@@ -7,6 +7,7 @@ import * as argon2 from "argon2";
 import { isRateLimited } from "@/lib/rate-limit";
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   // @ts-ignore
   adapter: Prisma8Adapter(),
   session: { strategy: "jwt" },

@@ -1,4 +1,4 @@
-import "server-only";
+// Rate limiting utility (in-memory)
 
 // NOTE: This in-memory rate limiter is instance-local. 
 // It does NOT provide distributed, global rate-limiting across all serverless 

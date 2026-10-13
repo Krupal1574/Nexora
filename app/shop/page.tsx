@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { useCart } from "@/lib/cart";
+import { products as staticProducts } from "@/lib/shop";
 import NavaratriPromo from "@/components/home/NavaratriPromo";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -92,6 +93,21 @@ const productMeta: Record<
     ],
     badge: "BEST SELLER",
     icon: TrendingUp,
+  },
+
+  "ultimate-support": {
+    tagline: "Unlimited live interview sessions with interview guarantee",
+    features: [
+      "Resume crafting",
+      "Resume understanding session",
+      "Profile marketing",
+      "Interview assessment",
+      "Interview guarantee",
+      "Unlimited Live Interview Sessions",
+      "After placement fees: 12%",
+    ],
+    badge: "PREMIUM",
+    icon: Crown,
   },
 
   "ultimate-session": {
@@ -186,9 +202,19 @@ function ProductCard({
 }) {
   const { addToCart, openCart } = useCart();
 
-  const meta = productMeta[product.slug];
+  const staticProduct = staticProducts.find((p) => p.slug === product.slug);
+  const meta =
+    productMeta[product.slug] ||
+    (staticProduct
+      ? {
+          tagline: staticProduct.tagline,
+          features: staticProduct.features,
+          badge: staticProduct.badge,
+          icon: staticProduct.icon as typeof Rocket,
+        }
+      : undefined);
 
-  const Icon = meta?.icon ?? Briefcase;
+  const Icon = meta?.icon ?? (staticProduct?.icon as typeof Rocket) ?? Briefcase;
 
   const price = Number(product.price);
   const originalPrice = Number(product.originalPrice);
@@ -303,26 +329,17 @@ function ProductCard({
 
         {/* Features */}
         <ul className="mt-3 space-y-1.5 flex-1">
-          {(meta?.features || []).slice(0, 4).map(
-            (feature, index) => (
-              <li
-                key={index}
-                className="flex items-start gap-2 text-[8px] text-[#77736D]"
-              >
-                <CheckCircle2 className="w-2.5 h-2.5 mt-0.5 flex-shrink-0 text-[#F26A21]" />
-                <span className="line-clamp-1">
-                  {feature}
-                </span>
-              </li>
-            )
-          )}
-
-          {(meta?.features?.length || 0) > 4 && (
-            <li className="text-[7px] text-[#64748B] pl-4">
-              + {(meta?.features?.length || 0) - 4} more
-              features
+          {(meta?.features || []).map((feature, index) => (
+            <li
+              key={index}
+              className="flex items-start gap-2 text-[9px] text-[#77736D]"
+            >
+              <CheckCircle2 className="w-3 h-3 mt-0.5 flex-shrink-0 text-[#F26A21]" />
+              <span className="leading-snug">
+                {feature}
+              </span>
             </li>
-          )}
+          ))}
         </ul>
 
         {/* Buttons */}
