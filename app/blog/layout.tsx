@@ -1,8 +1,20 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Read the latest insights, career advice, and industry trends from the Nexora team for tech professionals.",
+  title: {
+    default: "Nexora Insights | Career & Industry Resources",
+    template: "%s",
+  },
+  description:
+    "Explore career advice, recruitment insights, industry trends, and practical resources from Nexora Staffing LLP.",
+  openGraph: {
+    type: "website",
+    siteName: "Nexora Staffing LLP",
+    title: "Nexora Insights",
+    description:
+      "Career advice, industry insights, and practical resources for professionals and employers.",
+    url: "https://www.nexorastaffingllp.com/blog",
+  },
 };
 
 export default function BlogLayout({

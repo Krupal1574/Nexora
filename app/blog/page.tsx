@@ -3,28 +3,45 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 import PageHero from "@/components/motion/PageHero";
-import { Sparkles, Search, Clock, ArrowRight, ExternalLink } from "lucide-react";
+import { Sparkles, Search, Clock, ArrowRight, ExternalLink, ShieldCheck } from "lucide-react";
 import { blogPosts as staticBlogPosts, type BlogCategory } from "@/lib/blog";
 
 type Tab = "Nexora" | "Industry";
 
 export default function BlogIndexPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("Nexora");
+  const { data: session } = useSession();
+  const isAdmin = (session?.user as any)?.role === "ADMIN";
+
+  const [activeTab, setActiveTab] = useState<Tab>("Industry");
   const [searchQuery, setSearchQuery] = useState("");
   
-  // Nexora Posts
+  // Nexora Posts (Admin Only)
   const [internalCategory, setInternalCategory] = useState<string>("All");
   const [internalPosts, setInternalPosts] = useState<any[]>([]);
   const [internalLoaded, setInternalLoaded] = useState(false);
 
-  // Industry News
+  // Industry News (Public)
   const [externalCategory, setExternalCategory] = useState<string>("All");
   const [externalPosts, setExternalPosts] = useState<any[]>([]);
   const [externalLoaded, setExternalLoaded] = useState(false);
 
+  // Revert tab if non-admin somehow selects Nexora
   useEffect(() => {
-    // Fetch Internal Posts
+    if (!isAdmin && activeTab === "Nexora") {
+      setActiveTab("Industry");
+    }
+  }, [isAdmin, activeTab]);
+
+  useEffect(() => {
+    // Only fetch Nexora Articles if user is ADMIN
+    if (!isAdmin) {
+      setInternalPosts([]);
+      setInternalLoaded(true);
+      return;
+    }
+
     fetch("/api/blogs")
       .then((r) => r.json())
       .then((data) => {
@@ -39,25 +56,23 @@ export default function BlogIndexPage() {
         setInternalPosts(staticBlogPosts);
         setInternalLoaded(true);
       });
-  }, []);
+  }, [isAdmin]);
 
   useEffect(() => {
-    // Fetch External News when tab is active (or just fetch once)
-    if (activeTab === "Industry" && !externalLoaded) {
-      fetch("/api/news")
-        .then((r) => r.json())
-        .then((data) => {
-          if (Array.isArray(data)) {
-            setExternalPosts(data);
-          }
-          setExternalLoaded(true);
-        })
-        .catch(() => {
-          setExternalPosts([]);
-          setExternalLoaded(true);
-        });
-    }
-  }, [activeTab, externalLoaded]);
+    // Always fetch External News
+    fetch("/api/news")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setExternalPosts(data);
+        }
+        setExternalLoaded(true);
+      })
+      .catch(() => {
+        setExternalPosts([]);
+        setExternalLoaded(true);
+      });
+  }, []);
 
   const internalCategories = ["All", ...Array.from(new Set(internalPosts.map((p) => p.category)))];
   const externalCategories = ["All", ...Array.from(new Set(externalPosts.map((p) => p.category)))];
@@ -119,28 +134,38 @@ export default function BlogIndexPage() {
           sub="Expert advice, industry trends, and practical guides to help you navigate your tech career."
         >
           {/* Tabs */}
-          <div className="inline-flex bg-[#FFFFFF] p-1 rounded-full border border-[#203548]">
-            <button
-              onClick={() => setActiveTab("Nexora")}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                activeTab === "Nexora"
-                  ? "bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
-                  : "text-[#77736D] hover:text-[#171717]"
-              }`}
-            >
-              Nexora Articles
-            </button>
-            <button
-              onClick={() => setActiveTab("Industry")}
-              className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                activeTab === "Industry"
-                  ? "bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
-                  : "text-[#77736D] hover:text-[#171717]"
-              }`}
-            >
-              Industry News
-            </button>
-          </div>
+          {isAdmin ? (
+            <div className="inline-flex bg-[#FFFFFF] p-1 rounded-full border border-[#203548]">
+              <button
+                onClick={() => setActiveTab("Industry")}
+                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                  activeTab === "Industry"
+                    ? "bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+                    : "text-[#77736D] hover:text-[#171717]"
+                }`}
+              >
+                Industry News
+              </button>
+              <button
+                onClick={() => setActiveTab("Nexora")}
+                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all inline-flex items-center gap-2 ${
+                  activeTab === "Nexora"
+                    ? "bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] shadow-[0_0_15px_rgba(0,242,254,0.3)]"
+                    : "text-[#77736D] hover:text-[#171717]"
+                }`}
+              >
+                Nexora Articles
+                <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-[#171717] text-white">
+                  Admin
+                </span>
+              </button>
+            </div>
+          ) : (
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FFFFFF] border border-[#203548] text-[#171717] text-sm font-semibold shadow-sm">
+              <Sparkles className="w-4 h-4 text-[#F26A21]" />
+              Industry News & Tech Trends
+            </div>
+          )}
         </PageHero>
 
         {/* Filters & Search */}
