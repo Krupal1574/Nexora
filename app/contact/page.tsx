@@ -35,10 +35,9 @@ const contactCards = [
   },
   {
     icon: MapPin,
-    title: "Headquarters",
-    value: "5830 E 2nd St, Ste 7000",
-    sublabel: "Casper, WY 82609, USA",
-    href: siteConfig.contact.mapsUrl,
+    title: "Location",
+    value: "Casper, WY",
+    sublabel: "Serving Nationwide",
     color: "#F26A21",
   },
 ];
@@ -442,17 +441,14 @@ export default function ContactPage() {
               </span>
             </h2>
             <p className="text-[#77736D] text-sm mt-2">
-              {siteConfig.contact.address}
+              Casper, WY — Serving Nationwide
             </p>
           </div>
 
-          {/* Map embed with click-to-open overlay */}
-          <a
-            href={siteConfig.contact.mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group block relative rounded-2xl overflow-hidden border border-[#E5E5E5] shadow-[0_4px_24px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_40px_rgba(242,106,33,0.15)] transition-shadow duration-300"
-            aria-label="Open office location in Google Maps"
+          {/* Map embed without external link */}
+          <div
+            className="block relative rounded-2xl overflow-hidden border border-[#E5E5E5] shadow-[0_4px_24px_rgba(0,0,0,0.07)]"
+            aria-label="Nexora office location in Casper, WY"
           >
             <iframe
               src={siteConfig.contact.mapsEmbed}
@@ -464,14 +460,7 @@ export default function ContactPage() {
               referrerPolicy="no-referrer-when-downgrade"
               title="Nexora office location map"
             />
-            {/* Hover overlay */}
-            <div className="absolute inset-0 bg-[#F26A21]/0 group-hover:bg-[#F26A21]/5 transition-colors duration-300 flex items-center justify-center">
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-full px-5 py-2.5 flex items-center gap-2 shadow-lg">
-                <MapPin className="w-4 h-4 text-[#F26A21]" />
-                <span className="text-sm font-semibold text-[#171717]">Open in Google Maps</span>
-              </div>
-            </div>
-          </a>
+          </div>
         </div>
       </section>
     </div>

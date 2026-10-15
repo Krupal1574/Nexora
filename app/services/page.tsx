@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/motion/PageHero";
-import CtaSection from "@/components/motion/CtaSection";
 import {
   CheckCircle2,
   Zap,
@@ -107,6 +107,15 @@ const sections = [
   { id: "add-ons", label: "Add-ons", icon: Plus },
 ];
 
+const serviceImages: Record<string, string> = {
+  "job-placement": "/images/services/explore-prepare-get-placed.png",
+  "recruitment-and-staffing": "/images/services/staffing-solutions.png",
+  "talent-acquisition": "/images/services/talent-acquisition-hero.png",
+  "background-verification": "/images/services/background-verification-hero.png",
+  "accounting-and-taxes": "/images/services/accounting-taxes-hero.png",
+  "it-training": "/images/services/it-training-hero.png",
+};
+
 export default function ServicesPage() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -167,29 +176,47 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {servicesData.map((svc) => {
               const Icon = serviceIcons[svc.iconName] || ShieldCheck;
+              const imageUrl = serviceImages[svc.slug];
               return (
                 <div
                   key={svc.slug}
-                  className="rounded-3xl border border-[#E5E5E5] bg-[#F5F1E8]/50 p-7 hover:bg-white hover:border-[#F26A21]/40 transition-all duration-300 hover:shadow-[0_16px_40px_rgba(23,23,23,0.06)] flex flex-col justify-between group"
+                  className="overflow-hidden rounded-3xl border border-[#E5E5E5] bg-[#F5F1E8]/50 hover:bg-white hover:border-[#F26A21]/40 transition-all duration-300 hover:shadow-[0_16px_40px_rgba(23,23,23,0.06)] flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white border border-[#E5E5E5] group-hover:border-[#F26A21]/30 group-hover:bg-[#F26A21]/10 flex items-center justify-center text-[#F26A21] mb-5 transition-all">
-                      <Icon className="w-6 h-6 transition-transform group-hover:scale-110" />
+                    {imageUrl && (
+                      <div className="relative h-60 w-full overflow-hidden border-b border-[#E5E5E5]/60 bg-white p-3 flex items-center justify-center">
+                        <Image
+                          src={imageUrl}
+                          alt={svc.title}
+                          fill
+                          className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 400px"
+                        />
+                      </div>
+                    )}
+                    <div className="p-6">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-xl bg-[#F26A21]/10 border border-[#F26A21]/20 flex items-center justify-center text-[#F26A21] shrink-0 group-hover:bg-[#F26A21] group-hover:text-white transition-colors">
+                          <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
+                        </div>
+                        <h3 className="text-xl font-bold text-[#171717] group-hover:text-[#F26A21] transition-colors" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+                          {svc.title}
+                        </h3>
+                      </div>
+                      <p className="text-[#77736D] text-xs sm:text-sm leading-relaxed">
+                        {svc.subtext}
+                      </p>
                     </div>
-                    <h3 className="text-xl font-bold text-[#171717] group-hover:text-[#F26A21] transition-colors mb-2" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-                      {svc.title}
-                    </h3>
-                    <p className="text-[#77736D] text-xs sm:text-sm leading-relaxed mb-6">
-                      {svc.subtext}
-                    </p>
                   </div>
 
-                  <Link
-                    href={`/services/${svc.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#F26A21] hover:text-[#E05A10] group-hover:translate-x-0.5 transition-all"
-                  >
-                    Explore Service Details <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                  <div className="px-6 pb-6 pt-2">
+                    <Link
+                      href={`/services/${svc.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#F26A21] hover:text-[#E05A10] group-hover:translate-x-0.5 transition-all"
+                    >
+                      Explore Service Details <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               );
             })}
@@ -316,13 +343,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ══════════ CTA ══════════ */}
-      <CtaSection
-        lines={["Ready to Start Your ", <span key="journey" className="accent">Nexora Journey?</span>]}
-        text="Speak with a Nexora specialist today and get a personalized roadmap for your career."
-        primary={{ href: "/contact", label: "Get a Free Consultation" }}
-        secondary={{ href: "/refer-and-earn", label: "Refer & Earn $500" }}
-      />
     </div>
   );
 }

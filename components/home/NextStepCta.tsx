@@ -16,10 +16,10 @@ const CONTACTS: ContactItem[] = [
     lines: [{ text: "Support@nexorastaffingllp.com", href: "mailto:Support@nexorastaffingllp.com" }],
   },
   {
-    label: "Visit Us",
+    label: "Location",
     icon: <MapPin className="w-5 h-5 text-[#F26A21]" />,
     lines: [
-      { text: "Casper, WY", href: "https://www.google.com/maps/search/?api=1&query=5830+E+2nd+St+Ste+7000+Casper+WY+82609" },
+      { text: "Casper, WY" },
       { text: "Serving Nationwide" },
     ],
   },

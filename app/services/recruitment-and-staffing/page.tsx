@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { servicesData } from "@/lib/services-data";
-import ServiceDetailPage from "@/components/services/ServiceDetailPage";
+import RecruitmentStaffingContent from "../recruitment-staffing/RecruitmentStaffingContent";
 
 export const metadata: Metadata = {
-  title: "Technical Recruitment & Staffing Solutions",
+  title: "Recruitment & Staffing Solutions | Nexora Staffing",
   description:
-    "Scalable technical staffing solutions connecting companies with pre-vetted engineers, architects, data specialists, and IT leaders.",
+    "End-to-end technical recruitment, contract staffing, and permanent placement solutions. Connecting leading U.S. enterprises with pre-screened tech talent.",
 };
 
-export default function RecruitmentStaffingPage() {
-  const service = servicesData.find((s) => s.slug === "recruitment-and-staffing");
-  if (!service) notFound();
-
-  return <ServiceDetailPage service={service} />;
+export default function RecruitmentAndStaffingPage() {
+  return <RecruitmentStaffingContent />;
 }

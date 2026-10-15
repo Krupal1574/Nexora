@@ -683,53 +683,46 @@ function OtherServices() {
   );
 }
 
-/* ─── Final CTA ─────────────────────────────────────────────────────────────── */
 
-function FinalCTA() {
+function PlacementJourneyBanner() {
   return (
-    <section className="px-6 pb-20 pt-10 sm:px-10">
-      <div className="relative mx-auto max-w-[1440px] overflow-hidden rounded-[32px] bg-[#10162E] px-8 py-16 text-white shadow-2xl sm:px-14 lg:py-20">
-        <div className="glow-drift absolute -top-32 right-10 h-[450px] w-[450px] rounded-full bg-[#F26A21]/20 blur-[130px] pointer-events-none" />
-        <div className="absolute -bottom-32 left-10 h-[400px] w-[400px] rounded-full bg-[#2026D8]/20 blur-[120px] pointer-events-none" />
+    <section className="mx-auto max-w-[1440px] px-6 py-12 sm:px-10">
+      <div className="relative overflow-hidden rounded-[32px] border border-[#171717]/10 bg-gradient-to-br from-[#10162E] via-[#171717] to-[#10162E] p-8 sm:p-12 lg:p-16 text-white shadow-xl">
+        <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-[#F26A21]/20 blur-3xl" />
+        <div className="pointer-events-none absolute -left-20 -bottom-20 h-72 w-72 rounded-full bg-[#8FB8D8]/15 blur-3xl" />
 
-        <div className="relative z-10 max-w-2xl">
-          <p className="eyebrow mb-4 text-[#F26A21]">
-            Your next chapter starts here
-          </p>
-          <h2
-            className="text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl"
-            style={{ fontFamily: "Space Grotesk, sans-serif" }}
-          >
-            Ready to Land Your Next U.S. Tech Role?
-          </h2>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-white/80">
-            Schedule a confidential 1-on-1 strategy call with our placement
-            advisors. We&apos;ll review your profile and outline actionable steps.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              href="/contact"
-              className="btn-primary inline-flex items-center gap-3 rounded-full bg-[#F26A21] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#F26A21]/25 transition hover:bg-[#D95A19]"
-            >
-              Book a Strategy Call <ArrowRight size={17} />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 rounded-full border border-white/25 bg-white/5 px-7 py-4 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/10"
-            >
-              Contact Nexora
-            </Link>
+        <div className="relative z-10 grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#F26A21]/30 bg-[#F26A21]/10 px-3.5 py-1.5 text-xs font-bold text-[#F26A21] uppercase tracking-wider">
+              Proven Placement Methodology
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#F5F1E8]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+              Explore, Prepare &amp; <span className="text-[#F26A21]">Get Placed</span>
+            </h2>
+            <p className="mt-4 text-sm sm:text-base leading-relaxed text-white/70">
+              Navigating the competitive U.S. tech ecosystem requires more than sending generic applications. Our structured framework aligns your technical positioning with enterprise hiring expectations.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-[#F26A21] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#df5814] shadow-md"
+              >
+                Schedule Career Audit <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <div className="relative z-10 mt-14 flex items-center gap-4 border-t border-white/15 pt-6 text-sm text-white/75">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-base font-extrabold text-[#10162E]">
-            N<span className="text-[#F26A21]">↗</span>
-          </span>
-          <span>
-            <strong className="block font-semibold text-white">Nexora Staffing LLP</strong>
-            People. Trust. Growth.
-          </span>
+          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-3xl bg-white shadow-2xl p-2 sm:p-2.5 border border-white/80">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl">
+              <Image
+                src="/images/services/explore-prepare-get-placed.png"
+                alt="Explore, Prepare, Get Placed - Nexora Placement Roadmap"
+                fill
+                className="object-cover transition-transform duration-500 hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 700px"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -746,11 +739,11 @@ export default function JobPlacementContent() {
       <StatsSection />
       <ServicesSection />
       <ComparisonSection />
+      <PlacementJourneyBanner />
       <ProcessSection />
       <ValuesSection />
       <LivePlacements />
       <OtherServices />
-      <FinalCTA />
     </div>
   );
 }
