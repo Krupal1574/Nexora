@@ -119,11 +119,11 @@ export default function ContactPage() {
         sub="Whether you're ready to start your job search or just have questions, the Nexora team is here to help. Reach out — we respond fast."
       >
         {/* Hero Visual */}
-        <div className="relative w-full max-w-4xl mx-auto mb-8 h-64 rounded-2xl overflow-hidden">
+        <div className="relative w-full max-w-3xl mx-auto mb-8 aspect-[1653/951] flex items-center justify-center">
           <img
-            src="/images/contact/contact-hero.svg"
-            alt="Contact Nexora"
-            className="w-full h-full object-cover"
+            src="/images/contact/contact-hero.png"
+            alt="Contact Nexora Support & Career Consulting"
+            className="w-full h-full object-contain drop-shadow-2xl"
           />
         </div>
 

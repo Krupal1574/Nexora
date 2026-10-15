@@ -126,9 +126,6 @@ export default function ReferAndEarnPage() {
       {/* ════════════════════════════════════════════════════════
           HERO
       ════════════════════════════════════════════════════════ */}
-      {/* ════════════════════════════════════════════════════════
-          HERO
-      ════════════════════════════════════════════════════════ */}
       <PageHero
         align="center"
         eyebrow="Referral Revolution"
@@ -138,11 +135,11 @@ export default function ReferAndEarnPage() {
         ]}
       >
         {/* Hero Visual */}
-        <div className="relative w-full max-w-4xl mx-auto mb-8 h-64 rounded-2xl overflow-hidden">
+        <div className="relative w-full max-w-3xl mx-auto mb-8 aspect-[1024/588] flex items-center justify-center">
           <img
-            src="/images/refer/refer-hero.svg"
-            alt="Refer and Earn"
-            className="w-full h-full object-cover"
+            src="/images/refer/refer-hero.png"
+            alt="Refer and Earn with Nexora"
+            className="w-full h-full object-contain drop-shadow-2xl"
           />
         </div>
 
