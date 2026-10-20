@@ -47,13 +47,13 @@ export default function ProductDetailPage({
         {/* Product Details Section */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-24">
           {/* Left Column: Visual/Hero */}
-          <div className="rounded-3xl bg-[#0a111a] border border-[#E5E5E5] relative overflow-hidden min-h-[500px]">
+          <div className="rounded-3xl bg-[#F5F1E8] border border-[#E5E5E5] relative overflow-hidden min-h-[500px]">
             {/* Product Image */}
             <div className="relative w-full h-full">
               <img
                 src={`/images/products/${product.slug}.png`}
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
 
               {/* Badge Overlay */}
@@ -64,12 +64,14 @@ export default function ProductDetailPage({
               )}
 
               {/* Discount Badge */}
-              <div className="absolute top-6 right-6 bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
-                {product.discountPercent}% OFF
-              </div>
+              {product.discountPercent > 0 && (
+                <div className="absolute top-6 right-6 bg-gradient-to-r from-[#F26A21] to-[#8FB8D8] text-[#171717] px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
+                  {product.discountPercent}% OFF
+                </div>
+              )}
 
               {/* Bottom Gradient Overlay for Text */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#0a111a] via-[#0a111a]/80 to-transparent p-8">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#F5F1E8] via-[#F5F1E8]/90 to-transparent p-8">
                 <div className="flex items-center gap-4 mb-3">
                   <div className="w-16 h-16 rounded-2xl bg-[#F26A21]/10 border border-[#F26A21]/30 flex items-center justify-center backdrop-blur-sm">
                     <Icon className="w-8 h-8 text-[#F26A21]" />
@@ -106,12 +108,16 @@ export default function ProductDetailPage({
                   ${product.salePrice.toLocaleString()}
                 </span>
                 <div className="flex items-center gap-3">
-                  <span className="text-[#64748B] text-xl line-through">
-                    ${product.originalPrice.toLocaleString()}
-                  </span>
-                  <span className="bg-gradient-to-r from-emerald-400/20 to-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-md text-sm font-bold">
-                    Save ${product.savings.toLocaleString()}
-                  </span>
+                  {product.discountPercent > 0 && (
+                    <span className="text-[#64748B] text-xl line-through">
+                      ${product.originalPrice.toLocaleString()}
+                    </span>
+                  )}
+                  {product.savings > 0 && (
+                    <span className="bg-gradient-to-r from-emerald-400/20 to-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-md text-sm font-bold">
+                      Save ${product.savings.toLocaleString()}
+                    </span>
+                  )}
                 </div>
               </div>
               <p className="text-[#64748B] text-sm">

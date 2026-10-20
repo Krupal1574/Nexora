@@ -260,19 +260,21 @@ function ProductCard({
   return (
     <div className="group relative rounded-2xl bg-[#FFFFFF] border border-[#E5E5E5] overflow-hidden flex flex-col min-h-[420px] hover:border-[#F26A21]/40 transition-all duration-300">
       {/* Product Image */}
-      <div className="relative w-full h-40 overflow-hidden bg-[#F5F1E8]">
+      <div className="relative w-full h-52 overflow-hidden bg-[#F5F1E8]">
         <img
           src={productImage}
           alt={product.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
         />
         {/* Discount Badge on Image */}
         <div className="absolute top-2 left-2 z-10">
-          <span className="inline-flex items-center rounded-md bg-[#F26A21] px-2 py-1 text-[9px] font-bold text-[#171717]">
-            {discount}% OFF
-          </span>
+          {discount > 0 && (
+            <span className="inline-flex items-center rounded-md bg-[#F26A21] px-2 py-1 text-[9px] font-bold text-[#171717]">
+              {discount}% OFF
+            </span>
+          )}
           {meta?.badge && (
-            <div className="mt-1">
+            <div className={discount > 0 ? "mt-1" : ""}>
               <span className="inline-flex items-center rounded-md border border-[#F26A21]/40 bg-white/90 backdrop-blur-sm px-2 py-1 text-[8px] font-bold text-[#171717]">
                 {meta.badge}
               </span>
@@ -317,14 +319,18 @@ function ProductCard({
               ${price.toLocaleString()}
             </span>
 
-            <span className="text-[10px] text-[#64748B] line-through">
-              ${originalPrice.toLocaleString()}
-            </span>
+            {discount > 0 && (
+              <span className="text-[10px] text-[#64748B] line-through">
+                ${originalPrice.toLocaleString()}
+              </span>
+            )}
           </div>
 
-          <p className="text-[9px] text-[#8FB8D8] mt-1">
-            You save ${savings.toLocaleString()}
-          </p>
+          {savings > 0 && (
+            <p className="text-[9px] text-[#8FB8D8] mt-1">
+              You save ${savings.toLocaleString()}
+            </p>
+          )}
         </div>
 
         {/* Features */}
