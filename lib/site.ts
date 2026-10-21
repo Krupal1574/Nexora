@@ -6,7 +6,7 @@ export const siteConfig = {
   contact: {
     phoneDisplay: "+1 (484) 317-5613",
     phoneHref: "tel:+14843175613",
-    email: "Support@nexorastaffingllp.com",
+    email: "connect@nexorastaffingllp.com",
     instagram: "https://www.instagram.com/nexorastaffingllp?stkn=MXd6bHExejU3cm9iZA==",
     linkedin: "https://www.linkedin.com/company/nexora-staffing-llp/",
     address: "Casper, WY",

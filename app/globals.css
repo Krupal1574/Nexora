@@ -53,6 +53,26 @@
   --section-y-large: clamp(5rem, 8vw, 9rem);
 }
 
+@media (min-width: 1536px) {
+  :root {
+    --container-max: 1480px;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --container-max: 1720px;
+    --section-y: clamp(4.5rem, 6vw, 8rem);
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --container-max: 2160px;
+    --section-y: clamp(5rem, 6vw, 9rem);
+  }
+}
+
 @utility hero-title {
   font-size: clamp(2.5rem, 5.5vw, 4.5rem);
   line-height: 1.12;
@@ -310,7 +330,8 @@ h6 {
   font-family: "Space Grotesk", system-ui, sans-serif;
   font-weight: 700; text-transform: uppercase;
   letter-spacing: -0.04em; line-height: .92;
-  font-size: clamp(2.8rem, 9vw, 8.5rem);
+  font-size: clamp(2.2rem, 6.8vw, 9.2rem);
+  word-break: break-word;
 }
 .display-md { font-size: clamp(2.2rem, 6vw, 5.2rem); }
 .display .thin { font-weight: 300; color: var(--nexora-muted); }   /* "Not just design." contrast */

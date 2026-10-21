@@ -13,7 +13,7 @@ const CONTACTS: ContactItem[] = [
   {
     label: "Email us on",
     icon: <Mail className="w-5 h-5 text-[#F26A21]" />,
-    lines: [{ text: "Support@nexorastaffingllp.com", href: "mailto:Support@nexorastaffingllp.com" }],
+    lines: [{ text: "connect@nexorastaffingllp.com", href: "mailto:connect@nexorastaffingllp.com" }],
   },
   {
     label: "Location",

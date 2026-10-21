@@ -132,7 +132,7 @@ export default function Navbar() {
             : "bg-[#F5F1E8]/80 backdrop-blur-md border-b border-[#F26A21]/10"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[var(--container-max)] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group shrink-0">
@@ -158,7 +158,7 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+            <nav className="hidden xl:flex items-center gap-4 2xl:gap-7">
               {navigation.map((link) => {
                 if (link.href === "/services") {
                   return (
@@ -192,7 +192,7 @@ export default function Navbar() {
                       {/* Mega Menu Dropdown */}
                       {servicesOpen && (
                         <div
-                          className="absolute top-full -left-28 xl:-left-48 pt-3 z-50 w-[780px] xl:w-[860px] animate-in fade-in slide-in-from-top-1 duration-150"
+                          className="absolute top-full -left-28 xl:-left-48 pt-3 z-50 w-[min(860px,calc(100vw-2rem))] animate-in fade-in slide-in-from-top-1 duration-150"
                           onMouseEnter={handleServicesMouseEnter}
                           onMouseLeave={handleServicesMouseLeave}
                         >
@@ -274,7 +274,7 @@ export default function Navbar() {
 
             {/* Right side controls */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-              <div className="hidden lg:block">
+              <div className="hidden xl:block">
                 <a href={siteConfig.contact.phoneHref} className="btn-primary text-sm">
                   <Phone className="w-4 h-4 mr-1.5" />
                   Call Us Now!
@@ -282,7 +282,7 @@ export default function Navbar() {
               </div>
 
               {/* User Menu Desktop */}
-              <div className="hidden lg:flex items-center gap-3 border-l border-[#203548] pl-3 ml-1">
+              <div className="hidden xl:flex items-center gap-3 border-l border-[#203548] pl-3 ml-1">
                 {session ? (
                   <div className="relative" ref={userMenuRef}>
                     <button
@@ -376,7 +376,7 @@ export default function Navbar() {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 ref={menuButtonRef}
-                className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#77736D] hover:text-[#F26A21] hover:bg-[#F26A21]/10 transition-all"
+                className="xl:hidden w-10 h-10 flex items-center justify-center rounded-xl text-[#77736D] hover:text-[#F26A21] hover:bg-[#F26A21]/10 transition-all"
                 aria-label="Toggle menu"
                 aria-expanded={isOpen}
                 aria-controls="mobile-navigation"
@@ -395,7 +395,7 @@ export default function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm xl:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}

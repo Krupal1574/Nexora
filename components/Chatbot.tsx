@@ -38,7 +38,7 @@ function getFallbackResponse(input: string): string {
     return "Looking for a new role or top talent? Our recruitment team specializes in IT staffing and would love to help. You can check our open roles on our careers page or contact us directly!";
   }
   if (lower.match(/\b(contact|recruiter|reach|talk)\b/)) {
-    return "You can reach our recruitment team through the 'Contact Us' page on our website, or email us at Support@nexorastaffingllp.com.";
+    return "You can reach our recruitment team through the 'Contact Us' page on our website, or email us at connect@nexorastaffingllp.com.";
   }
   if (lower.match(/\b(start|getting started|how to get started)\b/)) {
     return "Getting started is easy! If you're a candidate, you can submit your resume. If you're a company looking to hire, please reach out via our contact form and our staffing experts will get back to you.";

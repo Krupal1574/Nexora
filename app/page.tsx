@@ -114,7 +114,7 @@ export default function HomePage() {
   return (
     <div className="overflow-x-clip bg-[#F5F1E8]">
       {/* HERO */}
-      <section ref={heroRef} className="relative min-h-[92vh] flex flex-col justify-center pt-10 pb-24">
+      <section ref={heroRef} className="relative min-h-[85vh] 2xl:min-h-[78vh] flex flex-col justify-center pt-14 pb-16 2xl:py-24">
         <div className="absolute inset-0 bg-grid pointer-events-none" />
         <div className="glow-drift absolute -top-40 left-1/2 w-[900px] h-[500px] bg-[#F26A21]/15 blur-[140px] rounded-full pointer-events-none" />
         <motion.div style={{ y, opacity: fade, scale }} className="container-wide relative z-10">
@@ -125,7 +125,7 @@ export default function HomePage() {
             lines={[<>Careers <span key="a" className="outline-text">built</span></>, <>for the <span key="b" className="accent">U.S.</span> tech</>, "market."]} />
           <div className="mt-10 grid md:grid-cols-[1fr_auto] gap-8 items-end">
             <motion.p initial={{ opacity: 0, y: 20 }} animate={ready ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 0.8, ease, delay: 0.7 }}
-              className="text-lg sm:text-xl text-[#77736D] max-w-xl leading-relaxed">
+              className="text-lg sm:text-xl 2xl:text-2xl text-[#77736D] max-w-xl 2xl:max-w-2xl leading-relaxed">
               We bridge elite tech talent and top U.S. enterprises, from resume and training to placement and onboarding.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={ready ? { opacity: 1, y: 0 } : undefined} transition={{ duration: 0.8, ease, delay: 0.85 }} className="flex flex-col sm:flex-row gap-4">

@@ -59,8 +59,8 @@ export async function POST(req: NextRequest) {
     `;
 
     const data = await resend.emails.send({
-      from: "Nexora RCA <support@nexorastaffingllp.com>",
-      to: ["nexorastaffingllp@gmail.com", "Support@nexorastaffingllp.com"],
+      from: "Nexora RCA <connect@nexorastaffingllp.com>",
+      to: ["nexorastaffingllp@gmail.com", "support@nexorastaffingllp.com", "connect@nexorastaffingllp.com"],
       subject: `New RCA Submission from ${name}`,
       html: htmlContent,
       attachments,

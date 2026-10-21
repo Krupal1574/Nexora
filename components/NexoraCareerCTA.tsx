@@ -71,7 +71,7 @@ export default function NexoraCareerCTA() {
         }
 
         .nexora-cta-shell {
-          width: min(1120px, 100%);
+          width: min(var(--container-max, 1360px), 100%);
           margin: 0 auto;
         }
 
