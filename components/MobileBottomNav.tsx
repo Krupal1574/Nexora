@@ -27,6 +27,10 @@ export default function MobileBottomNav() {
     }
   }, []);
 
+  if (pathname === "/payment-details" || pathname?.startsWith("/payment-details")) {
+    return null;
+  }
+
   return (
     <nav
       className="fixed bottom-0 left-0 right-0 z-40 lg:hidden"

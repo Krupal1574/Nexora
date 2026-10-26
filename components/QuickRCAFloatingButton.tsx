@@ -1,9 +1,16 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Activity } from "lucide-react";
 
 export default function QuickRCAFloatingButton() {
+  const pathname = usePathname();
+
+  if (pathname === "/payment-details" || pathname?.startsWith("/payment-details")) {
+    return null;
+  }
+
   return (
     <motion.button
       initial={{ y: 100, opacity: 0 }}

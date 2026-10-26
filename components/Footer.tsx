@@ -3,9 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { navigation, siteConfig, servicesList } from "@/lib/site";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === "/payment-details" || pathname?.startsWith("/payment-details")) {
+    return null;
+  }
+
   return (
     <footer className="relative bg-[#171717] text-white overflow-hidden">
       {/* ── TOP HERO CTA: Career & Hiring (Merged Horizon Transition) ── */}
@@ -316,7 +323,7 @@ export default function Footer() {
         }
 
         .nexora-cta-shell {
-          width: min(var(--container-max, 1360px), 100%);
+          width: min(1120px, 100%);
           margin: 0 auto;
         }
 
