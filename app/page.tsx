@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Star } from "lucide-react";
-import { testimonials as staticTestimonials } from "@/lib/testimonials";
+import { testimonials as staticTestimonials, type Testimonial } from "@/lib/testimonials";
 import MaskLines from "@/components/motion/MaskLines";
 import Marquee from "@/components/motion/Marquee";
 import Magnetic from "@/components/motion/Magnetic";
@@ -19,6 +19,7 @@ import BenefitsSection from "@/components/home/BenefitsSection";
 import ServicesSolutionsSection from "@/components/home/ServicesSolutionsSection";
 import MissionValuesSection from "@/components/home/MissionValuesSection";
 import LivePlacements from "@/components/home/LivePlacements";
+import OpenRolesCarousel from "@/components/OpenRolesCarousel";
 import NextStepCta from "@/components/home/NextStepCta";
 import DiwaliPromo from "@/components/home/DiwaliPromo";
 
@@ -69,7 +70,7 @@ const fadeUp = (delay = 0) => ({
 
 /* ─── Testimonials ─────────────────────────────────────────────────────── */
 function Testimonials() {
-  const [items, setItems] = useState<any[]>(staticTestimonials);
+  const [items, setItems] = useState<Testimonial[]>(staticTestimonials);
   useEffect(() => {
     fetch("/api/testimonials").then((r) => r.json()).then((d) => Array.isArray(d) && d.length && setItems(d)).catch(() => {});
   }, []);
@@ -213,6 +214,8 @@ export default function HomePage() {
       </section>
 
       <LivePlacements />
+
+      <OpenRolesCarousel />
 
       <Testimonials />
 

@@ -20,11 +20,16 @@ export const navigation = [
   { label: "Home", href: "/" },
   { label: "Our Services", href: "/services" },
   { label: "Shop", href: "/shop" },
-  { label: "Testimonials", href: "/testimonials" },
   { label: "Blog", href: "/blog" },
   { label: "Refer", href: "/refer-and-earn" },
+  { label: "Careers", href: "/careers" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
+] as const;
+
+export const footerNavigation = [
+  ...navigation,
+  { label: "Testimonials", href: "/testimonials" },
 ] as const;
 
 export const servicesList = [

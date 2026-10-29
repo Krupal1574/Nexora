@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { navigation, siteConfig, servicesList } from "@/lib/site";
+import { footerNavigation, siteConfig, servicesList } from "@/lib/site";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -114,7 +114,7 @@ export default function Footer() {
               <span className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-[#F26A21] to-transparent rounded-full" />
             </h4>
             <ul className="space-y-2.5">
-              {navigation.map((link) => (
+              {footerNavigation.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
