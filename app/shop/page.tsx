@@ -19,7 +19,7 @@ import {
 
 import { useCart } from "@/lib/cart";
 import { products as staticProducts } from "@/lib/shop";
-import NavaratriPromo from "@/components/home/NavaratriPromo";
+import DiwaliPromo from "@/components/home/DiwaliPromo";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -545,8 +545,8 @@ export default function ShopPage() {
           sub="Choose the perfect plan to accelerate your job search, optimize your profile, and land your dream role faster."
         />
 
-        {/* Navaratri Promo Artwork */}
-        <NavaratriPromo />
+        {/* Diwali Promo Artwork */}
+        <DiwaliPromo />
 
 
         {/* Filters */}
