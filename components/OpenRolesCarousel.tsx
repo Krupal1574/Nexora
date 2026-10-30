@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, MapPin, Briefcase } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, Briefcase, Check } from "lucide-react";
 
 const roles = [
   {
@@ -13,7 +13,7 @@ const roles = [
     salary: "$110k–$150k",
     type: "Full-time, office-based with flexible work model",
     href: "/careers/civil-engineer-project-manager-land-development",
-    image: "/images/careers/civil-engineer-project-manager.jpg",
+    image: "/images/careers/civil-engineer-pm.webp",
   },
   {
     title: "Full-Stack Software Engineer",
@@ -22,7 +22,7 @@ const roles = [
     salary: "$215k–$290k",
     type: "Full-time, on-site",
     href: "/careers/full-stack-software-engineer-retell-ai",
-    image: "/images/careers/full-stack-software-engineer.jpg",
+    image: "/images/careers/full-stack-engineer.webp",
   },
 ];
 
@@ -148,64 +148,70 @@ export default function OpenRolesCarousel() {
         aria-label="Current openings list. Use left and right arrow keys to navigate."
       >
         <div className="w-[calc(max(0px,(100vw-1400px)/2))] shrink-0" />
-        {roles.map((role) => (
+        {roles.map((role, index) => (
           <article
             key={role.href}
-            className="role-card flex-[0_0_min(400px,82vw)] snap-start bg-[#f1eee8] rounded-[28px] flex flex-col overflow-hidden"
+            className="role-card flex-[0_0_min(400px,82vw)] snap-start bg-[#E9EFF2] rounded-[28px] flex flex-col overflow-hidden border border-[#171717]/6"
           >
             <div className="p-8 pb-6">
               <div className="flex justify-between items-center mb-8">
                 <span className="inline-flex items-center gap-2 bg-[#ff2b2b] text-white text-xs font-semibold px-3 py-1.5 rounded-full">
                   <span className="w-2 h-2 rounded-full bg-white animate-pulse" /> Open
                 </span>
-                <span className="text-xs text-[#8a8680]">Now hiring</span>
+                <span className="text-xs text-[#5F6870] font-medium">Now hiring</span>
               </div>
 
-              <h3 className="text-[34px] font-bold tracking-[-0.03em] text-[#0f0f0f] mb-1 leading-[1.1]">
+              <h3 className="text-[32px] font-bold tracking-[-0.03em] text-[#0f0f0f] mb-1 leading-[1.1]">
                 {role.title}
               </h3>
-              <p className="text-[17px] text-[#0f0f0f]/70 mb-6">{role.subtitle}</p>
+              <p className="text-[16px] text-[#0f0f0f]/70 mb-6">{role.subtitle}</p>
 
-              <div className="flex flex-wrap gap-3">
-                <span className="inline-flex items-center gap-2 bg-white text-[#0f0f0f] text-sm px-4 py-2.5 rounded-full font-medium">
-                  <MapPin className="w-4 h-4 text-[#0f0f0f]" /> {role.location}
+              <div className="flex flex-wrap gap-2.5">
+                <span className="inline-flex items-center gap-2 bg-white text-[#0f0f0f] text-sm px-4 py-2 rounded-full font-medium shadow-xs">
+                  <MapPin className="w-4 h-4 text-[#F26A21]" /> {role.location}
                 </span>
-                <span className="inline-flex items-center gap-2 bg-white text-[#0f0f0f] text-sm px-4 py-2.5 rounded-full font-medium">
-                  <Briefcase className="w-4 h-4 text-[#0f0f0f]" /> {role.salary}
+                <span className="inline-flex items-center gap-2 bg-white text-[#0f0f0f] text-sm px-4 py-2 rounded-full font-medium shadow-xs">
+                  <Briefcase className="w-4 h-4 text-[#F26A21]" /> {role.salary}
                 </span>
               </div>
 
-              <p className="mt-3 text-sm text-[#8a8680]">{role.type}</p>
+              <p className="mt-3 text-sm text-[#5F6870]">{role.type}</p>
             </div>
 
-            <div
-              className="relative h-[268px] mt-auto flex items-center justify-center overflow-hidden rounded-[28px] bg-[#1a1a1a] group"
-            >
-              <Image
-                src={role.image}
-                alt={`${role.title} – ${role.subtitle}`}
-                fill
-                sizes="(max-width: 768px) 82vw, 400px"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+            {/* Inner visual card with padding, matching reference */}
+            <div className="p-4 sm:p-5 pt-0 mt-auto">
+              <div className="relative h-[230px] sm:h-[250px] w-full rounded-[22px] overflow-hidden bg-white shadow-sm border border-black/5 group flex items-center justify-center">
+                <Image
+                  src={role.image}
+                  alt={`${role.title} – ${role.subtitle}`}
+                  fill
+                  sizes="(max-width: 768px) 82vw, 360px"
+                  className="object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                  priority
+                />
 
-              <Link
-                href={role.href}
-                onClick={(e) => {
-                  if (hasMoved.current) {
-                    e.preventDefault();
-                    hasMoved.current = false;
-                  }
-                }}
-                className="absolute left-4 bottom-4 inline-flex items-center gap-3 bg-white/20 backdrop-blur-md text-white border-0 rounded-full py-2.5 pl-4 pr-3 text-[13px] font-semibold transition-colors hover:bg-white/30 z-20 shadow-md"
-              >
-                View Role
-                <span className="w-6 h-6 rounded-full bg-white text-[#0f0f0f] flex items-center justify-center">
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </Link>
+                {/* 01 / 02 index pill */}
+                <div className="absolute top-3 right-3 z-20 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-[#5F6870] shadow-xs border border-black/5">
+                  0{index + 1} / 0{roles.length}
+                </div>
+
+                {/* Floating dark pill button with orange checkmark */}
+                <Link
+                  href={role.href}
+                  onClick={(e) => {
+                    if (hasMoved.current) {
+                      e.preventDefault();
+                      hasMoved.current = false;
+                    }
+                  }}
+                  className="absolute left-3.5 bottom-3.5 z-20 inline-flex items-center gap-2 bg-[#171717] hover:bg-[#F26A21] text-white rounded-full py-2 pl-2.5 pr-4 text-xs font-semibold shadow-lg transition-colors group/btn"
+                >
+                  <span className="w-5 h-5 rounded-full bg-[#F26A21] group-hover/btn:bg-white text-white group-hover/btn:text-[#171717] flex items-center justify-center transition-colors">
+                    <Check className="w-3 h-3 stroke-[3]" />
+                  </span>
+                  <span>View Role</span>
+                </Link>
+              </div>
             </div>
           </article>
         ))}

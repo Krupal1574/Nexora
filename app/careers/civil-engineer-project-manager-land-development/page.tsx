@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const ROLE_NAME = "Civil Engineer Project Manager – Land Development";
 const ROLE_SLUG = "civil-engineer-project-manager-land-development";
-const ROLE_IMAGE = "/images/careers/civil-engineer-project-manager.jpg";
+const ROLE_IMAGE = "/images/careers/civil-engineer-pm.webp";
 
 export default function CivilEngineerPMPage() {
   return (
@@ -56,14 +56,14 @@ export default function CivilEngineerPMPage() {
         </div>
 
         {/* Role Banner Image */}
-        <div className="relative aspect-[16/9] md:aspect-[2/1] w-full rounded-[28px] overflow-hidden shadow-sm mb-8 bg-[#1a1a1a] border border-black/5">
+        <div className="relative aspect-[16/10] md:aspect-[2/1] w-full rounded-[24px] overflow-hidden shadow-sm mb-8 bg-white border border-black/5 p-4 md:p-6 flex items-center justify-center">
           <Image
             src={ROLE_IMAGE}
             alt={ROLE_NAME}
             fill
             sizes="(max-width: 1024px) 100vw, 896px"
-            className="object-cover"
             priority
+            className="object-contain p-2 md:p-4"
           />
         </div>
 
