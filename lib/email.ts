@@ -281,6 +281,61 @@ export async function sendEmailChangeVerification(email: string, verifyUrl: stri
 }
 
 // ---------------------------------------------------------------------------
+// Payment Details Access OTP → client
+// ---------------------------------------------------------------------------
+export async function sendPaymentOtpEmail(email: string, otp: string): Promise<{ success: boolean; error?: string }> {
+  const resend = getResend();
+  if (!resend) {
+    return { success: false, error: "Email service is not configured (missing RESEND_API_KEY)." };
+  }
+
+  try {
+    const { error: sendError } = await resend.emails.send({
+      from: getFrom(),
+      to: email,
+      subject: "Nexora Staffing – Payment Details Access Code",
+      html: `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px 24px; color: #23384a;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <h2 style="color: #173b5e; margin: 0 0 4px; font-size: 22px;">Nexora Staffing Inc.</h2>
+            <p style="color: #687d8f; font-size: 13px; margin: 0;">Payment Details Access Verification</p>
+          </div>
+          
+          <div style="background: #f2f8fc; border: 1px solid #dce6ed; border-radius: 16px; padding: 28px 20px; text-align: center;">
+            <p style="color: #173b5e; font-size: 14px; margin: 0 0 16px; font-weight: 500;">Your one-time verification code is:</p>
+            <div style="font-size: 38px; font-weight: 800; letter-spacing: 10px; color: #173b5e; font-family: 'Courier New', monospace; padding: 12px 0;">
+              ${escapeHtml(otp)}
+            </div>
+            <p style="color: #687d8f; font-size: 12px; margin: 16px 0 0;">This code expires in 5 minutes.</p>
+          </div>
+          
+          <div style="margin-top: 20px; padding: 16px; background: #fff7f5; border: 1px solid #ffd6cc; border-radius: 12px;">
+            <p style="color: #6a5a58; font-size: 12px; margin: 0; line-height: 1.5;">
+              <strong style="color: #173b5e;">Security note:</strong> If you did not request access to Nexora payment details, please disregard this email. Never share this code with anyone.
+            </p>
+          </div>
+          
+          <p style="color: #94a3b8; font-size: 11px; text-align: center; margin-top: 28px;">
+            Nexora Staffing Inc. · Global Staffing & Business Solutions<br />
+            <a href="https://www.nexorastaffingllp.com" style="color: #2c7197; text-decoration: none;">www.nexorastaffingllp.com</a>
+          </p>
+        </div>
+      `,
+    });
+
+    if (sendError) {
+      console.error("[email] Failed to send payment OTP via Resend:", sendError);
+      return { success: false, error: sendError.message || "Failed to send email." };
+    }
+
+    return { success: true };
+  } catch (error) {
+    console.error("[email] Failed to send payment OTP email:", error);
+    return { success: false, error: "Email delivery failed." };
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Utility
 // ---------------------------------------------------------------------------
 function escapeHtml(str: string): string {

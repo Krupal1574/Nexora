@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,12 +14,10 @@ import {
   Globe,
   ArrowLeft,
   Lock,
-  KeyRound,
-  Eye,
-  EyeOff,
   ShieldAlert,
   LogOut,
-  Sparkles,
+  Loader2,
+  Send,
 } from "lucide-react";
 
 type BankField = {
@@ -29,8 +27,6 @@ type BankField = {
   copyValue: string;
   wide?: boolean;
 };
-
-const PASSWORD = "Payment@nexora1";
 
 const RAW_BANK_FIELDS: BankField[] = [
   {
@@ -66,42 +62,184 @@ const RAW_BANK_FIELDS: BankField[] = [
   },
 ];
 
+type Step = "email" | "otp" | "authenticated";
+
 export default function PaymentDetailsPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [passwordInput, setPasswordInput] = useState<string>("");
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [step, setStep] = useState<Step>("email");
+  const [isLoading, setIsLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [isSending, setIsSending] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
+  const [resendCooldown, setResendCooldown] = useState(0);
 
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  // Check session on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = sessionStorage.getItem("nexora_payment_auth");
       if (stored === "true") {
-        setIsAuthenticated(true);
+        setStep("authenticated");
       }
       setIsLoading(false);
     }
   }, []);
 
-  const handleLogin = (e: FormEvent) => {
-    e.preventDefault();
-    if (passwordInput === PASSWORD) {
-      setIsAuthenticated(true);
-      setAuthError(null);
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("nexora_payment_auth", "true");
+  // Resend cooldown timer
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const timer = setInterval(() => {
+      setResendCooldown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [resendCooldown]);
+
+  const handleSendOTP = async (e?: FormEvent) => {
+    if (e) e.preventDefault();
+    if (!email.trim()) {
+      setAuthError("Please enter your email address.");
+      return;
+    }
+
+    setIsSending(true);
+    setAuthError(null);
+
+    try {
+      const res = await fetch("/api/payment-otp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setAuthError(data.error || "Failed to send code.");
+        setIsSending(false);
+        return;
       }
-    } else {
-      setAuthError("Incorrect password. Please verify and try again.");
+
+      setStep("otp");
+      setOtp(["", "", "", "", "", ""]);
+      setResendCooldown(60);
+      setIsSending(false);
+
+      // Focus first OTP input after render
+      setTimeout(() => otpRefs.current[0]?.focus(), 100);
+    } catch {
+      setAuthError("Network error. Please try again.");
+      setIsSending(false);
     }
   };
 
+  const handleOTPChange = (index: number, value: string) => {
+    if (!/^\d*$/.test(value)) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value.slice(-1);
+    setOtp(newOtp);
+    setAuthError(null);
+
+    // Auto-focus next input
+    if (value && index < 5) {
+      otpRefs.current[index + 1]?.focus();
+    }
+
+    // Auto-submit when all 6 digits entered
+    if (value && index === 5 && newOtp.every((d) => d !== "")) {
+      verifyOTP(newOtp.join(""));
+    }
+  };
+
+  const handleOTPKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      otpRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleOTPPaste = (e: React.ClipboardEvent) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+    if (pasted.length === 0) return;
+
+    const newOtp = [...otp];
+    for (let i = 0; i < pasted.length; i++) {
+      newOtp[i] = pasted[i];
+    }
+    setOtp(newOtp);
+    setAuthError(null);
+
+    // Focus the next empty input or the last one
+    const nextEmpty = newOtp.findIndex((d) => d === "");
+    if (nextEmpty >= 0) {
+      otpRefs.current[nextEmpty]?.focus();
+    } else {
+      otpRefs.current[5]?.focus();
+      // Auto-submit
+      verifyOTP(newOtp.join(""));
+    }
+  };
+
+  const verifyOTP = async (code: string) => {
+    setIsVerifying(true);
+    setAuthError(null);
+
+    try {
+      const res = await fetch("/api/payment-otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), otp: code }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setAuthError(data.error || "Verification failed.");
+        setOtp(["", "", "", "", "", ""]);
+        setIsVerifying(false);
+        setTimeout(() => otpRefs.current[0]?.focus(), 100);
+        return;
+      }
+
+      setStep("authenticated");
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("nexora_payment_auth", "true");
+      }
+      setIsVerifying(false);
+    } catch {
+      setAuthError("Network error. Please try again.");
+      setIsVerifying(false);
+    }
+  };
+
+  const handleVerifySubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const code = otp.join("");
+    if (code.length !== 6) {
+      setAuthError("Please enter the complete 6-digit code.");
+      return;
+    }
+    verifyOTP(code);
+  };
+
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    setPasswordInput("");
+    setStep("email");
+    setEmail("");
+    setOtp(["", "", "", "", "", ""]);
     setAuthError(null);
     if (typeof window !== "undefined") {
       sessionStorage.removeItem("nexora_payment_auth");
@@ -109,7 +247,7 @@ export default function PaymentDetailsPage() {
   };
 
   const handleCopy = async (text: string, label: string, key: string) => {
-    if (!isAuthenticated) return;
+    if (step !== "authenticated") return;
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
@@ -141,7 +279,7 @@ export default function PaymentDetailsPage() {
   };
 
   const handleCopyAll = () => {
-    if (!isAuthenticated) return;
+    if (step !== "authenticated") return;
     const fullMemo = [
       "NEXORA STAFFING INC. · GLOBAL PAYMENT DETAILS (USD)",
       "===================================================",
@@ -160,20 +298,24 @@ export default function PaymentDetailsPage() {
   };
 
   const handlePrint = () => {
-    if (!isAuthenticated) return;
+    if (step !== "authenticated") return;
     if (typeof window !== "undefined") {
       window.print();
     }
   };
 
+  const isAuthenticated = step === "authenticated";
+
   // Mask sensitive values until authenticated
   const displayFields = RAW_BANK_FIELDS.map((f) => {
     if (!isAuthenticated) {
       if (f.id === "bank-name") return { ...f, value: "•••• ••••" };
-      if (f.id === "account-holder") return { ...f, value: "•••••••• •••••••• ••••" };
+      if (f.id === "account-holder")
+        return { ...f, value: "•••••••• •••••••• ••••" };
       if (f.id === "routing-number") return { ...f, value: "•••••••••" };
       if (f.id === "account-number") return { ...f, value: "•••••••••••••••" };
-      if (f.id === "transfer-currency") return { ...f, value: "$ USD · ••••••••••" };
+      if (f.id === "transfer-currency")
+        return { ...f, value: "$ USD · ••••••••••" };
     }
     return f;
   });
@@ -188,7 +330,7 @@ export default function PaymentDetailsPage() {
         </div>
       )}
 
-      {/* POPUP MODAL FOR PASSWORD UNLOCK */}
+      {/* EMAIL / OTP MODAL */}
       {!isLoading && !isAuthenticated && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0a1c2e]/65 backdrop-blur-md animate-in fade-in duration-300">
           <div className="w-full max-w-md bg-white border border-[#dce6ed] rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.35)] overflow-hidden animate-in zoom-in-95 duration-200">
@@ -213,71 +355,159 @@ export default function PaymentDetailsPage() {
                 Unlock Payment Details
               </h2>
               <p className="text-xs sm:text-sm text-[#687d8f] mt-1 max-w-xs mx-auto">
-                Enter the authorization password to view official USD bank transfer information.
+                {step === "email"
+                  ? "Enter your email to receive a one-time verification code."
+                  : `We sent a 6-digit code to ${email}`}
               </p>
             </div>
 
-            {/* Modal Form */}
-            <form onSubmit={handleLogin} className="p-6 sm:p-7 space-y-4">
-              <div>
-                <label
-                  htmlFor="popup-password-input"
-                  className="block text-xs font-extrabold text-[#173b5e] uppercase tracking-wider mb-2"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#687d8f]">
-                    <KeyRound className="w-4 h-4" />
+            {/* Step 1: Email Input */}
+            {step === "email" && (
+              <form onSubmit={handleSendOTP} className="p-6 sm:p-7 space-y-4">
+                <div>
+                  <label
+                    htmlFor="email-input"
+                    className="block text-xs font-extrabold text-[#173b5e] uppercase tracking-wider mb-2"
+                  >
+                    Email Address
+                  </label>
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#687d8f]">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <input
+                      id="email-input"
+                      type="email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (authError) setAuthError(null);
+                      }}
+                      placeholder="you@company.com"
+                      autoFocus
+                      required
+                      className="w-full pl-10 pr-4 py-3 text-sm bg-white border border-[#dce6ed] rounded-xl text-[#173b5e] placeholder-[#94a3b8] focus:outline-none focus:border-[#2c7197] focus:ring-2 focus:ring-[#2c7197]/20 transition-all"
+                    />
                   </div>
-                  <input
-                    id="popup-password-input"
-                    type={showPassword ? "text" : "password"}
-                    value={passwordInput}
-                    onChange={(e) => {
-                      setPasswordInput(e.target.value);
-                      if (authError) setAuthError(null);
-                    }}
-                    placeholder="Enter password to unlock"
-                    autoFocus
-                    required
-                    className="w-full pl-10 pr-11 py-3 text-sm bg-white border border-[#dce6ed] rounded-xl text-[#173b5e] placeholder-[#94a3b8] focus:outline-none focus:border-[#2c7197] focus:ring-2 focus:ring-[#2c7197]/20 transition-all font-mono"
-                  />
+                </div>
+
+                {authError && (
+                  <div className="flex items-start gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold animate-in fade-in duration-150">
+                    <ShieldAlert className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
+                    <span>{authError}</span>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#173b5e] hover:bg-[#204a74] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-sm shadow-md shadow-[#173b5e]/20 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                >
+                  {isSending ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending Code…</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Send Verification Code</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+
+            {/* Step 2: OTP Input */}
+            {step === "otp" && (
+              <form
+                onSubmit={handleVerifySubmit}
+                className="p-6 sm:p-7 space-y-4"
+              >
+                <div>
+                  <label className="block text-xs font-extrabold text-[#173b5e] uppercase tracking-wider mb-3 text-center">
+                    Enter 6-digit code
+                  </label>
+                  <div
+                    className="flex justify-center gap-2 sm:gap-3"
+                    onPaste={handleOTPPaste}
+                  >
+                    {otp.map((digit, i) => (
+                      <input
+                        key={i}
+                        ref={(el) => {
+                          otpRefs.current[i] = el;
+                        }}
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={1}
+                        value={digit}
+                        onChange={(e) => handleOTPChange(i, e.target.value)}
+                        onKeyDown={(e) => handleOTPKeyDown(i, e)}
+                        className="w-11 h-13 sm:w-12 sm:h-14 text-center text-xl font-bold bg-white border border-[#dce6ed] rounded-xl text-[#173b5e] focus:outline-none focus:border-[#2c7197] focus:ring-2 focus:ring-[#2c7197]/20 transition-all font-mono"
+                        autoFocus={i === 0}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {authError && (
+                  <div className="flex items-start gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold animate-in fade-in duration-150">
+                    <ShieldAlert className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
+                    <span>{authError}</span>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isVerifying || otp.join("").length !== 6}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#173b5e] hover:bg-[#204a74] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-sm shadow-md shadow-[#173b5e]/20 hover:shadow-lg transition-all duration-200 cursor-pointer"
+                >
+                  {isVerifying ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Verifying…</span>
+                    </>
+                  ) : (
+                    <>
+                      <Lock className="w-4 h-4" />
+                      <span>Verify & Unlock</span>
+                    </>
+                  )}
+                </button>
+
+                {/* Resend / Change email */}
+                <div className="flex items-center justify-between text-xs text-[#687d8f]">
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-[#687d8f] hover:text-[#173b5e] transition-colors"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    onClick={() => {
+                      setStep("email");
+                      setOtp(["", "", "", "", "", ""]);
+                      setAuthError(null);
+                    }}
+                    className="hover:text-[#173b5e] transition-colors font-semibold cursor-pointer"
                   >
-                    {showPassword ? (
-                      <EyeOff className="w-4 h-4" />
-                    ) : (
-                      <Eye className="w-4 h-4" />
-                    )}
+                    ← Change email
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled={resendCooldown > 0}
+                    onClick={() => handleSendOTP()}
+                    className="hover:text-[#173b5e] disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold cursor-pointer"
+                  >
+                    {resendCooldown > 0
+                      ? `Resend in ${resendCooldown}s`
+                      : "Resend code"}
                   </button>
                 </div>
-              </div>
-
-              {authError && (
-                <div className="flex items-start gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold animate-in fade-in duration-150">
-                  <ShieldAlert className="w-4 h-4 shrink-0 mt-0.5 text-red-500" />
-                  <span>{authError}</span>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#173b5e] hover:bg-[#204a74] text-white font-bold text-sm shadow-md shadow-[#173b5e]/20 hover:shadow-lg transition-all duration-200 cursor-pointer"
-              >
-                <Lock className="w-4 h-4" />
-                <span>Unlock Page</span>
-              </button>
-            </form>
+              </form>
+            )}
 
             {/* Modal Footer */}
             <div className="px-6 py-4 bg-[#fafcfe] border-t border-[#e6edf2] flex flex-col items-center gap-2 text-center text-xs text-[#687d8f]">
               <div>
-                <span>Need access? Contact </span>
+                <span>Need help? Contact </span>
                 <a
                   href="mailto:connect@nexorastaffingllp.com"
                   className="text-[#2c7197] font-semibold hover:underline"
@@ -428,7 +658,9 @@ export default function PaymentDetailsPage() {
                       </div>
                       <button
                         type="button"
-                        onClick={() => handleCopy(field.copyValue, field.label, field.id)}
+                        onClick={() =>
+                          handleCopy(field.copyValue, field.label, field.id)
+                        }
                         className={`inline-flex items-center gap-1 border-0 rounded-xl px-3 py-2 text-xs font-extrabold cursor-pointer transition-all duration-150 shrink-0 select-none ${
                           isCopied
                             ? "bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm"
@@ -498,7 +730,10 @@ export default function PaymentDetailsPage() {
               <strong className="text-[#173b5e] font-bold block mb-0.5">
                 Security note
               </strong>
-              Verify payment instructions through a trusted Nexora contact before transferring funds. USD is the stated currency; the flags are illustrative and do not confirm Canadian-dollar or local-transfer support.
+              Verify payment instructions through a trusted Nexora contact before
+              transferring funds. USD is the stated currency; the flags are
+              illustrative and do not confirm Canadian-dollar or local-transfer
+              support.
             </div>
           </main>
 
