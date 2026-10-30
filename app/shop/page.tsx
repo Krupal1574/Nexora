@@ -410,7 +410,7 @@ export default function ShopPage() {
     useState<CategoryFilter>("pro-services");
 
   const [sort, setSort] =
-    useState<SortOption>("popular");
+    useState<SortOption>("price-asc");
 
   // ───────────────────────────────────────────────────────
   // Fetch products from Prisma API
