@@ -144,10 +144,10 @@ const productMeta: Record<
 // ─────────────────────────────────────────────────────────────────────────────
 
 const discountedPriceOverrides: Record<string, number> = {
-  "application-guarantee": 1500,
-  "interview-coaching": 1800,
-  "ultimate-support": 2500,
-  "all-in-one": 4000,
+  "application-guarantee": 499,
+  "interview-coaching": 999,
+  "ultimate-support": 1999,
+  "all-in-one": 2999,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -471,6 +471,25 @@ export default function DiscountedPricesPage() {
     result = result.filter(
       (product) => product.category === "pro-services"
     );
+
+    // Apply discounted price overrides
+    result = result.map((p) => {
+      const override = discountedPriceOverrides[p.slug];
+      if (override !== undefined) {
+        const orig = Number(p.originalPrice) || Number(p.price) || override;
+        const disc =
+          orig > override
+            ? Math.round(((orig - override) / orig) * 100)
+            : 0;
+        return {
+          ...p,
+          price: override.toString(),
+          originalPrice: orig.toString(),
+          discount: disc,
+        };
+      }
+      return p;
+    });
 
     // Sort
     switch (sort) {
