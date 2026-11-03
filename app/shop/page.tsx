@@ -73,6 +73,7 @@ const productMeta: Record<
       "Resume understanding session",
       "Profile marketing",
       "Candidate profile optimization",
+      "2 Interview Support",
       "60 days of marketing",
       "After placement fees: 14%",
     ],
@@ -87,6 +88,7 @@ const productMeta: Record<
       "Resume understanding session",
       "Mock interview",
       "Guidance in initial OPT",
+      "6 Interview Support",
       "100 working days profile marketing",
       "Interview guarantee",
       "After placement fees: 12%",
@@ -134,6 +136,7 @@ const productMeta: Record<
       "Interview assessment",
       "Interview guarantee",
       "Unlimited Live Interview Sessions",
+      "Tech Interview Support",
       "After placement fees: 10%",
     ],
     badge: "POPULAR",
@@ -538,9 +541,9 @@ export default function ShopPage() {
           eyebrow="Limited Time Offers"
           lines={[
             "Invest in Your ",
-            <span key="career" className="accent">Career</span>,
-            <br key="br" />,
-            <span key="success" className="accent">Success</span>,
+            <span key="career-success" className="accent">
+              Career Success
+            </span>,
           ]}
           sub="Choose the perfect plan to accelerate your job search, optimize your profile, and land your dream role faster."
         />

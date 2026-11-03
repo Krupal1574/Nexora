@@ -8,7 +8,7 @@ export default function DiwaliPromo() {
   const pathname = usePathname();
 
   const handleExplore = (e: React.MouseEvent) => {
-    if (pathname === "/shop") {
+    if (pathname === "/shop" || pathname === "/discounted-prices") {
       e.preventDefault();
       const el = document.getElementById("shop-products");
       if (el) {
