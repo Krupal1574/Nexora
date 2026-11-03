@@ -74,7 +74,7 @@ const productMeta: Record<
       "Profile marketing",
       "Candidate profile optimization",
       "2 Interview Support",
-      "100 days of marketing",
+      "100 working days profile marketing",
       "After placement fees: 14%",
     ],
     badge: "POPULAR",
