@@ -1,3 +1,4 @@
+import Script from "next/script";
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -78,6 +79,16 @@ export default function RootLayout({
         </AuthProvider>
         <Analytics />
         <SpeedInsights />
+        <Script
+          id="bitrix24-call-tracker"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,u){
+var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
+var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+})(window,document,'https://cdn.bitrix24.in/b39059615/crm/tag/call.tracker.js');`,
+          }}
+        />
       </body>
     </html>
   );
