@@ -17,7 +17,6 @@ import {
 
 import { useCart } from "@/lib/cart";
 import { products as staticProducts } from "@/lib/shop";
-import DiwaliPromo from "@/components/home/DiwaliPromo";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -536,8 +535,6 @@ export default function DiscountedPricesPage() {
           sub="Special discounted rates on our premier career plans and packages. Choose the plan that fits your goals and accelerate your job search."
         />
 
-        {/* Diwali Promo Artwork */}
-        <DiwaliPromo />
 
         {/* Header and Controls */}
         <section

@@ -21,7 +21,6 @@ import MissionValuesSection from "@/components/home/MissionValuesSection";
 import LivePlacements from "@/components/home/LivePlacements";
 import OpenRolesCarousel from "@/components/OpenRolesCarousel";
 import NextStepCta from "@/components/home/NextStepCta";
-import DiwaliPromo from "@/components/home/DiwaliPromo";
 
 /* ─── Content ──────────────────────────────────────────────────────────── */
 const services = [
@@ -145,8 +144,6 @@ export default function HomePage() {
       <Marquee items={ticker} />
       <CompanyLogos />
 
-      {/* Seasonal Festive Banner */}
-      <DiwaliPromo />
 
       {/* ABOUT */}
       <section className="section-spacing">

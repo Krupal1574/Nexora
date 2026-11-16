@@ -19,7 +19,6 @@ import {
 
 import { useCart } from "@/lib/cart";
 import { products as staticProducts } from "@/lib/shop";
-import DiwaliPromo from "@/components/home/DiwaliPromo";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -548,8 +547,6 @@ export default function ShopPage() {
           sub="Choose the perfect plan to accelerate your job search, optimize your profile, and land your dream role faster."
         />
 
-        {/* Diwali Promo Artwork */}
-        <DiwaliPromo />
 
 
         {/* Filters */}
