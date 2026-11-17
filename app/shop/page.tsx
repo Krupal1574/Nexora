@@ -539,7 +539,7 @@ export default function ShopPage() {
           align="center"
           eyebrow="Limited Time Offers"
           lines={[
-            "Invest in Your ",
+            "Invest in Your",
             <span key="career-success" className="accent">
               Career Success
             </span>,
