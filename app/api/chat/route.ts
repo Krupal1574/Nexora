@@ -5,13 +5,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkBotId } from 'botid/server';
 
 // ─── Providers ────────────────────────────────────────────────────────────────
-// Primary: AgentRouter (OpenAI-compatible)
+// Primary: Vercel AI Gateway (OpenAI-compatible)
+const aiGateway = createOpenAI({
+  apiKey: process.env.AI_GATEWAY_API_KEY,
+  baseURL: process.env.AI_GATEWAY_BASE_URL || 'https://ai-gateway.vercel.sh/v1',
+});
+
+// Secondary: AgentRouter (OpenAI-compatible)
 const agentRouter = createOpenAI({
   apiKey: process.env.AGENTROUTER_API_KEY,
   baseURL: process.env.AGENTROUTER_BASE_URL || 'https://agentrouter.org/v1',
 });
 
-// Fallback: Groq
+// Tertiary: Groq
 const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 });
@@ -86,10 +92,11 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const hasGateway = !!process.env.AI_GATEWAY_API_KEY;
   const hasAgentRouter = !!process.env.AGENTROUTER_API_KEY;
   const hasGroq = !!process.env.GROQ_API_KEY;
 
-  if (!hasAgentRouter && !hasGroq) {
+  if (!hasGateway && !hasAgentRouter && !hasGroq) {
     return NextResponse.json(
       { error: 'AI service is not configured.' },
       { status: 500 }
@@ -111,49 +118,60 @@ export async function POST(req: NextRequest) {
 
     const modelMessages = await convertToModelMessages(uiMessages);
 
-    // Use AgentRouter as primary, Groq as fallback
-    const model = hasAgentRouter
-      ? agentRouter('gpt-4o-mini')
-      : groq('groq/compound-mini');
+    // Build priority provider sequence: Vercel AI Gateway -> AgentRouter -> Groq
+    const providers = [];
+    if (hasGateway) {
+      providers.push({
+        name: 'Vercel AI Gateway',
+        model: aiGateway('openai/gpt-4o-mini'),
+      });
+    }
+    if (hasAgentRouter) {
+      providers.push({
+        name: 'AgentRouter',
+        model: agentRouter('gpt-4o-mini'),
+      });
+    }
+    if (hasGroq) {
+      providers.push({
+        name: 'Groq',
+        model: groq('groq/compound-mini'),
+      });
+    }
 
-    const result = streamText({
-      model,
-      maxOutputTokens: 4096,
-      system: SYSTEM_PROMPT,
-      messages: modelMessages,
-      experimental_telemetry: {
-        isEnabled: true,
-        functionId: 'nexora-chat',
-        recordInputs: false,
-        recordOutputs: false,
-      },
-    });
+    let lastError: any = null;
 
-    return result.toUIMessageStreamResponse();
-  } catch (error: any) {
-    console.error('Chat API error:', error);
-
-    // If AgentRouter fails, try Groq as fallback
-    if (process.env.GROQ_API_KEY) {
+    for (const provider of providers) {
       try {
-        const body = await req.clone().json().catch(() => ({}));
-        const rawMessages: any[] = Array.isArray(body.messages) ? body.messages : [];
-        const uiMessages = normalizeToUIMessages(rawMessages);
-        const modelMessages = await convertToModelMessages(uiMessages);
-
         const result = streamText({
-          model: groq('groq/compound-mini'),
+          model: provider.model,
           maxOutputTokens: 4096,
           system: SYSTEM_PROMPT,
           messages: modelMessages,
+          onError({ error }) {
+            console.error(`Stream error on ${provider.name}:`, error);
+          },
+          experimental_telemetry: {
+            isEnabled: true,
+            functionId: 'nexora-chat',
+            recordInputs: false,
+            recordOutputs: false,
+          },
         });
 
         return result.toUIMessageStreamResponse();
-      } catch (fallbackError: any) {
-        console.error('Fallback chat error:', fallbackError);
+      } catch (err: any) {
+        console.warn(`Provider ${provider.name} failed, falling back to next...`, err);
+        lastError = err;
       }
     }
 
+    return NextResponse.json(
+      { error: lastError?.message || 'AI service temporarily unavailable. Please try again.' },
+      { status: 500 }
+    );
+  } catch (error: any) {
+    console.error('Chat API error:', error);
     return NextResponse.json(
       { error: error.message || 'Something went wrong. Please try again.' },
       { status: 500 }
