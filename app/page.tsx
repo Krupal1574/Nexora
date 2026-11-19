@@ -71,7 +71,7 @@ const fadeUp = (delay = 0) => ({
 function Testimonials() {
   const [items, setItems] = useState<Testimonial[]>(staticTestimonials);
   useEffect(() => {
-    fetch("/api/testimonials").then((r) => r.json()).then((d) => Array.isArray(d) && d.length && setItems(d)).catch(() => {});
+    fetch("/api/testimonials").then((r) => r.json()).then((d) => Array.isArray(d) && d.length && setItems(d)).catch(() => { });
   }, []);
   return (
     <section className="section-spacing">

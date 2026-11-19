@@ -70,10 +70,9 @@ const productMeta: Record<
     features: [
       "Resume crafting",
       "Resume understanding session",
-      "Profile marketing",
       "Candidate profile optimization",
       "2 Interview Support",
-      "100 working days profile marketing",
+      "90 days profile marketing",
       "After placement fees: 14%",
     ],
     badge: "POPULAR",
@@ -81,14 +80,14 @@ const productMeta: Record<
   },
 
   "interview-coaching": {
-    tagline: "Mock interviews, OPT guidance & 100-day profile marketing",
+    tagline: "Mock interviews, OPT guidance & 120-day profile marketing",
     features: [
       "Resume crafting",
       "Resume understanding session",
       "Mock interview",
       "Guidance in initial OPT",
       "6 Interview Support",
-      "100 working days profile marketing",
+      "120 days profile marketing",
       "Interview guarantee",
       "After placement fees: 12%",
     ],
@@ -101,10 +100,10 @@ const productMeta: Record<
     features: [
       "Resume crafting",
       "Resume understanding session",
-      "Profile marketing",
       "Interview assessment",
       "Interview guarantee",
       "Unlimited Live Interview Sessions",
+      "180 days profile marketing",
       "After placement fees: 12%",
     ],
     badge: "PREMIUM",
@@ -116,10 +115,10 @@ const productMeta: Record<
     features: [
       "Resume crafting",
       "Resume understanding session",
-      "Profile marketing",
       "Interview assessment",
       "Interview guarantee",
       "Unlimited Live Interview Sessions",
+      "180 days profile marketing",
       "After placement fees: 12%",
     ],
     badge: "PREMIUM",
@@ -131,11 +130,11 @@ const productMeta: Record<
     features: [
       "Resume crafting",
       "Resume understanding session",
-      "Profile marketing",
       "Interview assessment",
       "Interview guarantee",
       "Unlimited Live Interview Sessions",
       "Tech Interview Support",
+      "365 days profile marketing",
       "After placement fees: 10%",
     ],
     badge: "POPULAR",
@@ -197,6 +196,14 @@ const productMeta: Record<
 // Product card
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Direct price mapping for core plans
+const planPriceOverrides: Record<string, number> = {
+  "application-guarantee": 1499,
+  "interview-coaching": 1799,
+  "ultimate-support": 2499,
+  "all-in-one": 3999,
+};
+
 function ProductCard({
   product,
 }: {
@@ -218,8 +225,9 @@ function ProductCard({
 
   const Icon = meta?.icon ?? (staticProduct?.icon as typeof Rocket) ?? Briefcase;
 
-  const price = Number(product.price);
-  const originalPrice = Number(product.originalPrice);
+  const overridePrice = planPriceOverrides[product.slug];
+  const price = overridePrice ?? Number(product.price);
+  const originalPrice = overridePrice ?? (Number(product.originalPrice) || price);
 
   const savings = Math.max(originalPrice - price, 0);
 
