@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/motion/PageHero";
+import PlansComparisonTable from "@/components/services/PlansComparisonTable";
 import {
   CheckCircle2,
   Zap,
@@ -105,6 +106,7 @@ const sections = [
   { id: "core-services", label: "Core Services", icon: ShieldCheck },
   { id: "individual-services", label: "Individual Services", icon: Zap },
   { id: "add-ons", label: "Add-ons", icon: Plus },
+  { id: "plans-comparison", label: "Plans", icon: CheckCircle2 },
 ];
 
 const serviceImages: Record<string, string> = {
@@ -323,25 +325,13 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          {/* CTA to Shop */}
-          <div className="mt-12 rounded-2xl bg-[#F26A21]/8 border border-[#F26A21]/20 p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-xl font-bold text-[#171717]" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
-                Looking for a complete package?
-              </h3>
-              <p className="text-[#77736D] text-sm mt-1">
-                Our Plans &amp; Packages bundle everything together at the best value — with after-placement fees starting at just 10%.
-              </p>
-            </div>
-            <Link
-              href="/shop"
-              className="shrink-0 px-6 py-3 rounded-full bg-[#F26A21] text-[#171717] text-sm font-bold transition-colors hover:bg-[#E05A10] whitespace-nowrap"
-            >
-              Browse Plans &amp; Packages →
-            </Link>
-          </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 4 — PLANS COMPARISON TABLE
+      ══════════════════════════════════════════════ */}
+      <PlansComparisonTable />
 
     </div>
   );
