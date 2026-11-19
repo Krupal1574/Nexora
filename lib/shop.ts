@@ -38,7 +38,7 @@ export const products: Product[] = [
     description: "Guaranteed job applications to top tech companies with personalized cover letters and optimized candidate profiles.",
     features: [
       "Targeted job application support",
-      "90 days profile marketing",
+      "365 days profile marketing",
       "Personalized cover letter preparation",
       "Candidate profile optimization",
       "2 Interview Support",
@@ -65,7 +65,7 @@ export const products: Product[] = [
       "Interview communication guidance",
       "Preparation for common interview scenarios",
       "6 Interview Support",
-      "120 days profile marketing",
+      "365 days profile marketing",
       "Practical improvement recommendations"
     ],
     originalPrice: 1799,
@@ -88,7 +88,7 @@ export const products: Product[] = [
       "Ongoing career mentorship",
       "Job-search strategy support",
       "Personalized career guidance",
-      "180 days profile marketing"
+      "365 days profile marketing"
     ],
     originalPrice: 2499,
     salePrice: 2499,
