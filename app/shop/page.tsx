@@ -198,10 +198,10 @@ const productMeta: Record<
 
 // Direct price mapping for core plans
 const planPriceOverrides: Record<string, number> = {
-  "application-guarantee": 1499,
-  "interview-coaching": 1799,
-  "ultimate-support": 2499,
-  "all-in-one": 3999,
+  "application-guarantee": 1200,
+  "interview-coaching": 1500,
+  "ultimate-support": 2200,
+  "all-in-one": 3000,
 };
 
 function ProductCard({

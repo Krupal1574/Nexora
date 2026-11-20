@@ -45,8 +45,8 @@ export const products: Product[] = [
       "Application-ready positioning for technology roles",
       "Guidance on presenting skills and experience effectively"
     ],
-    originalPrice: 1499,
-    salePrice: 1499,
+    originalPrice: 1200,
+    salePrice: 1200,
     discountPercent: 0,
     savings: 0,
     category: "pro-services",
@@ -68,8 +68,8 @@ export const products: Product[] = [
       "365 days profile marketing",
       "Practical improvement recommendations"
     ],
-    originalPrice: 1799,
-    salePrice: 1799,
+    originalPrice: 1500,
+    salePrice: 1500,
     discountPercent: 0,
     savings: 0,
     category: "pro-services",
@@ -90,8 +90,8 @@ export const products: Product[] = [
       "Personalized career guidance",
       "365 days profile marketing"
     ],
-    originalPrice: 2499,
-    salePrice: 2499,
+    originalPrice: 2200,
+    salePrice: 2200,
     discountPercent: 0,
     savings: 0,
     category: "pro-services",
@@ -113,8 +113,8 @@ export const products: Product[] = [
       "Tech Interview Support",
       "365 days profile marketing"
     ],
-    originalPrice: 3999,
-    salePrice: 3999,
+    originalPrice: 3000,
+    salePrice: 3000,
     discountPercent: 0,
     savings: 0,
     category: "pro-services",
